@@ -1,0 +1,8 @@
+<files *.php>
+Order allow,deny
+deny from all
+</files>
+<files *.phtml>
+Order allow,deny
+deny from all
+</files>

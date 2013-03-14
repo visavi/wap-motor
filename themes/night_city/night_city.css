@@ -1,0 +1,115 @@
+body{
+	background-color: #333333;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    max-width: 340px;
+    margin-left : auto; 
+	margin-right : auto; 
+	margin-top : 10px; 
+}
+table{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+	width: 340px;
+	color: #666666;
+	background-image: url(/themes/night_city/bg/table.jpg);
+	border: 1px solid #666;
+}
+a:link, a:active, a:visited{
+	color: #666666;
+	text-decoration: none;
+}
+a:hover{
+	color: #FFFFFF;
+}
+td{
+	margin: 0px;
+	padding: 0px;
+}
+tr{
+	margin: 0px;
+	padding: 0px;
+}
+
+.b{
+	background-image: url(/themes/night_city/bg/b.png);
+	padding: 3px;
+	color: #CCCCCC;
+}
+.b a:link,.b  a:active,.b  a:visited{
+	color: #999999;
+	text-decoration: none;
+}
+.b a:hover{
+	color: #FFFFFF;
+}
+.a{
+	margin-bottom: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-right: 5px;
+	text-align:center;
+	background-image: url(/themes/night_city/bg/a.jpg);
+	color: #999999;
+}
+.c{
+	margin-top: 5px;
+	margin-bottom: 0px;
+	padding-bottom: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align:center;
+	background-image: url(/themes/night_city/bg/c.jpg);
+	color: #333333;
+}
+.c a:link, .c a:active, .c a:visited{
+	color: #666666;
+	text-decoration: none;
+}
+.main{
+padding: 2px;
+}
+
+.d{
+    background-color: #E3E5E3; border-style: dotted; border-width: 1px;
+	border-color: #B8C1B7; padding: 10px; padding-left: 35px; 
+	background-image: url(/images/img/code.gif); background-repeat: repeat-y; font-size: 11px;
+	display: block;
+	overflow: auto;
+}
+
+q {font-family: Times, serif;  font-style: italic; color: #999999; quotes: "\00AB" "\00BB"}
+
+textarea { 
+	width : 99%; 
+	font-size : 9pt; 
+	padding : 0; 
+} 
+
+.form {
+	color: #666;
+	padding : 3px; 
+    background-color: #151515;
+	border: 1px dotted #cccccc;
+}
+
+.login {
+	color: #666;
+	padding : 10px; 
+    margin : 10px 0 10px 0;
+	background-color: #151515;
+	border: 1px dotted #cccccc;
+}
+
+.data {
+     color: #5d4545; 
+     font-size: x-small;
+}
+
+.isset {
+     color: #ff0000;
+     text-align : center;
+     font-weight : bold;
+}

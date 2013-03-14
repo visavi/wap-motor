@@ -1,0 +1,18 @@
+<?php 
+$quot_arr = array(
+'<a href="http://wap-motor.com"><span style="color:#ff0000">Все для WAP-Motor</span></a>',
+'<a href="http://visavi.net"><span style="color:#ff0000">Visavi.net - Мир скриптов</span></a>',
+'<a href="http://pizdec.ru"><span style="color:#ff0000">Сайт для риальных поцанов</span></a>'
+);
+
+$quot_rand = array_rand($quot_arr);
+
+echo '<div style="text-align:center">';
+
+echo '<b>'.$quot_arr[$quot_rand].'</b><br />';
+
+include_once BASEDIR."includes/reklama.php";
+
+echo '</div>';
+
+?>

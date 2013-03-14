@@ -1,0 +1,12 @@
+<img src="<?=BASEDIR?>images/img/partners.gif" alt="image" /> <b>Статистика сайта</b><br /><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/statistik.php?<?=SID?>">Статистика сайта</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/traffic.php?<?=SID?>">Статистика трафика</a><br />	
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/livebank.php?<?=SID?>">Статистика вкладов</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/raitinglist.php?<?=SID?>">Рейтинг толстосумов</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/avtorlist.php?<?=SID?>">Рейтинг авторитетов</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/lifelist.php?<?=SID?>">Рейтинг долгожителей</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/statusfaq.php?<?=SID?>">Статусы юзеров</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/themes.php?<?=SID?>">Популярные скины</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/who.php?<?=SID?>">Кто-где</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/referer.php?<?=SID?>">Кто-откуда</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/onlinewho.php?<?=SID?>">Кто онлайн</a><br />	

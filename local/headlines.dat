@@ -1,0 +1,54 @@
+|index.php|Главная страница|
+|pages/who.php|Кто-где|
+|pages/avators.php|Галерея аватаров|
+|pages/raitinglist.php|Рейтинг толстосумов|
+|pages/anketa.php|Анкета|
+|pages/userlist.php|Cписок пользователей|
+|pages/traffic.php|Статистика трафика|
+|votes/vote.php|Голосование|
+|pages/profil.php|Профиль|
+|pages/privat.php|Личные сообщения|
+|pages/statistik.php|Статистика сайта|
+|pages/setting.php|Личные настройки|
+|news/komm.php|Комментарии  новостей|
+|news/index.php|Новости сайта|
+|forum/addtem.php|Создание темы в форуме|
+|forum/topusers.php|Топ самых активных на форуме|
+|forum/search.php|Поиск по форуму|
+|forum/top.php|Топ популярных тем|
+|forum/index.php|Форум|
+|games/bank.php|Банк|
+|games/magazin.php|Магазин|
+|games/perevod.php|Перевод денег|
+|games/21.php|21 Очко|
+|games/bandit.php|Однорукий Бандит|
+|games/kosti.php|Игра Кости|
+|games/hi.php|Угадай число|
+|games/livebank.php|Статистика вкладов|
+|chat/say.php|Создание сообщения в чате|
+|chat/index.php|Мини-чат|
+|board/add.php|Добавление объявления|
+|board/index.php|Объявления|
+|gallery/index.php|Галерея сайта|
+|pages/tegi.php|Справка по тегам|
+|book/index.php|Гостевая книга|
+|mail/index.php|Сообщение администрации|
+|pages/faq.php|FAQ (ЧАВО)|
+|pages/link.php|Размещение ссылки|
+|pages/statusfaq.php|Статусы пользователей|
+|pages/smiles.php|Галерея смайлов|
+|search/index.php|Поиск в интернете|
+|input.php|Главная страница|
+|pages/index.php|Разделы сайта|
+|pages/ignor.php|Игнор-лист|
+|pages/kontakt.php|Контакт-лист|
+|pages/searchuser.php|Поиск пользователя|
+|pages/pravila.php|Правила сайта|
+|pages/adminlist.php|Администрация сайта|
+|games/health.php|Здоровье|
+|games/stamina.php|Выносливость|
+|library/new.php|Новые статьи в библиотеке|
+|library/top.php|Топ статей в библиотеке|
+|library/lib.php|Библиотека|
+|library/add.php|Добавление статьи в библиотеке|
+|library/index.php|Разделы библиотеки|

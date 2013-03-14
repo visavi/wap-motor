@@ -1,0 +1,9 @@
+<img src="<?=BASEDIR?>images/img/partners.gif" alt="image" /> <b>Досуг / Отдых</b><br /><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>gallery/?<?=SID?>">Фотогалерея</a> (<?=stats_gallery()?>)<br />	
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>board/?<?=SID?>">Доска объявлений</a> (<?=stats_board()?>)<br />		 
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>votes/?<?=SID?>">Голосование</a> (<?=stats_votes()?>)<br />			
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/razban.php?<?=SID?>">Исправительная</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/pravila.php?<?=SID?>">Правила сайта</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/tegi.php?<?=SID?>">Справка по тегам</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/privat.php?action=submit&amp;<?=SID?>">Отправить приват</a><br />				
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>mail/?<?=SID?>">Написать админу</a><br />

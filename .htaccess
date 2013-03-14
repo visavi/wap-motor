@@ -1,0 +1,72 @@
+Addtype application/vnd.sonyericsson.mms-template tpl
+Addtype application/vnd.wap.wmlc .wmlc
+Addtype application/vnd.wap.wmlscriptc .wmlsc
+Addtype application/vnd.eri.thm .thm 
+Addtype application/vnd.mophun.application .mpn  
+Addtype application/vnd.mophun.certificate .mpc
+Addtype application/x-gtar .gtar
+Addtype application/x-tar .tar
+Addtype application/zip .zip
+Addtype application/x-rar-compressed .rar
+Addtype application/vnd.wap.mms-message .mms
+Addtype application/smil .smil
+Addtype application/smil .smi
+Addtype application/java-archive .jar
+Addtype application/vnd.symbian.install .sis
+Addtype application/vnd.smaf .mmf
+Addtype application/x-tar .hid
+Addtype text/vnd.wap.wml;charset=utf-8 .wml
+Addtype text/vnd.wap.wmlscript .wmls
+Addtype text/x-vmel .mel
+Addtype text/vnd.sun.j2me.app-descriptor;charset=UTF-8 .jad
+Addtype text/x-vmel .emy
+Addtype text/x-imelody .imy
+Addtype text/x-emelody .emy
+Addtype text/x-vcard .vcf
+Addtype text/x-vcalendar .vcs
+Addtype text/calendar .ics
+Addtype audio/imelody .imy
+Addtype audio/amr .amr
+Addtype audio/x-wav .wav
+Addtype audio/wav .wav
+Addtype audio/midi .midi 
+Addtype audio/midi .mid 
+Addtype audio/rmf .rmf 
+Addtype image/jpeg .jpg
+Addtype image/jpeg .jpeg
+Addtype image/gif .gif
+Addtype image/png .png
+Addtype image/bmp .bmp
+Addtype image/vnd.wap.wbmp .wbmp
+Addtype video/mp4 .mp4
+Addtype video/3gpp .3gp
+
+<Files ~ "includes|local">
+   Order allow,deny
+    Deny from all
+</Files>
+<Files ~ ".(dat|priv|prof|sfx)$">
+   Order allow,deny
+   Deny from all
+</Files>
+
+php_value error_reporting 7
+php_value url_rewriter.tags On
+php_value register_globals Off
+php_value session.use_trans_sid On
+php_value magic_quotes_gpc Off
+php_value magic_quotes_runtime Off
+php_value magic_quotes_sybase Off
+php_value file_uploads On
+php_value date.timezone "Europe/Moscow"
+
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+Options -Indexes
+
+ErrorDocument 403 /pages/error.php?error=403
+ErrorDocument 404 /pages/error.php?error=404
+
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} ^TRACE
+RewriteRule .* - [F]
