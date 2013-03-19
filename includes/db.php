@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $db['host']='localhost';
 $db['db']=''; // Имя базы данных
 $db['user']=''; // Логин пользователя
@@ -11,22 +11,22 @@ mysql_query('SET NAMES utf8');
 
 /////////////////////////////////////////////////////Небольшие настройки///////////////////////////////////////////////////////////
 $config_msg_pr_nikname = "SYSTEM"; /// От кого приходят оповещения в приват!
-/* 
+/*
 $conf_forum_files = "1"; /// Удалять файлы по истичению времени (0- нет / 1-да)
-$conf_forum_files_time = "30"; /// Сколько суток хранить файлы на сайте 
+$conf_forum_files_time = "30"; /// Сколько суток хранить файлы на сайте
 */
 $conf_forum_ppfor = "1"; /// Выводить последнюю тему под подфорумом (0- нет / 1-да)
 $config_floodstime_thm = "0"; /// Антифлуд на создание тем(В секундах)
 $config_strtsz = "1"; /// Выводить рейтинг юзера под ником (0- нет / 1-да)
-//////////////////////////////////////////////////// 
+////////////////////////////////////////////////////
 //////// Статусы! для бетки сделал такие :)
 //////// для демки взято из джона
 //////////////////////////////////////////////////////
-function strtsz($login){ 
+function strtsz($login){
 
 if (file_exists(DATADIR."profil/$login.prof")){
 
-$text = file_get_contents(DATADIR."profil/$login.prof"); 
+$text = file_get_contents(DATADIR."profil/$login.prof");
 $date = explode(":||:",$text);
 
 if ($date['36'] < '100'){$status = '<span style="color:#ff0000;"> [Шнырь] </span>';}
@@ -47,7 +47,7 @@ return $status;
 //////////////////////////////////////////////////// Считаеем кол-во страниц/////////////////////////////////////////////
 function strts($id, $config_forumpost){
 $filek = mysql_result(mysql_query("SELECT COUNT(*) FROM `posts` WHERE `theme` = '".$id."'"), 0);
-if (!empty($filek)) { $filek = $filek-1;} 
+if (!empty($filek)) { $filek = $filek-1;}
 $page = floor($filek / $config_forumpost) * $config_forumpost;
 return $page;
 }
@@ -77,12 +77,12 @@ if ($i < $total && $i >= 0) {
 $ii = floor(1 + $i / $onpage);
 if ($start == $i){ echo ' <b>[' . $ii . ']</b>';
 }else{ echo ' <a href="'.$page.'&amp;start='.$i.'&amp;'.SID.'">' . $ii . '</a>';}
-} 
+}
 $i = $i + $onpage;
-} 
+}
 if ($asd2 < $total){ echo ' ... <a href="'.$page.'&amp;start='.$ba2.'&amp;'.SID.'">' . $ba . '</a>';}
 }
-} 
+}
 
 ?>
 
