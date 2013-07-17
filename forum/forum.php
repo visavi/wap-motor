@@ -151,21 +151,30 @@ break;
 ##                                  Создание новой темы                                   ##
 ############################################################################################
 case 'create':
+	$uid = check($_GET['uid']);
 
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 	if ($forum) {
+	if (is_user()) {
+	if ($uid==$_SESSION['token']){
 
 		$title = check($_POST['title']);
 		$msg = check($_POST['msg']);
 
-		//antiflood("Location: forum.php?fid=$fid&isset=antiflood&".SID);
-		karantin($udata[6], "Location: forum.php?fid=$fid&isset=karantin&".SID);
-
 		if (utf_strlen(trim($title))>=5 && utf_strlen($title)<=50){
 			if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<=3000){
 
+				antiflood("Location: forum.php?fid=$fid&isset=antiflood&".SID);
+				karantin($udata[6], "Location: forum.php?fid=$fid&isset=karantin&".SID);
+				statistics(1);
+				statistics(2);
+
 				$title = no_br($title);
+				$title = antimat($title);
+
 				$msg = no_br($msg,'<br />');
+				$msg = antimat($msg);
+				$msg = smiles($msg);
 
 				$id = unifile(DATADIR."dataforum/topic$fid.dat", 0);
 
@@ -174,7 +183,7 @@ case 'create':
 				write_files(DATADIR."dataforum/topic$fid.dat", "$text\r\n", 0, 0666);
 
 				// Создание файла темы и запись сообщения
-				$topictext = $id.'|'.$fid.'|'.$log.'|'.$title.'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|0|0|';
+				$topictext = $id.'|'.$fid.'|'.$log.'|'.$title.'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
 				write_files(DATADIR."dataforum/$id.dat", "$topictext\r\n", 1, 0666);
 
 				// Обновление mainforum
@@ -198,12 +207,19 @@ case 'create':
 						}
 					}
 				}
+				change_profil($log, array(8=>$udata[8]+1, 14=>$ip, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
-				//header ("Location: topic.php?fid=$fid&id=$id&isset=oktem&".SID);	exit;
+				header ("Location: topic.php?fid=$fid&id=$id&isset=oktem&".SID);	exit;
 
 			} else {show_error('Слишком длинный или короткий текст сообщения (Необходимо от 5 до 3000 символов)');}
 		} else {show_error('Слишком длинный или короткий заголовок (Необходимо от 5 до 50 символов)');}
 
+	} else {
+		show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');
+	}
+	} else {
+		show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');
+	}
 	} else {
 		show_error('Ошибка! Даннго раздела для создании темы не существует!');
 	}

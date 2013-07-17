@@ -55,39 +55,39 @@ function date_fixed($timestamp, $format = "d.m.y / H:i") {
 
 // ------------------- Функция полного удаления юзера --------------------//
 function delete_users($users) {
-	$string = search_string(DATADIR . "bank.dat", $users, 1);
+	$string = search_string(DATADIR."bank.dat", $users, 1);
 	if ($string) {
-		delete_lines(DATADIR . "bank.dat", $string['line']);
+		delete_lines(DATADIR."bank.dat", $string['line']);
 	}
 
-	$substring = search_string(DATADIR . "subscribe.dat", $users, 3);
+	$substring = search_string(DATADIR."subscribe.dat", $users, 3);
 	if ($substring) {
-		delete_lines(DATADIR . "subscribe.dat", $substring['line']);
+		delete_lines(DATADIR."subscribe.dat", $substring['line']);
 	}
 
-	if (file_exists(DATADIR . "profil/$users.prof")) {
-		unlink (DATADIR . "profil/$users.prof");
+	if (file_exists(DATADIR."profil/$users.prof")) {
+		unlink (DATADIR."profil/$users.prof");
 	}
-	if (file_exists(DATADIR . "privat/$users.priv")) {
-		unlink (DATADIR . "privat/$users.priv");
+	if (file_exists(DATADIR."privat/$users.priv")) {
+		unlink (DATADIR."privat/$users.priv");
 	}
-	if (file_exists(DATADIR . "dataoutput/$users.priv")) {
-		unlink (DATADIR . "dataoutput/$users.priv");
+	if (file_exists(DATADIR."dataoutput/$users.priv")) {
+		unlink (DATADIR."dataoutput/$users.priv");
 	}
-	if (file_exists(DATADIR . "dataavators/$users.gif")) {
-		unlink (DATADIR . "dataavators/$users.gif");
+	if (file_exists(DATADIR."dataavators/$users.gif")) {
+		unlink (DATADIR."dataavators/$users.gif");
 	}
-	if (file_exists(DATADIR . "dataraiting/$users.dat")) {
-		unlink (DATADIR . "dataraiting/$users.dat");
+	if (file_exists(DATADIR."dataraiting/$users.dat")) {
+		unlink (DATADIR."dataraiting/$users.dat");
 	}
-	if (file_exists(DATADIR . "dataignor/$users.dat")) {
-		unlink (DATADIR . "dataignor/$users.dat");
+	if (file_exists(DATADIR."dataignor/$users.dat")) {
+		unlink (DATADIR."dataignor/$users.dat");
 	}
-	if (file_exists(DATADIR . "datakontakt/$users.dat")) {
-		unlink (DATADIR . "datakontakt/$users.dat");
+	if (file_exists(DATADIR."datakontakt/$users.dat")) {
+		unlink (DATADIR."datakontakt/$users.dat");
 	}
-	if (file_exists(DATADIR . "datalife/$users.dat")) {
-		unlink (DATADIR . "datalife/$users.dat");
+	if (file_exists(DATADIR."datalife/$users.dat")) {
+		unlink (DATADIR."datalife/$users.dat");
 	}
 
 	return $users;
@@ -100,11 +100,11 @@ function moneys($string) {
 	$str1 = abs($string) % 100;
 	$str2 = $string % 10;
 
-	if ($str1 > 10 && $str1 < 20) return $string . ' чатлов';
-	if ($str2 > 1 && $str2 < 5) return $string . ' чатла';
-	if ($str2 == 1) return $string . ' чатл';
+	if ($str1 > 10 && $str1 < 20) return $string.' чатлов';
+	if ($str2 > 1 && $str2 < 5) return $string.' чатла';
+	if ($str2 == 1) return $string.' чатл';
 
-	return $string . ' чатлов';
+	return $string.' чатлов';
 }
 
 // ------------------- Функция очистки файла --------------------//
@@ -303,23 +303,23 @@ function highlight_code($code) {
 	$code = strtr($code, array('&#124;' => '|', '&lt;' => '<', '&gt;' => '>', '&amp;' => '&', '&#36;' => '$', '&quot;' => '"', '&#39;' => "'", '&#92;' => '`', '&#37;' => '%', '&#94;' => '^', '&#58;' => ':', '<br />' => "\r\n"));
 
 	if (!strpos($code, '<?') && substr($code, 0, 2) != '<?') {
-		$code = "<?php\r\n" . trim($code);
+		$code = "<?php\r\n".trim($code);
 	}
 
 	$code = highlight_string($code, true);
 
 	$code = strtr($code, array("\r\n" => '<br />', '|' => '&#124;', '$' => '&#36;', "'" => '&#39;', '`' => '&#92;', '%' => '&#37;', '^' => '&#94;', ':' => '&#58;'));
 
-	$code = '<div class="d">' . $code . '</div>';
+	$code = '<div class="d">'.$code.'</div>';
 	return $code;
 }
 
 // ------------------ Вспомогательная функция для bb-кода --------------------//
 function url_replace($m) {
 	if (!isset($m[3])) {
-		return '<a href="' . $m[1] . '">' . $m[2] . '</a>';
+		return '<a href="'.$m[1].'">'.$m[2].'</a>';
 	} else {
-		return '<a href="' . $m[3] . '">' . $m[3] . '</a>';
+		return '<a href="'.$m[3].'">'.$m[3].'</a>';
 	}
 }
 
@@ -443,26 +443,26 @@ function smiles($string) {
 	$string = preg_replace('|&#58;|', ':', $string, $config['resmiles']);
 
 	$arrsmiles = array();
-	$globsmiles = glob(BASEDIR . "images/smiles/*.gif");
+	$globsmiles = glob(BASEDIR."images/smiles/*.gif");
 	foreach ($globsmiles as $filename) {
 		$arrsmiles[] = basename($filename, '.gif');
 	}
 	rsort($arrsmiles);
 
 	foreach($arrsmiles as $smval) {
-		$string = str_replace(":$smval", '<img src="' . BASEDIR . 'images/smiles/' . $smval . '.gif" alt="image" /> ', $string);
+		$string = str_replace(":$smval", '<img src="'.BASEDIR.'images/smiles/'.$smval.'.gif" alt="image" /> ', $string);
 	}
 
 	if (is_admin(array(101, 102, 103, 105))) {
 		$admsmiles = array();
-		$globsmiles = glob(BASEDIR . "images/smiles2/*.gif");
+		$globsmiles = glob(BASEDIR."images/smiles2/*.gif");
 		foreach ($globsmiles as $filename) {
 			$admsmiles[] = basename($filename, '.gif');
 		}
 		rsort($admsmiles);
 
 		foreach($admsmiles as $smvals) {
-			$string = str_replace(":$smvals", '<img src="' . BASEDIR . 'images/smiles2/' . $smvals . '.gif" alt="image" /> ', $string);
+			$string = str_replace(":$smvals", '<img src="'.BASEDIR.'images/smiles2/'.$smvals.'.gif" alt="image" /> ', $string);
 		}
 	}
 
@@ -537,15 +537,15 @@ function nosmiles($string) {
 // --------------- Функция правильного вывода веса файла -------------------//
 function formatsize($file_size) {
 	if ($file_size >= 1048576000) {
-		$file_size = round(($file_size / 1073741824), 2) . " Gb";
+		$file_size = round(($file_size / 1073741824), 2)." Gb";
 	} elseif (
 		$file_size >= 1024000) {
-		$file_size = round(($file_size / 1048576), 2) . " Mb";
+		$file_size = round(($file_size / 1048576), 2)." Mb";
 	} elseif (
 		$file_size >= 1000) {
-		$file_size = round(($file_size / 1024), 2) . " Kb";
+		$file_size = round(($file_size / 1024), 2)." Kb";
 	} else {
-		$file_size = round($file_size) . " byte";
+		$file_size = round($file_size)." byte";
 	}
 	return $file_size;
 }
@@ -568,10 +568,10 @@ function read_dir($dir) {
 	if ($path = opendir($dir)) {
 		while ($file_name = readdir($path)) {
 			if (($file_name !== '.') && ($file_name !== '..')) {
-				if (is_dir($dir . "/" . $file_name)) {
-					$allsize += read_dir($dir . "/" . $file_name);
+				if (is_dir($dir."/".$file_name)) {
+					$allsize += read_dir($dir."/".$file_name);
 				} else {
-					$allsize += filesize($dir . "/" . $file_name);
+					$allsize += filesize($dir."/".$file_name);
 				}
 			}
 		}
@@ -583,22 +583,22 @@ function read_dir($dir) {
 // --------------- Функция правильного вывода времени -------------------//
 function formattime($file_time) {
 	if ($file_time >= 86400) {
-		$file_time = 'суток: ' . round((($file_time / 60) / 60) / 24, 1);
+		$file_time = 'суток: '.round((($file_time / 60) / 60) / 24, 1);
 	} elseif (
 		$file_time >= 3600) {
-		$file_time = 'часов:  ' . round(($file_time / 60) / 60, 1);
+		$file_time = 'часов:  '.round(($file_time / 60) / 60, 1);
 	} elseif (
 		$file_time >= 60) {
-		$file_time = 'минут: ' . round($file_time / 60);
+		$file_time = 'минут: '.round($file_time / 60);
 	} else {
-		$file_time = 'секунд:  ' . round($file_time);
+		$file_time = 'секунд:  '.round($file_time);
 	}
 	return $file_time;
 }
 
 // ------------------ Функция антимата --------------------//
 function antimat($string) {
-	$file = file(DATADIR . "antimat.dat");
+	$file = file(DATADIR."antimat.dat");
 
 	if (count($file) > 0) {
 		foreach($file as $value) {
@@ -675,8 +675,8 @@ function raiting_vote($string) {
 function nickname($string) {
 	global $config;
 	if ($config['includenick'] == 1) {
-		if (file_exists(DATADIR . "profil/$string.prof")) {
-			$text = file_get_contents(DATADIR . "profil/$string.prof");
+		if (file_exists(DATADIR."profil/$string.prof")) {
+			$text = file_get_contents(DATADIR."profil/$string.prof");
 
 			$data = explode(":||:", $text);
 
@@ -692,8 +692,8 @@ function nickname($string) {
 function flooder($ip, $php_self) {
 	global $config;
 
-	$old_db = file(DATADIR . "flood.dat");
-	$new_db = fopen(DATADIR . "flood.dat", "a+");
+	$old_db = file(DATADIR."flood.dat");
+	$new_db = fopen(DATADIR."flood.dat", "a+");
 	flock ($new_db, LOCK_EX);
 	ftruncate ($new_db, 0);
 	$result = false;
@@ -725,9 +725,9 @@ function antiflood($page) {
 			header ($page);
 			exit;
 		}
-		$flood_file = fopen(DATADIR . "flood.dat", "a+");
+		$flood_file = fopen(DATADIR."flood.dat", "a+");
 		flock ($flood_file, LOCK_EX);
-		fputs ($flood_file, SITETIME . '|' . $ip . '|' . $php_self . "|\r\n");
+		fputs ($flood_file, SITETIME.'|'.$ip.'|'.$php_self."|\r\n");
 		fflush($flood_file);
 		flock ($flood_file, LOCK_UN);
 		fclose($flood_file);
@@ -800,15 +800,15 @@ function generate_password($length = "") {
 
 // ------------------ Функция для читаемого вывода массива --------------------//
 function text_dump($var, $level = 0) {
-	if (is_array($var)) $type = "array[" . count($var) . "]";
+	if (is_array($var)) $type = "array[".count($var)."]";
 	else if (is_object($var)) $type = "object";
 	else $type = "";
 	if ($type) {
-		echo $type . '<br />';
+		echo $type.'<br />';
 		for(Reset($var), $level++; list($k, $v) = each($var);) {
 			if (is_array($v) && $k === "GLOBALS") continue;
 			for($i = 0; $i < $level * 3; $i++) echo ' ';
-			echo '<b>' . htmlspecialchars($k) . '</b> => ', text_dump($v, $level);
+			echo '<b>'.htmlspecialchars($k).'</b> => ', text_dump($v, $level);
 		}
 	} else echo '"', htmlspecialchars($var), '"<br />';
 }
@@ -857,19 +857,19 @@ function scan_check($dirname) {
 	$dir = opendir($dirname);
 	while (($file = readdir($dir)) !== false) {
 		if ($file != "." && $file != "..") {
-			if (is_file($dirname . '/' . $file)) {
+			if (is_file($dirname.'/'.$file)) {
 				$ext = strtolower(substr($file, strrpos($file, '.') + 1));
 
 				if (!in_array($ext, $no_check)) {
-					$arr['files'][] = $dirname . '/' . $file . ' - ' . date_fixed(filemtime($dirname . '/' . $file), "j.m.y / H:i") . ' - ' . formatsize(filesize($dirname . '/' . $file));
+					$arr['files'][] = $dirname.'/'.$file.' - '.date_fixed(filemtime($dirname.'/'.$file), "j.m.y / H:i").' - '.formatsize(filesize($dirname.'/'.$file));
 					$arr['totalfiles']++;
 				}
 			}
 
-			if (is_dir($dirname . '/' . $file)) {
-				$arr['files'][] = $dirname . '/' . $file;
+			if (is_dir($dirname.'/'.$file)) {
+				$arr['files'][] = $dirname.'/'.$file;
 				$arr['totaldirs']++;
-				scan_check($dirname . '/' . $file);
+				scan_check($dirname.'/'.$file);
 			}
 		}
 	}
@@ -919,25 +919,25 @@ function user_many($login) {
 	$prof_summ = 0;
 	$bank_summ = 0;
 
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$text = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$text = file_get_contents(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
 		$prof_summ = (int)$data[41];
 	}
 
-	$string = search_string(DATADIR . "bank.dat", $login, 1);
+	$string = search_string(DATADIR."bank.dat", $login, 1);
 	if ($string) {
 		$bank_summ = (int)$string[2];
 	}
 
-	return $prof_summ . '/' . $bank_summ;
+	return $prof_summ.'/'.$bank_summ;
 }
 
 // --------------- Функция подсчета денег в банке ---------------//
 function user_bankmany($login) {
 	$bank_summ = 0;
 
-	$string = search_string(DATADIR . "bank.dat", $login, 1);
+	$string = search_string(DATADIR."bank.dat", $login, 1);
 	if ($string) {
 		$bank_summ = (int)$string[2];
 	}
@@ -947,27 +947,27 @@ function user_bankmany($login) {
 
 // --------------- Функция подсчета писем у юзера ---------------//
 function user_mail($login) {
-	$all_privat = counter_string(DATADIR . "privat/$login.priv");
+	$all_privat = counter_string(DATADIR."privat/$login.priv");
 
 	$new_privat = 0;
 
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$text = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$text = file_get_contents(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
 		$new_privat = (int)$data[10];
 	}
 
-	return $new_privat . '/' . $all_privat;
+	return $new_privat.'/'.$all_privat;
 }
 
 // --------------- Функция подсчета здоровья персонажа ---------------//
 function user_health($login) {
 	$health = 0;
 
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$text = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$text = file_get_contents(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
-		$health = (int)$data[56] . '%';
+		$health = (int)$data[56].'%';
 	}
 
 	return $health;
@@ -977,10 +977,10 @@ function user_health($login) {
 function user_stamina($login) {
 	$stamina = 0;
 
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$text = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$text = file_get_contents(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
-		$stamina = (int)$data[57] . '%';
+		$stamina = (int)$data[57].'%';
 	}
 
 	return $stamina;
@@ -991,19 +991,19 @@ function user_avatars($login) {
 	global $config;
 
 	if ($login == $config['guestsuser']) {
-		return '<img src="' . BASEDIR . 'images/avators/guest.gif" alt="image" /> ';
+		return '<img src="'.BASEDIR.'images/avators/guest.gif" alt="image" /> ';
 	}
 
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$text = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$text = file_get_contents(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
 
 		if ($data[43] != "") {
-			return '<img src="' . BASEDIR . $data[43] . '" alt="image" /> ';
+			return '<img src="'.BASEDIR.$data[43].'" alt="image" /> ';
 		}
 	}
 
-	return '<img src="' . BASEDIR . 'images/avators/noavatar.gif" alt="image" /> ';
+	return '<img src="'.BASEDIR.'images/avators/noavatar.gif" alt="image" /> ';
 }
 
 // --------------- Функция подсчета карт в игре ---------------//
@@ -1051,12 +1051,12 @@ function cards_points($str) {
 	if ($str == 31) {
 		$points = ' очко';
 	}
-	return $str . $points;
+	return $str.$points;
 }
 
 // --------------- Функция вывода статуса ---------------//
 function user_ststuses($balls) {
-	$text = file_get_contents(DATADIR . "status.dat");
+	$text = file_get_contents(DATADIR."status.dat");
 	if ($text != "") {
 		$udta = explode("|", $text);
 	}
@@ -1136,78 +1136,78 @@ function user_ststuses($balls) {
 
 // --------------- Функция подсчета человек в контакт-листе ---------------//
 function user_kontakt($login) {
-	return counter_string(DATADIR . "datakontakt/$login.dat");
+	return counter_string(DATADIR."datakontakt/$login.dat");
 }
 
 // --------------- Функция подсчета человек в игнор-листе ---------------//
 function user_ignor($login) {
-	return counter_string(DATADIR . "dataignor/$login.dat");
+	return counter_string(DATADIR."dataignor/$login.dat");
 }
 
 // --------------- Функция вывода количества зарегистрированных ---------------//
 function stats_users() {
-	return counter_string(DATADIR . 'datatmp/userlist.dat');
+	return counter_string(DATADIR.'datatmp/userlist.dat');
 }
 
 // --------------- Функция вывода количества админов и модеров --------------------//
 function stats_admins() {
-	return counter_string(DATADIR . 'datatmp/adminlist.dat');
+	return counter_string(DATADIR.'datatmp/adminlist.dat');
 }
 
 // --------------- Функция вывода количества забаненных --------------------//
 function stats_banned() {
-	return counter_string(DATADIR . 'datatmp/banlist.dat');
+	return counter_string(DATADIR.'datatmp/banlist.dat');
 }
 
 // ------------ Функция вывода количества ожидающих регистрации -----------//
 function stats_reglist() {
-	return counter_string(DATADIR . 'datatmp/reglist.dat');
+	return counter_string(DATADIR.'datatmp/reglist.dat');
 }
 
 // --------------- Функция вывода количества забаненных IP --------------------//
 function stats_ipbanned() {
-	return counter_string(DATADIR . 'ban.dat');
+	return counter_string(DATADIR.'ban.dat');
 }
 
 // --------------- Функция вывода количества фотографий --------------------//
 function stats_gallery() {
-	return counter_string(DATADIR . 'datagallery/fotobase.dat');
+	return counter_string(DATADIR.'datagallery/fotobase.dat');
 }
 
 // --------------- Функция вывода количества новостей--------------------//
 function stats_allnews() {
-	return counter_string(DATADIR . 'news.dat');
+	return counter_string(DATADIR.'news.dat');
 }
 
 // ---------- Функция вывода количества запрещенных логинов ------------//
 function stats_blacklogin() {
-	return counter_string(DATADIR . 'blacklogin.dat');
+	return counter_string(DATADIR.'blacklogin.dat');
 }
 
 // ------------ Функция вывода количества запрещенных e-mail------------//
 function stats_blackmail() {
-	return counter_string(DATADIR . 'blackmail.dat');
+	return counter_string(DATADIR.'blackmail.dat');
 }
 
 // --------------- Функция вывода количества заголовков ----------------//
 function stats_headlines() {
-	return counter_string(DATADIR . 'headlines.dat');
+	return counter_string(DATADIR.'headlines.dat');
 }
 
 // --------------- Функция вывода количества заголовков ----------------//
 function stats_navigation() {
-	return counter_string(DATADIR . 'navigation.dat');
+	return counter_string(DATADIR.'navigation.dat');
 }
 
 // --------------- Функция вывода количества заголовков ----------------//
 function stats_antimat() {
-	return counter_string(DATADIR . 'antimat.dat');
+	return counter_string(DATADIR.'antimat.dat');
 }
 
 // ----------- Функция вывода даты последнего сканирования -------------//
 function stats_checker() {
-	if (file_exists(DATADIR . "datatmp/checker.dat")) {
-		return date_fixed(filemtime(DATADIR . "datatmp/checker.dat"), "j.m.y");
+	if (file_exists(DATADIR."datatmp/checker.dat")) {
+		return date_fixed(filemtime(DATADIR."datatmp/checker.dat"), "j.m.y");
 	} else {
 		return 0;
 	}
@@ -1218,16 +1218,16 @@ function stats_version() {
 	$info = 0;
 	$filtime = 0;
 
-	if (file_exists(DATADIR . "datatmp/version.dat")) {
-		$filtime = filemtime(DATADIR . "datatmp/version.dat") + 86400;
-		$info = file_get_contents(DATADIR . "datatmp/version.dat");
+	if (file_exists(DATADIR."datatmp/version.dat")) {
+		$filtime = filemtime(DATADIR."datatmp/version.dat") + 86400;
+		$info = file_get_contents(DATADIR."datatmp/version.dat");
 	}
 
 	if (time() > $filtime) {
-		if (copy("http://visavi.net/wap-motor/version.txt", DATADIR . "datatmp/version.dat")) {
-			@chmod(DATADIR . "datatmp/version.dat", 0666);
+		if (copy("http://visavi.net/wap-motor/version.txt", DATADIR."datatmp/version.dat")) {
+			@chmod(DATADIR."datatmp/version.dat", 0666);
 		} else {
-			write_files(DATADIR . "datatmp/version.dat", 0, 1, 0666);
+			write_files(DATADIR."datatmp/version.dat", 0, 1, 0666);
 		}
 	}
 
@@ -1238,14 +1238,14 @@ function stats_version() {
 function user_position($string) {
 	$position = 'Не определено';
 
-	if (file_exists(DATADIR . "headlines.dat")) {
-		$file = file(DATADIR . "headlines.dat");
+	if (file_exists(DATADIR."headlines.dat")) {
+		$file = file(DATADIR."headlines.dat");
 
 		foreach($file as $value) {
 			$line = explode("|", $value);
 
 			if ($string == $line[1]) {
-				$position = '<a href="' . BASEDIR . $line[1] . '?' . SID . '">' . $line[2] . '</a>';
+				$position = '<a href="'.BASEDIR.$line[1].'?'.SID.'">'.$line[2].'</a>';
 				break;
 			}
 		}
@@ -1259,7 +1259,7 @@ function chmode ($path = ".") {
 	if ($handle = opendir ($path)) {
 		while (false !== ($file = readdir($handle))) {
 			if ($file != "." && $file != "..") {
-				$file_path = $path . "/" . $file;
+				$file_path = $path."/".$file;
 
 				if (is_dir ($file_path)) {
 					@chmod ($file_path, 0777);
@@ -1278,8 +1278,8 @@ function chmode ($path = ".") {
 function user_online($login) {
 	$statwho = '<span style="color:#ff0000">[Off]</span>';
 
-	if (file_exists(DATADIR . "datalife/$login.dat")) {
-		$lifefile = file_get_contents(DATADIR . "datalife/$login.dat");
+	if (file_exists(DATADIR."datalife/$login.dat")) {
+		$lifefile = file_get_contents(DATADIR."datalife/$login.dat");
 		if ($lifefile != "") {
 			$lifestr = explode("|", $lifefile);
 			$userlife = SITETIME - $lifestr[0];
@@ -1294,8 +1294,8 @@ function user_online($login) {
 
 // ---- Функция определение последнего посещения и местонахождения -----//
 function user_visit($login, $where = "") {
-	if (file_exists(DATADIR . "datalife/$login.dat")) {
-		$lifefile = file_get_contents(DATADIR . "datalife/$login.dat");
+	if (file_exists(DATADIR."datalife/$login.dat")) {
+		$lifefile = file_get_contents(DATADIR."datalife/$login.dat");
 		if ($lifefile != "") {
 			$lifestr = explode("|", $lifefile);
 			$userlife = SITETIME - $lifestr[0];
@@ -1304,7 +1304,7 @@ function user_visit($login, $where = "") {
 				$visit = '(Сейчас на сайте)';
 				$whereuser = user_position($lifestr[3]);
 			} else {
-				$visit = '(Последнее посещение ' . date_fixed($lifestr[0]) . ')';
+				$visit = '(Последнее посещение '.date_fixed($lifestr[0]).')';
 				$whereuser = 'Оффлайн';
 			}
 			if ($where == "") {
@@ -1337,8 +1337,8 @@ function check_string($string) {
 
 // ---------- Функция определение должности юзера ---------//
 function user_title($login) {
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$text = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$text = file_get_contents(DATADIR."profil/$login.prof");
 
 		$data = explode(":||:", $text);
 		if ($data[7] >= 101 && $data[7] <= 105) {
@@ -1436,7 +1436,7 @@ function utf_badstrip($str) {
 function unitime() {
 	$microtime = explode(' ', microtime());
 
-	$unitime = $microtime[1] . substr($microtime[0], 2, 2) ;
+	$unitime = $microtime[1].substr($microtime[0], 2, 2) ;
 
 	return $unitime;
 }
@@ -1480,14 +1480,14 @@ function addmail($usermail, $subject, $msg, $mail = "", $name = "") {
 	$msg = convert_cyr_string($msg, 'w', 'k');
 	$name = convert_cyr_string($name, 'w', 'k');
 
-	$subject = '=?KOI8-R?B?' . base64_encode($subject) . '?=';
+	$subject = '=?KOI8-R?B?'.base64_encode($subject).'?=';
 
-	$adds = "From: " . $name . " <" . $mail . ">\n";
-	$adds .= "X-sender: " . $name . " <" . $mail . ">\n";
+	$adds = "From: ".$name." <".$mail.">\n";
+	$adds .= "X-sender: ".$name." <".$mail.">\n";
 	$adds .= "Content-Type: text/plain; charset=koi8-r\n";
 	$adds .= "MIME-Version: 1.0\n";
 	$adds .= "Content-Transfer-Encoding: 8bit\n";
-	$adds .= "X-Mailer: PHP v." . phpversion();
+	$adds .= "X-Mailer: PHP v.".phpversion();
 
 	return mail($usermail, $subject, $msg, $adds);
 }
@@ -1496,13 +1496,13 @@ function addmail($usermail, $subject, $msg, $mail = "", $name = "") {
 function page_jumpnavigation($link, $posts, $start, $total) {
 	echo '<hr />';
 	if ($start != 0) {
-		echo '<a href="' . $link . 'start=' . ($start - $posts) . '&amp;' . SID . '">&lt;-Назад</a> ';
+		echo '<a href="'.$link.'start='.($start - $posts).'&amp;'.SID.'">&lt;-Назад</a> ';
 	} else {
 		echo '&lt;-Назад';
 	}
 	echo ' | ';
 	if ($total > $start + $posts) {
-		echo '<a href="' . $link . 'start=' . ($start + $posts) . '&amp;' . SID . '">Далее-&gt;</a>';
+		echo '<a href="'.$link.'start='.($start + $posts).'&amp;'.SID.'">Далее-&gt;</a>';
 	} else {
 		echo 'Далее-&gt;';
 	}
@@ -1520,9 +1520,9 @@ function page_strnavigation($link, $posts, $start, $total, $koll = 4) {
 
 		if ($min < $total && $min > 0) {
 			if ($min - $posts > 0) {
-				echo '<a href="' . $link . 'start=0&amp;' . SID . '">1</a> ... ';
+				echo '<a href="'.$link.'start=0&amp;'.SID.'">1</a> ... ';
 			} else {
-				echo '<a href="' . $link . 'start=0&amp;' . SID . '">1</a> ';
+				echo '<a href="'.$link.'start=0&amp;'.SID.'">1</a> ';
 			}
 		}
 
@@ -1531,9 +1531,9 @@ function page_strnavigation($link, $posts, $start, $total, $koll = 4) {
 				$ii = floor(1 + $i / $posts);
 
 				if ($start == $i) {
-					echo ' <b>(' . $ii . ')</b> ';
+					echo ' <b>('.$ii.')</b> ';
 				} else {
-					echo ' <a href="' . $link . 'start=' . $i . '&amp;' . SID . '">' . $ii . '</a> ';
+					echo ' <a href="'.$link.'start='.$i.'&amp;'.SID.'">'.$ii.'</a> ';
 				}
 			}
 
@@ -1542,9 +1542,9 @@ function page_strnavigation($link, $posts, $start, $total, $koll = 4) {
 
 		if ($max < $total) {
 			if ($max + $posts < $total) {
-				echo ' ... <a href="' . $link . 'start=' . $ba2 . '&amp;' . SID . '">' . $ba . '</a>';
+				echo ' ... <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
 			} else {
-				echo ' <a href="' . $link . 'start=' . $ba2 . '&amp;' . SID . '">' . $ba . '</a>';
+				echo ' <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
 			}
 		}
 		echo '<br /><br />';
@@ -1586,14 +1586,14 @@ function site_title($string) {
 
 	$position = $config['title'];
 
-	if (file_exists(DATADIR . "headlines.dat")) {
-		$headlines = search_string(DATADIR . "headlines.dat", $string, 1);
+	if (file_exists(DATADIR."headlines.dat")) {
+		$headlines = search_string(DATADIR."headlines.dat", $string, 1);
 		if ($headlines) {
-			$position .= ' - ' . $headlines[2];
+			$position .= ' - '.$headlines[2];
 		}
 	}
 	if ($header_title) {
-		$position .= ' - ' . $header_title;
+		$position .= ' - '.$header_title;
 	}
 
 	return $position;
@@ -1601,10 +1601,22 @@ function site_title($string) {
 
 // --------------------- Функция подсчета статистики ------------------------//
 function statistics($number, $clear = false) {
+	/*
+	0 - Сообщений в гостевой
+	1 - Тем в форуме
+	2 - Сообщений в форуме
+	3 - Комментарий в новостях
+	4 - Сообщений в админ-чате
+	5 - Комментарий в загрузках
+	6 - Комментарий в библиотеке
+	7 - Комментарий в галерее
+	8 - Сообщений в чате
+	*/
+
 	if (isset($number)) {
 		$number = (int)$number;
 
-		$file = file_get_contents(DATADIR . "local.dat");
+		$file = file_get_contents(DATADIR."local.dat");
 		$u = explode("|", $file);
 
 		if ($clear === false) {
@@ -1613,16 +1625,10 @@ function statistics($number, $clear = false) {
 			$u[$number] = $clear;
 		}
 
-		$text = $u[0] . '|' . $u[1] . '|' . $u[2] . '|' . $u[3] . '|' . $u[4] . '|' . $u[5] . '|' . $u[6] . '|' . $u[7] . '|' . $u[8] . '|' . $u[9] . '|' . $u[10] . '|';
+		$data = $u[0].'|'.$u[1].'|'.$u[2].'|'.$u[3].'|'.$u[4].'|'.$u[5].'|'.$u[6].'|'.$u[7].'|'.$u[8].'|'.$u[9].'|'.$u[10].'|';
 
 		if ($text != "" && $u[$number] !== "") {
-			$fp = fopen(DATADIR . "local.dat", "a+");
-			flock ($fp, LOCK_EX);
-			ftruncate ($fp, 0);
-			fputs ($fp, $text);
-			fflush($fp);
-			flock ($fp, LOCK_UN);
-			fclose($fp);
+			file_put_contents(DATADIR."local.dat", $data, LOCK_EX);
 			unset($number);
 		}
 	}
@@ -1631,7 +1637,7 @@ function statistics($number, $clear = false) {
 // --------------------- Функция вывода статистики ------------------------//
 function stats($number) {
 	if (isset($number)) {
-		$file = file_get_contents(DATADIR . "local.dat");
+		$file = file_get_contents(DATADIR."local.dat");
 		$data = explode("|", $file);
 		return (int)$data[$number];
 	}
@@ -1642,8 +1648,8 @@ function stats_forum() {
 	$allthem = 0;
 	$allpost = 0;
 
-	if (file_exists(DATADIR . "dataforum/mainforum.dat")) {
-		$file = file(DATADIR . "dataforum/mainforum.dat");
+	if (file_exists(DATADIR."dataforum/mainforum.dat")) {
+		$file = file(DATADIR."dataforum/mainforum.dat");
 
 		foreach ($file as $val) {
 			$data = explode('|', $val);
@@ -1660,7 +1666,7 @@ function crypt_mail($mail) {
 	$output = "";
 	$strlen = strlen($mail);
 	for ($i = 0; $i < $strlen; $i++) {
-		$output .= '&#' . ord($mail[$i]) . ';';
+		$output .= '&#'.ord($mail[$i]).';';
 	}
 	return $output;
 }
@@ -1704,8 +1710,8 @@ function intar($string) {
 // ------------------- Функция подсчета голосований --------------------//
 function stats_votes() {
 	$sum = 0;
-	if (file_exists(DATADIR . "datavotes/result.dat")) {
-		$vresult = file(DATADIR . "datavotes/result.dat");
+	if (file_exists(DATADIR."datavotes/result.dat")) {
+		$vresult = file(DATADIR."datavotes/result.dat");
 		$vr = explode("|", $vresult[0]);
 		if ($vresult) {
 			$sum = array_sum($vr);
@@ -1717,12 +1723,12 @@ function stats_votes() {
 // ------------------- Функция подсчета объявлений --------------------//
 function stats_board() {
 	$itogoboards = 0;
-	if (file_exists(DATADIR . "databoard/database.dat")) {
-		$file = file(DATADIR . "databoard/database.dat");
+	if (file_exists(DATADIR."databoard/database.dat")) {
+		$file = file(DATADIR."databoard/database.dat");
 		foreach($file as $bval) {
 			$dtb = explode("|", $bval);
-			if (file_exists(DATADIR . "databoard/$dtb[2].dat")) {
-				$total = counter_string(DATADIR . "databoard/$dtb[2].dat");
+			if (file_exists(DATADIR."databoard/$dtb[2].dat")) {
+				$total = counter_string(DATADIR."databoard/$dtb[2].dat");
 				$itogoboards += $total;
 			}
 		}
@@ -1732,7 +1738,7 @@ function stats_board() {
 
 // ------------------- Функция показа даты последней новости --------------------//
 function stats_news() {
-	$file = file(DATADIR . "news.dat");
+	$file = file(DATADIR."news.dat");
 	$data = explode("|", end($file));
 
 	if (isset($data[3])) {
@@ -1752,7 +1758,7 @@ function last_news() {
 	global $config;
 
 	if ($config['lastnews'] > 0) {
-		$file = file(DATADIR . "news.dat");
+		$file = file(DATADIR."news.dat");
 		$file = array_reverse($file);
 		$count = count($file);
 
@@ -1763,13 +1769,13 @@ function last_news() {
 		for ($i = 0; $i < $config['lastnews']; $i++) {
 			$dt = explode("|", $file[$i]);
 
-			echo '<br /><img src="' . BASEDIR . 'images/img/news.gif" alt="image" /> <b>' . $dt[0] . '</b> (' . date_fixed($dt[3], "d.m.y") . ')<br />';
+			echo '<br /><img src="'.BASEDIR.'images/img/news.gif" alt="image" /> <b>'.$dt[0].'</b> ('.date_fixed($dt[3], "d.m.y").')<br />';
 
-			echo bb_code($dt[1]) . '<br /><a href="' . BASEDIR . 'news/komm.php?id=' . (int)$dt[5] . '&amp;' . SID . '">Комментарии</a> ';
+			echo bb_code($dt[1]).'<br /><a href="'.BASEDIR.'news/komm.php?id='.(int)$dt[5].'&amp;'.SID.'">Комментарии</a> ';
 
-			$totalkomm = counter_string(DATADIR . "datakomm/$dt[5].dat");
+			$totalkomm = counter_string(DATADIR."datakomm/$dt[5].dat");
 
-			echo '(' . (int)$totalkomm . ')';
+			echo '('.(int)$totalkomm.')';
 		}
 	}
 }
@@ -1777,9 +1783,9 @@ function last_news() {
 // ------------------- Функция присоединения идентификатора --------------------//
 function verifi($link) {
 	if (strpos($link, '?') === false) {
-		return $link . '?' . SID;
+		return $link.'?'.SID;
 	} else {
-		return $link . '&' . SID;
+		return $link.'&'.SID;
 	}
 }
 
@@ -1793,58 +1799,58 @@ if (!function_exists("stripos")) {
 // ------------------------- Функция вывода пользовательских тегов ------------------------//
 function quickcode() {
 	echo 'BB-код<br />';
-	echo '<a href="#form" onclick="javascript:tag(\'[url=]\', \'[/url]\');"><img src="' . BASEDIR . 'images/editor/a.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[b]\', \'[/b]\');"><img src="' . BASEDIR . 'images/editor/b.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[big]\', \'[/big]\');"><img src="' . BASEDIR . 'images/editor/big.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[small]\', \'[/small]\');"><img src="' . BASEDIR . 'images/editor/small.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[i]\', \'[/i]\');"><img src="' . BASEDIR . 'images/editor/i.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[u]\', \'[/u]\');"><img src="' . BASEDIR . 'images/editor/u.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[q]\', \'[/q]\');"><img src="' . BASEDIR . 'images/editor/q.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[del]\', \'[/del]\');"><img src="' . BASEDIR . 'images/editor/del.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[code]\', \'[/code]\');"><img src="' . BASEDIR . 'images/editor/code.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[url=]\', \'[/url]\');"><img src="'.BASEDIR.'images/editor/a.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[b]\', \'[/b]\');"><img src="'.BASEDIR.'images/editor/b.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[big]\', \'[/big]\');"><img src="'.BASEDIR.'images/editor/big.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[small]\', \'[/small]\');"><img src="'.BASEDIR.'images/editor/small.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[i]\', \'[/i]\');"><img src="'.BASEDIR.'images/editor/i.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[u]\', \'[/u]\');"><img src="'.BASEDIR.'images/editor/u.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[q]\', \'[/q]\');"><img src="'.BASEDIR.'images/editor/q.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[del]\', \'[/del]\');"><img src="'.BASEDIR.'images/editor/del.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[code]\', \'[/code]\');"><img src="'.BASEDIR.'images/editor/code.gif" alt="image" /></a>';
 
-	echo '<a href="#form" onclick="javascript:tag(\'[red]\', \'[/red]\');"><img src="' . BASEDIR . 'images/editor/red.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[green]\', \'[/green]\');"><img src="' . BASEDIR . 'images/editor/green.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[blue]\', \'[/blue]\');"><img src="' . BASEDIR . 'images/editor/blue.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'[yellow]\', \'[/yellow]\');"><img src="' . BASEDIR . 'images/editor/yellow.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[red]\', \'[/red]\');"><img src="'.BASEDIR.'images/editor/red.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[green]\', \'[/green]\');"><img src="'.BASEDIR.'images/editor/green.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[blue]\', \'[/blue]\');"><img src="'.BASEDIR.'images/editor/blue.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'[yellow]\', \'[/yellow]\');"><img src="'.BASEDIR.'images/editor/yellow.gif" alt="image" /></a>';
 	echo '<br />';
 }
 
 // ------------------------- Функция вывода админских тегов ------------------------//
 function quicktags() {
 	echo 'Быстрые теги <br />';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;a href=&quot;&quot;&gt;\', \'&lt;/a&gt;\');"><img src="' . BASEDIR . 'images/editor/a.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;img src=&quot;\', \'&quot; alt=&quot;image&quot; /&gt;\');"><img src="' . BASEDIR . 'images/editor/img.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;br /&gt;\', \'\');"><img src="' . BASEDIR . 'images/editor/br.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;hr /&gt;\', \'\');"><img src="' . BASEDIR . 'images/editor/hr.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;b&gt;\', \'&lt;/b&gt;\');"><img src="' . BASEDIR . 'images/editor/b.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;big&gt;\', \'&lt;/big&gt;\');"><img src="' . BASEDIR . 'images/editor/big.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;small&gt;\', \'&lt;/small&gt;\');"><img src="' . BASEDIR . 'images/editor/small.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;i&gt;\', \'&lt;/i&gt;\');"><img src="' . BASEDIR . 'images/editor/i.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;u&gt;\', \'&lt;/u&gt;\');"><img src="' . BASEDIR . 'images/editor/u.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;div style=&quot;text-align:left&quot;&gt;\', \'&lt;/div&gt;\');"><img src="' . BASEDIR . 'images/editor/left.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;div style=&quot;text-align:center&quot;&gt;\', \'&lt;/div&gt;\');"><img src="' . BASEDIR . 'images/editor/center.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;div style=&quot;text-align:right&quot;&gt;\', \'&lt;/div&gt;\');"><img src="' . BASEDIR . 'images/editor/right.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#ff0000&quot;&gt;\', \'&lt;/span&gt;\');"><img src="' . BASEDIR . 'images/editor/red.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#00ff00&quot;&gt;\', \'&lt;/span&gt;\');"><img src="' . BASEDIR . 'images/editor/green.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#0000ff&quot;&gt;\', \'&lt;/span&gt;\');"><img src="' . BASEDIR . 'images/editor/blue.gif" alt="image" /></a>';
-	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#ffff00&quot;&gt;\', \'&lt;/span&gt;\');"><img src="' . BASEDIR . 'images/editor/yellow.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;a href=&quot;&quot;&gt;\', \'&lt;/a&gt;\');"><img src="'.BASEDIR.'images/editor/a.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;img src=&quot;\', \'&quot; alt=&quot;image&quot; /&gt;\');"><img src="'.BASEDIR.'images/editor/img.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;br /&gt;\', \'\');"><img src="'.BASEDIR.'images/editor/br.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;hr /&gt;\', \'\');"><img src="'.BASEDIR.'images/editor/hr.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;b&gt;\', \'&lt;/b&gt;\');"><img src="'.BASEDIR.'images/editor/b.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;big&gt;\', \'&lt;/big&gt;\');"><img src="'.BASEDIR.'images/editor/big.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;small&gt;\', \'&lt;/small&gt;\');"><img src="'.BASEDIR.'images/editor/small.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;i&gt;\', \'&lt;/i&gt;\');"><img src="'.BASEDIR.'images/editor/i.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;u&gt;\', \'&lt;/u&gt;\');"><img src="'.BASEDIR.'images/editor/u.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;div style=&quot;text-align:left&quot;&gt;\', \'&lt;/div&gt;\');"><img src="'.BASEDIR.'images/editor/left.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;div style=&quot;text-align:center&quot;&gt;\', \'&lt;/div&gt;\');"><img src="'.BASEDIR.'images/editor/center.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;div style=&quot;text-align:right&quot;&gt;\', \'&lt;/div&gt;\');"><img src="'.BASEDIR.'images/editor/right.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#ff0000&quot;&gt;\', \'&lt;/span&gt;\');"><img src="'.BASEDIR.'images/editor/red.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#00ff00&quot;&gt;\', \'&lt;/span&gt;\');"><img src="'.BASEDIR.'images/editor/green.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#0000ff&quot;&gt;\', \'&lt;/span&gt;\');"><img src="'.BASEDIR.'images/editor/blue.gif" alt="image" /></a>';
+	echo '<a href="#form" onclick="javascript:tag(\'&lt;span style=&quot;color:#ffff00&quot;&gt;\', \'&lt;/span&gt;\');"><img src="'.BASEDIR.'images/editor/yellow.gif" alt="image" /></a>';
 	echo '<br />';
 }
 
 // ------------------------- Функция вывода быстрых смайлов ------------------------//
 function quicksmiles() {
 	echo 'Смайлы<br />';
-	echo '<a href="#form" onclick="javascript:tag(\' :) \', \'\');"><img src="' . BASEDIR . 'images/smiles/).gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :( \', \'\');"><img src="' . BASEDIR . 'images/smiles/(.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :D \', \'\');"><img src="' . BASEDIR . 'images/smiles/D.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :E \', \'\');"><img src="' . BASEDIR . 'images/smiles/E.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :hello \', \'\');"><img src="' . BASEDIR . 'images/smiles/hello.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :cry \', \'\');"><img src="' . BASEDIR . 'images/smiles/cry.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :obana \', \'\');"><img src="' . BASEDIR . 'images/smiles/obana.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :infat \', \'\');"><img src="' . BASEDIR . 'images/smiles/infat.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :krut \', \'\');"><img src="' . BASEDIR . 'images/smiles/krut.gif" alt="image" /></a> ';
-	echo '<a href="#form" onclick="javascript:tag(\' :vtopku \', \'\');"><img src="' . BASEDIR . 'images/smiles/vtopku.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :) \', \'\');"><img src="'.BASEDIR.'images/smiles/).gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :( \', \'\');"><img src="'.BASEDIR.'images/smiles/(.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :D \', \'\');"><img src="'.BASEDIR.'images/smiles/D.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :E \', \'\');"><img src="'.BASEDIR.'images/smiles/E.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :hello \', \'\');"><img src="'.BASEDIR.'images/smiles/hello.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :cry \', \'\');"><img src="'.BASEDIR.'images/smiles/cry.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :obana \', \'\');"><img src="'.BASEDIR.'images/smiles/obana.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :infat \', \'\');"><img src="'.BASEDIR.'images/smiles/infat.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :krut \', \'\');"><img src="'.BASEDIR.'images/smiles/krut.gif" alt="image" /></a> ';
+	echo '<a href="#form" onclick="javascript:tag(\' :vtopku \', \'\');"><img src="'.BASEDIR.'images/smiles/vtopku.gif" alt="image" /></a> ';
 	echo '<br />';
 }
 
@@ -1853,15 +1859,15 @@ function quickpaste($form) {
 	echo '<script language="JavaScript" type="text/javascript">
 function tag(text1, text2) {
 if ((document.selection)) {
-document.form.' . $form . '.focus();
+document.form.'.$form.'.focus();
 document.form.document.selection.createRange().text = text1+document.form.document.selection.createRange().text+text2;
-} else if(document.forms[\'form\'].elements[\'' . $form . '\'].selectionStart!=undefined) {
-var element = document.forms[\'form\'].elements[\'' . $form . '\'];
+} else if(document.forms[\'form\'].elements[\''.$form.'\'].selectionStart!=undefined) {
+var element = document.forms[\'form\'].elements[\''.$form.'\'];
 var str = element.value;
 var start = element.selectionStart;
 var length = element.selectionEnd - element.selectionStart;
 element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2 + str.substr(start + length);
-} else document.form.' . $form . '.value += text1+text2;
+} else document.form.'.$form.'.value += text1+text2;
 }
 </script>';
 }
@@ -1870,7 +1876,7 @@ element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2
 function change_setting($str) {
 	global $config;
 
-	$file = file_get_contents(DATADIR . "config.dat");
+	$file = file_get_contents(DATADIR."config.dat");
 	$data = explode('|', $file);
 
 	$text = "";
@@ -1878,11 +1884,11 @@ function change_setting($str) {
 		if (isset($str[$u])) {
 			$data[$u] = $str[$u];
 		}
-		$text .= $data[$u] . '|';
+		$text .= $data[$u].'|';
 	}
 
 	if ($data[8] != "" && $data[9] != "" && $text != "") {
-		$fp = fopen(DATADIR . "config.dat", "a+");
+		$fp = fopen(DATADIR."config.dat", "a+");
 		flock($fp, LOCK_EX);
 		ftruncate($fp, 0);
 		fputs($fp, $text);
@@ -1897,8 +1903,8 @@ function change_setting($str) {
 function change_profil($login, $str) {
 	global $config;
 
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$file = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$file = file_get_contents(DATADIR."profil/$login.prof");
 		$data = explode(':||:', $file);
 
 		$text = "";
@@ -1906,11 +1912,11 @@ function change_profil($login, $str) {
 			if (isset($str[$u])) {
 				$data[$u] = $str[$u];
 			}
-			$text .= $data[$u] . ':||:';
+			$text .= $data[$u].':||:';
 		}
 
 		if ($data[0] != "" && $data[1] != "" && $data[4] != "" && $text != "") {
-			$fp = fopen(DATADIR . "profil/$login.prof", "a+");
+			$fp = fopen(DATADIR."profil/$login.prof", "a+");
 			flock($fp, LOCK_EX);
 			ftruncate($fp, 0);
 			fputs($fp, $text);
@@ -1926,8 +1932,8 @@ function change_profil($login, $str) {
 function reading_profil($login) {
 	$arrdata = array();
 
-	if (file_exists(DATADIR . "profil/$login.prof")) {
-		$file = file_get_contents(DATADIR . "profil/$login.prof");
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		$file = file_get_contents(DATADIR."profil/$login.prof");
 		if ($file != "") {
 			$arrdata = explode(':||:', $file);
 		}
@@ -1939,8 +1945,8 @@ function reading_profil($login) {
 // ------------------------- Функция проверки авторизации  ------------------------//
 function is_user() {
 	if ($_SESSION['log'] != "" && $_SESSION['par'] != "") {
-		if (file_exists(DATADIR . 'profil/' . $_SESSION['log'] . '.prof')) {
-			$file = file_get_contents(DATADIR . 'profil/' . $_SESSION['log'] . '.prof');
+		if (file_exists(DATADIR.'profil/'.$_SESSION['log'].'.prof')) {
+			$file = file_get_contents(DATADIR.'profil/'.$_SESSION['log'].'.prof');
 			$data = explode(':||:', $file);
 
 			if ($_SESSION['log'] == $data[0] && md5(md5($_SESSION['par'])) == $data[1]) {
@@ -1974,13 +1980,13 @@ function copyright_image($file) {
 
 		if ($ext[2] == 1) {
 			$img = imagecreatefromgif($file);
-			$copy = imagecreatefromgif(BASEDIR . 'images/img/copyright.gif');
+			$copy = imagecreatefromgif(BASEDIR.'images/img/copyright.gif');
 			imagecopy($img, $copy, imagesx($img) - imagesx($copy), imagesy($img) - imagesy($copy), 0, 0, imagesx($copy), imagesy($copy));
 			imagegif($img, $file);
 			imagedestroy($img);
 		} else if ($ext[2] == 2) {
 			$img = imagecreatefromjpeg($file);
-			$copy = imagecreatefromgif(BASEDIR . 'images/img/copyright.gif');
+			$copy = imagecreatefromgif(BASEDIR.'images/img/copyright.gif');
 			imagecopy($img, $copy, imagesx($img) - imagesx($copy), imagesy($img) - imagesy($copy), 0, 0, imagesx($copy), imagesy($copy));
 			imagejpeg ($img, $file);
 			imagedestroy($img);
@@ -1991,18 +1997,18 @@ function copyright_image($file) {
 
 // ------------------------- Функция вывода заголовков ------------------------//
 function show_title($image, $title) {
-	echo '<img src="' . BASEDIR . 'images/img/' . $image . '" alt="image" /> <b>' . $title . '</b><br /><br />';
+	echo '<img src="'.BASEDIR.'images/img/'.$image.'" alt="image" /> <b>'.$title.'</b><br /><br />';
 }
 
 // ------------------------- Функция вывода ошибок ------------------------//
 function show_error($error) {
-	echo '<img src="' . BASEDIR . 'images/img/error.gif" alt="image" /> <b>' . $error . '</b><br /><br />';
+	echo '<img src="'.BASEDIR.'images/img/error.gif" alt="image" /> <b>'.$error.'</b><br /><br />';
 }
 
 // ------------------------- Функция вывода предупреждения ------------------------//
 function show_login($notice) {
-	echo '<div class="login">' . $notice . '<br /><b><a href="' . BASEDIR . 'pages/login.php?' . SID . '">Авторизоваться</a></b> или в начале ';
-	echo '<b><a href="' . BASEDIR . 'pages/registration.php?' . SID . '">Зарегистрироваться</a></b></div>';
+	echo '<div class="login">'.$notice.'<br /><b><a href="'.BASEDIR.'pages/login.php?'.SID.'">Авторизоваться</a></b> или в начале ';
+	echo '<b><a href="'.BASEDIR.'pages/registration.php?'.SID.'">Зарегистрироваться</a></b></div>';
 }
 
 ?>

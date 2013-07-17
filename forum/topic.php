@@ -65,16 +65,22 @@ case "index":
 
 				page_strnavigation('topic.php?fid='.$fid.'&amp;id='.$id.'&amp;', $config['forumpost'], $start, $total);
 
+				if (empty($topic[6])){
+					if (is_user()){
 
-				if (is_user()){
+						echo '<div class="form" id="form">';
+						echo '<form action="topic.php?act=add&amp;fid='.$fid.'&amp;id='.$id.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+						echo 'Сообщение:<br />';
+						echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
+						echo '<input type="submit" value="Написать" /></form></div><br />';
 
-					echo '<div class="form" id="form">';
-					echo '<form action="topic.php?act=add&amp;fid='.$fid.'&amp;id='.$id.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
-					echo 'Сообщение:<br />';
-					echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
-					echo '<input type="submit" value="Написать" /></form></div><br />';
+					} else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
+				} else {show_error('Данная тема закрыта для обсуждения!');}
 
-				} else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
+			echo '<a href="#up"><img src="../images/img/ups.gif" alt="image" /></a> ';
+			echo '<a href="../pages/pravila.php?'.SID.'">Правила</a> / ';
+			echo '<a href="../pages/smiles.php?'.SID.'">Смайлы</a> / ';
+			echo '<a href="../pages/tegi.php?'.SID.'">Теги</a><br /><br />';
 
 			} else {show_error('Тема пустая! Сообщений еще нет!');}
 		} else {show_error('Ошибка! Данной темы не существует!');}
@@ -85,35 +91,54 @@ break;
 ##                                    Добавление сообщения                                ##
 ############################################################################################
 case "add":
+
+	$uid = check($_GET['uid']);
+
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 	if ($forum) {
 		$topic = search_string(DATADIR."dataforum/topic$fid.dat", $id, 0);
 		if ($topic) {
+		if (is_user()) {
+		if ($uid==$_SESSION['token']){
 
-			$msg = check($_POST['msg']);
+			if (empty($topic[6])){
+				$msg = check($_POST['msg']);
 
-			antiflood("Location: topic.php?fid=$fid&id=$id&isset=antiflood&".SID);
-			karantin($udata[6], "Location: topic.php?fid=$fid&id=$id&isset=karantin&".SID);
+				if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<=5000){
 
-			if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<=5000){
+					antiflood("Location: topic.php?fid=$fid&id=$id&isset=antiflood&".SID);
+					karantin($udata[6], "Location: topic.php?fid=$fid&id=$id&isset=karantin&".SID);
+					statistics(2);
 
-				$msg = no_br($msg,'<br />');
+					$msg = no_br($msg, '<br />');
+					$msg = antimat($msg);
+					$msg = smiles($msg);
 
-				$text = $id.'|'.$fid.'|'.$log.'|'.$topic[3].'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
+					$text = $id.'|'.$fid.'|'.$log.'|'.$topic[3].'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
 
-				// Запись сообщения
-				write_files(DATADIR."dataforum/$id.dat", "$text\r\n", 0, 0666);
+					// Запись сообщения
+					write_files(DATADIR."dataforum/$id.dat", "$text\r\n", 0, 0666);
 
-				// Поднятие темы в списке
-				shift_lines(DATADIR."dataforum/topic$fid.dat", $topic['line']);
+					// Поднятие темы в списке
+					shift_lines(DATADIR."dataforum/topic$fid.dat", $topic['line']);
 
-				// Обновление mainforum
-				$maintext = $forum[0].'|'.$forum[1].'|'.$forum[2].'|'.($forum[3]+1).'|';
-				replace_lines(DATADIR."dataforum/mainforum.dat", $forum['line'], $maintext);
+					// Обновление mainforum
+					$maintext = $forum[0].'|'.$forum[1].'|'.$forum[2].'|'.($forum[3]+1).'|';
+					replace_lines(DATADIR."dataforum/mainforum.dat", $forum['line'], $maintext);
 
-				header ("Location: topic.php?act=end&fid=$fid&id=$id&isset=oktem&".SID); exit;
+					change_profil($log, array(8=>$udata[8]+1, 14=>$ip, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
+					header ("Location: topic.php?act=end&fid=$fid&id=$id&isset=oktem&".SID); exit;
+
+				} else {show_error('Ошибка! Данная тема закрыта для обсуждения!');}
 			} else {show_error('Слишком длинный или короткий текст сообщения (Необходимо от 5 до 3000 символов)');}
+
+		} else {
+			show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');
+		}
+		} else {
+			show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');
+		}
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
 
