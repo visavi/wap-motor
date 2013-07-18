@@ -22,7 +22,7 @@ $id = (isset($_GET['id'])) ? abs(intval($_GET['id'])) : 0;
 show_title('menu.gif', 'Форум '.$config['title']);
 
 if (file_exists(DATADIR."dataforum/topic$fid.dat")){
-if (file_exists(DATADIR."dataforum/$id.dat")){
+if (file_exists(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat')){
 
 switch ($act):
 ############################################################################################
@@ -41,11 +41,11 @@ case "index":
 		$topic = search_string(DATADIR."dataforum/topic$fid.dat", $id, 0);
 		if ($topic) {
 
-			$total = counter_string(DATADIR."dataforum/$id.dat");
+			$total = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 			echo '<br /><br /><img src="../images/img/themes.gif" alt="image" /> <b>'.$topic[3].'</b> ('.$total.' пост.)<hr />';
 
 			if ($total>0) {
-				$file = file(DATADIR."dataforum/$id.dat");
+				$file = file(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 
 				if ($start < 0 || $start >= $total){$start = 0;}
 				if ($total < $start + $config['forumpost']){ $end = $total; }
@@ -65,24 +65,26 @@ case "index":
 
 				page_strnavigation('topic.php?fid='.$fid.'&amp;id='.$id.'&amp;', $config['forumpost'], $start, $total);
 
-				if (empty($topic[6])){
-					if (is_user()){
+			} else {show_error('Тема пустая! Сообщений еще нет!');}
 
-						echo '<div class="form" id="form">';
-						echo '<form action="topic.php?act=add&amp;fid='.$fid.'&amp;id='.$id.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
-						echo 'Сообщение:<br />';
-						echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
-						echo '<input type="submit" value="Написать" /></form></div><br />';
+			// Форма для добавления сообщений
+			if (empty($topic[6])){
+				if (is_user()){
 
-					} else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
-				} else {show_error('Данная тема закрыта для обсуждения!');}
+					echo '<div class="form" id="form">';
+					echo '<form action="topic.php?act=add&amp;fid='.$fid.'&amp;id='.$id.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+					echo 'Сообщение:<br />';
+					echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
+					echo '<input type="submit" value="Написать" /></form></div><br />';
+
+				} else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
+			} else {show_error('Данная тема закрыта для обсуждения!');}
 
 			echo '<a href="#up"><img src="../images/img/ups.gif" alt="image" /></a> ';
 			echo '<a href="../pages/pravila.php?'.SID.'">Правила</a> / ';
 			echo '<a href="../pages/smiles.php?'.SID.'">Смайлы</a> / ';
 			echo '<a href="../pages/tegi.php?'.SID.'">Теги</a><br /><br />';
 
-			} else {show_error('Тема пустая! Сообщений еще нет!');}
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
 break;
@@ -117,7 +119,7 @@ case "add":
 					$text = $id.'|'.$fid.'|'.$log.'|'.$topic[3].'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
 
 					// Запись сообщения
-					write_files(DATADIR."dataforum/$id.dat", "$text\r\n", 0, 0666);
+					write_files(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', "$text\r\n", 0, 0666);
 
 					// Поднятие темы в списке
 					shift_lines(DATADIR."dataforum/topic$fid.dat", $topic['line']);
@@ -153,7 +155,7 @@ case "end":
 	if ($forum) {
 		$topic = search_string(DATADIR."dataforum/topic$fid.dat", $id, 0);
 		if ($topic) {
-			$totpage = counter_string(DATADIR."dataforum/".$id.".dat");
+			$totpage = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 			$lastpage = ceil($totpage/$config['forumpost']) * $config['forumpost'] - $config['forumpost'];
 
 			header ("Location: topic.php?fid=$fid&id=$id&start=$lastpage&".SID); exit;

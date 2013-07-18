@@ -28,43 +28,42 @@ switch ($act):
 ##                                 Вывод перечня категорий                                ##
 ############################################################################################
 case "index":
-
 if (file_exists(DATADIR."dataforum/mainforum.dat")) {
-	$lines = file(DATADIR."dataforum/mainforum.dat");
-	$total = count($lines);
+	$fileforum = file(DATADIR."dataforum/mainforum.dat");
+	$total = count($fileforum);
 
 	if ($total>0) {
 
-	foreach($lines as $key=>$forumval){
-		$data = explode("|", $forumval);
+	foreach($fileforum as $key=>$forumval){
+		$forum = explode("|", $forumval);
 
 		echo '<div class="b"><img src="../images/img/forums.gif" alt="image" /> ';
-		echo '<b><a href="forum.php?fid='.$data[0].'&amp;'.SID.'">'.$data[1].'</a></b> ('.$data[2].'/'.$data[3].')';
+		echo '<b><a href="forum.php?fid='.$forum[0].'&amp;'.SID.'">'.$forum[1].'</a></b> ('.$forum[2].'/'.$forum[3].')';
 
 		if (is_admin(array(101,102))){
 			echo '<br />';
-			if ($key != 0){echo '<a href="forum.php?act=move&amp;fid='.$data[0].'&amp;where=0&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вверх</a> | ';} else {echo 'Вверх | ';}
-			if ($total > ($key+1)){echo '<a href="forum.php?act=move&amp;fid='.$data[0].'&amp;where=1&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вниз</a>';} else {echo 'Вниз';}
-			echo ' | <a href="forum.php?act=editforum&amp;fid='.$data[0].'&amp;'.SID.'">Редактировать</a>';
+			if ($key != 0){echo '<a href="forum.php?act=move&amp;fid='.$forum[0].'&amp;where=0&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вверх</a> | ';} else {echo 'Вверх | ';}
+			if ($total > ($key+1)){echo '<a href="forum.php?act=move&amp;fid='.$forum[0].'&amp;where=1&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вниз</a>';} else {echo 'Вниз';}
+			echo ' | <a href="forum.php?act=editforum&amp;fid='.$forum[0].'&amp;'.SID.'">Редактировать</a>';
 			if (is_admin(array(101))){
-				echo ' | <a href="forum.php?act=delforum&amp;fid='.$data[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить раздел?\')">Удалить</a>';
+				echo ' | <a href="forum.php?act=delforum&amp;fid='.$forum[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить раздел?\')">Удалить</a>';
 			}
 		}
 		echo '</div>';
 
-		$totalforum = counter_string(DATADIR."dataforum/topic".$data[0].".dat");
+		$totalforum = counter_string(DATADIR."dataforum/topic".$forum[0].".dat");
 
 		if($totalforum>0){
-			$filetopic = file(DATADIR."dataforum/topic".$data[0].".dat");
+			$filetopic = file(DATADIR."dataforum/topic".$forum[0].".dat");
 			$topic = explode("|", end($filetopic));
 
-			if (file_exists(DATADIR."dataforum/".$topic[0].".dat")) {
-				$filepost = file(DATADIR."dataforum/".$topic[0].".dat");
+			if (file_exists(DATADIR.'dataforum/'.$forum[0].'-'.$topic[0].'.dat')) {
+				$filepost = file(DATADIR.'dataforum/'.$forum[0].'-'.$topic[0].'.dat');
 				$post = explode("|", end($filepost));
 
 				if (utf_strlen($topic[3])>35) {$topic[3]=utf_substr($topic[3], 0, 30); $topic[3].="...";}
 
-				echo '<div>Тема: <a href="topic.php?act=end&amp;fid='.$data[0].'&amp;id='.$topic[0].'&amp;'.SID.'">'.$topic[3].'</a><br />';
+				echo '<div>Тема: <a href="topic.php?act=end&amp;fid='.$forum[0].'&amp;id='.$topic[0].'&amp;'.SID.'">'.$topic[3].'</a><br />';
 				echo 'Сообщение: '.nickname($post[2]).' ('.date_fixed($post[6]).')</div>';
 
 			} else {echo 'Последняя тема не найдена!';}
@@ -75,13 +74,59 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 
 	} else {show_error('Форум пустой! Разделы еще не созданы!');}
 } else {show_error('Форум пустой! Разделы еще не созданы!');}
+
+if (is_admin(array(101))){
+	echo '<br /><div class="form">';
+	echo '<form action="forum.php?act=addforum&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+	echo 'Заголовок:<br />';
+	echo '<input type="text" name="title" size="50" maxlength="50" /><br />';
+	echo '<input value="Создать раздел" type="submit" /></form></div><br />';
+
+	echo '<img src="../images/img/reload.gif" alt="image" /> <a href="forum.php?act=recount&amp;'.SID.'">Пересчитать</a><br />';
+}
+break;
+
+############################################################################################
+##                                     Сдвиг разделов                                     ##
+############################################################################################
+case "recount":
+if (file_exists(DATADIR."dataforum/mainforum.dat")) {
+	$fileforum = file(DATADIR."dataforum/mainforum.dat");
+
+	if (count($fileforum)>0){
+		foreach($fileforum as $key=>$forumval){
+			$forum = explode("|", $forumval);
+
+			$totaltopic = 0;
+			$totalpost = 0;
+
+			if (file_exists(DATADIR.'dataforum/topic'.$forum[0].'.dat')){
+				$filetopic = file(DATADIR.'dataforum/topic'.$forum[0].'.dat');
+				$totaltopic = count($filetopic);
+
+				foreach($filetopic as $topicval){
+					$topic = explode("|", $topicval);
+					$totalpost += counter_string(DATADIR.'dataforum/'.$forum[0].'-'.$topic[0].'.dat');
+				}
+			}
+
+			// Обновление mainforum
+			$maintext = $forum[0].'|'.$forum[1].'|'.$totaltopic.'|'.$totalpost.'|';
+			replace_lines(DATADIR."dataforum/mainforum.dat", $key, $maintext);
+		}
+		// Данные форума успешно пересчитаны!
+		header ("Location: forum.php?".SID); exit;
+
+	} else {show_error('Форум пустой! Разделы еще не созданы!');}
+} else {show_error('Форум пустой! Разделы еще не созданы!');}
+
+echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?'.SID.'">Вернуться</a><br />';
 break;
 
 ############################################################################################
 ##                                     Сдвиг разделов                                     ##
 ############################################################################################
 case "move":
-
 $uid = check($_GET['uid']);
 $where = (isset($_GET['where'])) ? abs(intval($_GET['where'])) : null;
 
@@ -127,13 +172,12 @@ break;
 ############################################################################################
 case "changeforum":
 	$uid = check($_GET['uid']);
+	$title = check($_POST['title']);
 
 	if ($uid==$_SESSION['token']){
 	if (is_admin(array(101,102))){
 		$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 		if ($forum) {
-
-			$title = check($_POST['title']);
 
 			if (utf_strlen(trim($title))>=5 && utf_strlen($title)<=50){
 
@@ -151,7 +195,7 @@ case "changeforum":
 break;
 
 ############################################################################################
-##                                    Удаление  форумов                                   ##
+##                                    Удаление форумов                                    ##
 ############################################################################################
 case "delforum":
 	$uid = check($_GET['uid']);
@@ -166,8 +210,8 @@ case "delforum":
 			if (count($file)>0){
 				foreach ($file as $data) {
 					$data = explode("|", $data);
-					if (file_exists(DATADIR.'dataforum/'.$data[0].'.dat')){
-						unlink(DATADIR.'dataforum/'.$data[0].'.dat');
+					if (file_exists(DATADIR.'dataforum/'.$fid.'-'.$data[0].'.dat')){
+						unlink(DATADIR.'dataforum/'.$fid.'-'.$data[0].'.dat');
 					}
 				}
 			}
@@ -185,8 +229,36 @@ case "delforum":
 		} else {show_error('Ошибка! Данный раздел форума не найден!');}
 	} else {show_error('Ошибка! Доступ разрешен только суперадминам!');}
 	} else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
+
 	echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?'.SID.'">Вернуться</a><br />';
 break;
+
+############################################################################################
+##                                     Создание форумов                                   ##
+############################################################################################
+case "addforum":
+	$uid = check($_GET['uid']);
+	$title = check($_POST['title']);
+
+	if ($uid==$_SESSION['token']){
+	if (is_admin(array(101))){
+
+		if (utf_strlen(trim($title))>=5 && utf_strlen($title)<=50){
+
+			$id = unifile(DATADIR."dataforum/mainforum.dat", 0);
+
+			$maintext = $id.'|'.$title.'|0|0|';
+			write_files(DATADIR."dataforum/mainforum.dat", "$maintext\r\n", 0, 0666);
+
+			header ("Location: forum.php?isset=mp_addforums&".SID); exit;
+
+		} else {show_error('Слишком длинный или короткий заголовок (Необходимо от 5 до 50 символов)');}
+	} else {show_error('Ошибка! Доступ разрешен только суперадминам!');}
+	} else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
+
+	echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?'.SID.'">Вернуться</a><br />';
+break;
+
 
 default:
 header("location: forum.php?".SID); exit;

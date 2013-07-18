@@ -67,27 +67,26 @@ case "index":
 				if ($data[5] == 1) {
 					$icon = 'lock.gif';
 				} elseif($data[6] == 1) {
-					$icon = 'close.gif';
+					$icon = 'zakr.gif';
 				} else {
 					$icon = 'forums.gif';
 				}
 
-				$totaltopic = counter_string(DATADIR."dataforum/".$data[0].".dat");
+				$totalpost = counter_string(DATADIR.'dataforum/'.$fid.'-'.$data[0].'.dat');
 
 				echo '<div class="b"><img src="../images/img/'.$icon.'" alt="image" /> ';
-				echo '<b><a href="topic.php?fid='.$fid.'&amp;id='.$data[0].'&amp;'.SID.'">'.$data[3].'</a></b> ('.$totaltopic.')</div>';
+				echo '<b><a href="topic.php?fid='.$fid.'&amp;id='.$data[0].'&amp;'.SID.'">'.$data[3].'</a></b> ('.$totalpost.')</div>';
 
-				if($totaltopic>0){
-					$filetop = file(DATADIR."dataforum/".$data[0].".dat");
-					$lostlist = explode("|", end($filetop));
+				if($totalpost>0){
+					$filepost = file(DATADIR.'dataforum/'.$fid.'-'.$data[0].'.dat');
+					$datapost = explode("|", end($filepost));
 
-					$totpage = counter_string(DATADIR."dataforum/".$lostlist[0].".dat");
-					$lastpage = ceil($totpage/$config['forumpost']) * $config['forumpost'] - $config['forumpost'];
+					$lastpage = ceil($totalpost/$config['forumpost']) * $config['forumpost'] - $config['forumpost'];
 
 					echo '<div>Страницы: ';
-					forum_navigation('topic.php?fid='.$lostlist[1].'&amp;id='.$lostlist[0].'&amp;', $config['forumpost'], $totaltopic);
+					forum_navigation('topic.php?fid='.$datapost[1].'&amp;id='.$datapost[0].'&amp;', $config['forumpost'], $totalpost);
 
-					echo 'Сообщение: '.nickname($lostlist[2]).' ('.date_fixed($lostlist[6]).')</div>';
+					echo 'Сообщение: '.nickname($datapost[2]).' ('.date_fixed($datapost[6]).')</div>';
 
 				} else {echo 'Тема пустая! Сообщений еще нет!';}
 			}
@@ -95,7 +94,7 @@ case "index":
 			page_strnavigation('forum.php?fid='.$fid.'&amp;', $config['forumtem'], $start, $total);
 
 
-		} else {show_error('Форум пустой! Разделы еще не созданы!');}
+		} else {show_error('Раздел пустой! Темы еще не созданы!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
 break;
 
@@ -152,6 +151,7 @@ break;
 ############################################################################################
 case 'create':
 	$uid = check($_GET['uid']);
+	$fid = abs(intval($_POST['fid']));
 
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 	if ($forum) {
@@ -184,7 +184,7 @@ case 'create':
 
 				// Создание файла темы и запись сообщения
 				$topictext = $id.'|'.$fid.'|'.$log.'|'.$title.'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
-				write_files(DATADIR."dataforum/$id.dat", "$topictext\r\n", 1, 0666);
+				write_files(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', "$topictext\r\n", 1, 0666);
 
 				// Обновление mainforum
 				$maintext = $forum[0].'|'.$forum[1].'|'.($forum[2]+1).'|'.($forum[3]+1).'|';
@@ -197,8 +197,8 @@ case 'create':
 						$data = explode("|", $value);
 						if (empty($data[5])){ // если тема не закреплена
 
-							if (file_exists(DATADIR."dataforum/".$data[0].".dat")) {
-								unlink (DATADIR."dataforum/".$data[0].".dat");
+							if (file_exists(DATADIR.'dataforum/'.$fid.'-'.$data[0].'.dat')) {
+								unlink (DATADIR.'dataforum/'.$fid.'-'.$data[0].'.dat');
 							}
 
 							unset($file[$key]);
@@ -209,7 +209,7 @@ case 'create':
 				}
 				change_profil($log, array(8=>$udata[8]+1, 14=>$ip, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
-				header ("Location: topic.php?fid=$fid&id=$id&isset=oktem&".SID);	exit;
+				header ("Location: topic.php?fid=$fid&id=$id&isset=oktem&".SID); exit;
 
 			} else {show_error('Слишком длинный или короткий текст сообщения (Необходимо от 5 до 3000 символов)');}
 		} else {show_error('Слишком длинный или короткий заголовок (Необходимо от 5 до 50 символов)');}
