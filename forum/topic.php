@@ -38,11 +38,25 @@ case "index":
 		echo '<a href="forum.php?fid='.$fid.'&amp;'.SID.'">'.$forum[1].'</a> / ';
 		echo '<a href="forum.php?act=new&amp;fid='.$fid.'&amp;'.SID.'">Новая тема</a>';
 
+
 		$topic = search_string(DATADIR."dataforum/topic$fid.dat", $id, 0);
 		if ($topic) {
 
 			$total = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 			echo '<br /><br /><img src="../images/img/themes.gif" alt="image" /> <b>'.$topic[3].'</b> ('.$total.' пост.)<hr />';
+
+			if (is_admin()){
+				$lock = (empty($topic[5])) ? 'Закрепить' : 'Открепить';
+				echo '<a href="'.ADMINDIR.'forum.php?act=lockedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$lock.'</a> / ';
+
+
+				$close = (empty($topic[6])) ? 'Закрыть' : 'Открыть';
+				echo '<a href="'.ADMINDIR.'forum.php?act=closedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$close.'</a> / ';
+
+				echo '<a href="'.ADMINDIR.'forum.php?act=edittopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;'.SID.'">Изменить</a> / ';
+				echo '<a href="'.ADMINDIR.'forum.php?act=deltopic&amp;del='.$id.'&amp;fid='.$fid.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить тему?\')">Удалить</a> / ';
+				echo '<a href="'.ADMINDIR.'forum.php?act=topic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;'.SID.'">Управление</a>';
+			}
 
 			if ($total>0) {
 				$file = file(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
@@ -57,9 +71,9 @@ case "index":
 					echo '<div class="b">';
 					echo user_avatars($data[2]).' <b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
 					echo user_title($data[2]).user_online($data[2]);
-					echo ' <small>('.date_fixed($data[6]).')</small></div>';
-					echo '<div>'.bb_code($data[4]).'<br />';
-					echo '<span class="data">('.$data[5].')</span>';
+					echo ' <small>('.date_fixed($data[5]).')</small></div>';
+					echo '<div>'.bb_code($data[3]).'<br />';
+					echo '<span class="data">('.$data[4].')</span>';
 					echo '</div>';
 				}
 
@@ -87,6 +101,7 @@ case "index":
 
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
+	echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?fid='.$fid.'&amp;'.SID.'">Вернуться</a><br />';
 break;
 
 ############################################################################################
@@ -116,7 +131,7 @@ case "add":
 					$msg = antimat($msg);
 					$msg = smiles($msg);
 
-					$text = $id.'|'.$fid.'|'.$log.'|'.$topic[3].'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
+					$text = $id.'|'.$fid.'|'.$log.'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
 
 					// Запись сообщения
 					write_files(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', "$text\r\n", 0, 0666);
@@ -148,7 +163,7 @@ case "add":
 break;
 
 ############################################################################################
-##                                    Добавление сообщения                                ##
+##                                Переход к последней странице                            ##
 ############################################################################################
 case "end":
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);

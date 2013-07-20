@@ -93,9 +93,10 @@ case "index":
 
 			page_strnavigation('forum.php?fid='.$fid.'&amp;', $config['forumtem'], $start, $total);
 
-
 		} else {show_error('Раздел пустой! Темы еще не созданы!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
+
+	echo '<img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
 break;
 
 
@@ -183,7 +184,7 @@ case 'create':
 				write_files(DATADIR."dataforum/topic$fid.dat", "$text\r\n", 0, 0666);
 
 				// Создание файла темы и запись сообщения
-				$topictext = $id.'|'.$fid.'|'.$log.'|'.$title.'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
+				$topictext = $id.'|'.$fid.'|'.$log.'|'.$msg.'|'.$brow.', '.$ip.'|'.SITETIME.'|';
 				write_files(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', "$topictext\r\n", 1, 0666);
 
 				// Обновление mainforum

@@ -141,33 +141,25 @@ function delete_lines($files, $lines) {
 	if ($lines !== "") {
 		if (file_exists($files)) {
 			if (!is_array($lines)) {
-				$file = file($files);
-				$fp = fopen($files, "a+");
-				flock ($fp, LOCK_EX);
-				ftruncate ($fp, 0);
-				if (isset($file[$lines])) {
-					unset($file[$lines]);
+				$data = file($files);
+
+				if (isset($data[$lines])) {
+					unset($data[$lines]);
 				}
-				fputs ($fp, implode($file));
-				fflush($fp);
-				flock ($fp, LOCK_UN);
-				fclose($fp);
-				unset ($lines);
+
+				file_put_contents($files, implode($data), LOCK_EX);
+
 			} else {
-				$file = file($files);
-				$fp = fopen($files, "a+");
-				flock ($fp, LOCK_EX);
-				ftruncate ($fp, 0);
+				$data = file($files);
+
 				foreach($lines as $val) {
-					if (isset($file[$val])) {
-						unset($file[$val]);
+					if (isset($data[$val])) {
+						unset($data[$val]);
 					}
 				}
-				fputs ($fp, implode($file));
-				fflush($fp);
-				flock ($fp, LOCK_UN);
-				fclose($fp);
-				unset ($lines);
+
+				file_put_contents($files, implode($data), LOCK_EX);
+
 			}
 		}
 	}
@@ -283,11 +275,11 @@ function search_string($file, $str, $ceil) {
 }
 
 // ------------------ Функция чтения строки в файле ------------------//
-function read_string($file, $line = null) {
+function read_string($file, $line) {
 	if (file_exists($file)) {
 		$files = file($file);
 
-		if (is_null($line)) {
+		if ($line === false) {
 			return explode("|", end($files));
 		}
 
@@ -913,6 +905,15 @@ function makeCal ($month, $year) {
  * return $image;
  * }
  */
+
+// ------------------------- Функция проверки аккаунта  ------------------------//
+function check_user($login) {
+	if (file_exists(DATADIR."profil/$login.prof")) {
+		return true;
+	}
+
+	return false;
+}
 
 // --------------- Функция подсчета денег у юзера ---------------//
 function user_many($login) {
