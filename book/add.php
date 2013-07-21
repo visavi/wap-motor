@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -45,7 +45,8 @@ delete_lines(DATADIR."book.dat",array(0,1));
 
 change_profil($log, array(9=>$udata[9]+1, 14=>$ip, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
-header ("Location: index.php?isset=addon&".SID); exit;
+$_SESSION['note'] = 'Сообщение успешно добавлено!';
+header ("Location: index.php?".SID); exit;
 
 } else {show_error('Ошибка! Слишком длинное или короткое сообщение!');}
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
@@ -80,7 +81,8 @@ if ($countstr>=$config['maxpostbook']) {
 delete_lines(DATADIR."book.dat",array(0,1));
 }
 
-header ("Location: index.php?isset=addon&".SID); exit;
+$_SESSION['note'] = 'Сообщение успешно добавлено!';
+header ("Location: index.php?".SID); exit;
 
 } else {show_error('Ошибка! Проверочное число не совпало с данными на картинке!');}
 } else {show_error('Ошибка! Слишком длинное или короткое сообщение!');}
@@ -88,7 +90,7 @@ header ("Location: index.php?isset=addon&".SID); exit;
 } else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 
 echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

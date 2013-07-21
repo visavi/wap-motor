@@ -38,14 +38,18 @@ function makestime($string) {
 function date_fixed($timestamp, $format = "d.m.y / H:i") {
 	global $config;
 
-	if (!ctype_digit($timestamp)) {
+	if (!is_numeric($timestamp)) {
 		$timestamp = SITETIME;
 	}
 	$shift = $config['timeclocks'] * 3600;
 	$datestamp = date($format, $timestamp + $shift);
+
 	$today = date("d.m.y", SITETIME + $shift);
+	$yesterday = date("d.m.y", strtotime("-1 day") + $shift);
 
 	$datestamp = str_replace($today, 'Сегодня', $datestamp);
+	$datestamp = str_replace($yesterday, 'Вчера', $datestamp);
+
 	$search = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	$replace = array('Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря');
 	$datestamp = str_replace($search, $replace, $datestamp);
@@ -373,37 +377,55 @@ function rus_utf_tolower($str) {
 	return strtr($str, $arraytolower);
 }
 
-// ------------------ Функция определения реального IP --------------------//
-if (empty($_SESSION['user_ip'])) {
-	if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match('|^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$|', $_SERVER['HTTP_X_FORWARDED_FOR'])) {
-		$_SESSION['user_ip'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	} elseif (isset($_SERVER['HTTP_CLIENT_IP']) && preg_match('|^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$|', $_SERVER['HTTP_CLIENT_IP'])) {
-		$_SESSION['user_ip'] = $_SERVER['HTTP_CLIENT_IP'];
-	} else {
-		$_SESSION['user_ip'] = $ip_addr;
-	}
-}
-
-$ip = check($_SESSION['user_ip']);
 // ------------------ Функция определения браузера --------------------//
-if (empty($_SESSION['user_brow'])) {
-	if (isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])) {
-		$browsus = $_SERVER['HTTP_X_OPERAMINI_PHONE_UA'];
-	} elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
-		$browsus = $_SERVER['HTTP_USER_AGENT'];
-	} else {
-		$browsus = 'Not_detected';
+function get_user_agent() {
+	if (isset($_SERVER['HTTP_USER_AGENT'])) {
+		$agent = check($_SERVER['HTTP_USER_AGENT']);
+
+		if (stripos($agent, 'Avant Browser') !== false) {
+			return 'Avant Browser';
+		} elseif (stripos($agent, 'Acoo Browser') !== false) {
+			return 'Acoo Browser';
+		} elseif (stripos($agent, 'MyIE2') !== false) {
+			return 'MyIE2';
+		} elseif (preg_match('|Iron/([0-9a-z\.]*)|i', $agent, $pocket)) {
+			return 'SRWare Iron '.subtok($pocket[1], '.', 0, 2);
+		} elseif (preg_match('|Chrome/([0-9a-z\.]*)|i', $agent, $pocket)) {
+			return 'Chrome '.subtok($pocket[1], '.', 0, 2);
+		} elseif (preg_match('#(Maxthon|NetCaptor)( [0-9a-z\.]*)?#i', $agent, $pocket)) {
+			return $pocket[1] . $pocket[2];
+		} elseif (stripos($agent, 'Safari') !== false && preg_match('|Version/([0-9]{1,2}.[0-9]{1,2})|i', $agent, $pocket)) {
+			return 'Safari '.subtok($pocket[1], '.', 0, 2);
+		} elseif (preg_match('#(NetFront|K-Meleon|Netscape|Galeon|Epiphany|Konqueror|Safari|Opera Mini|Opera Mobile)/([0-9a-z\.]*)#i', $agent, $pocket)) {
+			return $pocket[1].' '.subtok($pocket[2], '.', 0, 2);
+		} elseif (stripos($agent, 'Opera') !== false && preg_match('|Version/([0-9]{1,2}.[0-9]{1,2})|i', $agent, $pocket)) {
+			return 'Opera '.$pocket[1];
+		} elseif (preg_match('|Opera[/ ]([0-9a-z\.]*)|i', $agent, $pocket)) {
+			return 'Opera '.subtok($pocket[1], '.', 0, 2);
+		} elseif (preg_match('|Orca/([ 0-9a-z\.]*)|i', $agent, $pocket)) {
+			return 'Orca '.subtok($pocket[1], '.', 0, 2);
+		} elseif (preg_match('#(SeaMonkey|Firefox|GranParadiso|Minefield|Shiretoko)/([0-9a-z\.]*)#i', $agent, $pocket)) {
+			return $pocket[1].' '.subtok($pocket[2], '.', 0, 2);
+		} elseif (preg_match('|rv:([0-9a-z\.]*)|i', $agent, $pocket) && strpos($agent, 'Mozilla/') !== false) {
+			return 'Mozilla '.subtok($pocket[1], '.', 0, 2);
+		} elseif (preg_match('|Lynx/([0-9a-z\.]*)|i', $agent, $pocket)) {
+			return 'Lynx '.subtok($pocket[1], '.', 0, 2);
+		} elseif (preg_match('|MSIE ([0-9a-z\.]*)|i', $agent, $pocket)) {
+			return 'IE '.subtok($pocket[1], '.', 0, 2);
+		} else {
+			$agent = preg_replace('|http://|i', '', $agent);
+			$agent = strtok($agent, '( ');
+			$agent = substr($agent, 0, 22);
+			$agent = subtok($agent, '.', 0, 2);
+
+			if (!empty($agent)) {
+				return $agent;
+			}
+		}
 	}
-	if (!empty($browsus)) {
-		$browsus = preg_replace('|http://|i', '', $browsus);
-		$browsus = strtok($browsus, '( ');
-		$_SESSION['user_brow'] = substr($browsus, 0, 22);
-	} else {
-		$_SESSION['user_brow'] = 'Not_detected';
-	}
+	return 'Unknown';
 }
 
-$brow = check($_SESSION['user_brow']);
 // ----------------------- Функция экранирования основных знаков --------------------------//
 function check($msg) {
 	if (is_array($msg)) {
@@ -412,14 +434,19 @@ function check($msg) {
 		}
 	} else {
 		$msg = htmlspecialchars($msg);
-		$search = array('|', '\'', '$', '\\', '^', '%', '`', "\0", "\x00", "\x1A");
-		$replace = array('&#124;', '&#39;', '&#36;', '&#92;', '&#94;', '&#37;', '&#96;', '', '', '');
+		$search = array('|', '\'', '$', '\\', '^', '%', '`', "\0", "\x00", "\x1A", chr(226) . chr(128) . chr(174));
+		$replace = array('&#124;', '&#39;', '&#36;', '&#92;', '&#94;', '&#37;', '&#96;', '', '', '', '');
 
 		$msg = str_replace($search, $replace, $msg);
 		$msg = stripslashes(trim($msg));
 	}
 
 	return $msg;
+}
+
+// ----------------------- Функция обрезки строки с условием -------------------------//
+function subtok($string, $chr, $pos, $len = null) {
+	return implode($chr, array_slice(explode($chr, $string), $pos, $len));
 }
 
 // ----------------------- Функция вырезания переноса строки --------------------------//
@@ -530,11 +557,9 @@ function nosmiles($string) {
 function formatsize($file_size) {
 	if ($file_size >= 1048576000) {
 		$file_size = round(($file_size / 1073741824), 2)." Gb";
-	} elseif (
-		$file_size >= 1024000) {
+	} elseif ($file_size >= 1024000) {
 		$file_size = round(($file_size / 1048576), 2)." Mb";
-	} elseif (
-		$file_size >= 1000) {
+	} elseif ($file_size >= 1000) {
 		$file_size = round(($file_size / 1024), 2)." Kb";
 	} else {
 		$file_size = round($file_size)." byte";
@@ -575,15 +600,13 @@ function read_dir($dir) {
 // --------------- Функция правильного вывода времени -------------------//
 function formattime($file_time) {
 	if ($file_time >= 86400) {
-		$file_time = 'суток: '.round((($file_time / 60) / 60) / 24, 1);
-	} elseif (
-		$file_time >= 3600) {
-		$file_time = 'часов:  '.round(($file_time / 60) / 60, 1);
-	} elseif (
-		$file_time >= 60) {
-		$file_time = 'минут: '.round($file_time / 60);
+		$file_time = round((($file_time / 60) / 60) / 24, 1).' дн.';
+	} elseif ($file_time >= 3600) {
+		$file_time = round(($file_time / 60) / 60, 1).' час.';
+	} elseif ($file_time >= 60) {
+		$file_time = round($file_time / 60).' мин.';
 	} else {
-		$file_time = 'секунд:  '.round($file_time);
+		$file_time = round($file_time).' сек.';
 	}
 	return $file_time;
 }
@@ -1263,10 +1286,13 @@ function chmode ($path = ".") {
 				$file_path = $path."/".$file;
 
 				if (is_dir ($file_path)) {
-					@chmod ($file_path, 0777);
+					$old = umask(0);
+					chmod ($file_path, 0777);
+					umask($old);
+
 					chmode ($file_path);
 				} else {
-					@chmod ($file_path, 0666);
+					chmod ($file_path, 0666);
 				}
 			}
 		}
@@ -1362,6 +1388,9 @@ function user_title($login) {
 
 // ---------- Аналог функции substr для UTF-8 ---------//
 function utf_substr($str, $offset, $length = null) {
+	if ($length === null) {
+		$length = utf_strlen($str);
+	}
 	if (function_exists('mb_substr')) return mb_substr($str, $offset, $length, 'utf-8');
 	if (function_exists('iconv_substr')) return iconv_substr($str, $offset, $length, 'utf-8');
 
@@ -1387,23 +1416,30 @@ function utf_wordwrap($str, $width = 75, $break = ' ', $cut = 1) {
 
 // ----------------------- Функция определения кодировки ------------------------//
 function is_utf($str) {
-	if (function_exists('mb_detect_encoding')) {
-		if (mb_detect_encoding($str) == "UTF-8") {
-			return true;
-		} else {
-			return false;
+	$c = 0;
+	$b = 0;
+	$bits = 0;
+	$len = strlen($str);
+	for($i = 0; $i < $len; $i++) {
+		$c = ord($str[$i]);
+		if ($c > 128) {
+			if (($c >= 254)) return false;
+			elseif ($c >= 252) $bits = 6;
+			elseif ($c >= 248) $bits = 5;
+			elseif ($c >= 240) $bits = 4;
+			elseif ($c >= 224) $bits = 3;
+			elseif ($c >= 192) $bits = 2;
+			else return false;
+			if (($i + $bits) > $len) return false;
+			while ($bits > 1) {
+				$i++;
+				$b = ord($str[$i]);
+				if ($b < 128 || $b > 191) return false;
+				$bits--;
+			}
 		}
 	}
-
-	$letters = array("а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я");
-	foreach($letters as $letval) {
-		if (strstr($str, $letval)) {
-			return true;
-			break;
-		} else {
-			return false;
-		}
-	}
+	return true;
 }
 
 // --------------------- Функция вырезания битых символов UTF -------------------//
@@ -1465,32 +1501,25 @@ function unifile($file, $ceil) {
 }
 
 // ----------------------- Функция отправки письма по e-mail ------------------------//
-function addmail($usermail, $subject, $msg, $mail = "", $name = "") {
+function addmail($mail, $subject, $messages, $sendermail="", $sendername="") {
 	global $config;
 
-	if ($mail == "") {
-		$mail = $config['emails'];
-		$name = $config['nickname'];
+	if (empty($sendermail)) {
+		$sendermail = $config['emails'];
+		$sendername = $config['nickname'];
 	}
 
-	$subject = utf_to_win($subject);
-	$msg = utf_to_win($msg);
-	$name = utf_to_win($name);
+	$subject = '=?UTF-8?B?'.base64_encode($subject).'?=';
 
-	$subject = convert_cyr_string($subject, 'w', 'k');
-	$msg = convert_cyr_string($msg, 'w', 'k');
-	$name = convert_cyr_string($name, 'w', 'k');
-
-	$subject = '=?KOI8-R?B?'.base64_encode($subject).'?=';
-
-	$adds = "From: ".$name." <".$mail.">\n";
-	$adds .= "X-sender: ".$name." <".$mail.">\n";
-	$adds .= "Content-Type: text/plain; charset=koi8-r\n";
+	$adds = "From: =?UTF-8?B?".base64_encode($sendername)."?= <".$sendermail.">\n";
+	$adds .= "X-sender: =?UTF-8?B?".base64_encode($sendername)."?= <".$sendermail.">\n";
+	$adds .= "Content-Type: text/plain; charset=utf-8\n";
 	$adds .= "MIME-Version: 1.0\n";
 	$adds .= "Content-Transfer-Encoding: 8bit\n";
-	$adds .= "X-Mailer: PHP v.".phpversion();
+	$adds .= "X-Mailer: PHP v.".phpversion()."\n";
+	$adds .= "Date: ".date("r")."\n";
 
-	return mail($usermail, $subject, $msg, $adds);
+	return mail($mail, $subject, $messages, $adds);
 }
 
 // ----------------------- Постраничная навигация (Переходы) ------------------------//
@@ -1509,68 +1538,75 @@ function page_jumpnavigation($link, $posts, $start, $total) {
 	}
 }
 
-// ----------------------- Постраничная навигация (Страницы) ------------------------//
-function page_strnavigation($link, $posts, $start, $total, $koll = 4) {
+// ----------------------- Постраничная навигация ------------------------//
+function page_strnavigation($link, $posts, $start, $total, $range = 3){
+
 	if ($total > 0) {
-		$ba = ceil($total / $posts);
-		$ba2 = $ba * $posts - $posts;
 
-		echo '<hr />Страницы: ';
-		$min = $start - $posts * ($koll - 1);
-		$max = $start + $posts * $koll;
+	   $pg_cnt = ceil($total / $posts);
+	   $cur_page = ceil(($start + 1) / $posts);
+		$idx_fst = max($cur_page - $range, 1);
+		$idx_lst = min($cur_page + $range, $pg_cnt);
 
-		if ($min < $total && $min > 0) {
-			if ($min - $posts > 0) {
-				echo '<a href="'.$link.'start=0&amp;'.SID.'">1</a> ... ';
+		$res = 'Страницы: ';
+
+		if ($cur_page != 1) {
+			$res .='<a href="'.$link.'start='.($cur_page - 2) * $posts.'&amp;'.SID.'" title="Назад">&laquo;</a> ';
+		}
+
+	   if (($start - $posts) >= 0) {
+	      if ($cur_page > ($range + 1)) {
+	         $res .= ' <a href="'.$link.'start=0&amp;'.SID.'">1</a> ';
+	         if ($cur_page != ($range + 2)) {
+	            $res .= ' ... ';
+	         }
+	      }
+	   }
+
+		for ($i = $idx_fst; $i <= $idx_lst; $i++) {
+			$offset_page = ($i - 1) * $posts;
+			if ($i == $cur_page) {
+				$res .= ' <span class="navcurrent">'.$i.'</span> ';
 			} else {
-				echo '<a href="'.$link.'start=0&amp;'.SID.'">1</a> ';
+				$res .= ' <a href="'.$link.'start='.$offset_page.'&amp;'.SID.'">'.$i.'</a> ';
 			}
 		}
 
-		for($i = $min; $i < $max;) {
+	   if (($start + $posts) < $total) {
+	      if ($cur_page < ($pg_cnt - $range)) {
+	         if ($cur_page != ($pg_cnt - $range - 1)) {
+	            $res .= ' ... ';
+	         }
+	         $res .= ' <a href="'.$link.'start='.($pg_cnt - 1) * $posts.'&amp;'.SID.'">'.$pg_cnt.'</a> ';
+	      }
+	   }
+
+		if ($cur_page != $pg_cnt) {
+			$res .= ' <a href="'.$link.'start='.($cur_page * $posts).'&amp;'.SID.'" title="Вперед">&raquo;</a>';
+		}
+
+		echo '<hr /><div class="nav">'.$res.'</div>';
+	}
+}
+
+// ----------------------- Вывод страниц в форуме ------------------------//
+function forum_navigation($link, $posts, $total) {
+	if ($total > 0) {
+		$ba = ceil($total / $posts);
+		$ba2 = $ba * $posts - $posts;
+		$max = $posts * 5;
+
+		for($i = 0; $i < $max;) {
 			if ($i < $total && $i >= 0) {
 				$ii = floor(1 + $i / $posts);
-
-				if ($start == $i) {
-					echo ' <b>('.$ii.')</b> ';
-				} else {
-					echo ' <a href="'.$link.'start='.$i.'&amp;'.SID.'">'.$ii.'</a> ';
-				}
+				echo ' <a href="'.$link.'start='.$i.'&amp;'.SID.'">'.$ii.'</a> ';
 			}
 
-			$i = $i + $posts;
+			$i += $posts;
 		}
 
 		if ($max < $total) {
 			if ($max + $posts < $total) {
-				echo ' ... <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
-			} else {
-				echo ' <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
-			}
-		}
-		echo '<br /><br />';
-	}
-}
-
-//----------------------- Вывод страниц в форуме ------------------------//
-function forum_navigation($link, $posts, $total) {
-
-	if($total>0){
-		$ba = ceil($total/$posts);
-		$ba2 = $ba * $posts - $posts;
-		$max = $posts * 5;
-
-		for($i=0; $i<$max;){
-
-		if ($i<$total && $i>=0){
-			$ii = floor(1 + $i / $posts);
-			echo ' <a href="'.$link.'start='.$i.'&amp;'.SID.'">'.$ii.'</a> ';
-		}
-
-		$i+=$posts;}
-
-		if ($max<$total){
-			if ($max+$posts<$total){
 				echo ' ... <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
 			} else {
 				echo ' <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
@@ -1628,7 +1664,7 @@ function statistics($number, $clear = false) {
 
 		$data = $u[0].'|'.$u[1].'|'.$u[2].'|'.$u[3].'|'.$u[4].'|'.$u[5].'|'.$u[6].'|'.$u[7].'|'.$u[8].'|'.$u[9].'|'.$u[10].'|';
 
-		if ($text != "" && $u[$number] !== "") {
+		if ($data != "" && $u[$number] !== "") {
 			file_put_contents(DATADIR."local.dat", $data, LOCK_EX);
 			unset($number);
 		}
@@ -1994,6 +2030,20 @@ function copyright_image($file) {
 		}
 		return true;
 	}
+}
+
+// ------------------------- Функция замены заголовков ------------------------//
+function ob_processing($str) {
+	global $config, $php_self;
+
+	if (isset($config['newtitle'])) {
+		$str = str_replace('%TITLE%', $config['newtitle'].' - '.$config['title'], $str);
+	} else {
+		$str = str_replace('%TITLE%', site_title($php_self), $str);
+	}
+	$str = str_replace('%KEYWORDS%', $config['keywords'], $str);
+	$str = str_replace('%DESCRIPTION%', $config['description'], $str);
+	return $str;
 }
 
 // ------------------------- Функция вывода заголовков ------------------------//

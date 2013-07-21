@@ -30,6 +30,11 @@ session_name('SID');
 session_start();
 
 $starttime = microtime(1);
+$ip = $ip_addr = preg_replace('|[^0-9\.]|', '', $_SERVER['REMOTE_ADDR']);
+
+if (version_compare(PHP_VERSION, '5.2.1') < 0) {
+    die('<b>Ошибка! Версия PHP должна быть 5.2.1 или выше!</b>');
+}
 
 if (get_magic_quotes_gpc()) {
     $in = array(& $_GET, & $_POST, & $_COOKIE);
@@ -50,13 +55,14 @@ if (get_magic_quotes_gpc()) {
     }
 }
 
-$ip_addr = preg_replace('|[^0-9\.]|', '', $_SERVER['REMOTE_ADDR']);
-if (version_compare(PHP_VERSION, '5.2.1') < 0) {die('<b>Ошибка! Версия PHP должна быть 5.2.1 или выше!</b>');}
-
 $level = 0;
 $folder_level = '';
-while (!file_exists($folder_level.'input.php') && $level<5) {$folder_level .= '../'; ++$level;}
+while (!file_exists($folder_level.'input.php') && $level < 5) {
+    $folder_level .= '../';
+    ++$level;
+}
 unset($level);
+
 define('BASEDIR', $folder_level);
 define('DATADIR', BASEDIR.'local/');
 define('ADMINDIR', BASEDIR.'mpanel/');

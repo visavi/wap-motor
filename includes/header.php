@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 if (!defined('BASEDIR')) { header('Location:../index.php'); exit; }
 
 if (isset($_SERVER['PHP_SELF'])) {$php_self = check(substr($_SERVER['PHP_SELF'],1));}
@@ -16,36 +16,34 @@ if (isset($_SERVER['REQUEST_URI'])) {$request_uri = check(urldecode(substr(strto
 if (isset($_SERVER['HTTP_REFERER'])) {$http_referer = check(urldecode(strtok($_SERVER['HTTP_REFERER'],'S')));} else {$http_referer = 'Не определено';}
 if (empty($_SESSION['log'])) {$username = $config['guestsuser'];} else {$username = $_SESSION['log'];}
 
+if (empty($_SESSION['user_brow'])) {
+	$_SESSION['user_brow'] = get_user_agent();
+}
+
+$brow = $_SESSION['user_brow'];
+
 ############################################################################################
 ##                            Сжатие и буферизация данныx                                 ##
 ############################################################################################
-if ($config['gzip']==1 && extension_loaded('zlib') && ini_get('zlib.output_compression')!='On' && ini_get('output_handler')!='ob_gzhandler' && ini_get('output_handler')!='zlib.output_compression'){
+if (!empty($config['gzip']) && extension_loaded('zlib') && ini_get('zlib.output_compression') != 'On' && ini_get('output_handler') != 'ob_gzhandler' && ini_get('output_handler') != 'zlib.output_compression') {
+	if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {
+		$gzencode = $_SERVER['HTTP_ACCEPT_ENCODING'];
+	} elseif (isset($_SERVER['HTTP_TE'])) {
+		$gzencode = $_SERVER['HTTP_TE'];
+	} else {
+		$gzencode = false;
+	}
 
-if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])) {$gzencode = $_SERVER['HTTP_ACCEPT_ENCODING'];} else {$gzencode = $_SERVER['HTTP_TE'];}
+	$support_gzip = (strpos($gzencode, 'gzip') !== false);
+	$support_deflate = (strpos($gzencode, 'deflate') !== false);
 
-$support_gzip = (strpos($gzencode, 'gzip') !== FALSE);
-$support_deflate = (strpos($gzencode, 'deflate') !== FALSE);
-
-if ($support_gzip && $support_deflate) {$support_deflate = FALSE;}
-
-if ($support_gzip){
-header("Content-Encoding: gzip");
-ob_start("compress_output_gzip");
-} 
-
-if ($support_deflate) {
-header("Content-Encoding: deflate");
-ob_start("compress_output_deflate");
-} 
-
-if (!$support_gzip && !$support_deflate) {
-ob_start();
-$config['gzip'] = 0; 
-}
-
-} else {
-ob_start();
-$config['gzip'] = 0; 
+	if ($support_gzip) {
+		header("Content-Encoding: gzip");
+		ob_start("compress_output_gzip");
+	} elseif ($support_deflate) {
+		header("Content-Encoding: deflate");
+		ob_start("compress_output_deflate");
+	}
 }
 
 ############################################################################################
@@ -55,7 +53,7 @@ $dosfiles = glob(DATADIR.'datados/*.dat');
 foreach ($dosfiles as $filename) {
 $file_array_filemtime = filemtime($filename);
 if ($file_array_filemtime < (time() - 60)) {
-unlink($filename); 
+unlink($filename);
 }}
 //-------------------------- Проверка на время -----------------------------//
 if (file_exists(DATADIR.'datados/'.$ip_addr.'.dat')){
@@ -128,7 +126,7 @@ $unlog = xoft_decode($_COOKIE['cooklog'],$config['keypass']);
 $unpar = xoft_decode($_COOKIE['cookpar'],$config['keypass']);
 
 if (file_exists(DATADIR.'profil/'.$unlog.'.prof')){
-$checkfiles = file_get_contents(DATADIR.'profil/'.$unlog.'.prof'); 
+$checkfiles = file_get_contents(DATADIR.'profil/'.$unlog.'.prof');
 $checkdata = explode(':||:', $checkfiles);
 
 if ($unlog==$checkdata[0] && md5(md5($unpar))==$checkdata[1] && !empty($checkdata[25])) {
@@ -155,26 +153,27 @@ if (empty($_SESSION['currs'])) {$_SESSION['currs'] = SITETIME;}
 if (empty($_SESSION['token'])) {$_SESSION['token'] = generate_password(6);}
 if (empty($_SESSION['protect'])) {$_SESSION['protect'] = mt_rand(1000,9999);}
 $_SESSION['timeon'] = maketime(SITETIME - $_SESSION['currs']);
+ob_start('ob_processing');
 
 ############################################################################################
 ##                                     Авторизация                                        ##
 ############################################################################################
-if (isset($_SESSION['log']) && isset($_SESSION['par']) && preg_match('|^[a-z0-9\-]+$|i',$_SESSION['log'])){ 
+if (isset($_SESSION['log']) && isset($_SESSION['par']) && preg_match('|^[a-z0-9\-]+$|i',$_SESSION['log'])){
 if (file_exists(DATADIR.'profil/'.$_SESSION['log'].'.prof')){
-$userprof = file_get_contents(DATADIR.'profil/'.$_SESSION['log'].'.prof'); 
+$userprof = file_get_contents(DATADIR.'profil/'.$_SESSION['log'].'.prof');
 $udata = explode(':||:', $userprof);
 
 if ($udata[0]==$_SESSION['log'] && $udata[1]==md5(md5($_SESSION['par'])) && !empty($udata[25])){
 
-$log  = $_SESSION['log']; 
+$log  = $_SESSION['log'];
 $config['themes'] = check($udata[20]);          # Скин/тема по умолчанию
 $config['bookpost'] = (int)$udata[21];          # Вывод сообщений в гостевой
 $config['postnews'] = (int)$udata[22];          # Новостей на страницу
 $config['forumpost'] = (int)$udata[23];         # Вывод сообщение в форуме
 $config['forumtem'] = (int)$udata[24];          # Вывод тем в форуме
-$config['chatpost'] = (int)$udata[26];          # Вывод сообщений в чате 
+$config['chatpost'] = (int)$udata[26];          # Вывод сообщений в чате
 $config['boardspost'] = (int)$udata[28];        # Выод объявлений
-$config['timeclocks'] =  check($udata[30]);     # Временной сдвиг 
+$config['timeclocks'] =  check($udata[30]);     # Временной сдвиг
 $config['showtime'] = (int)$udata[31];          # Вывод часов и дня недели
 $config['privatpost'] = (int)$udata[32];        # Вывод писем в привате
 
@@ -194,7 +193,7 @@ header ('Location: '.$config['home'].'/games/kredit.php?'.SID);  exit();}}
 //---------------------- функция проверки ip и браузера -----------------------//
 if ($udata[66]==1){
 $pr_ip = explode('.', $ip_addr);
-$new_ip = $pr_ip[0].$pr_ip[1].$pr_ip[2];	
+$new_ip = $pr_ip[0].$pr_ip[1].$pr_ip[2];
 
 if ($new_ip!=$_SESSION['my_ip']){
 session_unset();
@@ -215,12 +214,12 @@ delete_lines(DATADIR.'datalog/admin.dat', array(0,1));
 }
 
 } else {
-//------------------------ Запись текущей страницы для юзера ------------------------------//	
+//------------------------ Запись текущей страницы для юзера ------------------------------//
 if (file_exists(DATADIR.'who.dat')){
 $wholines = file(DATADIR.'who.dat');
 
 foreach($wholines as $whokey=>$whovalue){
-$whodats = explode("|",$whovalue); 
+$whodats = explode("|",$whovalue);
 if ($log == $whodats[0]) {
 unset ($wholines[$whokey]);
 }}
@@ -236,7 +235,7 @@ delete_lines(DATADIR.'who.dat', array(0,1));
 
 //-------------------------- Дайджест ------------------------------------//
 if (file_exists(DATADIR.'datalife/'.$log.'.dat')){
-$lifefile = file_get_contents(DATADIR.'datalife/'.$log.'.dat'); 
+$lifefile = file_get_contents(DATADIR.'datalife/'.$log.'.dat');
 $lifestr = explode('|', $lifefile);
 
 $lifetime = SITETIME - $lifestr[0];
@@ -260,20 +259,24 @@ write_files(DATADIR.'datalife/'.$log.'.dat', $tlife, 1, 0666);
 
 //------------------------ Отключение кеширования -----------------------------//
 if ($config['nocache']==0){
-Header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); 
-Header('Cache-Control: no-cache, must-revalidate'); 
-Header('Pragma: no-cache'); 
+Header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+Header('Cache-Control: no-cache, must-revalidate');
+Header('Pragma: no-cache');
 Header('Last-Modified: '.gmdate("D, d M Y H:i:s").' GMT');
 }
 
 //------------------------ Автоопределение системы -----------------------------//
-if (!empty($config['webthemes']) && empty($_SESSION['my_themes'])){
-if (empty($_SESSION['log']) || empty($_SESSION['par'])){ 
-if (stristr($_SERVER['HTTP_USER_AGENT'],'windows') || stristr($_SERVER['HTTP_USER_AGENT'],'linux') || 
-    stristr($_SERVER['HTTP_USER_AGENT'],'macintosh') || stristr($_SERVER['HTTP_USER_AGENT'],'unix') || 
-    stristr($_SERVER['HTTP_USER_AGENT'],'macos') || stristr($_SERVER['HTTP_USER_AGENT'],'bsd')){
-$config['themes'] = $config['webthemes'];
-}}}
+include_once BASEDIR.'includes/mobile_detect.php';
+$browser_detect = new Mobile_Detect();
+
+// ------------------------ Автоопределение системы -----------------------------//
+if (!empty($config['webthemes']) && empty($_SESSION['my_themes'])) {
+	if (empty($_SESSION['log']) || empty($_SESSION['par']) || empty($config['themes'])) {
+		if (!$browser_detect->isMobile() && !$browser_detect->isTablet()) {
+			$config['themes'] = $config['webthemes'];
+		}
+	}
+}
 
 if (isset($_SESSION['my_themes'])){$config['themes'] = $_SESSION['my_themes'];}
 if (!file_exists(BASEDIR.'themes/'.$config['themes'].'/index.php')){$config['themes'] = 'default';}
@@ -298,7 +301,7 @@ $textref = no_br($checkref.'|'.($refstring[1] + 1).'|'.SITETIME.'|'.$ip.'|');
 replace_lines(DATADIR.'referer.dat', $refstring['line'], $textref);
 
 } else {
-$textref = no_br($checkref.'|1|'.SITETIME.'|'.$ip.'|');	  
+$textref = no_br($checkref.'|1|'.SITETIME.'|'.$ip.'|');
 write_files(DATADIR.'referer.dat', $textref."\r\n");
 }
 

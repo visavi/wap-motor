@@ -8,13 +8,18 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 if (!defined('BASEDIR')) { header("Location:../index.php"); exit; }
 
+if (isset($_SESSION['note'])) {
+	echo '<div class="isset">'.$_SESSION['note'].'</div>';
+}
+
 if (is_user() && $udata[10]>0){
-if (!stristr($php_self,'pages/ban.php') && !stristr($php_self,'pages/key.php') && !stristr($php_self,'pages/banip.php') && !stristr($php_self,'pages/privat.php') && !stristr($php_self,'pages/pravila.php') && !stristr($php_self,'pages/closed.php')){ 
-echo '<img src="'.BASEDIR.'images/img/newmail.gif" alt="image" /> <b><a href="'.BASEDIR.'pages/privat.php?'.SID.'"><span style="color:#ff0000">Приватное сообщение! ('.(int)$udata[10].')</span></a></b><br />';
-}}
+	if (!stristr($php_self,'pages/ban.php') && !stristr($php_self,'pages/key.php') && !stristr($php_self,'pages/banip.php') && !stristr($php_self,'pages/privat.php') && !stristr($php_self,'pages/pravila.php') && !stristr($php_self,'pages/closed.php')){
+			echo '<img src="'.BASEDIR.'images/img/newmail.gif" alt="image" /> <b><a href="'.BASEDIR.'pages/privat.php?'.SID.'"><span style="color:#ff0000">Приватное сообщение! ('.(int)$udata[10].')</span></a></b><br />';
+	}
+}
 
 if (isset($_GET['isset'])){
 
@@ -50,22 +55,22 @@ echo '<div class="isset">Настройки успешно изменены!</di
 if ($isset=="lostpass"){
 echo '<div class="isset">Пароль успешно восстановлен!<br />Ваши новые данные высланы на E-mail указанный в профиле</div>';}
 
-if ($isset=="antiflood"){ 
+if ($isset=="antiflood"){
 echo '<div class="isset">Свои мысли нужно формулировать чётче. Разрешается отправлять сообщения раз в '.$config['floodstime'].' секунд!</div>'; }
 
-if ($isset=="addon"){ 
+if ($isset=="addon"){
 echo '<div class="isset">Сообщение успешно добавлено!</div>'; }
 
-if ($isset=="oktem"){ 
+if ($isset=="oktem"){
 echo '<div class="isset">Тема успешно добавлена!</div>'; }
 
-if ($isset=="delthemes"){ 
+if ($isset=="delthemes"){
 echo '<div class="isset">Тема была удалена модератором!</div>'; }
 
-if ($isset=="nopost"){ 
+if ($isset=="nopost"){
 echo '<div class="isset">Ошибка! Слишком длинное сообщение или тема!</div>'; }
 
-if ($isset=="zakr"){ 
+if ($isset=="zakr"){
 echo '<div class="isset">Вы не можете писать в закрытую тему!</div>'; }
 
 if ($isset=="alldelpriv"){
@@ -74,7 +79,7 @@ echo '<div class="isset">Ящик успешно очищен!</div>';}
 if ($isset=="selectpriv"){
 echo '<div class="isset">Выбранные сообщения успешно удалены!</div>';}
 
-if ($isset=="posts"){ 
+if ($isset=="posts"){
 echo '<div class="isset">Ваше сообщение пустое, слишком длинное или короткое.</div>'; }
 
 if ($isset=="mp_yesset"){

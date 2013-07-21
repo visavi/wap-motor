@@ -8,11 +8,11 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 header('Content-type:text/html; charset=utf-8');
 echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
 echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><head>';
-echo '<title>'.site_title($php_self).'</title>';
+echo '<title>%TITLE%</title>';
 echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
 echo '<style type="text/css">
 body, td, tr {text-decoration: none; font-family: verdana, arial, helvetica, sans-serif; font-size: 8pt; cursor: default; color: #666;}
@@ -26,10 +26,10 @@ a.nav:active, a.nav:visited, a.nav:link {color: #666; font-size: 10px; font-weig
 a.nav:hover {font-size: 10px; font-weight: bold; color: #666; text-decoration: underline;}
 input, select {font-size: 8pt;}
 textarea {width: 98%; font-size: 9pt; padding: 5px;}
-div {margin: 1px 0px 1px 0px; padding: 5px 5px 5px 5px; background: #fff;}  
+div {margin: 1px 0px 1px 0px; padding: 5px 5px 5px 5px; background: #fff;}
 table {margin: 1px 0px 1px 0px; padding: 1px 1px 1px 1px; font-size: 8pt;}
 q {font-family: Times, serif;  font-style: italic; color: navy;quotes: "\00AB" "\00BB"}
-hr {border : 1px dotted #ccc;} 
+hr {border : 1px dotted #ccc;}
 .a {border: 1px solid #ccc; color: #666; background: #E9E9E9;}
 .b {font-size: 13px; color: #666; background-color: #f3f3f3; padding: 3px; color: #666; border: 1px solid #ccc;}
 .c {border: 1px solid #ccc; color: #666; background: #E9E9E9;}
@@ -39,8 +39,8 @@ hr {border : 1px dotted #ccc;}
 </style>';
 echo '<link rel="shortcut icon" href="'.$config['home'].'/favicon.ico" />';
 echo '<link rel="alternate" type="application/rss+xml" title="RSS News" href="'.$config['home'].'/news/rss.php" />';
-echo '<meta name="keywords" content="'.$config['keywords'].'" />';
-echo '<meta name="description" content="'.$config['description'].'" />';
+echo '<meta name="keywords" content="%KEYWORDS%" />';
+echo '<meta name="description" content="%DESCRIPTION%" />';
 echo '<meta name="generator" content="Wap-Motor '.MOTOR_VERSION.'" />';
 echo '</head><body>';
 echo '<!--Design by Vantuz (http://pizdec.ru)-->';
