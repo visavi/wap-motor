@@ -703,7 +703,76 @@ function nickname($string) {
 	return $string;
 }
 
+
+// ------------------------- Функция времени антифлуда ------------------------------//
+function flood_period() {
+	global $config, $udata;
+
+	$period = $config['floodstime'];
+
+	if ($udata[36] < 50) {
+		$period = round($config['floodstime'] * 2);
+	}
+	if ($udata[36] >= 500) {
+		$period = round($config['floodstime'] / 2);
+	}
+	if ($udata[36] >= 1000) {
+		$period = round($config['floodstime'] / 3);
+	}
+	if ($udata[36] >= 5000) {
+		$period = round($config['floodstime'] / 6);
+	}
+	if (is_admin()) {
+		$period = 0;
+	}
+
+	return $period;
+}
+
+// ------------------------- Функция антифлуда ------------------------------//
+function is_flood($log, $period = 0) {
+	global $php_self;
+
+	if (empty($period)) {
+		$period = flood_period();
+	}
+	if (empty($period)) {
+		return true;
+	}
+
+	$result = true;
+	$file = file(DATADIR."flooder.dat");
+	$fp = fopen(DATADIR."flooder.dat", "a+");
+	flock ($fp, LOCK_EX);
+	ftruncate ($fp, 0);
+
+	foreach($file as $line) {
+		$array = explode("|", $line);
+
+		if (($array[2]) > SITETIME) {
+			fputs ($fp, $line);
+
+			if ($array[0] == $log && $array[1] == $php_self) {
+				$result = false;
+			}
+		}
+	}
+
+	if ($result){
+		fputs ($fp, $log.'|'.$php_self.'|'.(SITETIME + $period)."|\r\n");
+	}
+
+	fflush($fp);
+	flock ($fp, LOCK_UN);
+	fclose($fp);
+
+	return $result;
+}
+
 // --------------- Вспомогательная функция антифлуда ------------------------//
+/**
+ * Не использовать функцию, устаревшее
+ */
 function flooder($ip, $php_self) {
 	global $config;
 
@@ -732,6 +801,10 @@ function flooder($ip, $php_self) {
 }
 
 // ------------------------- Функция антифлуда ------------------------------//
+/**
+ * Не использовать функцию, устаревшее
+ * Вместо нее if (is_flood($log))
+ */
 function antiflood($page) {
 	global $config, $ip, $php_self;
 
@@ -750,6 +823,24 @@ function antiflood($page) {
 }
 
 // ------------------------- Функция карантина ------------------------------//
+function is_quarantine($log) {
+	global $config, $udata;
+
+	if (!empty($config['karantin'])) {
+		$profil = reading_profil($log);
+
+		if ($profil[6] + $config['karantin'] > SITETIME) {
+			return false;
+		}
+	}
+	return true;
+}
+
+// ------------------------- Функция карантина ------------------------------//
+/**
+ * Не использовать функцию, устаревшее
+ * Вместо нее if (is_quarantine($log))
+ */
 function karantin($usertime, $page) {
 	global $config;
 
@@ -2044,6 +2135,17 @@ function ob_processing($str) {
 	$str = str_replace('%KEYWORDS%', $config['keywords'], $str);
 	$str = str_replace('%DESCRIPTION%', $config['description'], $str);
 	return $str;
+}
+
+// ------------- Функция переадресации -------------//
+function redirect($url, $permanent = false){
+
+	if ($permanent){
+		header('HTTP/1.1 301 Moved Permanently');
+	}
+
+	header('Location: '.$url);
+	exit();
 }
 
 // ------------------------- Функция вывода заголовков ------------------------//

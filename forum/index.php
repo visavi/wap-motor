@@ -14,16 +14,9 @@ require_once ('../includes/functions.php');
 require_once ('../includes/header.php');
 include_once ('../themes/'.$config['themes'].'/index.php');
 
-$act = (isset($_GET['act'])) ? check($_GET['act']) : 'index';
-$start = (isset($_GET['start'])) ? abs(intval($_GET['start'])) : 0;
-
 show_title('menu.gif', 'Форум '.$config['title']);
+$config['newtitle'] = 'Форум - Список разделов';
 
-switch ($act):
-############################################################################################
-##                                 Вывод перечня категорий                                ##
-############################################################################################
-case "index":
 if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 	$fileforum = file(DATADIR."dataforum/mainforum.dat");
 	$total = count($fileforum);
@@ -59,12 +52,6 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 
 	} else {show_error('Форум пустой! Разделы еще не созданы!');}
 } else {show_error('Форум пустой! Разделы еще не созданы!');}
-break;
-
-
-default:
-header("location: index.php?".SID); exit;
-endswitch;
 
 echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
 

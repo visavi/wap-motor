@@ -42,6 +42,8 @@ case "index":
 		$topic = search_string(DATADIR."dataforum/topic$fid.dat", $id, 0);
 		if ($topic) {
 
+			$config['newtitle'] = $topic[3];
+
 			$total = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 			echo '<br /><br /><img src="../images/img/themes.gif" alt="image" /> <b>'.$topic[3].'</b> ('.$total.' пост.)<hr />';
 
@@ -108,8 +110,10 @@ break;
 ##                                    Добавление сообщения                                ##
 ############################################################################################
 case "add":
+	$config['newtitle'] = 'Добавление сообщения';
 
 	$uid = check($_GET['uid']);
+	$msg = check($_POST['msg']);
 
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 	if ($forum) {
@@ -119,12 +123,11 @@ case "add":
 		if ($uid==$_SESSION['token']){
 
 			if (empty($topic[6])){
-				$msg = check($_POST['msg']);
 
+				if (is_flood($log)) {
+				if (is_quarantine($log)) {
 				if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<=5000){
 
-					antiflood("Location: topic.php?fid=$fid&id=$id&isset=antiflood&".SID);
-					karantin($udata[6], "Location: topic.php?fid=$fid&id=$id&isset=karantin&".SID);
 					statistics(2);
 
 					$msg = no_br($msg, '<br />');
@@ -145,10 +148,13 @@ case "add":
 
 					change_profil($log, array(8=>$udata[8]+1, 14=>$ip, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
-					header ("Location: topic.php?act=end&fid=$fid&id=$id&isset=oktem&".SID); exit;
+					$_SESSION['note'] = 'Сообщение успешно добавлено!';
+					redirect("topic.php?act=end&fid=$fid&id=$id&".SID);
 
-				} else {show_error('Ошибка! Данная тема закрыта для обсуждения!');}
-			} else {show_error('Слишком длинный или короткий текст сообщения (Необходимо от 5 до 3000 символов)');}
+				} else {show_error('Слишком длинный или короткий текст сообщения (Необходимо от 5 до 3000 символов)');}
+				} else {show_error('Карантин! Вы не можете писать в течении '.round($config['karantin'] / 3600).' часов!');}
+				} else {show_error('Антифлуд! Разрешается отправлять сообщения раз в '.flood_period().' секунд!');}
+			} else {show_error('Ошибка! Данная тема закрыта для обсуждения!');}
 
 		} else {
 			show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');
@@ -173,7 +179,7 @@ case "end":
 			$totpage = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 			$lastpage = ceil($totpage/$config['forumpost']) * $config['forumpost'] - $config['forumpost'];
 
-			header ("Location: topic.php?fid=$fid&id=$id&start=$lastpage&".SID); exit;
+			redirect("topic.php?fid=$fid&id=$id&start=$lastpage&".SID);
 
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
@@ -182,7 +188,7 @@ case "end":
 break;
 
 default:
-header("location: index.php?".SID); exit;
+redirect("index.php?".SID);
 endswitch;
 
 } else {show_error('Данной темы не существует, возможно она была удалена!');}

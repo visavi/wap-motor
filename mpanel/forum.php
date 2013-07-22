@@ -28,6 +28,9 @@ switch ($act):
 ##                                 Вывод перечня категорий                                ##
 ############################################################################################
 case "index":
+
+$config['newtitle'] = 'Форум - Список разделов';
+
 if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 	$fileforum = file(DATADIR."dataforum/mainforum.dat");
 	$total = count($fileforum);
@@ -93,6 +96,8 @@ case "forum":
 
 $forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 if ($forum) {
+
+	$config['newtitle'] = $forum[1];
 
 	$total = counter_string(DATADIR."dataforum/topic$fid.dat");
 
@@ -190,6 +195,8 @@ case "topic":
 		$topic = search_string(DATADIR."dataforum/topic$fid.dat", $id, 0);
 		if ($topic) {
 
+			$config['newtitle'] = $topic[3];
+
 			$total = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 			echo '<br /><br /><img src="../images/img/themes.gif" alt="image" /> <b>'.$topic[3].'</b> ('.$total.' пост.)<hr />';
 
@@ -266,6 +273,8 @@ break;
 ##                                   Пересчет разделов                                    ##
 ############################################################################################
 case "recount":
+$config['newtitle'] = 'Пересчет разделов';
+
 if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 	$fileforum = file(DATADIR."dataforum/mainforum.dat");
 
@@ -290,8 +299,9 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 			$maintext = $forum[0].'|'.$forum[1].'|'.$totaltopic.'|'.$totalpost.'|';
 			replace_lines(DATADIR."dataforum/mainforum.dat", $key, $maintext);
 		}
-		// Данные форума успешно пересчитаны!
-		header ("Location: forum.php?".SID); exit;
+
+		$_SESSION['note'] = 'Данные форума успешно пересчитаны!';
+		redirect("forum.php?".SID);
 
 	} else {show_error('Форум пустой! Разделы еще не созданы!');}
 } else {show_error('Форум пустой! Разделы еще не созданы!');}
@@ -300,9 +310,11 @@ echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?'.SID.
 break;
 
 ############################################################################################
-##                                     Сдвиг разделов                                     ##
+##                                     Сдвиг раздела                                      ##
 ############################################################################################
 case "move":
+$config['newtitle'] = 'Перемещение раздела';
+
 $uid = check($_GET['uid']);
 $where = (isset($_GET['where'])) ? abs(intval($_GET['where'])) : null;
 
@@ -314,7 +326,8 @@ if (is_admin(array(101,102))){
 
 				move_lines(DATADIR."dataforum/mainforum.dat", $forum['line'], $where);
 
-				header ("Location: forum.php?isset=mp_moveboard&".SID); exit;
+				$_SESSION['note'] = 'Раздел успешно перемещен!';
+				redirect("forum.php?".SID);
 
 			} else {echo show_error('Ошибка! Не выбрано действие для сдвига!');}
 		} else {show_error('Ошибка! Данный раздел форума не найден!');}
@@ -325,9 +338,10 @@ echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?'.SID.
 break;
 
 ############################################################################################
-##                                Редактирование форумов                                  ##
+##                                Редактирование форума                                   ##
 ############################################################################################
 case "editforum":
+	$config['newtitle'] = 'Редактирование форума';
 	if (is_admin(array(101,102))){
 		$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 		if ($forum) {
@@ -348,9 +362,10 @@ case "editforum":
 break;
 
 ############################################################################################
-##                                    Изменение форумов                                   ##
+##                                    Изменение форума                                    ##
 ############################################################################################
 case "changeforum":
+	$config['newtitle'] = 'Изменение форума';
 	$uid = check($_GET['uid']);
 	$title = check($_POST['title']);
 	$themes = abs(intval($_POST['themes']));
@@ -366,7 +381,8 @@ case "changeforum":
 				$maintext = $forum[0].'|'.$title.'|'.$themes.'|'.$posts.'|';
 				replace_lines(DATADIR."dataforum/mainforum.dat", $forum['line'], $maintext);
 
-				header ("Location: forum.php?isset=mp_editrazdel&".SID); exit;
+				$_SESSION['note'] = 'Раздел успешно изменен!';
+				redirect("forum.php?".SID);
 
 			} else {show_error('Слишком длинный или короткий заголовок (Необходимо от 5 до 50 символов)');}
 		} else {show_error('Ошибка! Данный раздел форума не найден!');}
@@ -377,9 +393,10 @@ case "changeforum":
 break;
 
 ############################################################################################
-##                                    Удаление форумов                                    ##
+##                                    Удаление форума                                     ##
 ############################################################################################
 case "delforum":
+	$config['newtitle'] = 'Удаление форума';
 	$uid = check($_GET['uid']);
 
 	if ($uid==$_SESSION['token']){
@@ -406,7 +423,8 @@ case "delforum":
 			// Удаление раздела форума
 			delete_lines(DATADIR."dataforum/mainforum.dat", $forum['line']);
 
-			header ("Location: forum.php?isset=mp_delforums&".SID); exit;
+			$_SESSION['note'] = 'Раздел успешно удален!';
+			redirect("forum.php?".SID);
 
 		} else {show_error('Ошибка! Данный раздел форума не найден!');}
 	} else {show_error('Ошибка! Доступ разрешен только суперадминам!');}
@@ -416,9 +434,10 @@ case "delforum":
 break;
 
 ############################################################################################
-##                                     Создание форумов                                   ##
+##                                     Создание форума                                    ##
 ############################################################################################
 case "addforum":
+	$config['newtitle'] = 'Создание форума';
 	$uid = check($_GET['uid']);
 	$title = check($_POST['title']);
 
@@ -432,7 +451,8 @@ case "addforum":
 			$maintext = $id.'|'.$title.'|0|0|';
 			write_files(DATADIR."dataforum/mainforum.dat", "$maintext\r\n", 0, 0666);
 
-			header ("Location: forum.php?isset=mp_addforums&".SID); exit;
+			$_SESSION['note'] = 'Раздел успешно создан!';
+			redirect("forum.php?".SID);
 
 		} else {show_error('Слишком длинный или короткий заголовок (Необходимо от 5 до 50 символов)');}
 	} else {show_error('Ошибка! Доступ разрешен только суперадминам!');}
@@ -444,9 +464,10 @@ break;
 //------------------------------------- Темы форума --------------------------------------//
 
 ############################################################################################
-##                                      Удаление тем                                      ##
+##                                      Удаление темы                                     ##
 ############################################################################################
 case "deltopic":
+	$config['newtitle'] = 'Удаление темы';
 
 	$uid = check($_GET['uid']);
 
@@ -482,7 +503,8 @@ case "deltopic":
 				// Удаление записи в темах
 				delete_lines(DATADIR."dataforum/topic$fid.dat", $delete);
 
-				header ("Location: forum.php?act=forum&fid=$fid&start=$start&isset=mp_delthemes&".SID); exit;
+				$_SESSION['note'] = 'Выбранные темы успешно удалены!';
+				redirect("forum.php?act=forum&fid=$fid&start=$start&".SID);
 
 			} else {show_error('Ошибка! Не выбраны темы для удаления!');}
 		} else {show_error('Ошибка! Данный раздел форума не найден!');}
@@ -492,9 +514,10 @@ case "deltopic":
 break;
 
 ############################################################################################
-##                                    Редактирование тем                                  ##
+##                                    Редактирование темы                                 ##
 ############################################################################################
 case "edittopic":
+	$config['newtitle'] = 'Редактирование темы';
 
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 	if ($forum) {
@@ -527,9 +550,11 @@ case "edittopic":
 break;
 
 ############################################################################################
-##                                       Изменение тем                                    ##
+##                                       Изменение темы                                   ##
 ############################################################################################
 case "changetopic":
+	$config['newtitle'] = 'Изменение темы';
+
 	$uid = check($_GET['uid']);
 	$title = check($_POST['title']);
 	$author = check($_POST['author']);
@@ -549,8 +574,8 @@ case "changetopic":
 			$topictext = $topic[0].'|'.$topic[1].'|'.$author.'|'.$title.'|'.$topic[4].'|'.$locked.'|'.$closed.'|';
 			replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], $topictext);
 
-			// тема успешно изменена
-			header ("Location: forum.php?act=forum&fid=$fid&start=$start&".SID); exit;
+			$_SESSION['note'] = 'Тема успешно изменена!';
+			redirect("forum.php?act=forum&fid=$fid&start=$start&".SID);
 
 		} else {show_error('Слишком длинный или короткий заголовок (Необходимо от 5 до 50 символов)');}
 		} else {show_error('Аккаунт пользователя '.$author.' не найден!');}
@@ -563,9 +588,11 @@ case "changetopic":
 break;
 
 ############################################################################################
-##                                    Закрытие тем                                        ##
+##                                    Закрытие темы                                       ##
 ############################################################################################
 case "closedtopic":
+	$config['newtitle'] = 'Закрытие темы';
+
 	$uid = check($_GET['uid']);
 
 	if ($uid==$_SESSION['token']){
@@ -580,8 +607,8 @@ case "closedtopic":
 		$topictext = $topic[0].'|'.$topic[1].'|'.$topic[2].'|'.$topic[3].'|'.$topic[4].'|'.$topic[5].'|'.$closed.'|';
 		replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], $topictext);
 
-		// тема успешно изменена
-		header ("Location: forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID); exit;
+		$_SESSION['note'] = 'Тема успешно изменена!';
+		redirect("forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID);
 
 	} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данный раздел форума не найден!');}
@@ -592,9 +619,11 @@ break;
 
 
 ############################################################################################
-##                                   Закепление тем                                       ##
+##                                   Закрепление темы                                     ##
 ############################################################################################
 case "lockedtopic":
+	$config['newtitle'] = 'Закрепление темы';
+
 	$uid = check($_GET['uid']);
 
 	if ($uid==$_SESSION['token']){
@@ -609,8 +638,8 @@ case "lockedtopic":
 		$topictext = $topic[0].'|'.$topic[1].'|'.$topic[2].'|'.$topic[3].'|'.$topic[4].'|'.$locked.'|'.$topic[6].'|';
 		replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], $topictext);
 
-		// тема успешно изменена
-		header ("Location: forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID); exit;
+		$_SESSION['note'] = 'Тема успешно изменена!';
+		redirect("forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID);
 
 	} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данный раздел форума не найден!');}
@@ -622,9 +651,11 @@ break;
 //--------------------------------- Сообщения форума -------------------------------------//
 
 ############################################################################################
-##                                     Удаление постов                                    ##
+##                                    Удаление сообщений                                  ##
 ############################################################################################
 case "delpost":
+	$config['newtitle'] = 'Удаление сообщений';
+
 	$uid = check($_GET['uid']);
 	$del = (isset($_POST['del'])) ? intar($_POST['del']) : null;
 
@@ -639,8 +670,8 @@ case "delpost":
 
 			delete_lines(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', $del);
 
-			// Выбранные сообщения успешно удалены!
-			header ("Location: forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID); exit;
+			$_SESSION['note'] = 'Выбранные сообщения успешно удалены!';
+			redirect("forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID);
 
 		} else {show_error('Ошибка! Не выбраны сообщения для удаления!');}
 	} else {show_error('Ошибка! Данной темы не существует!');}
@@ -652,9 +683,10 @@ break;
 
 
 ############################################################################################
-##                                  Редактирование постов                                 ##
+##                                Редактирование сообщения                                ##
 ############################################################################################
 case "editpost":
+	$config['newtitle'] = 'Редактирование сообщения';
 
 	$post = (isset($_GET['post'])) ? abs(intval($_GET['post'])) : null;
 
@@ -684,9 +716,10 @@ break;
 
 
 ############################################################################################
-##                                  Редактирование постов                                 ##
+##                                  Изменение сообщения                                   ##
 ############################################################################################
 case "changepost":
+	$config['newtitle'] = 'Изменение сообщения';
 
 	$post = (isset($_GET['post'])) ? abs(intval($_GET['post'])) : null;
 	$msg = check($_POST['msg']);
@@ -707,8 +740,8 @@ case "changepost":
 			$posttext = $data[0].'|'.$data[1].'|'.$author.'|'.$msg.'|'.$data[4].'|'.$data[5].'|';
 			replace_lines(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', $post, $posttext);
 
-			// Сообщение успешно изменено
-			header ("Location: forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID); exit;
+			$_SESSION['note'] = 'Сообщение успешно изменено!';
+			redirect("forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID);
 
 		} else {show_error('Слишком длинный или короткий текст сообщения (Необходимо от 5 до 5000 символов)');}
 		} else {show_error('Аккаунт пользователя '.$author.' не найден!');}
@@ -730,7 +763,7 @@ case "end":
 			$totpage = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
 			$lastpage = ceil($totpage/$config['forumpost']) * $config['forumpost'] - $config['forumpost'];
 
-			header ("Location: forum.php?act=topic&fid=$fid&id=$id&start=$lastpage&".SID); exit;
+			redirect("forum.php?act=topic&fid=$fid&id=$id&start=$lastpage&".SID);
 
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
@@ -739,14 +772,14 @@ case "end":
 break;
 
 default:
-header("location: forum.php?".SID); exit;
+redirect("forum.php".SID);
 endswitch;
 
 //----------------------- Концовка -------------------------//
 echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
 echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {redirect(BASEDIR.'index.php?'.SID);}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

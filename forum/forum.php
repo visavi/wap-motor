@@ -29,6 +29,7 @@ case "index":
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 	if ($forum) {
 
+		$config['newtitle'] = $forum[1];
 		$total = counter_string(DATADIR."dataforum/topic$fid.dat");
 
 		echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';
@@ -104,6 +105,7 @@ break;
 ##                           Подготовка к созданию новой темы                             ##
 ############################################################################################
 case 'new':
+	$config['newtitle'] = 'Создание новой темы';
 
 	if (is_user()) {
 		$forums = file(DATADIR."dataforum/mainforum.dat");
@@ -151,6 +153,8 @@ break;
 ##                                  Создание новой темы                                   ##
 ############################################################################################
 case 'create':
+	$config['newtitle'] = 'Создание новой темы';
+
 	$uid = check($_GET['uid']);
 	$fid = abs(intval($_POST['fid']));
 
@@ -162,11 +166,11 @@ case 'create':
 		$title = check($_POST['title']);
 		$msg = check($_POST['msg']);
 
+		if (is_flood($log)) {
+		if (is_quarantine($log)) {
 		if (utf_strlen(trim($title))>=5 && utf_strlen($title)<=50){
 			if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<=3000){
 
-				antiflood("Location: forum.php?fid=$fid&isset=antiflood&".SID);
-				karantin($udata[6], "Location: forum.php?fid=$fid&isset=karantin&".SID);
 				statistics(1);
 				statistics(2);
 
@@ -210,11 +214,13 @@ case 'create':
 				}
 				change_profil($log, array(8=>$udata[8]+1, 14=>$ip, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
-				header ("Location: topic.php?fid=$fid&id=$id&isset=oktem&".SID); exit;
+				$_SESSION['note'] = 'Тема успешно создана!';
+				redirect("topic.php?fid=$fid&id=$id&".SID);
 
 			} else {show_error('Слишком длинный или короткий текст сообщения (Необходимо от 5 до 3000 символов)');}
 		} else {show_error('Слишком длинный или короткий заголовок (Необходимо от 5 до 50 символов)');}
-
+		} else {show_error('Карантин! Вы не можете писать в течении '.round($config['karantin'] / 3600).' часов!');}
+		} else {show_error('Антифлуд! Разрешается отправлять сообщения раз в '.flood_period().' секунд!');}
 	} else {
 		show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');
 	}
@@ -229,7 +235,7 @@ echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?act=ne
 break;
 
 default:
-header("location: index.php?".SID); exit;
+redirect('index.php?'.SID);
 endswitch;
 
 echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
