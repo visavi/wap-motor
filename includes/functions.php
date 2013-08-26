@@ -125,7 +125,7 @@ function clear_files($files) {
 }
 
 // ------------------------ Функция записи в файл ------------------------//
-function write_files($filename, $text, $clear = 0, $chmod = "") {
+/*function write_files($filename, $text, $clear = 0, $chmod = "") {
 	$fp = fopen($filename, "a+");
 	flock ($fp, LOCK_EX);
 	if ($clear == 1) {
@@ -136,6 +136,19 @@ function write_files($filename, $text, $clear = 0, $chmod = "") {
 	flock ($fp, LOCK_UN);
 	fclose($fp);
 	if ($chmod != "") {
+		@chmod($filename, $chmod);
+	}
+}*/
+
+function write_files($filename, $text, $clear = 0, $chmod = 0) {
+
+	if (empty($clear)) {
+		file_put_contents($filename, $text, FILE_APPEND | LOCK_EX);
+	} else {
+		file_put_contents($filename, $text, LOCK_EX);
+	}
+
+	if (!empty($chmod)) {
 		@chmod($filename, $chmod);
 	}
 }
@@ -2015,15 +2028,8 @@ function change_setting($str) {
 		$text .= $data[$u].'|';
 	}
 
-	if ($data[8] != "" && $data[9] != "" && $text != "") {
-		$fp = fopen(DATADIR."config.dat", "a+");
-		flock($fp, LOCK_EX);
-		ftruncate($fp, 0);
-		fputs($fp, $text);
-		fflush($fp);
-		flock($fp, LOCK_UN);
-		fclose($fp);
-		unset($text);
+	if (!empty($data[8]) && !empty($data[9]) && !empty($text)) {
+		file_put_contents(DATADIR."config.dat", $text, LOCK_EX);
 	}
 }
 
@@ -2032,6 +2038,7 @@ function change_profil($login, $str) {
 	global $config;
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
+
 		$file = file_get_contents(DATADIR."profil/$login.prof");
 		$data = explode(':||:', $file);
 
@@ -2043,15 +2050,8 @@ function change_profil($login, $str) {
 			$text .= $data[$u].':||:';
 		}
 
-		if ($data[0] != "" && $data[1] != "" && $data[4] != "" && $text != "") {
-			$fp = fopen(DATADIR."profil/$login.prof", "a+");
-			flock($fp, LOCK_EX);
-			ftruncate($fp, 0);
-			fputs($fp, $text);
-			fflush($fp);
-			flock($fp, LOCK_UN);
-			fclose($fp);
-			unset($text);
+		if (!empty($data[0]) && !empty($data[1]) && !empty($data[4]) && !empty($text)) {
+			file_put_contents(DATADIR."profil/$login.prof", $text, LOCK_EX);
 		}
 	}
 }
@@ -2062,7 +2062,7 @@ function reading_profil($login) {
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
 		$file = file_get_contents(DATADIR."profil/$login.prof");
-		if ($file != "") {
+		if (!empty($file)) {
 			$arrdata = explode(':||:', $file);
 		}
 	}

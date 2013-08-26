@@ -32,7 +32,7 @@ case "index":
 		$config['newtitle'] = $forum[1];
 		$total = counter_string(DATADIR."dataforum/topic$fid.dat");
 
-		echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';
+		echo '<a href="#down"><img src="/images/img/downs.gif" alt="image" /></a> ';
 		echo '<a href="index.php?'.SID.'">Форум</a> / ';
 		echo '<a href="forum.php?act=new&amp;fid='.$fid.'&amp;'.SID.'">Новая тема</a>';
 
@@ -40,7 +40,7 @@ case "index":
 			echo ' / <a href="'.ADMINDIR.'forum.php?act=forum&amp;fid='.$fid.'&amp;start='.$start.'&amp;'.SID.'">Управление</a>';
 		}
 
-		echo '<br /><br /><img src="../images/img/themes.gif" alt="image" /> <b>'.$forum[1].'</b> ('.$total.' тем.)<hr />';
+		echo '<br /><br /><img src="/images/img/themes.gif" alt="image" /> <b>'.$forum[1].'</b> ('.$total.' тем.)<hr />';
 
 		if ($total>0) {
 			$files = file(DATADIR."dataforum/topic$fid.dat");
@@ -75,7 +75,7 @@ case "index":
 
 				$totalpost = counter_string(DATADIR.'dataforum/'.$fid.'-'.$data[0].'.dat');
 
-				echo '<div class="b"><img src="../images/img/'.$icon.'" alt="image" /> ';
+				echo '<div class="b"><img src="/images/img/'.$icon.'" alt="image" /> ';
 				echo '<b><a href="topic.php?fid='.$fid.'&amp;id='.$data[0].'&amp;'.SID.'">'.$data[3].'</a></b> ('.$totalpost.')</div>';
 
 				if($totalpost>0){
@@ -97,7 +97,7 @@ case "index":
 		} else {show_error('Раздел пустой! Темы еще не созданы!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
 
-	echo '<img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
+	echo '<img src="/images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
 break;
 
 
@@ -135,7 +135,7 @@ case 'new':
 			echo '<input value="Создать тему" type="submit" /></form></div><br />';
 
 			echo 'Прежде чем создать новую тему необходимо ознакомиться с правилами<br />';
-			echo '<a href="../pages/pravila.php?'.SID.'">Правила сайта</a><br />';
+			echo '<a href="/pages/pravila.php?'.SID.'">Правила сайта</a><br />';
 			echo 'Также убедись что такой темы нет, чтобы не создавать одинаковые, для этого введи ключевое слово в поиске<br />';
 			echo '<a href="search.php?'.SID.'">Поиск по форуму</a><br />';
 			echo 'И если после этого вы уверены, что ваша тема будет интересна другим пользователям, то можете ее создать<br /><br />';
@@ -146,7 +146,7 @@ case 'new':
 		show_login('Вы не авторизованы, для создания новой темы, необходимо');
 	}
 
-	echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?fid='.$fid.'&amp;'.SID.'">Вернуться</a><br />';
+	echo '<img src="/images/img/back.gif" alt="image" /> <a href="forum.php?fid='.$fid.'&amp;'.SID.'">Вернуться</a><br />';
 break;
 
 ############################################################################################
@@ -231,14 +231,15 @@ case 'create':
 		show_error('Ошибка! Даннго раздела для создании темы не существует!');
 	}
 
-echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?act=new&amp;fid='.$fid.'&amp;'.SID.'">Вернуться</a><br />';
+echo '<img src="/images/img/back.gif" alt="image" /> <a href="forum.php?act=new&amp;fid='.$fid.'&amp;'.SID.'">Вернуться</a><br />';
 break;
 
 default:
 redirect('index.php?'.SID);
 endswitch;
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<img src="/images/img/search.gif" alt="image" /> <a href="search.php?'.SID.'">Поиск</a><br />';
+echo '<img src="/images/img/homepage.gif" alt="image" /> <a href="/index.php?'.SID.'">На главную</a><br />';
 
 include_once ('../themes/'.$config['themes'].'/foot.php');
 ?>

@@ -8,12 +8,12 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("includes/start.php");
 require_once ("includes/functions.php");
 require_once ("includes/header.php");
 
-sleep(1); 
+sleep(1);
 if (isset($_POST['login'])) {$login = check($_POST['login']);} else {$login = check($_GET['login']);}
 if (isset($_POST['pass'])) {$pass = check($_POST['pass']);} else {$pass = check($_GET['pass']);}
 if (isset($_POST['cookietrue'])) {$cookietrue = (int)$_POST['cookietrue'];} else {$cookietrue = (int)$_GET['cookietrue'];}
@@ -26,17 +26,13 @@ if ($action==""){
 if (preg_match('|^[a-z0-9\-]+$|i',$login) && preg_match('|^[a-z0-9\-]+$|i',$pass)){
 if (file_exists(DATADIR."profil/$login.prof")){
 
-/* АПГРЕЙД из 18 в 19 версию */
-include_once ("includes/upgrade_pass_19ver.php");
-/* АПГРЕЙД из 18 в 19 версию */
-
-$inform = file_get_contents(DATADIR."profil/$login.prof"); 
+$inform = file_get_contents(DATADIR."profil/$login.prof");
 $info = explode(":||:",$inform);
 
 if ($login==$info[0] && md5(md5($pass))==$info[1]) {
 
 if ($cookietrue==1){
-	
+
 $apar = xoft_encode($pass,$config['keypass']);
 $alog = xoft_encode($login,$config['keypass']);
 
@@ -54,9 +50,9 @@ $_SESSION['my_ip'] = $my_ip;
 
 change_profil($login, array(11=>$info[11]+1, 14=>$ip, 25=>1, 44=>SITETIME));
 
-header ("Location: index.php?".SID); exit; 
+header ("Location: index.php?".SID); exit;
 }}}
-header ("Location: pages/login.php?isset=inputoff"); exit; 
+header ("Location: pages/login.php?isset=inputoff"); exit;
 }
 
 ############################################################################################
@@ -69,7 +65,7 @@ change_profil($log, array(25=>0));
 }
 
 unset($_SESSION['log']);
-unset($_SESSION['par']);	
+unset($_SESSION['par']);
 setcookie('cookpar', '');
 setcookie('cooklog', '');
 session_unset();

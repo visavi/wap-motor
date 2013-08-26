@@ -9,20 +9,22 @@
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
 #-----------------------------------------------------#
-define('MOTOR_VERSION', '21.0');
+define('MOTOR_VERSION', '22.0');
 
-/* Для режима отладки */
-/*
-error_reporting(E_ALL);
-ini_set('display_errors', true);
-ini_set('html_errors', true);
-ini_set('error_reporting', E_ALL);
-*/
+$debugmode = 1;
 
-@error_reporting(E_ALL ^ E_NOTICE);
-@ini_set('display_errors', false);
-@ini_set('html_errors', false);
-@ini_set('error_reporting', E_ALL ^ E_NOTICE);
+if ($debugmode) {
+    @error_reporting(E_ALL);
+    @ini_set('display_errors', true);
+    @ini_set('html_errors', true);
+    @ini_set('error_reporting', E_ALL);
+} else {
+    @error_reporting(E_ALL ^ E_NOTICE);
+    @ini_set('display_errors', false);
+    @ini_set('html_errors', false);
+    @ini_set('error_reporting', E_ALL ^ E_NOTICE);
+}
+
 @ini_set('url_rewriter.tags','');
 @ini_set('session.use_trans_sid', 1);
 @set_magic_quotes_runtime(0);
@@ -67,11 +69,11 @@ define('BASEDIR', $folder_level);
 define('DATADIR', BASEDIR.'local/');
 define('ADMINDIR', BASEDIR.'mpanel/');
 
-foreach ($_GET as $check_url) {
+/*foreach ($_GET as $check_url) {
 if (!preg_match('#^(?:[a-z0-9_\-/]+|\.+(?!/))*$#i', $check_url)){
 header ('Location: '.BASEDIR.'index.php?isset=403&'.SID); exit;
 }}
-unset($check_url);
+unset($check_url);*/
 
 ############################################################################################
 ##                                  Настройки сайта                                       ##

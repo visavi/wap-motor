@@ -19,7 +19,7 @@ body {text-decoration: none; font-family: arial; font-size: 15pt; margin: 5px; p
 .a {background-color: #333; margin: 5px; padding: 5px; color: #fff; font-style: italic;}
 .x {background-color: #eee; margin: 10px; padding: 15px;}
 </style>';
-echo '<link rel="shortcut icon" href="'.$config['home'].'/favicon.ico" />';
+echo '<link rel="shortcut icon" href="/favicon.ico" />';
 echo '<meta name="keywords" content="%KEYWORDS%" />';
 echo '<meta name="description" content="%DESCRIPTION%" />';
 echo '<meta name="generator" content="Wap-Motor '.MOTOR_VERSION.'" />';

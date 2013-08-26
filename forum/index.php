@@ -26,7 +26,7 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 	foreach($fileforum as $forumval){
 		$forum = explode("|", $forumval);
 
-		echo '<div class="b"><img src="../images/img/forums.gif" alt="image" /> ';
+		echo '<div class="b"><img src="/images/img/forums.gif" alt="image" /> ';
 		echo '<b><a href="forum.php?fid='.$forum[0].'&amp;'.SID.'">'.$forum[1].'</a></b> ('.$forum[2].'/'.$forum[3].')</div>';
 
 		$totalforum = counter_string(DATADIR."dataforum/topic".$forum[0].".dat");
@@ -53,7 +53,8 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 	} else {show_error('Форум пустой! Разделы еще не созданы!');}
 } else {show_error('Форум пустой! Разделы еще не созданы!');}
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<img src="/images/img/search.gif" alt="image" /> <a href="search.php?'.SID.'">Поиск</a><br />';
+echo '<img src="/images/img/homepage.gif" alt="image" /> <a href="/index.php?'.SID.'">На главную</a><br />';
 
 include_once ('../themes/'.$config['themes'].'/foot.php');
 ?>

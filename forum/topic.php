@@ -33,7 +33,7 @@ case "index":
 	$forum = search_string(DATADIR."dataforum/mainforum.dat", $fid, 0);
 	if ($forum) {
 
-		echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';
+		echo '<a href="#down"><img src="/images/img/downs.gif" alt="image" /></a> ';
 		echo '<a href="index.php?'.SID.'">Форум</a> / ';
 		echo '<a href="forum.php?fid='.$fid.'&amp;'.SID.'">'.$forum[1].'</a> / ';
 		echo '<a href="forum.php?act=new&amp;fid='.$fid.'&amp;'.SID.'">Новая тема</a>';
@@ -45,7 +45,7 @@ case "index":
 			$config['newtitle'] = $topic[3];
 
 			$total = counter_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat');
-			echo '<br /><br /><img src="../images/img/themes.gif" alt="image" /> <b>'.$topic[3].'</b> ('.$total.' пост.)<hr />';
+			echo '<br /><br /><img src="/images/img/themes.gif" alt="image" /> <b>'.$topic[3].'</b> ('.$total.' пост.)<hr />';
 
 			if (is_admin()){
 				$lock = (empty($topic[5])) ? 'Закрепить' : 'Открепить';
@@ -71,7 +71,7 @@ case "index":
 					$data = explode("|", $file[$i]);
 
 					echo '<div class="b">';
-					echo user_avatars($data[2]).' <b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
+					echo user_avatars($data[2]).' <b><a href="/pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
 					echo user_title($data[2]).user_online($data[2]);
 					echo ' <small>('.date_fixed($data[5]).')</small></div>';
 					echo '<div>'.bb_code($data[3]).'<br />';
@@ -96,14 +96,14 @@ case "index":
 				} else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 			} else {show_error('Данная тема закрыта для обсуждения!');}
 
-			echo '<a href="#up"><img src="../images/img/ups.gif" alt="image" /></a> ';
-			echo '<a href="../pages/pravila.php?'.SID.'">Правила</a> / ';
-			echo '<a href="../pages/smiles.php?'.SID.'">Смайлы</a> / ';
-			echo '<a href="../pages/tegi.php?'.SID.'">Теги</a><br /><br />';
+			echo '<a href="#up"><img src="/images/img/ups.gif" alt="image" /></a> ';
+			echo '<a href="/pages/pravila.php?'.SID.'">Правила</a> / ';
+			echo '<a href="/pages/smiles.php?'.SID.'">Смайлы</a> / ';
+			echo '<a href="/pages/tegi.php?'.SID.'">Теги</a><br /><br />';
 
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
-	echo '<img src="../images/img/back.gif" alt="image" /> <a href="forum.php?fid='.$fid.'&amp;'.SID.'">Вернуться</a><br />';
+	echo '<img src="/images/img/back.gif" alt="image" /> <a href="forum.php?fid='.$fid.'&amp;'.SID.'">Вернуться</a><br />';
 break;
 
 ############################################################################################
@@ -165,7 +165,7 @@ case "add":
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
 
-	echo '<img src="../images/img/back.gif" alt="image" /> <a href="topic.php?fid='.$fid.'&amp;id='.$id.'&amp;'.SID.'">Вернуться</a><br />';
+	echo '<img src="/images/img/back.gif" alt="image" /> <a href="topic.php?fid='.$fid.'&amp;id='.$id.'&amp;'.SID.'">Вернуться</a><br />';
 break;
 
 ############################################################################################
@@ -184,7 +184,7 @@ case "end":
 		} else {show_error('Ошибка! Данной темы не существует!');}
 	} else {show_error('Ошибка! Данного раздела не существует!');}
 
-	echo '<img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
+	echo '<img src="/images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
 break;
 
 default:
@@ -194,7 +194,7 @@ endswitch;
 } else {show_error('Данной темы не существует, возможно она была удалена!');}
 } else {show_error('Разделы форума еще не созданы!');}
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<img src="/images/img/homepage.gif" alt="image" /> <a href="/index.php?'.SID.'">На главную</a><br />';
 
 include_once ('../themes/'.$config['themes'].'/foot.php');
 ?>

@@ -33,19 +33,19 @@ hr {border : 1px dotted #ccc;}
 .a {border: 1px solid #ccc; color: #666; background: #E9E9E9;}
 .b {font-size: 13px; color: #666; background-color: #f3f3f3; padding: 3px; color: #666; border: 1px solid #ccc;}
 .c {border: 1px solid #ccc; color: #666; background: #E9E9E9;}
-.d {background-color: #E3E5E3; border-style: dotted; border-width: 1px; border-color: #B8C1B7; padding: 10px; padding-left: 35px;  background-image: url('.$config['home'].'/images/img/code.gif); background-repeat: repeat-y; font-size: 11px; display: block; overflow: auto;}
+.d {background-color: #E3E5E3; border-style: dotted; border-width: 1px; border-color: #B8C1B7; padding: 10px; padding-left: 35px;  background-image: url(/images/img/code.gif); background-repeat: repeat-y; font-size: 11px; display: block; overflow: auto;}
 .form {color: #666; padding : 3px; background-color: #f3f3f3; border: 1px dotted #ccc;}
 .login {color: #666; padding : 10px; margin : 10px 0 10px 0; background-color: #f3f3f3; border: 1px dotted #ccc;}
 </style>';
-echo '<link rel="shortcut icon" href="'.$config['home'].'/favicon.ico" />';
-echo '<link rel="alternate" type="application/rss+xml" title="RSS News" href="'.$config['home'].'/news/rss.php" />';
+echo '<link rel="shortcut icon" href="/favicon.ico" />';
+echo '<link rel="alternate" type="application/rss+xml" title="RSS News" href="/news/rss.php" />';
 echo '<meta name="keywords" content="%KEYWORDS%" />';
 echo '<meta name="description" content="%DESCRIPTION%" />';
 echo '<meta name="generator" content="Wap-Motor '.MOTOR_VERSION.'" />';
 echo '</head><body>';
 echo '<!--Design by Vantuz (http://pizdec.ru)-->';
 
-echo '<div class="a" id="up"><img src="'.$config['logotip'].'" alt="image" /><br />'.$config['logos'].' </div>';
+echo '<div class="a" id="up"><a href="/index.php?'.SID.'"><img src="'.$config['logotip'].'" alt="'.$config['title'].'" /></a><br />'.$config['logos'].' </div>';
 echo '<div>';
 
 if ($config['rekhead']==1){include_once DATADIR."datamain/reklama_head.dat";}

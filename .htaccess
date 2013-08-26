@@ -1,8 +1,8 @@
 Addtype application/vnd.sonyericsson.mms-template tpl
 Addtype application/vnd.wap.wmlc .wmlc
 Addtype application/vnd.wap.wmlscriptc .wmlsc
-Addtype application/vnd.eri.thm .thm 
-Addtype application/vnd.mophun.application .mpn  
+Addtype application/vnd.eri.thm .thm
+Addtype application/vnd.mophun.application .mpn
 Addtype application/vnd.mophun.certificate .mpc
 Addtype application/x-gtar .gtar
 Addtype application/x-tar .tar
@@ -29,9 +29,9 @@ Addtype audio/imelody .imy
 Addtype audio/amr .amr
 Addtype audio/x-wav .wav
 Addtype audio/wav .wav
-Addtype audio/midi .midi 
-Addtype audio/midi .mid 
-Addtype audio/rmf .rmf 
+Addtype audio/midi .midi
+Addtype audio/midi .mid
+Addtype audio/rmf .rmf
 Addtype image/jpeg .jpg
 Addtype image/jpeg .jpeg
 Addtype image/gif .gif

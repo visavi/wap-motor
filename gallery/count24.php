@@ -113,8 +113,12 @@ for($i=1;$i<$counth;$i++){
 
 	if ($hits_data[$i] != 0 && $i == $max_index){
 		
+imageTTFtext($img, 6, 0, $x2-17, $y2_hits-3, $color_red, BASEDIR."gallery/font/font.ttf","max");
+imageTTFtext($img, 6, 0, $x2+2, $y2_hits-3, $color2, BASEDIR."gallery/font/font.ttf",$hits_data[$i]);
+/* 
 ImageString($img, 1, $x2-17,  $y2_hits-10, "max", $color_red);
 ImageString($img, 1, $x2+2,  $y2_hits-10, $hits_data[$i], $color2);
+*/
 
 imageLine($img,$x2-1,$y2_hits-7,$x2-1,$y2_hits+42,$color_red);
 }
