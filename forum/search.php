@@ -68,7 +68,7 @@ case 'search':
 		echo 'Поиск запроса <b>&quot;'.$find.'&quot;</b> в темах<br />';
 
 		// Индексирование всех тем на сутки
-		if (@filemtime(DATADIR."datatmp/forumtopics.dat") < time() - 86400 * 24) {
+		if (@filemtime(DATADIR."datatmp/forumtopics.dat") < time() - 3600 * 24) {
 			$filetopics = glob(DATADIR.'dataforum/topic*.dat');
 
 			if (is_array($filetopics)) {
@@ -88,7 +88,7 @@ case 'search':
 			foreach ($filetopics as $cachetopics){
 				$cachedata = explode('|', $cachetopics);
 
-				if (stristr($cachedata[3], $find)){
+				if (utf_stristr($cachedata[3], $find)){
 					$topics[] = $cachetopics;
 				}
 			}
@@ -150,7 +150,7 @@ case 'search':
 		echo 'Поиск запроса <b>&quot;'.$find.'&quot;</b> в сообщениях<br />';
 
 		// Индексирование всех сообщений на сутки
-		if (@filemtime(DATADIR."datatmp/forumposts.dat") < time() - 86400 * 24) {
+		if (@filemtime(DATADIR."datatmp/forumposts.dat") < time() - 3600 * 24) {
 			$fileposts = glob(DATADIR.'dataforum/*-*.dat');
 
 			if (is_array($fileposts)) {

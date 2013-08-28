@@ -1518,6 +1518,25 @@ function utf_wordwrap($str, $width = 75, $break = ' ', $cut = 1) {
 	return win_to_utf($str);
 }
 
+// ---------- Аналог функции stristr для UTF-8 ---------//
+function utf_stristr($str, $search, $before = false) {
+
+	if (function_exists('mb_stristr'))  return mb_stristr($str, $search, $before, 'utf-8');
+
+	if (utf_strlen($search) == 0 ) {
+		return false;
+	}
+
+	preg_match('|^(.*)'.preg_quote($search).'|iusU', $str, $matches);
+
+	if (count($matches) == 2) {
+		if ($before) return utf_substr($str, 0, utf_strlen($matches[1]));
+		return utf_substr($str, utf_strlen($matches[1]));
+	}
+
+	return false;
+}
+
 // ----------------------- Функция определения кодировки ------------------------//
 function is_utf($str) {
 	$c = 0;
