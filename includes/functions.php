@@ -45,7 +45,7 @@ function date_fixed($timestamp, $format = "d.m.y / H:i") {
 	$datestamp = date($format, $timestamp + $shift);
 
 	$today = date("d.m.y", SITETIME + $shift);
-	$yesterday = date("d.m.y", strtotime("-1 day") + $shift);
+	$yesterday = date("d.m.y", strtotime("-1 day", SITETIME + $shift));
 
 	$datestamp = str_replace($today, 'Сегодня', $datestamp);
 	$datestamp = str_replace($yesterday, 'Вчера', $datestamp);

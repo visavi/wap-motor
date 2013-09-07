@@ -37,9 +37,10 @@ case "index":
 	echo '<input name="where" type="radio" value="1" checked="checked" /> В темах<br />';
 	echo '<input name="where" type="radio" value="2" /> В сообщениях<br /><br />';
 
+/*	В свободное время доработаю
 	echo '<b>Тип запроса:</b><br />';
 	echo '<input name="type" type="radio" value="1" checked="checked" /> Или<br />';
-	echo '<input name="type" type="radio" value="2" /> И<br />';
+	echo '<input name="type" type="radio" value="2" /> И<br />';*/
 
 	echo '<br /><input type="submit" value="Поиск" /></form></div><br />';
 
@@ -57,7 +58,6 @@ case 'search':
 	if (!is_utf($find)){
 		$find = win_to_utf($find);
 	}
-
 
 	if (utf_strlen($find) >= $minfind && utf_strlen($find) <= $maxfind) {
 
@@ -81,22 +81,15 @@ case 'search':
 		}
 
 		$filetopics = file(DATADIR."datatmp/forumtopics.dat");
+
+		// Поиск точного совпадения
 		$topics = array();
+		foreach ($filetopics as $cachetopics){
+			$cachedata = explode('|', $cachetopics);
 
-		// Поиск любого слова
-		if ($type == 1){
-			foreach ($filetopics as $cachetopics){
-				$cachedata = explode('|', $cachetopics);
-
-				if (utf_stristr($cachedata[3], $find)){
-					$topics[] = $cachetopics;
-				}
+			if (utf_stristr($cachedata[3], $find)){
+				$topics[] = $cachetopics;
 			}
-		}
-
-		// Поиск всех слов
-		if ($type == 2){
-
 		}
 
 
@@ -168,7 +161,7 @@ case 'search':
 		foreach ($fileposts as $cacheposts){
 			$cachedata = explode('|', $cacheposts);
 
-			if (stristr($cachedata[3], $find)){
+			if (utf_stristr($cachedata[3], $find)){
 				$posts[] = $cacheposts;
 			}
 		}
