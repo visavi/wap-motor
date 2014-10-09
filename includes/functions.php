@@ -309,18 +309,15 @@ function read_string($file, $line) {
 
 // ------------------ Функция подсветки кода -------------------------//
 function highlight_code($code) {
-	$code = strtr($code, array('&#124;' => '|', '&lt;' => '<', '&gt;' => '>', '&amp;' => '&', '&#36;' => '$', '&quot;' => '"', '&#39;' => "'", '&#92;' => '`', '&#37;' => '%', '&#94;' => '^', '&#58;' => ':', '<br />' => "\r\n"));
 
-	if (!strpos($code, '<?') && substr($code, 0, 2) != '<?') {
-		$code = "<?php\r\n".trim($code);
-	}
+	if (is_array($code)) $code = $code[1];
+	$code = nosmiles($code);
+	$code = strtr($code, array('&lt;'=>'<', '&gt;'=>'>', '&amp;'=>'&', '&quot;'=>'"', '&#36;'=>'$', '&#37;'=>'%', '&#39;'=>"'", '&#92;'=>'\\', '&#94;'=>'^', '&#96;'=>'`', '&#124;' => '|', '<br />'=>"\r\n"));
 
 	$code = highlight_string($code, true);
+	$code = strtr($code, array("\r\n"=>'<br />', '://'=>'&#58//', '$'=>'&#36;', "'"=>'&#39;', '%'=>'&#37;', '\\'=>'&#92;', '`'=>'&#96;', '^'=>'&#94;', '|'=>'&#124;'));
 
-	$code = strtr($code, array("\r\n" => '<br />', '|' => '&#124;', '$' => '&#36;', "'" => '&#39;', '`' => '&#92;', '%' => '&#37;', '^' => '&#94;', ':' => '&#58;'));
-
-	$code = '<div class="d">'.$code.'</div>';
-	return $code;
+	return '<div class="d">'.$code.'</div>';
 }
 
 // ------------------ Вспомогательная функция для bb-кода --------------------//
@@ -334,7 +331,7 @@ function url_replace($m) {
 
 // ------------------ Функция вставки BB-кода --------------------//
 function bb_code($message) {
-	$message = preg_replace('#\[code\](.*?)\[/code\]#ie', 'highlight_code("\1")', $message);
+	$message = preg_replace_callback('#\[code\](.*?)\[/code\]#i', 'highlight_code', $message);
 	$message = preg_replace('#\[big\](.*?)\[/big\]#si', '<big>\1</big>', $message);
 	$message = preg_replace('#\[b\](.*?)\[/b\]#si', '<b>\1</b>', $message);
 	$message = preg_replace('#\[i\](.*?)\[/i\]#si', '<i>\1</i>', $message);
