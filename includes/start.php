@@ -27,7 +27,6 @@ if ($debugmode) {
 
 @ini_set('url_rewriter.tags','');
 @ini_set('session.use_trans_sid', 1);
-@set_magic_quotes_runtime(0);
 session_name('SID');
 session_start();
 

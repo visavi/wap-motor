@@ -1343,18 +1343,18 @@ function stats_version() {
 	$info = 0;
 	$filtime = 0;
 
-	if (file_exists(DATADIR."datatmp/version.dat")) {
+/*	if (file_exists(DATADIR."datatmp/version.dat")) {
 		$filtime = filemtime(DATADIR."datatmp/version.dat") + 86400;
 		$info = file_get_contents(DATADIR."datatmp/version.dat");
-	}
+	}*/
 
-	if (time() > $filtime) {
+/*	if (time() > $filtime) {
 		if (copy("http://visavi.net/wap-motor/version.txt", DATADIR."datatmp/version.dat")) {
 			@chmod(DATADIR."datatmp/version.dat", 0666);
 		} else {
 			write_files(DATADIR."datatmp/version.dat", 0, 1, 0666);
 		}
-	}
+	}*/
 
 	return $info;
 }
