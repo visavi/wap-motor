@@ -379,7 +379,7 @@ case "changeforum":
 			if (utf_strlen(trim($title))>=5 && utf_strlen($title)<=50){
 
 				$maintext = $forum[0].'|'.$title.'|'.$themes.'|'.$posts.'|';
-				replace_lines(DATADIR."dataforum/mainforum.dat", $forum['line'], $maintext);
+				replace_lines(DATADIR."dataforum/mainforum.dat", $forum['line'], no_br($maintext));
 
 				$_SESSION['note'] = 'Раздел успешно изменен!';
 				redirect("forum.php?".SID);
@@ -572,7 +572,7 @@ case "changetopic":
 		if (utf_strlen(trim($title))>=5 && utf_strlen($title)<=50){
 
 			$topictext = $topic[0].'|'.$topic[1].'|'.$author.'|'.$title.'|'.$topic[4].'|'.$locked.'|'.$closed.'|';
-			replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], $topictext);
+			replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], no_br($topictext, '<br />'));
 
 			$_SESSION['note'] = 'Тема успешно изменена!';
 			redirect("forum.php?act=forum&fid=$fid&start=$start&".SID);
@@ -605,7 +605,7 @@ case "closedtopic":
 		$closed = (empty($topic[6])) ? 1 : 0;
 
 		$topictext = $topic[0].'|'.$topic[1].'|'.$topic[2].'|'.$topic[3].'|'.$topic[4].'|'.$topic[5].'|'.$closed.'|';
-		replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], $topictext);
+		replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], no_br($topictext, '<br />'));
 
 		$_SESSION['note'] = 'Тема успешно изменена!';
 		redirect("forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID);
@@ -636,7 +636,7 @@ case "lockedtopic":
 		$locked = (empty($topic[5])) ? 1 : 0;
 
 		$topictext = $topic[0].'|'.$topic[1].'|'.$topic[2].'|'.$topic[3].'|'.$topic[4].'|'.$locked.'|'.$topic[6].'|';
-		replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], $topictext);
+		replace_lines(DATADIR."dataforum/topic$fid.dat", $topic['line'], no_br($topictext, '<br />'));
 
 		$_SESSION['note'] = 'Тема успешно изменена!';
 		redirect("forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID);
@@ -699,6 +699,8 @@ case "editpost":
 	$data = read_string(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', $post);
 	if ($data){
 
+        $data[3] = str_replace("<br />","\r\n",nosmiles($data[3]));
+
 		echo '<div class="form" id="form">';
 		echo '<form action="forum.php?act=changepost&amp;fid='.$fid.'&amp;id='.$id.'&amp;post='.$post.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
 		echo 'Автор:<br />';
@@ -737,8 +739,10 @@ case "changepost":
 		if (check_user($author)){
 		if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<=5000){
 
+            $msg = smiles($msg);
+
 			$posttext = $data[0].'|'.$data[1].'|'.$author.'|'.$msg.'|'.$data[4].'|'.$data[5].'|';
-			replace_lines(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', $post, $posttext);
+			replace_lines(DATADIR.'dataforum/'.$fid.'-'.$id.'.dat', $post, no_br($posttext, '<br />'));
 
 			$_SESSION['note'] = 'Сообщение успешно изменено!';
 			redirect("forum.php?act=topic&fid=$fid&id=$id&start=$start&".SID);

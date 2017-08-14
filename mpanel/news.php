@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -28,7 +28,7 @@ if ($action==""){
 $file = file(DATADIR."news.dat");
 $file = array_reverse($file);
 $total = count($file);
-    
+
 if ($total>0){
 
 echo '<form action="news.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
@@ -64,7 +64,7 @@ page_strnavigation('news.php?', $config['loglist'], $start, $total);
 
 echo '<br /><br />Всего новостей: <b>'.(int)$total.'</b><br />';
 
-} else {echo '<br /><img src="../images/img/reload.gif" alt="image" /> <b>Новостей еще нет!</b><br />';} 
+} else {echo '<br /><img src="../images/img/reload.gif" alt="image" /> <b>Новостей еще нет!</b><br />';}
 
 echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="news.php?action=addnews&amp;'.SID.'">Добавить новость</a>';
 
@@ -91,14 +91,14 @@ if(file_exists(DATADIR."datakomm/$data[5].dat")){
 unlink (DATADIR."datakomm/$data[5].dat");
 }}}
 
-delete_lines(DATADIR."news.dat", $del); 
+delete_lines(DATADIR."news.dat", $del);
 
 header ("Location: news.php?start=$start&isset=mp_delnews&".SID);  exit;
 
 } else {echo '<b>Ошибка удаления! Отсутствуют выбранные новости</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 
@@ -121,7 +121,7 @@ $data[1] = str_replace("<br />","\r\n",$data[1]);
 echo '<b><big>Редактирование</big></b><br /><br />';
 
 echo '<form action="news.php?action=edit&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" name="form" method="post">';
-echo 'Заголовок: <br /><input type="text" name="name" size="50" maxlength="50" value="'.$data[0].'" /><br />'; 
+echo 'Заголовок: <br /><input type="text" name="name" size="50" maxlength="50" value="'.$data[0].'" /><br />';
 echo 'Cообщение:<br />';
 echo '<textarea cols="25" rows="10" name="msg">'.$data[1].'</textarea><br />';
 echo '<input type="hidden" name="timer" value="'.$data[3].'" />';
@@ -137,7 +137,7 @@ echo '<br /><input type="submit" value="Изменить" /></form><hr />';
 } else {echo '<b>Ошибка! Новости для редактирования не существует!</b><br />';}
 } else {echo '<b>Произошла ошибка, не выбрана новость для редактирования!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 
@@ -171,8 +171,8 @@ header ("Location: news.php?start=$start&isset=mp_editnews&".SID); exit;
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 } else {echo '<b>Ошибка редактирования выбранной вами новости</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
-} 
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
+}
 
 
 ############################################################################################
@@ -263,7 +263,7 @@ if (isset($_GET['last'])) {$last = (int)$_GET['last'];} else {$last = 0;}
 if ($uid==$_SESSION['token']){
 if ($themes!="" && $msg!=""){
 
-$dates = date_fixed(SITETIME, "j F, Y / H:i");	
+$dates = date_fixed(SITETIME, "j F, Y / H:i");
 
 $send_file = file(DATADIR."subscribe.dat");
 $send_count = count($send_file);
@@ -277,7 +277,7 @@ $data = explode("|",$send_file[$i]);
 /******************* Рассылка писем на E-mail ********************/
 if($data[0]!=""){
 addmail($data[0], "Рассылка новостей с сайта ".$config['title'], html_entity_decode($themes)." (".$dates.") \n".html_entity_decode($msg)." \n\nВы получили это письмо, потому что являетесь подписчиком сайта ".$config['home']." \nОтписаться от рассылки вы можете в своем профиле на нашем сайте \nили клинув по этой ссылке \n".$config['home']."/pages/subscribe.php?key=".$data[1]);
-} 
+}
 }
 
 if ($next < $send_count) {
@@ -285,7 +285,7 @@ $per = round(100 * $next / $send_count);
 
 echo '<br />Рассылка начата<br />';
 echo 'Успешно отправлено: '.(int)$per.'%<br /><br />';
-	
+
 echo '<form action="news.php?action=sub&amp;last='.$next.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post" />';
 echo '<input type="hidden" name="themes" value="'.$themes.'" />';
 echo '<input type="hidden" name="msg" value="'.$msg.'" />';
