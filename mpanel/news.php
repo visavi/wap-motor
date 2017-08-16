@@ -36,6 +36,7 @@ echo '<form action="news.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['postnews']){ $end = $total; }
 else {$end = $start + $config['postnews']; }
+
 for ($i = $start; $i < $end; $i++){
 
 $data = explode("|",$file[$i]);
@@ -59,8 +60,8 @@ echo '('.(int)$countkomm.')</div>';
 
 echo '<br /><input type="submit" value="Удалить выбранное" /></form>';
 
-page_jumpnavigation('news.php?', $config['loglist'], $start, $total);
-page_strnavigation('news.php?', $config['loglist'], $start, $total);
+page_jumpnavigation('news.php?', $config['postnews'], $start, $total);
+page_strnavigation('news.php?', $config['postnews'], $start, $total);
 
 echo '<br /><br />Всего новостей: <b>'.(int)$total.'</b><br />';
 
