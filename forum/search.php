@@ -126,7 +126,7 @@ case 'search':
 					echo '<div>Страницы: ';
 					forum_navigation('topic.php?fid='.$datapost[1].'&amp;id='.$datapost[0].'&amp;', $config['forumpost'], $totalpost);
 
-					echo 'Сообщение: '.nickname($datapost[2]).' ('.date_fixed($datapost[6]).')</div>';
+					echo 'Сообщение: '.nickname($datapost[2]).' ('.date_fixed($datapost[5]).')</div>';
 
 					} else {echo 'Тема пустая! Сообщений еще нет!';}
 			}

@@ -42,7 +42,7 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 				if (utf_strlen($topic[3])>35) {$topic[3]=utf_substr($topic[3], 0, 30); $topic[3].="...";}
 
 				echo '<div>Тема: <a href="topic.php?act=end&amp;fid='.$forum[0].'&amp;id='.$topic[0].'&amp;'.SID.'">'.$topic[3].'</a><br />';
-				echo 'Сообщение: '.nickname($post[2]).' ('.date_fixed($post[6]).')</div>';
+				echo 'Сообщение: '.nickname($post[2]).' ('.date_fixed($post[5]).')</div>';
 
 			} else {echo 'Последняя тема не найдена!';}
 		} else {echo 'Раздел пустой! Темы еще не созданы!';}
