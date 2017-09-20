@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -20,7 +20,7 @@ if ($config['openreg']==1){
 
 if (!is_user()){
 
-echo 'Регистрация на сайте означает что вы ознакомлены и согласны с <b><a href="pravila.php?'.SID.'">правилами</a></b> нашего сайта<br />';
+echo 'Регистрация на сайте означает что вы ознакомлены и согласны с <b><a href="pravila.php">правилами</a></b> нашего сайта<br />';
 echo 'Длина логина или пароля должна быть от 3 до 20 символов<br />';
 echo 'В полях логин и пароль разрешено использовать только знаки латинского алфавита и цифры, а также знак тире!<br />';
 
@@ -36,7 +36,7 @@ if ($config['karantin']>0){
 echo '<span style="color:#ff0000">Включен карантин! Новые пользователи не могут писать сообщения в течении '.round($config['karantin']/3600).' час. после регистрации!</span><br />';
 }
 
-echo '<br /><form method="post" action="reguser.php?'.SID.'">';
+echo '<br /><form method="post" action="reguser.php">';
 echo 'Логин: <br /><input name="logs" maxlength="40" /><br />';
 echo 'Пароль: <br /><input name="pars" type="password" maxlength="20" /><br />';
 echo 'Повторите пароль: <br /><input name="pars2" type="password" maxlength="20" /><br />';
@@ -44,7 +44,7 @@ echo 'Ваш e-mail: <br /><input name="meil" maxlength="50" /><br />';
 echo 'Проверочный код: ';
 
 if ($config['protectimg']==1){
-echo '<img src="../gallery/protect.php?'.SID.'" alt="" /><br />';
+echo '<img src="../gallery/protect.php" alt="" /><br />';
 } else {
 echo '<b>'.$_SESSION['protect'].'</b><br />';
 }
@@ -58,7 +58,7 @@ echo 'Указывайте верный е-мэйл, на него будут в
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Вы уже регистрировались, нельзя регистрироваться несколько раз</b><br /><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Регистрация временно приостановлена, пожалуйста зайдите позже!</b><br /><br />';}
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

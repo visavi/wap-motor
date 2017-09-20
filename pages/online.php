@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -17,8 +17,8 @@ include_once "../themes/".$config['themes']."/index.php";
 if (isset($_GET['list'])) {$list = check($_GET['list']);} else {$list = "";}
 if (isset($_GET['start'])){$start = (int)$_GET['start'];} else {$start = 0;}
 
-echo'<img src="../images/img/banners.gif" alt="image" /> <b>Кто в онлайне</b><br /><br />'; 
- 	
+echo'<img src="../images/img/banners.gif" alt="image" /> <b>Кто в онлайне</b><br /><br />';
+
 $lines=file(DATADIR."online.dat");
 $lines = array_reverse($lines);
 
@@ -54,12 +54,12 @@ $usertime=date_fixed($data[1],'H:i:s');
 
 if($data[3]==""){
 
-echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b>'.$config['guestsuser'].'</b> (Время: '.$usertime.')<br />'; 
+echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b>'.$config['guestsuser'].'</b> (Время: '.$usertime.')<br />';
 echo '<small><span style="color:#cc00cc">('.$data[4].', '.$data[2].')</span></small>';
 
 }else{
 
-echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[3].'&amp;'.SID.'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />'; 
+echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[3].'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />';
 echo '<small><span style="color:#cc00cc">('.$data[4].', '.$data[2].')</span></small>';
 
 }
@@ -68,7 +68,7 @@ echo '<small><span style="color:#cc00cc">('.$data[4].', '.$data[2].')</span></sm
 } else {
 
 //-------------------------------------------------------------//
-$total = $totalreg;    
+$total = $totalreg;
 
 if($total<1){echo'<img src="../images/img/reload.gif" alt="image" /> <b>Зарегистрированных нет!</b><br /><br />';}
 
@@ -80,7 +80,7 @@ for ($i = $start; $i < $end; $i++){
 $data = explode("|",$regar[$i]);
 $usertime=date_fixed($data[1],'H:i:s');
 
-echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[3].'&amp;'.SID.'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />'; 
+echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[3].'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />';
 echo '<small><span style="color:#cc00cc">('.$data[4].', '.$data[2].')</span></small>';
 
 }
@@ -91,11 +91,11 @@ page_strnavigation('online.php?list='.$list.'&amp;', $config['onlinelist'], $sta
 
 
 if ($list!='full'){
-echo'<br /><br /><img src="../images/img/chat.gif" alt="image" /> <a href="online.php?list=full&amp;'.SID.'">Показать гостей</a><br />';
+echo'<br /><br /><img src="../images/img/chat.gif" alt="image" /> <a href="online.php?list=full">Показать гостей</a><br />';
 } else {
-echo'<br /><br /><img src="../images/img/chat.gif" alt="image" /> <a href="online.php?'.SID.'">Cкрыть гостей</a><br />';
-} 
+echo'<br /><br /><img src="../images/img/chat.gif" alt="image" /> <a href="online.php">Cкрыть гостей</a><br />';
+}
 
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 include_once "../themes/".$config['themes']."/foot.php";
 ?>

@@ -23,7 +23,7 @@ echo '<meta name="generator" content="Wap-Motor '.MOTOR_VERSION.'" />';
 echo '</head><body>';
 echo '<!--Themes by wap.imgstudio.ru-->';
 
-echo '<div class="cs" id="up"><a href="/index.php?'.SID.'"><img src="'.$config['logotip'].'" alt="'.$config['title'].'" /></a><br /><br />'.$config['logos'].' </div>';
+echo '<div class="cs" id="up"><a href="/index.php"><img src="'.$config['logotip'].'" alt="'.$config['title'].'" /></a><br /><br />'.$config['logos'].' </div>';
 
 if ($config['rekhead']==1){include_once DATADIR."datamain/reklama_head.dat";}
 include_once (BASEDIR."includes/isset.php");

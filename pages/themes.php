@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -33,9 +33,9 @@ $array_users[] = basename($filename);
 
 $dat_skins =  array();
 foreach($array_users as $keyusers){
-$tex = file_get_contents(DATADIR."profil/$keyusers");	
+$tex = file_get_contents(DATADIR."profil/$keyusers");
 $data = explode(":||:",$tex);
-$dat_skins[] = $data[20]; 
+$dat_skins[] = $data[20];
 }
 
 $newskin_array=array_count_values($dat_skins);
@@ -57,11 +57,11 @@ $data_values[] = (int)$newskin_array[$key_themes];
 $data_values[] = 0;
 }}
 
-arsort($data_values);	
+arsort($data_values);
 $dat_top = array();
 
 foreach($data_values as $k=>$v){
-$dat_top[] = '|'.$data_themes[$k].'|'.$v.'|';	
+$dat_top[] = '|'.$data_themes[$k].'|'.$v.'|';
 }
 
 $dat_top=implode("\r\n",$dat_top);
@@ -74,30 +74,30 @@ fputs ($fp,"$dat_top\r\n");
 fflush($fp);
 flock ($fp,LOCK_UN);
 fclose($fp);
-@chmod (DATADIR."datatmp/themes.dat", 0666); 
+@chmod (DATADIR."datatmp/themes.dat", 0666);
 }
 }
-	
 
-//------------------------------ ВЫВОД ИЗ КЕША ------------------------------//	
+
+//------------------------------ ВЫВОД ИЗ КЕША ------------------------------//
 $file = file(DATADIR."datatmp/themes.dat");
 $total = count($file);
 
 foreach($file as $tval){
 $data = explode("|",$tval);
-echo '<img src="../images/img/act.gif" alt="image" /> <b><a href="../pages/skin.php?skins='.$data[1].'&amp;'.SID.'">'.$data[1].'</a></b> - <b>'.(int)$data[2].'</b> чел.<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <b><a href="../pages/skin.php?skins='.$data[1].'">'.$data[1].'</a></b> - <b>'.(int)$data[2].'</b> чел.<br />';
 }
-  
+
 
 $bestskin = explode("|",$file[0]);
-$worstskin = explode("|",end($file));  
- 
+$worstskin = explode("|",end($file));
+
 echo '<br />Всего скинов: <b>'.(int)$total.'</b><br /><br />';
 echo 'Наиболее популярный скин: <b>'.$bestskin[1].'</b> (Используют <b>'.$bestskin[2].'</b> чел.)<br />';
 echo 'Наименее популярный скин: <b>'.$worstskin[1].'</b> (Используют <b>'.$worstskin[2].'</b> чел.)<br />';
 
 
-echo'<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo'<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 include_once"../themes/".$config['themes']."/foot.php";
 ?>
 

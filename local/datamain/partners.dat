@@ -1,5 +1,5 @@
 <img src="<?=BASEDIR?>images/img/partners.gif" alt="image" /> <b>Партнеры и друзья</b><br /><br />
 
-<? include_once BASEDIR."includes/link.php"; ?>		
-		
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/link.php?<?=SID?>">Добавить сайт</a><br />
+<? include_once BASEDIR."includes/link.php"; ?>
+
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/link.php">Добавить сайт</a><br />

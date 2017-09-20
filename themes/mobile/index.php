@@ -45,7 +45,7 @@ echo '<meta name="generator" content="Wap-Motor '.MOTOR_VERSION.'" />';
 echo '</head><body>';
 echo '<!--Design by Vantuz (http://pizdec.ru)-->';
 
-echo '<div class="a" id="up"><a href="/index.php?'.SID.'"><img src="'.$config['logotip'].'" alt="'.$config['title'].'" /></a><br />'.$config['logos'].' </div>';
+echo '<div class="a" id="up"><a href="/index.php"><img src="'.$config['logotip'].'" alt="'.$config['title'].'" /></a><br />'.$config['logos'].' </div>';
 echo '<div>';
 
 if ($config['rekhead']==1){include_once DATADIR."datamain/reklama_head.dat";}

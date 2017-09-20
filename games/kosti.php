@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -28,11 +28,11 @@ if ($action==""){
 
 echo '<img src="../images/kosti/6.gif" alt="image" />  и <img src="../images/kosti/6.gif" alt="image" />.<br /><br />';
 
-echo '<b><a href="kosti.php?action=go&amp;rand='.$rand.'&amp;'.SID.'">Играть</a></b><br /><br />';
+echo '<b><a href="kosti.php?action=go&amp;rand='.$rand.'">Играть</a></b><br /><br />';
 
 echo 'У вас в наличии: '.moneys($udata[41]).'<br />';
 
-echo '<br /><img src="../images/img/faq.gif" alt="image" /> <a href="kosti.php?action=faq&amp;'.SID.'">Правила</a>';
+echo '<br /><img src="../images/img/faq.gif" alt="image" /> <a href="kosti.php?action=faq">Правила</a>';
 }
 
 ############################################################################################
@@ -82,7 +82,7 @@ echo '<b>Вы выиграли!</b>';
 if ($num_bank==$num_user){echo '<b>Ничья!</b>';}
 
 echo '<br /><br />';
-echo '<b><a href="kosti.php?action=go&amp;rand='.$rand.'&amp;'.SID.'">Играть</a></b><br /><br />';
+echo '<b><a href="kosti.php?action=go&amp;rand='.$rand.'">Играть</a></b><br /><br />';
 
 $udata = reading_profil($log);
 
@@ -90,7 +90,7 @@ echo 'У вас в наличии: '.moneys($udata[41]).'<br />';
 
 } else {show_error('Вы не можете играть т.к. на вашем счету недостаточно средств');}
 
-echo '<br /><img src="../images/img/faq.gif" alt="image" /> <a href="kosti.php?action=faq&amp;'.SID.'">Правила</a>';
+echo '<br /><img src="../images/img/faq.gif" alt="image" /> <a href="kosti.php?action=faq">Правила</a>';
 }
 
 
@@ -98,20 +98,20 @@ echo '<br /><img src="../images/img/faq.gif" alt="image" /> <a href="kosti.php?a
 ##                                    Правила игры                                        ##
 ############################################################################################
 if ($action=="faq"){
-	
+
 echo 'Для участия в игре нажмите "Играть"<br />';
-echo 'За каждый проигрыш у вас будут списывать по '.moneys(5).'<br />';	
-echo 'За каждый выигрыш вы получите '.moneys(10).'<br />';	
-echo 'Шанс банкира на выигрыш немного больше, чем у вас<br />';	
+echo 'За каждый проигрыш у вас будут списывать по '.moneys(5).'<br />';
+echo 'За каждый выигрыш вы получите '.moneys(10).'<br />';
+echo 'Шанс банкира на выигрыш немного больше, чем у вас<br />';
 echo 'Итак дерзайте!<br />';
-	
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="kosti.php?'.SID.'">Вернуться</a>'; 	
+
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="kosti.php">Вернуться</a>';
 }
 
 } else {show_login('Вы не авторизованы, чтобы начать игру, необходимо');}
 
-echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada&amp;'.SID.'">Развлечения</a><br />'; 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada">Развлечения</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

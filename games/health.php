@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -32,25 +32,25 @@ echo '<img src="../gallery/grafic.php?rat='.(int)$udata[56].'&amp;imgs=1" alt="i
 if ($udata[61]<SITETIME){
 echo 'Вы можете увеличить уровень разными способами<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=0&amp;'.SID.'">Покопаться в мусорке</a></b> (Бесплатно)<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=0">Покопаться в мусорке</a></b> (Бесплатно)<br />';
 echo '(Увеличивает твое здоровье всего на 1%, если повезет что-то там найти, утоляет голод на 1 час)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=1&amp;'.SID.'">Выпить пива</a></b> (Цена: '.moneys(100).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=1">Выпить пива</a></b> (Цена: '.moneys(100).')<br />';
 echo '(Увеличивает ваше здоровье на 3%, самая дешевая цена, утоляет голод на 2 часа)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=2&amp;'.SID.'">Съесть гамбургер</a></b> (Цена: '.moneys(500).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=2">Съесть гамбургер</a></b> (Цена: '.moneys(500).')<br />';
 echo '(Увеличивает ваше здоровье на 5%, утоляет голод на 3 часа)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=3&amp;'.SID.'">Съесть пиццу</a></b> (Цена: '.moneys(1500).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=3">Съесть пиццу</a></b> (Цена: '.moneys(1500).')<br />';
 echo '(Увеличивает ваше здоровье на 10%, утоляет голод на 3,5 часа)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=4&amp;'.SID.'">Съесть жареную рыбу</a></b> (Цена: '.moneys(5000).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=4">Съесть жареную рыбу</a></b> (Цена: '.moneys(5000).')<br />';
 echo '(Увеличивает ваше здоровье на 15%, средняя цена, утоляет голод на 4 часа)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=5&amp;'.SID.'">Съесть жареную курицу</a></b> (Цена: '.moneys(10000).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=5">Съесть жареную курицу</a></b> (Цена: '.moneys(10000).')<br />';
 echo '(Увеличивает ваше здоровье на 20%, утоляет голод на 4,5 часа)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=6&amp;'.SID.'">Съесть жареного поросенка</a></b> (Цена: '.moneys(25000).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="health.php?action=operacia&amp;pred=6">Съесть жареного поросенка</a></b> (Цена: '.moneys(25000).')<br />';
 echo '(Увеличивает ваше здоровье на 25%, утоляет голод на 5 часов)<br /><br />';
 
 
@@ -73,7 +73,7 @@ if ($udata[61]<SITETIME){
 //-----------------------------------//
 if ($pred==0){
 if (($udata[56]+1)<=100){
-	
+
 change_profil($log, array(56=>$udata[56]+1, 61=>SITETIME+3600));
 
 echo '<b>Вы успешно улучшили состояние своего здоровья!</b><br />';
@@ -175,19 +175,19 @@ echo '<img src="../gallery/grafic.php?rat='.(int)$udata[56].'&amp;imgs=1" alt="i
 
 } else {show_error('Увеличивать свое здоровье можно не чаще, чем пока не начался голод!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="health.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="health.php">Вернуться</a>';
 }
-	
+
 } else {
 echo 'Ошибка! Ваш персонаж игры не включен! Для того чтобы его включить, измените свои настройки<br />';
 echo 'Персонаж позволит вам участвовать в разных играх, боях, покупать оружие, прокачивать своего бойца, зарабатывать деньги и многое другое<br />';
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="../pages/setting.php?'.SID.'">Настройки</a>';
-}	
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="../pages/setting.php">Настройки</a>';
+}
 
 } else {show_login('Вы не авторизованы, чтобы совершать операции, необходимо');}
 
-echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada&amp;'.SID.'">Развлечения</a><br />'; 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada">Развлечения</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

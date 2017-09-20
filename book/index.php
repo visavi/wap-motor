@@ -20,10 +20,10 @@ show_title('partners.gif', 'Гостевая книга');
 
 echo '<a href="#down"><img src="../images/img/downs.gif" alt="down" /></a> ';
 echo '<a href="#form">Написать</a> / ';
-echo '<a href="index.php?rand='.mt_rand(100,999).'&amp;'.SID.'">Обновить</a>';
+echo '<a href="index.php?rand='.mt_rand(100,999).'">Обновить</a>';
 
 if (is_admin(array(101,102,103,105))){
-echo ' / <a href="'.ADMINDIR.'book.php?start='.$start.'&amp;'.SID.'">Управление</a>';
+echo ' / <a href="'.ADMINDIR.'book.php?start='.$start.'">Управление</a>';
 }
 echo '<hr />';
 
@@ -47,7 +47,7 @@ echo user_avatars($data[1]);
 if ($data[1]==$config['guestsuser']){
 echo '<b>'.$data[1].'</b> ';
 } else {
-echo '<b><a href="../pages/anketa.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> '.user_title($data[1]).user_online($data[1]).' ';
+echo '<b><a href="../pages/anketa.php?uz='.$data[1].'">'.nickname($data[1]).'</a></b> '.user_title($data[1]).user_online($data[1]).' ';
 }
 
 echo '<small>('.date_fixed($data[3]).')</small></div>';
@@ -66,7 +66,7 @@ page_strnavigation('index.php?', $config['bookpost'], $start, $total);
 if (is_user()){
 
 echo '<br /><div class="form" id="form">';
-echo '<form action="add.php?uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="add.php?uid='.$_SESSION['token'].'" method="post">';
 echo 'Сообщение:<br />';
 echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
 echo '<input type="submit" value="Написать" /></form></div>';
@@ -74,7 +74,7 @@ echo '<input type="submit" value="Написать" /></form></div>';
 } elseif($config['bookadds']==1){
 
 echo '<br /><div class="form" id="form">';
-echo '<form action="add.php?uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="add.php?uid='.$_SESSION['token'].'" method="post">';
 echo 'Сообщение:<br />';
 echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
 
@@ -82,7 +82,7 @@ echo 'Проверочный код:<br /> ';
 echo '<input name="provkod" size="6" maxlength="6" /> ';
 
 if ($config['protectimg']==1){
-echo '<img src="../gallery/protect.php?'.SID.'" alt="" /><br />';
+echo '<img src="../gallery/protect.php" alt="" /><br />';
 } else {
 echo '<b>'.$_SESSION['protect'].'</b><br />';
 }
@@ -92,11 +92,11 @@ echo '<br /><input type="submit" value="Написать" /></form></div>';
 } else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 
 echo '<br /><a href="#up"><img src="../images/img/ups.gif" alt="image" /></a> ';
-echo '<a href="../pages/pravila.php?'.SID.'">Правила</a> / ';
-echo '<a href="../pages/smiles.php?'.SID.'">Смайлы</a> / ';
-echo '<a href="../pages/tegi.php?'.SID.'">Теги</a><br /><br />';
+echo '<a href="../pages/pravila.php">Правила</a> / ';
+echo '<a href="../pages/smiles.php">Смайлы</a> / ';
+echo '<a href="../pages/tegi.php">Теги</a><br /><br />';
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

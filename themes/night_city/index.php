@@ -81,7 +81,7 @@ return $myhtml; }
 ob_start('amendment');
 
 echo '<table cellpadding="0" cellspacing="0"><tr><td>';
-echo '<div class="a" id="up"><br /><a href="/index.php?'.SID.'"><img src="/themes/night_city/site/logo.png" alt="'.$config['title'].'" /></a><br /><br />'.$config['logos'].'<br /><br /></div>';
+echo '<div class="a" id="up"><br /><a href="/index.php"><img src="/themes/night_city/site/logo.png" alt="'.$config['title'].'" /></a><br /><br />'.$config['logos'].'<br /><br /></div>';
 
 if($config['rekhead']==1){include_once DATADIR."datamain/reklama_head.dat";}
 include_once (BASEDIR."includes/isset.php");

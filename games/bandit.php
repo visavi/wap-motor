@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -23,26 +23,26 @@ if (is_user()){
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if ($action==""){  
+if ($action==""){
 
 echo 'Любишь азарт? А выигрывая, чувствуешь адреналин? Играй и получай призы<br /><br />';
- 
-echo '.<img src="../images/bandit/1.gif" alt="image" /> <img src="../images/bandit/2.gif" alt="image" /> <img src="../images/bandit/3.gif" alt="image" />.<br />';  
-echo '.<img src="../images/bandit/7.gif" alt="image" /> <img src="../images/bandit/7.gif" alt="image" /> <img src="../images/bandit/7.gif" alt="image" />.<br />';  
-echo '.<img src="../images/bandit/4.gif" alt="image" /> <img src="../images/bandit/5.gif" alt="image" /> <img src="../images/bandit/6.gif" alt="image" />.<br />';  
 
-echo '<br /><b><a href="bandit.php?action=go&amp;'.SID.'">Играть</a></b><br />';    
-    
+echo '.<img src="../images/bandit/1.gif" alt="image" /> <img src="../images/bandit/2.gif" alt="image" /> <img src="../images/bandit/3.gif" alt="image" />.<br />';
+echo '.<img src="../images/bandit/7.gif" alt="image" /> <img src="../images/bandit/7.gif" alt="image" /> <img src="../images/bandit/7.gif" alt="image" />.<br />';
+echo '.<img src="../images/bandit/4.gif" alt="image" /> <img src="../images/bandit/5.gif" alt="image" /> <img src="../images/bandit/6.gif" alt="image" />.<br />';
+
+echo '<br /><b><a href="bandit.php?action=go">Играть</a></b><br />';
+
 echo 'В наличии '.moneys($udata[41]).'<br /><br />';
 
-echo '<img src="../images/img/faq.gif" alt="image" /> <a href="bandit.php?action=faq&amp;'.SID.'">Правила игры</a><br />';
-} 
+echo '<img src="../images/img/faq.gif" alt="image" /> <a href="bandit.php?action=faq">Правила игры</a><br />';
+}
 
 
 ############################################################################################
 ##                                           Игра                                         ##
 ############################################################################################
-if ($action=="go"){ 
+if ($action=="go"){
 if ($udata[41]>=5){
 
 sleep(1);
@@ -63,8 +63,8 @@ $num9 = mt_rand(1, 8);
 $rand = mt_rand(100, 999);
 
 echo '.<img src="../images/bandit/'.$num1.'.gif" alt="image" /> <img src="../images/bandit/'.$num2.'.gif" alt="image" /> <img src="../images/bandit/'.$num3.'.gif" alt="image" />.<br />';
-echo '.<img src="../images/bandit/'.$num4.'.gif" alt="image" /> <img src="../images/bandit/'.$num5.'.gif" alt="image" /> <img src="../images/bandit/'.$num6.'.gif" alt="image" />.<br />'; 
-echo '.<img src="../images/bandit/'.$num7.'.gif" alt="image" /> <img src="../images/bandit/'.$num8.'.gif" alt="image" /> <img src="../images/bandit/'.$num9.'.gif" alt="image" />.<br /><br />'; 
+echo '.<img src="../images/bandit/'.$num4.'.gif" alt="image" /> <img src="../images/bandit/'.$num5.'.gif" alt="image" /> <img src="../images/bandit/'.$num6.'.gif" alt="image" />.<br />';
+echo '.<img src="../images/bandit/'.$num7.'.gif" alt="image" /> <img src="../images/bandit/'.$num8.'.gif" alt="image" /> <img src="../images/bandit/'.$num9.'.gif" alt="image" />.<br /><br />';
 
 //------------------------------- линии -----------------------------------//
 $sum = 0;
@@ -150,7 +150,7 @@ if ($num1 == 4 && $num5 == $num1 && $num9 == $num1) {echo 'Бананы - по �
 if ($num3 == 4 && $num5 == $num3 && $num7 == $num3) {echo 'Бананы - по диагонали<br />';  $sum+="25";}
 
 if ($num1 == 5 && $num5 == $num1 && $num9 == $num1) {echo 'Яблоки - по диагонали<br />';  $sum+="50";}
-if ($num3 == 5 && $num5 == $num3 && $num7 == $num3) {echo 'Яблоки - по диагонали<br />';  $sum+="50";} 
+if ($num3 == 5 && $num5 == $num3 && $num7 == $num3) {echo 'Яблоки - по диагонали<br />';  $sum+="50";}
 
 if ($num1 == 6 && $num5 == $num1 && $num9 == $num1) {echo 'BAR - по диагонали<br />';  $sum+="100";}
 if ($num3 == 6 && $num5 == $num3 && $num7 == $num3) {echo 'BAR - по диагонали<br />';  $sum+="100";}
@@ -169,7 +169,7 @@ echo 'Ваш выигрыш составил: <b>'.(int)$sum.'</b><br /><br />';
 change_profil($log, array(41=>$udata[41]+$sum));
 }
 
-echo '<b><a href="bandit.php?action=go&amp;rand='.$rand.'&amp;'.SID.'">Играть</a></b><br />';
+echo '<b><a href="bandit.php?action=go&amp;rand='.$rand.'">Играть</a></b><br />';
 
 } else {show_error('Вы не можете играть т.к. на вашем счету недостаточно средств');}
 
@@ -177,12 +177,12 @@ $udata = reading_profil($log);
 
 echo 'В наличии '.moneys($udata[41]).'<br /><br />';
 
-echo '<img src="../images/img/faq.gif" alt="image" /> <a href="bandit.php?action=faq&amp;'.SID.'">Правила игры</a><br />';
+echo '<img src="../images/img/faq.gif" alt="image" /> <a href="bandit.php?action=faq">Правила игры</a><br />';
 }
 
 
 //---------------------------- Правила -----------------------------------//
-if ($action=="faq"){ 
+if ($action=="faq"){
 
 echo 'Правила предельно просты. Нажимайте на кнопку Играть и выигрывайте деньги.<br />';
 echo 'За каждое нажатие у вас со счета списывают '.moneys(5).'<br />';
@@ -191,7 +191,7 @@ echo 'Комбинации картинок считаются по вертик
 echo 'Список выигрышных комбинаций:<br />';
 
 echo '<img src="../images/bandit/1.gif" alt="image" /> * 3 вишенки = '.moneys(10).' средний ряд/столбец  (5 - нижний или верхний ряд/столбец)<br />';
-echo '<img src="../images/bandit/2.gif" alt="image" /> * 3 апельсина = '.moneys(15).' средний ряд/столбец  (10 - нижний или верхний ряд/столбец)<br />'; 
+echo '<img src="../images/bandit/2.gif" alt="image" /> * 3 апельсина = '.moneys(15).' средний ряд/столбец  (10 - нижний или верхний ряд/столбец)<br />';
 echo '<img src="../images/bandit/3.gif" alt="image" /> * 3 винограда = '.moneys(25).' средний ряд/столбец  (15 - нижний или верхний ряд/столбец)<br />';
 echo '<img src="../images/bandit/4.gif" alt="image" /> * 3 Банана = '.moneys(35).' средний ряд/столбец  (25 - нижний или верхний ряд/столбец)<br />';
 echo '<img src="../images/bandit/5.gif" alt="image" /> * 3 Яблока = '.moneys(50).' средний ряд/столбец  (30 - нижний или верхний ряд/столбец)<br />';
@@ -204,13 +204,13 @@ echo '<img src="../images/bandit/7.gif" alt="image" /> * 3 777 = '.moneys(250).'
 echo '<img src="../images/bandit/7.gif" alt="image" /> * 3 777 = '.moneys(777).' средний ряд  (177 - нижний или верхний ряд)<br />';
 
 
-echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="bandit.php?'.SID.'">В игру</a><br />';
+echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="bandit.php">В игру</a><br />';
 }
 
 } else {show_login('Вы не авторизованы, чтобы начать игру, необходимо');}
 
-echo '<img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada&amp;'.SID.'">Развлечения</a><br />'; 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada">Развлечения</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

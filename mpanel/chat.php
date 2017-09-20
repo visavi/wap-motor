@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -24,20 +24,20 @@ echo '<img src="../images/img/menu.gif" alt="image" /> <b>Управление �
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if ($action==""){	
+if ($action==""){
 
-echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';	
-echo '<a href="chat.php?rand='.mt_rand(100,990).'&amp;'.SID.'">Обновить</a> | ';
-echo '<a href="../chat/index.php?start='.$start.'&amp;'.SID.'">Обзор</a><br /><hr />';	
-	
-	
+echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';
+echo '<a href="chat.php?rand='.mt_rand(100,990).'">Обновить</a> | ';
+echo '<a href="../chat/index.php?start='.$start.'">Обзор</a><br /><hr />';
+
+
 $file = file(DATADIR."chat.dat");
 $file = array_reverse($file);
 $total = count($file);
-    
-if ($total>0){   
 
-echo '<form action="chat.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+if ($total>0){
+
+echo '<form action="chat.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'" method="post">';
 
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['chatpost']){$end = $total;}
@@ -59,9 +59,9 @@ echo '<div class="b">';
 
 echo $useravatars;
 
-echo '<b><a href="../pages/anketa.php?uz='.$data[1].'&amp;'.SID.'"> '.nickname($data[1]).'</a></b> '.user_title($data[1]).$useronline.' <small> ('.date_fixed($data[3]).')</small><br />';
+echo '<b><a href="../pages/anketa.php?uz='.$data[1].'"> '.nickname($data[1]).'</a></b> '.user_title($data[1]).$useronline.' <small> ('.date_fixed($data[3]).')</small><br />';
 echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
-echo '<a href="chat.php?action=edit&amp;id='.$num.'&amp;start='.$start.'&amp;'.SID.'">Редактировать</a>';
+echo '<a href="chat.php?action=edit&amp;id='.$num.'&amp;start='.$start.'">Редактировать</a>';
 
 echo '</div><div>'.bb_code($data[0]).'<br />';
 echo '<span style="color:#cc00cc"><small>('.$data[4].', '.$data[5].')</small></span></div>';
@@ -75,11 +75,11 @@ page_strnavigation('chat.php?', $config['chatpost'], $start, $total);
 echo '<br /><br />Всего сообщений: <b>'.(int)$total.'</b><br />';
 
 if (is_admin(array(101))) {
-echo '<br /><img src="../images/img/error.gif" alt="image" /> <a href="chat.php?action=prodel&amp;'.SID.'">Очистить</a><br />';
-echo '<img src="../images/img/reload.gif" alt="image" /> <a href="chat.php?action=restatement&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Пересчитать</a>';
+echo '<br /><img src="../images/img/error.gif" alt="image" /> <a href="chat.php?action=prodel">Очистить</a><br />';
+echo '<img src="../images/img/reload.gif" alt="image" /> <a href="chat.php?action=restatement&amp;uid='.$_SESSION['token'].'">Пересчитать</a>';
 }
 
-} else {echo '<img src="../images/img/reload.gif" alt="image" />  <b>Сообщений еще нет!</b><br />';} 
+} else {echo '<img src="../images/img/reload.gif" alt="image" />  <b>Сообщений еще нет!</b><br />';}
 }
 
 ############################################################################################
@@ -87,9 +87,9 @@ echo '<img src="../images/img/reload.gif" alt="image" /> <a href="chat.php?actio
 ############################################################################################
 if ($action=="prodel") {
 echo '<br />Вы уверены что хотите удалить все сообщения в мини-чате?<br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="chat.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да уверен!</a></b><br />';	
-	
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?'.SID.'">Вернуться</a>';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="chat.php?action=alldel&amp;uid='.$_SESSION['token'].'">Да уверен!</a></b><br />';
+
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -102,14 +102,14 @@ $uid = check($_GET['uid']);
 if (is_admin(array(101))){
 if ($uid==$_SESSION['token']){
 
-clear_files(DATADIR."chat.dat");	
+clear_files(DATADIR."chat.dat");
 
-header ("Location: chat.php?isset=mp_chatclear&".SID); exit;
+header ("Location: chat.php?isset=mp_chatclear"); exit;
 
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 } else {echo '<b>Ошибка! Очищать мини-чат могут только суперадмины!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php">Вернуться</a>';
 
 }
 
@@ -128,12 +128,12 @@ $count = counter_string(DATADIR."chat.dat");
 
 statistics(8, $count);
 
-header ("Location: chat.php?isset=mp_chatrestatement&".SID); exit;	
+header ("Location: chat.php?isset=mp_chatrestatement"); exit;
 
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 } else {echo '<b>Ошибка! Пересчитывать сообщения могут только суперадмины!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -147,14 +147,14 @@ if (isset($_POST['del'])) {$del = intar($_POST['del']);} else {$del = "";}
 if ($uid==$_SESSION['token']){
 if ($del!==""){
 
-delete_lines(DATADIR."chat.dat", $del); 
+delete_lines(DATADIR."chat.dat", $del);
 
-header ("Location: chat.php?start=$start&isset=mp_checkdelpost&".SID); exit;
+header ("Location: chat.php?start=$start&isset=mp_checkdelpost"); exit;
 
 } else {echo '<b>Ошибка удаления! Отсутствуют выбранные сообщения</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?start='.$start.'">Вернуться</a>';
 }
 
 ############################################################################################
@@ -174,7 +174,7 @@ $data[0] = str_replace("<br />","\r\n",$data[0]);
 
 echo '<b><big>Редактирование сообщения</big></b><br /><br />';
 
-echo '<form action="chat.php?action=addedit&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="chat.php?action=addedit&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'" method="post">';
 
 echo '<img src="../images/img/edit.gif" alt="image" /> <b>'.nickname($data[1]).'</b> <small>('.date_fixed($data[3]).')</small><br /><br />';
 
@@ -185,14 +185,14 @@ echo '<br /><input type="submit" value="Изменить" /></form><hr />';
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Сообщения для редактирования не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не выбрано сообщение для редактирования!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?start='.$start.'">Вернуться</a>';
 }
 
 ############################################################################################
 ##                                 Изменение сообщения                                    ##
 ############################################################################################
 if ($action=="addedit") {
-	
+
 $uid = check($_GET['uid']);
 $msg = check($_POST['msg']);
 if (isset($_GET['id'])) {$id = (int)$_GET['id'];} else {$id = "";}
@@ -212,21 +212,21 @@ $text = no_br($msg.'|'.$data[1].'|'.$data[2].'|'.$data[3].'|'.$data[4].'|'.$data
 
 replace_lines(DATADIR."chat.dat", $id, $text);
 
-header ("Location: chat.php?start=$start&isset=mp_chateditpost&".SID); exit;
+header ("Location: chat.php?start=$start&isset=mp_chateditpost"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Сообщения для редактирования не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Вы не написали текст сообщения!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не выбрано сообщение для редактирования!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?action=edit&amp;id='.$id.'&amp;start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="chat.php?action=edit&amp;id='.$id.'&amp;start='.$start.'">Вернуться</a>';
 }
 
 //-------------------------------- КОНЦОВКА ----------------------------------//
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

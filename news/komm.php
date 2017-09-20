@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -31,19 +31,19 @@ if ($string) {
 echo '<img src="../images/img/news.gif" alt="image" /> <b>'.$string[0].'</b><br /><br />';
 
 echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';
-echo '<a href="#form">Написать</a> / ';	
-echo '<a href="komm.php?id='.$id.'&amp;rand='.mt_rand(100,999).'&amp;'.SID.'"> Обновить</a><hr />';
+echo '<a href="#form">Написать</a> / ';
+echo '<a href="komm.php?id='.$id.'&amp;rand='.mt_rand(100,999).'"> Обновить</a><hr />';
 
 if (file_exists(DATADIR."datakomm/$id.dat")){
 $file = file(DATADIR."datakomm/$id.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
 if($total>0){
 
 $is_admin = is_admin(array(101,102,103,105));
 
-if ($is_admin){echo '<form action="komm.php?action=del&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';}
+if ($is_admin){echo '<form action="komm.php?action=del&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'" method="post">';}
 
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['postnews']){ $end = $total; }
@@ -59,8 +59,8 @@ if ($is_admin) {echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
 
 echo user_avatars($data[4]);
 
-echo '<b><a href="../pages/anketa.php?uz='.$data[4].'&amp;'.SID.'"> '.nickname($data[4]).' </a></b> '.user_title($data[4]).user_online($data[4]);	
-	
+echo '<b><a href="../pages/anketa.php?uz='.$data[4].'"> '.nickname($data[4]).' </a></b> '.user_title($data[4]).user_online($data[4]);
+
 echo '<small> ('.date_fixed($data[3]).')</small></div>';
 
 echo '<div>'.bb_code($data[1]).'<br />';
@@ -76,16 +76,16 @@ page_strnavigation('komm.php?id='.$id.'&amp;', $config['postnews'], $start, $tot
 
 if (is_user()){
 
-echo '<br /><div class="form" id="form"><form action="komm.php?action=add&amp;id='.$id.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post"><b>Сообщение:</b><br />';
+echo '<br /><div class="form" id="form"><form action="komm.php?action=add&amp;id='.$id.'&amp;uid='.$_SESSION['token'].'" method="post"><b>Сообщение:</b><br />';
 echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
 echo '<input type="submit" value="Написать" /></form></div>';
 
 } else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 
 echo '<br /><a href="#up"><img src="../images/img/ups.gif" alt="image" /></a> ';
-echo '<a href="../pages/pravila.php?'.SID.'">Правила</a> / ';
-echo '<a href="../pages/smiles.php?'.SID.'">Смайлы</a> / ';
-echo '<a href="../pages/tegi.php?'.SID.'">Теги</a><br />';
+echo '<a href="../pages/pravila.php">Правила</a> / ';
+echo '<a href="../pages/smiles.php">Смайлы</a> / ';
+echo '<a href="../pages/tegi.php">Теги</a><br />';
 
 } else {show_error('Ошибка! Выбранная вами новость не существует, возможно она была удалена!');}
 }
@@ -106,8 +106,8 @@ if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<1000){
 $string = search_string(DATADIR."news.dat", $id, 5);
 if ($string) {
 
-antiflood("Location: komm.php?id=$id&isset=antiflood&".SID);
-karantin($udata[6], "Location: komm.php?id=$id&isset=karantin&".SID);
+antiflood("Location: komm.php?id=$id&isset=antiflood");
+karantin($udata[6], "Location: komm.php?id=$id&isset=karantin");
 statistics(3);
 
 $msg = no_br($msg,'<br />');
@@ -133,7 +133,7 @@ delete_lines(DATADIR."datakomm/$id.dat",array(0,1));
 
 change_profil($log, array(14=>$ip, 33=>$udata[33]+1, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
-header ("Location: komm.php?id=$id&isset=addon&".SID); exit;
+header ("Location: komm.php?id=$id&isset=addon"); exit;
 
 } else {show_error('Ошибка! Выбранная вами новость не существует, возможно она была удалена!');}
 } else {show_error('Ошибка! Слишком длинное или короткое сообщение!');}
@@ -141,7 +141,7 @@ header ("Location: komm.php?id=$id&isset=addon&".SID); exit;
 
 } else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 
-echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="komm.php?id='.$id.'&amp;start='.$start.'&amp;'.SID.'">К комментариям</a>';
+echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="komm.php?id='.$id.'&amp;start='.$start.'">К комментариям</a>';
 }
 ############################################################################################
 ##                                  Удаление комментариев                                 ##
@@ -161,7 +161,7 @@ if (file_exists(DATADIR."datakomm/$id.dat")){
 
 delete_lines(DATADIR."datakomm/$id.dat", $del);
 
-header("location: komm.php?id=$id&start=$start&isset=selectpriv&".SID); exit;
+header("location: komm.php?id=$id&start=$start&isset=selectpriv"); exit;
 
 } else {show_error('Ошибка! Отстутствует файл с комментариями!');}
 } else {show_error('Ошибка! Не выбран файл с комментариями!');}
@@ -169,11 +169,11 @@ header("location: komm.php?id=$id&start=$start&isset=selectpriv&".SID); exit;
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
 } else {show_error('Ошибка! Удалять сообщения могут только модераторы!');}
 
-echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="komm.php?id='.$id.'&amp;start='.$start.'&amp;'.SID.'">К комментариям</a>';
+echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="komm.php?id='.$id.'&amp;start='.$start.'">К комментариям</a>';
 }
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php">Вернуться</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

@@ -23,7 +23,7 @@ echo '</head><body>';
 echo '<!--Design by Vantuz (http://pizdec.ru)-->';
 
 echo '<table border="0" align="center" cellpadding="0" cellspacing="0" class="submenu" id="up"><tr>
-<td class="t1"><a href="/index.php?'.SID.'"><img src="/themes/toonel/logo.gif" alt="'.$config['title'].'" /></a></td>
+<td class="t1"><a href="/index.php"><img src="/themes/toonel/logo.gif" alt="'.$config['title'].'" /></a></td>
 
 
     <td class="t2"></td>
@@ -31,16 +31,16 @@ echo '<table border="0" align="center" cellpadding="0" cellspacing="0" class="su
 
 if (is_user()){
 
-    echo '<a title="Управление настройками" class="menu" href="/pages/?action=menu&amp;'.SID.'">Мое меню</a> | ';
+    echo '<a title="Управление настройками" class="menu" href="/pages/?action=menu">Мое меню</a> | ';
 
 } else {
 
-     echo '<a title="Страница авторизации" class="menu" href="/pages/login.php?'.SID.'">Вход</a> | ';
+     echo '<a title="Страница авторизации" class="menu" href="/pages/login.php">Вход</a> | ';
 
     }
-    echo'<a title="Центр общения" class="menu" href="/forum/?'.SID.'">Форум</a> |
-    <a title="Гостевая комната" class="menu" href="/book/?'.SID.'">Гостевая</a> |
-    <a title="Наши новости" class="menu" href="/news/?'.SID.'">Новости</a>';
+    echo'<a title="Центр общения" class="menu" href="/forum/">Форум</a> |
+    <a title="Гостевая комната" class="menu" href="/book/">Гостевая</a> |
+    <a title="Наши новости" class="menu" href="/news/">Новости</a>';
 
 
 

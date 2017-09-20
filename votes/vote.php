@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -31,9 +31,9 @@ $vcount = count($vdata);
 
 $vresult = file_get_contents(DATADIR."datavotes/result.dat");
 $vres = explode("|", $vresult);
-	
+
 $sum = array_sum($vres);
-$max = max($vres); 
+$max = max($vres);
 
 if (empty($sum)){$sum = 1;}
 if (empty($max)){$max = 1;}
@@ -41,11 +41,11 @@ if (empty($max)){$max = 1;}
 for($i=1; $i<$vcount; $i++){
 
 if($vdata[$i]!=""){
-$proc = round($vres[$i] * 100 / $sum);	
+$proc = round($vres[$i] * 100 / $sum);
 $maxproc = round($vres[$i] * 150 / $max);
 
 echo '<b>'.$vdata[$i].'</b> (Голосов: '.(int)$vres[$i].')<br />';
-echo '<img src="'.BASEDIR.'gallery/level.php?rat='.$maxproc.'&amp;in='.$proc.'" alt="image" /><br /><br />'; 
+echo '<img src="'.BASEDIR.'gallery/level.php?rat='.$maxproc.'&amp;in='.$proc.'" alt="image" /><br /><br />';
 }
 }
 
@@ -53,7 +53,7 @@ echo '<b>Всего проголосовавших: '.(int)$sum.'</b><br />';
 
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Голосование еще не создано!</b><br />';}
 
-} 
+}
 
 ############################################################################################
 ##                                     Голосование                                        ##
@@ -81,7 +81,7 @@ write_files(DATADIR."datavotes/result.dat", $vt, 1, 0666);
 
 write_files(DATADIR."datavotes/users.dat", '|'.$log.'|'.SITETIME."|\r\n", 0, 0666);
 
-header ("Location: vote.php?isset=yesvotes&".SID); exit;
+header ("Location: vote.php?isset=yesvotes"); exit;
 
 } else {echo '<b>Ошибка! Неверно указан вариант голосования!</b><br />';}
 } else {echo '<b>Ошибка! Вы уже проголосовали в этом опросе!</b><br />';}
@@ -90,8 +90,8 @@ header ("Location: vote.php?isset=yesvotes&".SID); exit;
 } else {show_login('Вы не авторизованы, чтобы голосовать, необходимо');}
 }
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">К голосованию</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php">К голосованию</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

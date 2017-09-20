@@ -1,13 +1,13 @@
 <img src="<?=BASEDIR?>images/img/partners.gif" alt="image" /> <b>Игры / Развлечения</b><br /><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/bank.php?<?=SID?>">Банк</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/kredit.php?<?=SID?>">Кредит</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/health.php?<?=SID?>">Кабак</a><br /> 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/stamina.php?<?=SID?>">Спортзал</a><br /> 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/magazin.php?<?=SID?>">Магазин</a><br /> 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/loterea.php?<?=SID?>">Лотерея</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/perevod.php?<?=SID?>">Перевод</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/21.php?<?=SID?>">21 (Очко)</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/bandit.php?<?=SID?>">Бандит</a><br />	
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/kosti.php?<?=SID?>">Кости</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/hi.php?<?=SID?>">Угадай число</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/naperstki.php?<?=SID?>">Наперстки</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/bank.php">Банк</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/kredit.php">Кредит</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/health.php">Кабак</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/stamina.php">Спортзал</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/magazin.php">Магазин</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/loterea.php">Лотерея</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/perevod.php">Перевод</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/21.php">21 (Очко)</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/bandit.php">Бандит</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/kosti.php">Кости</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/hi.php">Угадай число</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/naperstki.php">Наперстки</a><br />

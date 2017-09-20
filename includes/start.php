@@ -9,7 +9,7 @@
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
 #-----------------------------------------------------#
-define('MOTOR_VERSION', '22.0');
+define('MOTOR_VERSION', '24.0');
 
 $debugmode = 1;
 
@@ -25,8 +25,6 @@ if ($debugmode) {
     @ini_set('error_reporting', E_ALL ^ E_NOTICE);
 }
 
-@ini_set('url_rewriter.tags','');
-@ini_set('session.use_trans_sid', 1);
 session_name('SID');
 session_start();
 
@@ -70,7 +68,7 @@ define('ADMINDIR', BASEDIR.'mpanel/');
 
 /*foreach ($_GET as $check_url) {
 if (!preg_match('#^(?:[a-z0-9_\-/]+|\.+(?!/))*$#i', $check_url)){
-header ('Location: '.BASEDIR.'index.php?isset=403&'.SID); exit;
+header ('Location: '.BASEDIR.'index.php?isset=403'); exit;
 }}
 unset($check_url);*/
 

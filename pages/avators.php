@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -26,7 +26,7 @@ if (is_user()){
 ############################################################################################
 if($action==""){
 
-echo '<b>Выбрать</b> | <a href="avators.php?action=buy&amp;'.SID.'">Купить</a> | <a href="avators.php?action=load&amp;'.SID.'">Загрузить</a><br /><br />';
+echo '<b>Выбрать</b> | <a href="avators.php?action=buy">Купить</a> | <a href="avators.php?action=load">Загрузить</a><br /><br />';
 
 $array_avators = array();
 $globavatars = glob(BASEDIR."images/avators/*.gif");
@@ -43,7 +43,7 @@ if ($total < $start + $config['avlist']){ $end = $total; }
 else {$end = $start + $config['avlist']; }
 for ($i = $start; $i < $end; $i++){
 
-echo '<img src="../images/avators/'.$array_avators[$i].'" alt="image" /> <a href="avators.php?action=select&amp;av='.$array_avators[$i].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Выбрать</a><br />';
+echo '<img src="../images/avators/'.$array_avators[$i].'" alt="image" /> <a href="avators.php?action=select&amp;av='.$array_avators[$i].'&amp;uid='.$_SESSION['token'].'">Выбрать</a><br />';
 }
 
 page_jumpnavigation('avators.php?', $config['avlist'], $start, $total);
@@ -52,7 +52,7 @@ page_strnavigation('avators.php?', $config['avlist'], $start, $total);
 
 echo '<hr />Выберите понравившийся вам аватар<br />';
 echo 'Cейчас ваш аватар: '.user_avatars($log).'<br /><br />';
-echo 'Всего аваторов: <b>'.(int)$total.'</b><br />'; 
+echo 'Всего аваторов: <b>'.(int)$total.'</b><br />';
 
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>В данной категории аватаров нет!</b><br />';}
 }
@@ -84,7 +84,7 @@ echo 'Cейчас ваш аватар: <img src="'.BASEDIR.'images/avators/'.$av
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимое название аватара!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -92,7 +92,7 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.ph
 ############################################################################################
 if($action=="buy"){
 
-echo '<a href="avators.php?'.SID.'">Выбрать</a> | <b>Купить</b> | <a href="avators.php?action=load&amp;'.SID.'">Загрузить</a><br /><br />';
+echo '<a href="avators.php">Выбрать</a> | <b>Купить</b> | <a href="avators.php?action=load">Загрузить</a><br /><br />';
 
 $array_avators = array();
 $globavatars = glob(BASEDIR."images/avators2/*.gif");
@@ -108,7 +108,7 @@ if ($total < $start + $config['avlist']){ $end = $total; }
 else {$end = $start + $config['avlist']; }
 for ($i = $start; $i < $end; $i++){
 
-echo '<img src="../images/avators2/'.$array_avators[$i].'" alt="image" /> <a href="avators.php?action=addbuy&amp;av='.$array_avators[$i].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Купить</a><br />';
+echo '<img src="../images/avators2/'.$array_avators[$i].'" alt="image" /> <a href="avators.php?action=addbuy&amp;av='.$array_avators[$i].'&amp;uid='.$_SESSION['token'].'">Купить</a><br />';
 }
 
 page_jumpnavigation('avators.php?action=buy&amp;', $config['avlist'], $start, $total);
@@ -118,7 +118,7 @@ echo '<hr />Цена аватара '.moneys($config['avatarpay']).'<br />';
 echo 'В наличии: '.moneys($udata[41]).'<br />';
 echo 'Купите понравившийся вам аватар<br />';
 echo 'Cейчас ваш аватар: '.user_avatars($log).'<br /><br />';
-echo 'Всего аваторов: <b>'.(int)$total.'</b><br />'; 
+echo 'Всего аваторов: <b>'.(int)$total.'</b><br />';
 
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>В данной категории аватаров нет!</b><br />';}
 }
@@ -135,7 +135,7 @@ if ($uid==$_SESSION['token']){
 if (preg_match('|^[a-z0-9_\.\-]+$|i', $av)){
 if (file_exists("../images/avators2/$av")){
 if ($udata[43]!="images/avators2/$av"){
-if ($udata[41]>=$config['avatarpay']){	
+if ($udata[41]>=$config['avatarpay']){
 
 change_profil($log, array(41=>$udata[41]-$config['avatarpay'], 43=>"images/avators2/$av"));
 
@@ -151,7 +151,7 @@ echo 'C вашего счета списано '.moneys($config['avatarpay']).'<
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимое название аватара!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.php?action=buy&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.php?action=buy">Вернуться</a>';
 }
 
 ############################################################################################
@@ -159,14 +159,14 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.ph
 ############################################################################################
 if($action=="load"){
 
-echo '<a href="avators.php?'.SID.'">Выбрать</a> | <a href="avators.php?action=buy&amp;'.SID.'">Купить</a> | <b>Загрузить</b><br /><br />';
+echo '<a href="avators.php">Выбрать</a> | <a href="avators.php?action=buy">Купить</a> | <b>Загрузить</b><br /><br />';
 
 echo 'В наличии: '.moneys($udata[41]).'<br />';
 
-if ($udata[36]>=$config['avatarpoints']){		
+if ($udata[36]>=$config['avatarpoints']){
 if ($udata[41]>=$config['avatarupload']){
 
-echo '<form action="avators.php?action=addload&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post" name="form" enctype="multipart/form-data">';
+echo '<form action="avators.php?action=addload&amp;uid='.$_SESSION['token'].'" method="post" name="form" enctype="multipart/form-data">';
 echo '<br />Прикрепить аватар:<br />';
 echo '<input type="file" name="file" /><br /><br />';
 echo '<input type="submit" value="Загрузить" /></form><hr />';
@@ -201,9 +201,9 @@ if ($avat_size>0 && $avat_size<=$config['avatarweight']){
 if ($size[0]==$config['avatarsize'] && $size[1]==$config['avatarsize']){
 if ($udata[41]>=$config['avatarupload']){
 if ($udata[36]>=$config['avatarpoints']){
-	
+
 if (copy($_FILES['file']['tmp_name'], DATADIR.'dataavators/'.$log.'.gif')){
-@chmod(DATADIR.'dataavators/'.$log.'.gif', 0666);	
+@chmod(DATADIR.'dataavators/'.$log.'.gif', 0666);
 
 change_profil($log, array(41=>$udata[41]-$config['avatarupload'], 43=>"gallery/avators.php?uz=$log"));
 
@@ -220,12 +220,12 @@ echo 'C вашего счета списано '.moneys($config['avatarupload'])
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Разрешается загружать аватары только в формате .gif</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.php?action=load&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.php?action=load">Вернуться</a>';
 }
 
 } else {show_login('Вы не авторизованы, чтобы изменить аватар, необходимо');}
-	
-echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+
+echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once"../themes/".$config['themes']."/foot.php";
 ?>

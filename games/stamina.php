@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -34,19 +34,19 @@ echo '<img src="../gallery/grafic.php?rat='.(int)$udata[57].'&amp;imgs=2&amp;lim
 
 echo 'Вы можете увеличить уровень выносливости разными способами<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=0&amp;'.SID.'">Тренироваться</a></b> (Бесплатно)<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=0">Тренироваться</a></b> (Бесплатно)<br />';
 echo '(Увеличивает вашу выносливость всего на 3%)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=1&amp;'.SID.'">Выпить водки</a></b> (Цена: '.moneys(300).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=1">Выпить водки</a></b> (Цена: '.moneys(300).')<br />';
 echo '(Увеличивает вашу выносливость уже на 10%, но стоит денег)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=2&amp;'.SID.'">Применить аптечку</a></b> (Цена: '.moneys(1000).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=2">Применить аптечку</a></b> (Цена: '.moneys(1000).')<br />';
 echo '(Увеличивает вашу выносливость на 20%, весьма эффективный способ)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=3&amp;'.SID.'">Использовать допинг</a></b> (Цена: '.moneys(3000).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=3">Использовать допинг</a></b> (Цена: '.moneys(3000).')<br />';
 echo '(Увеличивает вашу выносливость на 30%, быстрый способ)<br /><br />';
 
-echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=4&amp;'.SID.'">Использовать энергетик</a></b> (Цена: '.moneys(10000).')<br />';
+echo '<img src="../images/img/plus.gif" alt="image" /> <b><a href="stamina.php?action=operacia&amp;pred=4">Использовать энергетик</a></b> (Цена: '.moneys(10000).')<br />';
 echo '(Увеличивает вашу выносливость на 50%, самый быстрый способ)<br /><br />';
 
 echo 'Выберите любой способ и при достаточном количестве денег вы сможете увеличить свою выносливость<br />';
@@ -61,7 +61,7 @@ if ($action=="operacia"){
 $pred = (int)$_GET['pred'];
 if (empty($udata[59])) {$udata[59] = 50;}
 
-if ($udata[62]<SITETIME){	
+if ($udata[62]<SITETIME){
 
 //--------------------------------------------------------------------//
 if ($pred==0){
@@ -116,7 +116,7 @@ echo '<b>Вы успешно улучшили состояние своей вы
 //--------------------------------------------------------------------//
 if ($pred==4){
 if ($udata[41]>=10000){
-if ($udata[59]>=($udata[57]+50)){	
+if ($udata[59]>=($udata[57]+50)){
 
 change_profil($log, array(41=>$udata[41]-10000, 57=>$udata[57]+50, 62=>SITETIME+3600*3));
 
@@ -134,18 +134,18 @@ echo'<img src="../gallery/grafic.php?rat='.(int)$udata[57].'&amp;imgs=2&amp;limi
 
 } else {show_error('Увеличивать уровень своей выносливости можно не чаще чем раз в 3 часа');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="stamina.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="stamina.php">Вернуться</a>';
 }
-	
+
 } else {echo 'Ошибка! Ваш персонаж игры не включен! Для того чтобы его включить, измените свои настройки<br />';
 echo 'Персонаж позволит вам участвовать в разных играх, боях, покупать оружие, прокачивать своего бойца, зарабатывать деньги и многое другое<br />';
-echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="../pages/setting.php?'.SID.'">Настройки</a>';
-}	
-	
+echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="../pages/setting.php">Настройки</a>';
+}
+
 } else {show_login('Вы не авторизованы, чтобы совершать операции, необходимо');}
 
-echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada&amp;'.SID.'">Развлечения</a><br />'; 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada">Развлечения</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

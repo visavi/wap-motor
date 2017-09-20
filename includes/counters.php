@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 if (!defined('BASEDIR')) { header("Location:../index.php"); exit; }
 
 $maxonline = 250; // Cколько онлайн записей хранить
@@ -50,7 +50,7 @@ fputs($f,$savesdata[0].'|'.$savesdata[1].'|'.$savesdata[2].'|'.$savesdata[3]."|\
 }
 
 fputs($f,SITETIME.'|'.$ip.'|'.$log.'|'.$brow."|\r\n");
-	
+
 fflush($f);
 flock($f,LOCK_UN);
 fclose ($f);
@@ -71,7 +71,7 @@ $counts = explode("|",$arcounts[0]);
 //----------------------- Статистика за 24 часа (хиты) ----------------------------//
 if(isset($counts[3]) && isset($counts[4]) && $counts[3]!=$hour){
 
-$filehits24 = file(DATADIR."datacounter/24_hits.dat"); 
+$filehits24 = file(DATADIR."datacounter/24_hits.dat");
 $datahits24 = explode("|",end($filehits24));
 
 if ($arrtimehour>$datahits24[1]){
@@ -86,7 +86,7 @@ delete_lines(DATADIR."datacounter/24_hits.dat", 0);
 //------------------------ Статистика за 31 день (хиты) ---------------------------//
 if (isset($counts[0]) && isset($counts[1]) && $counts[0]!=$den){
 
-$filehits31 = file(DATADIR."datacounter/31_hits.dat"); 
+$filehits31 = file(DATADIR."datacounter/31_hits.dat");
 $dathits31 = explode("|",end($filehits31));
 
 if ($arrtimeday>$dathits31[1]){
@@ -107,7 +107,7 @@ fputs($fp,$zapis);
 fflush($fp);
 flock($fp,LOCK_UN);
 fclose($fp);
-@chmod (DATADIR."datacounter/hits.dat", 0666); 
+@chmod (DATADIR."datacounter/hits.dat", 0666);
 }
 
 
@@ -127,7 +127,7 @@ $counts = explode("|",$arcounts[0]);
 //----------------------- Статистика за 24 часа (хосты) ----------------------------//
 if(isset($counts[3]) && isset($counts[4]) && $counts[3]!=$hour){
 
-$filehost24 = file(DATADIR."datacounter/24_host.dat"); 
+$filehost24 = file(DATADIR."datacounter/24_host.dat");
 $datahost24 = explode("|",end($filehost24));
 
 if ($arrtimehour>$datahost24[1]){
@@ -142,7 +142,7 @@ delete_lines(DATADIR."datacounter/24_host.dat", 0);
 //------------------------ Статистика за 31 день (хосты) ---------------------------//
 if (isset($counts[0]) && isset($counts[1]) && $counts[0]!=$den){
 
-$filehost31 = file(DATADIR."datacounter/31_host.dat"); 
+$filehost31 = file(DATADIR."datacounter/31_host.dat");
 $dathost31 = explode("|",end($filehost31));
 
 if ($arrtimeday>$dathost31[1]){
@@ -163,7 +163,7 @@ fputs($fp,$zapis);
 fflush($fp);
 flock($fp,LOCK_UN);
 fclose($fp);
-@chmod (DATADIR."datacounter/host.dat", 0666); 
+@chmod (DATADIR."datacounter/host.dat", 0666);
 }
 }
 
@@ -176,11 +176,11 @@ $substr_count = substr_count($onlinefile,'||');
 $counter_online = counter_string(DATADIR."online.dat");
 $counter_reg = $counter_online - $substr_count;
 
-echo '<a href="'.BASEDIR.'pages/online.php?'.SID.'">На сайте: '.$counter_reg.'/'.$counter_online.'</a><br />';
+echo '<a href="'.BASEDIR.'pages/online.php">На сайте: '.$counter_reg.'/'.$counter_online.'</a><br />';
 }
 
 //----------------------- Статистика ----------------------------//
-if ($config['incount']>0){ 
+if ($config['incount']>0){
 
 $counter_host = 0;
 $counter_all = 0;
@@ -201,10 +201,10 @@ $counter_hits = $hcount[1];
 $counter_allhits = $hcount[2];
 }
 
-if ($config['incount']==1){ echo '<a href="'.BASEDIR.'pages/counter.php?'.SID.'">'.$counter_host.' | '.$counter_all.'</a><br />';}
-if ($config['incount']==2){ echo '<a href="'.BASEDIR.'pages/counter.php?'.SID.'">'.$counter_hits.' | '.$counter_allhits.'</a><br />';}
-if ($config['incount']==3){ echo '<a href="'.BASEDIR.'pages/counter.php?'.SID.'">'.$counter_host.' | '.$counter_hits.'</a><br />';}
-if ($config['incount']==4){ echo '<a href="'.BASEDIR.'pages/counter.php?'.SID.'">'.$counter_all.' | '.$counter_allhits.'</a><br />';}
-if ($config['incount']==5){ echo '<a href="'.BASEDIR.'pages/counter.php?'.SID.'"><img src="'.BASEDIR.'gallery/count.php" alt="image" /></a><br />';}
+if ($config['incount']==1){ echo '<a href="'.BASEDIR.'pages/counter.php">'.$counter_host.' | '.$counter_all.'</a><br />';}
+if ($config['incount']==2){ echo '<a href="'.BASEDIR.'pages/counter.php">'.$counter_hits.' | '.$counter_allhits.'</a><br />';}
+if ($config['incount']==3){ echo '<a href="'.BASEDIR.'pages/counter.php">'.$counter_host.' | '.$counter_hits.'</a><br />';}
+if ($config['incount']==4){ echo '<a href="'.BASEDIR.'pages/counter.php">'.$counter_all.' | '.$counter_allhits.'</a><br />';}
+if ($config['incount']==5){ echo '<a href="'.BASEDIR.'pages/counter.php"><img src="'.BASEDIR.'gallery/count.php" alt="image" /></a><br />';}
 }
 ?>

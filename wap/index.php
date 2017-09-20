@@ -8,12 +8,12 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
 
 if ($_SESSION['my_themes']!='lite') {$_SESSION['my_themes'] = 'lite';} else {$_SESSION['my_themes'] = '';}
 
-header ("Location: ../index.php?".SID); exit;
+header ("Location: ../index.php"); exit;
 ?>

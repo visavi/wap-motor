@@ -8,12 +8,12 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
 include_once ("../themes/".$config['themes']."/index.php");
-    
+
 if (isset($_GET['action'])) {$action = check($_GET['action']);} else {$action = "";}
 
 show_title('partners.gif', 'Восстановление пароля');
@@ -31,12 +31,12 @@ echo 'Введите свой логин и код для проверки<br />
 echo 'Инструкция по восстановлению будет выслана на электронный адрес указанный в профиле<br />';
 echo 'Восстанавливать пароль можно не чаще чем раз в 12 часов<br /><br />';
 
-echo '<form method="post" action="lostpassword.php?action=send&amp;'.SID.'">';
+echo '<form method="post" action="lostpassword.php?action=send">';
 echo 'Логин:<br />';
 echo '<input name="uz" type="text" maxlength="20" value="'.$cookname.'" /><br />';
 echo 'Проверочный код: ';
 if ($config['protectimg']==1){
-echo '<img src="'.BASEDIR.'gallery/protect.php?'.SID.'" alt="" /><br />';
+echo '<img src="'.BASEDIR.'gallery/protect.php" alt="" /><br />';
 } else {
 echo '<b>'.$_SESSION['protect'].'</b><br />';
 }
@@ -83,7 +83,7 @@ echo 'Восстанавливать пароль можно не чаще че�
 } else {show_error('Недопустимые символы в названии логина!');}
 } else {show_error('Ошибка, вы не ввели логин для восстановления!');}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="lostpassword.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="lostpassword.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -113,7 +113,7 @@ if($uzdata[4]!=""){
 addmail($uzdata[4], "Восстановление пароля на сайте ".$config['title'], "Здравствуйте, ".$uzdata[0]." \nВаши новые данные для входа на на сайт ".$config['home']." \nЛогин: ".$uzdata[0]." \nПароль: ".$newpass." \n\nЗапомните и постарайтесь больше не забывать данные, а лучше сделайте сразу закладку на наш сайт \n".$config['home']."/input.php?login=".$uzdata[0]."&pass=".$newpass."&cookietrue=1 \nПароль вы сможете поменять в своем профиле \nВсего наилучшего!");
 }
 
-header ("Location: ../index.php?isset=lostpass&".SID); exit;
+header ("Location: ../index.php?isset=lostpass"); exit;
 
 } else {show_error('Ошибка, секретный код в ссылке не совпадает с данными в профиле!');}
 } else {show_error('Ошибка, пользователя с данным логином не зарегестрирован!');}
@@ -124,7 +124,7 @@ header ("Location: ../index.php?isset=lostpass&".SID); exit;
 
 } else {show_error('Ошибка! Вы авторизованы, восстановление пароля невозможно!');}
 
-echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

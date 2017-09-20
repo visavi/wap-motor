@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -27,7 +27,7 @@ if ($action==""){
 
 echo 'Логин пользователя:<br />';
 
-echo '<form method="post" action="zaban.php?action=edit&amp;'.SID.'">';
+echo '<form method="post" action="zaban.php?action=edit">';
 echo '<input name="users" maxlength="20" /><br /><br />';
 echo '<input value="Получить данные" type="submit" /></form><hr />';
 
@@ -50,7 +50,7 @@ echo '<img src="../images/img/chel.gif" alt="image" /> <b>Профиль пол�
 
 if ($uzdata[52]!=""){
 echo 'Последний бан: '.date_fixed($uzdata[52]).'<br />';
-echo 'Забанил: <b><a href="../pages/anketa.php?uz='.$uzdata[63].'&amp;'.SID.'">'.nickname($uzdata[63]).'</a></b><br />';
+echo 'Забанил: <b><a href="../pages/anketa.php?uz='.$uzdata[63].'">'.nickname($uzdata[63]).'</a></b><br />';
 echo 'Причина: '.$uzdata[39].'<br />';
 }
 
@@ -61,10 +61,10 @@ if ($uzdata[7]<101 || $uzdata[7]>105){
 if ($uzdata[37]<1 || $uzdata[38]<SITETIME){
 if ($uzdata[64]<5){
 
-echo '<form method="post" action="zaban.php?action=zaban&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
+echo '<form method="post" action="zaban.php?action=zaban&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'">';
 echo 'Время бана:<br /><input name="bantime" /><br />';
 
-echo '<input name="banform" type="radio" value="min" checked="checked" /> Минут<br />';	
+echo '<input name="banform" type="radio" value="min" checked="checked" /> Минут<br />';
 echo '<input name="banform" type="radio" value="chas" /> Часов<br />';
 echo '<input name="banform" type="radio" value="sut" /> Суток<br />';
 
@@ -77,27 +77,27 @@ echo 'Максимальное время бана '.round($config['maxbantime']
 echo 'Внимание! Постарайтесь как можно подробнее описать причину бана<br />';
 
 } else {
-echo '<b><span style="color:#ff0000">Внимание! Пользователь превысил лимит банов</span></b><br />';	
+echo '<b><span style="color:#ff0000">Внимание! Пользователь превысил лимит банов</span></b><br />';
 echo 'Вы можете удалить этот профиль!<br /><br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="zaban.php?action=deluser&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить профиль</a></b>';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="zaban.php?action=deluser&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'">Удалить профиль</a></b>';
 }
 
 } else {
 echo '<b><span style="color:#ff0000">Внимание, данный аккаунт заблокирован!</span></b><br />';
 echo 'До окончания бана осталось '.formattime($uzdata[38]-SITETIME).'<br /><br />';
 
-echo '<img src="../images/img/reload.gif" alt="image" /> <b><a href="zaban.php?action=razban&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Разбанить</a></b><hr />';
+echo '<img src="../images/img/reload.gif" alt="image" /> <b><a href="zaban.php?action=razban&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'">Разбанить</a></b><hr />';
 }
 
 } else {
 echo '<b><span style="color:#ff0000">У вас недостаточно прав для бана этого аккаунта</span></b><br />';
 echo 'Запрещается банить админов и модеров!<br />';
-} 
+}
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, пользователя с данным логином не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, необходимо ввести логин пользователя!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -116,11 +116,11 @@ if (preg_match('|^[a-z0-9\-]+$|i',$users)){
 if (file_exists(DATADIR."profil/$users.prof")){
 
 if ($banform=='min'){$bantotaltime = $bantime;}
-if ($banform=='chas'){$bantotaltime = round($bantime*60);}		
-if ($banform=='sut'){$bantotaltime = round($bantime*60*24);}	
-		
+if ($banform=='chas'){$bantotaltime = round($bantime*60);}
+if ($banform=='sut'){$bantotaltime = round($bantime*60*24);}
+
 if ($bantotaltime>0){
-if ($bantotaltime<=$config['maxbantime']){	
+if ($bantotaltime<=$config['maxbantime']){
 if (utf_strlen(trim($bancause))>=5){
 
 $bancause = no_br($bancause,' <br /> ');
@@ -131,9 +131,9 @@ if (SITETIME>($uzdata[52]+10800) && $bantotaltime>180){$bancount = 1;} else {$ba
 change_profil($users, array(37=>1, 38=>SITETIME+($bantotaltime*60), 39=>$bancause, 52=>SITETIME, 63=>$log, 64=>$uzdata[64]+$bancount, 73=>1));
 
 echo 'Данные пользователя <b>'.$users.'</b> успешно изменены!<br />';
-echo '<b><span style="color:#ff0000">Аккаунт заблокирован!</span></b><br /><br />'; 
+echo '<b><span style="color:#ff0000">Аккаунт заблокирован!</span></b><br /><br />';
 
-echo '<a href="zaban.php?'.SID.'">Редактировать нового юзера</a><br />';
+echo '<a href="zaban.php">Редактировать нового юзера</a><br />';
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Слишком короткая причина бана!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Максимальное время бана '.round($config['maxbantime']/1440).' суток!</b><br />';}
@@ -142,7 +142,7 @@ echo '<a href="zaban.php?'.SID.'">Редактировать нового юзе
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимый логин пользователя!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php?action=edit&amp;users='.$users.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php?action=edit&amp;users='.$users.'">Вернуться</a>';
 }
 
 
@@ -163,15 +163,15 @@ if ($uzdata[64]>0){$bancount = 1;} else {$bancount = 0;}
 change_profil($users, array(37=>0, 38=>0, 64=>$uzdata[64]-$bancount, 73=>0));
 
 echo 'Данные юзера <b>'.$users.'</b> успешно изменены!<br />';
-echo '<b><span style="color:#00ff00">Аккаунт разблокирован!</span></b><br /><br />'; 
+echo '<b><span style="color:#00ff00">Аккаунт разблокирован!</span></b><br /><br />';
 
-echo '<a href="zaban.php?'.SID.'">Редактировать нового юзера</a><br />';
+echo '<a href="zaban.php">Редактировать нового юзера</a><br />';
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Пользователя с данным логином не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимый логин пользователя!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php?action=edit&amp;users='.$users.'&amp;'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php?action=edit&amp;users='.$users.'">Вернуться</a>';
 }
 
 
@@ -213,14 +213,14 @@ echo 'Данные занесены в черный список!<br />';
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимый логин пользователя!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="zaban.php">Вернуться</a>';
 }
 
 
-echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

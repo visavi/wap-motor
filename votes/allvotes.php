@@ -57,8 +57,8 @@ echo '<br /><br />Всего голосований: '.(int)$total.'<br />';
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Голосований еще нет!</b><br />';}
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Архив голосований еще не создан!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">К голосованию</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php">К голосованию</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>'; 
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

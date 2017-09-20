@@ -26,8 +26,8 @@ if (is_user()) {
 if ($uid==$_SESSION['token']){
 if (utf_strlen(trim($msg))>=5 && utf_strlen($msg)<1000){
 
-antiflood("Location: index.php?isset=antiflood&".SID);
-karantin($udata[6], "Location: index.php?isset=karantin&".SID);
+antiflood("Location: index.php?isset=antiflood");
+karantin($udata[6], "Location: index.php?isset=karantin");
 statistics(0);
 
 $msg = no_br($msg,'<br />');
@@ -46,7 +46,7 @@ delete_lines(DATADIR."book.dat",array(0,1));
 change_profil($log, array(9=>$udata[9]+1, 14=>$ip, 36=>$udata[36]+1, 41=>$udata[41]+1));
 
 $_SESSION['note'] = 'Сообщение успешно добавлено!';
-header ("Location: index.php?".SID); exit;
+header ("Location: index.php"); exit;
 
 } else {show_error('Ошибка! Слишком длинное или короткое сообщение!');}
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
@@ -65,7 +65,7 @@ if ($provkod==$_SESSION['protect']){
 $_SESSION['protect'] = "";
 unset($_SESSION['protect']);
 
-antiflood("Location: index.php?isset=antiflood&".SID);
+antiflood("Location: index.php?isset=antiflood");
 statistics(0);
 
 $msg = no_br($msg,'<br />');
@@ -82,15 +82,15 @@ delete_lines(DATADIR."book.dat",array(0,1));
 }
 
 $_SESSION['note'] = 'Сообщение успешно добавлено!';
-header ("Location: index.php?".SID); exit;
+header ("Location: index.php"); exit;
 
 } else {show_error('Ошибка! Проверочное число не совпало с данными на картинке!');}
 } else {show_error('Ошибка! Слишком длинное или короткое сообщение!');}
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
 } else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php">Вернуться</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

@@ -17,7 +17,7 @@ if (isset($_SESSION['note'])) {
 
 if (is_user() && $udata[10]>0){
 	if (!stristr($php_self,'pages/ban.php') && !stristr($php_self,'pages/key.php') && !stristr($php_self,'pages/banip.php') && !stristr($php_self,'pages/privat.php') && !stristr($php_self,'pages/pravila.php') && !stristr($php_self,'pages/closed.php')){
-			echo '<img src="'.BASEDIR.'images/img/newmail.gif" alt="image" /> <b><a href="'.BASEDIR.'pages/privat.php?'.SID.'"><span style="color:#ff0000">Приватное сообщение! ('.(int)$udata[10].')</span></a></b><br />';
+			echo '<img src="'.BASEDIR.'images/img/newmail.gif" alt="image" /> <b><a href="'.BASEDIR.'pages/privat.php"><span style="color:#ff0000">Приватное сообщение! ('.(int)$udata[10].')</span></a></b><br />';
 	}
 }
 

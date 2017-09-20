@@ -1370,7 +1370,7 @@ function user_position($string) {
 			$line = explode("|", $value);
 
 			if ($string == $line[1]) {
-				$position = '<a href="'.BASEDIR.$line[1].'?'.SID.'">'.$line[2].'</a>';
+				$position = '<a href="'.BASEDIR.$line[1].'">'.$line[2].'</a>';
 				break;
 			}
 		}
@@ -1646,13 +1646,13 @@ function addmail($mail, $subject, $messages, $sendermail="", $sendername="") {
 function page_jumpnavigation($link, $posts, $start, $total) {
 	echo '<hr />';
 	if ($start != 0) {
-		echo '<a href="'.$link.'start='.($start - $posts).'&amp;'.SID.'">&lt;-Назад</a> ';
+		echo '<a href="'.$link.'start='.($start - $posts).'">&lt;-Назад</a> ';
 	} else {
 		echo '&lt;-Назад';
 	}
 	echo ' | ';
 	if ($total > $start + $posts) {
-		echo '<a href="'.$link.'start='.($start + $posts).'&amp;'.SID.'">Далее-&gt;</a>';
+		echo '<a href="'.$link.'start='.($start + $posts).'">Далее-&gt;</a>';
 	} else {
 		echo 'Далее-&gt;';
 	}
@@ -1671,12 +1671,12 @@ function page_strnavigation($link, $posts, $start, $total, $range = 3){
 		$res = 'Страницы: ';
 
 		if ($cur_page != 1) {
-			$res .='<a href="'.$link.'start='.($cur_page - 2) * $posts.'&amp;'.SID.'" title="Назад">&laquo;</a> ';
+			$res .='<a href="'.$link.'start='.($cur_page - 2) * $posts.'" title="Назад">&laquo;</a> ';
 		}
 
 	   if (($start - $posts) >= 0) {
 	      if ($cur_page > ($range + 1)) {
-	         $res .= ' <a href="'.$link.'start=0&amp;'.SID.'">1</a> ';
+	         $res .= ' <a href="'.$link.'start=0">1</a> ';
 	         if ($cur_page != ($range + 2)) {
 	            $res .= ' ... ';
 	         }
@@ -1688,7 +1688,7 @@ function page_strnavigation($link, $posts, $start, $total, $range = 3){
 			if ($i == $cur_page) {
 				$res .= ' <span class="navcurrent">'.$i.'</span> ';
 			} else {
-				$res .= ' <a href="'.$link.'start='.$offset_page.'&amp;'.SID.'">'.$i.'</a> ';
+				$res .= ' <a href="'.$link.'start='.$offset_page.'">'.$i.'</a> ';
 			}
 		}
 
@@ -1697,12 +1697,12 @@ function page_strnavigation($link, $posts, $start, $total, $range = 3){
 	         if ($cur_page != ($pg_cnt - $range - 1)) {
 	            $res .= ' ... ';
 	         }
-	         $res .= ' <a href="'.$link.'start='.($pg_cnt - 1) * $posts.'&amp;'.SID.'">'.$pg_cnt.'</a> ';
+	         $res .= ' <a href="'.$link.'start='.($pg_cnt - 1) * $posts.'">'.$pg_cnt.'</a> ';
 	      }
 	   }
 
 		if ($cur_page != $pg_cnt) {
-			$res .= ' <a href="'.$link.'start='.($cur_page * $posts).'&amp;'.SID.'" title="Вперед">&raquo;</a>';
+			$res .= ' <a href="'.$link.'start='.($cur_page * $posts).'" title="Вперед">&raquo;</a>';
 		}
 
 		echo '<hr /><div class="nav">'.$res.'</div>';
@@ -1719,7 +1719,7 @@ function forum_navigation($link, $posts, $total) {
 		for($i = 0; $i < $max;) {
 			if ($i < $total && $i >= 0) {
 				$ii = floor(1 + $i / $posts);
-				echo ' <a href="'.$link.'start='.$i.'&amp;'.SID.'">'.$ii.'</a> ';
+				echo ' <a href="'.$link.'start='.$i.'">'.$ii.'</a> ';
 			}
 
 			$i += $posts;
@@ -1727,9 +1727,9 @@ function forum_navigation($link, $posts, $total) {
 
 		if ($max < $total) {
 			if ($max + $posts < $total) {
-				echo ' ... <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
+				echo ' ... <a href="'.$link.'start='.$ba2.'">'.$ba.'</a>';
 			} else {
-				echo ' <a href="'.$link.'start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';
+				echo ' <a href="'.$link.'start='.$ba2.'">'.$ba.'</a>';
 			}
 		}
 
@@ -1928,21 +1928,12 @@ function last_news() {
 
 			echo '<br /><img src="'.BASEDIR.'images/img/news.gif" alt="image" /> <b>'.$dt[0].'</b> ('.date_fixed($dt[3], "d.m.y").')<br />';
 
-			echo bb_code($dt[1]).'<br /><a href="'.BASEDIR.'news/komm.php?id='.(int)$dt[5].'&amp;'.SID.'">Комментарии</a> ';
+			echo bb_code($dt[1]).'<br /><a href="'.BASEDIR.'news/komm.php?id='.(int)$dt[5].'">Комментарии</a> ';
 
 			$totalkomm = counter_string(DATADIR."datakomm/$dt[5].dat");
 
 			echo '('.(int)$totalkomm.')';
 		}
-	}
-}
-
-// ------------------- Функция присоединения идентификатора --------------------//
-function verifi($link) {
-	if (strpos($link, '?') === false) {
-		return $link.'?'.SID;
-	} else {
-		return $link.'&'.SID;
 	}
 }
 
@@ -2176,8 +2167,8 @@ function show_error($error) {
 
 // ------------------------- Функция вывода предупреждения ------------------------//
 function show_login($notice) {
-	echo '<div class="login">'.$notice.'<br /><b><a href="'.BASEDIR.'pages/login.php?'.SID.'">Авторизоваться</a></b> или в начале ';
-	echo '<b><a href="'.BASEDIR.'pages/registration.php?'.SID.'">Зарегистрироваться</a></b></div>';
+	echo '<div class="login">'.$notice.'<br /><b><a href="'.BASEDIR.'pages/login.php">Авторизоваться</a></b> или в начале ';
+	echo '<b><a href="'.BASEDIR.'pages/registration.php">Зарегистрироваться</a></b></div>';
 }
 
 ?>

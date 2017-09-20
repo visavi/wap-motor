@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -34,7 +34,7 @@ echo '<b>Внимание!</b><br />';
 echo 'При редактировании голосования подсчет результатов остается неизменным<br />';
 echo 'Также при редактировании нежелательно оставлять пустые поля.<hr />';
 
-echo '<form action="votes.php?action=edit&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="votes.php?action=edit&amp;uid='.$_SESSION['token'].'" method="post">';
 echo 'Вопрос:<br /><input type="text" name="question" maxlength="100"  value="'.$data[0].'" /><br />';
 echo 'Ответ 1:<br /><input type="text" name="answer1" value="'.$data[1].'" /><br />';
 echo 'Ответ 2:<br /><input type="text" name="answer2" value="'.$data[2].'" /><br />';
@@ -52,8 +52,8 @@ echo '<input type="submit" value="Изменить" /></form><hr />';
 
 } else {echo'<b>Голосование еще не создано</b><br />';}
 
-echo'<br /><img src="../images/img/reload.gif" alt="image" /> <a href="votes.php?action=new&amp;'.SID.'">Создать голосование</a><br />';
-echo'<img src="../images/img/arhiv.gif" alt="image" /> <a href="votes.php?action=all&amp;'.SID.'">Архив голосований</a>';
+echo'<br /><img src="../images/img/reload.gif" alt="image" /> <a href="votes.php?action=new">Создать голосование</a><br />';
+echo'<img src="../images/img/arhiv.gif" alt="image" /> <a href="votes.php?action=all">Архив голосований</a>';
 }
 
 ############################################################################################
@@ -76,17 +76,17 @@ if (isset($_POST['answer10'])){$answer10 = check($_POST['answer10']);} else {$an
 
 if ($uid==$_SESSION['token']){
 if ($question!="" && $answer1!=="" && $answer2!=="" && $answer3!==""){
-	
-$text = $question.'|'.$answer1.'|'.$answer2.'|'.$answer3.'|'.$answer4.'|'.$answer5.'|'.$answer6.'|'.$answer7.'|'.$answer8.'|'.$answer9.'|'.$answer10.'|';	
-	
+
+$text = $question.'|'.$answer1.'|'.$answer2.'|'.$answer3.'|'.$answer4.'|'.$answer5.'|'.$answer6.'|'.$answer7.'|'.$answer8.'|'.$answer9.'|'.$answer10.'|';
+
 write_files(DATADIR."datavotes/votes.dat", $text, 1, 0666);
 
-header ("Location: votes.php?isset=mp_editvotes&".SID); exit;
+header ("Location: votes.php?isset=mp_editvotes"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, не заполнено какое-либо важное поле!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php">Вернуться</a>';
 }
 
 
@@ -100,7 +100,7 @@ echo 'Голосование может состоять от 3 до 10 вари
 echo 'Для создания нового голосования заполните обязательные поля: Вопрос и первые 3 поля для ответов.<br />';
 echo 'При нажатии на кнопку Создать предыдущий вопрос и ответы, а также подсчёт результатов будут анулированы и отправлены в архив голосований<br /><br />';
 
-echo '<form action="votes.php?action=add&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="votes.php?action=add&amp;uid='.$_SESSION['token'].'" method="post">';
 echo 'Вопрос *:<br /><input type="text" name="question" maxlength="100" /><br />';
 echo 'Ответ 1 *:<br /><input type="text" name="answer1" /><br />';
 echo 'Ответ 2 *:<br /><input type="text" name="answer2" /><br />';
@@ -115,7 +115,7 @@ echo 'Ответ 10:<br /><input type="text" name="answer10" /><br /><br />';
 echo '<input type="submit" value="Создать" /></form><hr />';
 
 echo 'Поля отмеченные звездочкой обязательны для заполнения<br />';
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php">Вернуться</a>';
 }
 
 
@@ -164,15 +164,15 @@ $allvotes = no_br($data[0].'|'.$res1.'|'.$res2.'|'.$res3.'|'.$res4.'|'.$res5.'|'
 write_files(DATADIR."datavotes/allvotes.dat", "$allvotes\r\n", 0, 0666);
 }
 
-$newvotes = $question.'|'.$answer1.'|'.$answer2.'|'.$answer3.'|'.$answer4.'|'.$answer5.'|'.$answer6.'|'.$answer7.'|'.$answer8.'|'.$answer9.'|'.$answer10.'|';	
+$newvotes = $question.'|'.$answer1.'|'.$answer2.'|'.$answer3.'|'.$answer4.'|'.$answer5.'|'.$answer6.'|'.$answer7.'|'.$answer8.'|'.$answer9.'|'.$answer10.'|';
 
 write_files(DATADIR."datavotes/votes.dat", $newvotes, 1, 0666);
- 
+
 write_files(DATADIR."datavotes/result.dat", "|0|0|0|0|0|0|0|0|0|0|", 1, 0666);
 
 write_files(DATADIR."datavotes/users.dat", "", 1, 0666);
 
-header ("Location: votes.php?isset=mp_addvotes".SID); exit;
+header ("Location: votes.php?isset=mp_addvotes"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, не заполнено какое-либо важное поле!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
@@ -189,11 +189,11 @@ echo '<b><big>Архив голосований</big></b><br /><br />';
 if(file_exists(DATADIR."datavotes/allvotes.dat")){
 $file = file(DATADIR."datavotes/allvotes.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
 if ($total>0){
 
-echo '<form action="votes.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="votes.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'" method="post">';
 
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['allvotes']){ $end = $total; }
@@ -221,7 +221,7 @@ echo '<br /><br />Всего голосований: '.(int)$total.'<br />';
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Голосований еще нет!</b>';}
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Архив голосований еще не создан</b>';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php">Вернуться</a>';
 }
 
 
@@ -238,18 +238,18 @@ if ($del!==""){
 
 delete_lines(DATADIR."datavotes/allvotes.dat", $del);
 
-header ("Location: votes.php?action=all&start=$start&isset=mp_delvotes".SID);
+header ("Location: votes.php?action=all&start=$start&isset=mp_delvotes");
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не выбрано голосование для удаления!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php?action=all&amp;start='.$start.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="votes.php?action=all&amp;start='.$start.'">Вернуться</a>';
 }
 
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

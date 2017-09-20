@@ -43,7 +43,7 @@ echo '</td>
 
     <td align="center" valign="top" class="fbottom">';
 
-    	echo '<div style="text-align:center"><a href="/index.php?'.SID.'">'.$config['copy'].'</a></div>';
+    	echo '<div style="text-align:center"><a href="/index.php">'.$config['copy'].'</a></div>';
 
     	echo '</td>
     <td valign="top" class="footer_right"></td>

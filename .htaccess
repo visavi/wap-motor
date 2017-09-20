@@ -50,14 +50,6 @@ Addtype video/3gpp .3gp
    Deny from all
 </Files>
 
-php_value error_reporting 7
-php_value url_rewriter.tags On
-php_value register_globals Off
-php_value session.use_trans_sid On
-php_value magic_quotes_gpc Off
-php_value magic_quotes_runtime Off
-php_value magic_quotes_sybase Off
-php_value file_uploads On
 php_value date.timezone "Europe/Moscow"
 
 DirectoryIndex index.php

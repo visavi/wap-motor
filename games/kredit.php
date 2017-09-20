@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -40,14 +40,14 @@ echo 'До истечения срока кредита осталось <b>'.fo
 } else {
 
 echo '<b><span style="color:#ff0000">Внимание! Время погашения кредита просрочено!</span></b><br />';
-echo 'Начислен штраф в сумме 1%, у вас списано 10 баллов активности, и 1 балл авторитета<br />'; 
+echo 'Начислен штраф в сумме 1%, у вас списано 10 баллов активности, и 1 балл авторитета<br />';
 
 change_profil($log, array(36=>$udata[36]-10, 49=>$udata[49]-1, 51=>$udata[51]+1, 53=>SITETIME+86400, 54=>$udata[54]+round($udata[54]/100)));
 }}
 
 echo '<br /><b>Операция:</b>';
 
-echo '<br /><form action="kredit.php?action=operacia&amp;'.SID.'" method="post"><input name="gold" /><br />';
+echo '<br /><form action="kredit.php?action=operacia" method="post"><input name="gold" /><br />';
 echo '<select name="oper">';
 echo '<option value="1">Взять кредит</option><option value="2">Погасить кредит</option>';
 echo '</select><br /><br />';
@@ -79,8 +79,8 @@ echo '<b>Получение кредита</b><br />';
 
 if ($gold<=$config['maxkredit']){
 if ($udata[36]>=150){
-if (empty($udata[53]) && empty($udata[54])){	
-	
+if (empty($udata[53]) && empty($udata[54])){
+
 change_profil($log, array(41=>$udata[41]+$gold, 53=>SITETIME+259200, 54=>round((($gold*$config['percentkredit'])/100)+$gold)));
 
 $udata = reading_profil($log);
@@ -98,8 +98,8 @@ if ($oper=="2"){
 echo '<b>Погашение кредита</b><br />';
 
 if ($udata[54]>0){
-if ($udata[54]==$gold){	
-if ($gold<=$udata[41]){	
+if ($udata[54]==$gold){
+if ($gold<=$udata[41]){
 
 change_profil($log, array(41=>$udata[41]-$gold, 53=>0, 54=>0));
 
@@ -116,14 +116,14 @@ echo 'Остаток денег на руках: <b>'.moneys($udata[41]).'</b><b
 } else {show_error('Операции менее чем с '.moneys($config['minkredit']).' не проводятся!');}
 } else {show_error('Ошибка! Не выбрана операция!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="kredit.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="kredit.php">Вернуться</a>';
 }
-	
+
 } else {show_login('Вы не авторизованы, чтобы совершать операции, необходимо');}
 
-echo '<br /><img src="../images/img/many.gif" alt="image" /> <a href="../games/bank.php?'.SID.'">Банк</a><br />';
-echo '<img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada&amp;'.SID.'">Развлечения</a><br />'; 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/many.gif" alt="image" /> <a href="../games/bank.php">Банк</a><br />';
+echo '<img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada">Развлечения</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

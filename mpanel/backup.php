@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -20,9 +20,9 @@ if (isset($_GET['start'])) {$start = (int)$_GET['start'];} else {$start = 0;}
 if (isset($_GET['action'])) {$action = check($_GET['action']);} else {$action = "";}
 
 if (is_admin(array(101))){
-	
+
 echo '<img src="../images/img/partners.gif" alt="image" /> <b>Backup сайта</b><br /><br />';
-	
+
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
@@ -51,9 +51,9 @@ arsort($array_timebackup);
 
 foreach($array_timebackup as $key=>$value){
 echo '<div class="b">';
-echo '<img src="../images/img/zip.gif" alt="image" /> <b><a href="backup.php?action=view&amp;filearc='.$array_backup[$key].'&amp;'.SID.'">'.$array_backup[$key].'</a></b> ('.formatsize($array_sizebackup[$key]).')</div>';
-echo '<div><a href="backup.php?action=prounzip&amp;filearc='.$array_backup[$key].'&amp;'.SID.'">Восстановить</a> | ';
-echo '<a href="backup.php?action=del&amp;filearc='.$array_backup[$key].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить</a></div>';
+echo '<img src="../images/img/zip.gif" alt="image" /> <b><a href="backup.php?action=view&amp;filearc='.$array_backup[$key].'">'.$array_backup[$key].'</a></b> ('.formatsize($array_sizebackup[$key]).')</div>';
+echo '<div><a href="backup.php?action=prounzip&amp;filearc='.$array_backup[$key].'">Восстановить</a> | ';
+echo '<a href="backup.php?action=del&amp;filearc='.$array_backup[$key].'&amp;uid='.$_SESSION['token'].'">Удалить</a></div>';
 }
 
 echo '<br />Всего архивов: <b>'.(int)$totalarc.'</b><br />';
@@ -61,8 +61,8 @@ echo '<br />Всего архивов: <b>'.(int)$totalarc.'</b><br />';
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Бэкапов еще нет!</b><br />';}
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Бэкапов еще нет!</b><br />';}
 
-echo '<br /><img src="../images/img/backup.gif" alt="image" /> <a href="backup.php?action=backup&amp;'.SID.'">Создать</a>';
-} 
+echo '<br /><img src="../images/img/backup.gif" alt="image" /> <a href="backup.php?action=backup">Создать</a>';
+}
 
 ############################################################################################
 ##                                  Выбор файлов для архивации                            ##
@@ -84,7 +84,7 @@ $backdir_array[] = $dirs;
 
 sort($backdir_array);
 
-echo '<form method="post" action="backup.php?action=newbackup&amp;'.SID.'">';
+echo '<form method="post" action="backup.php?action=newbackup">';
 
 echo '<input name="files" value="1" type="checkbox" checked="checked" /> <img src="../images/img/adddir.gif" alt="image" /> <b>Главные файлы</b><br />';
 
@@ -97,7 +97,7 @@ echo '<br /><input type="submit" value="Сделать бекап" /></form><hr 
 
 } else {echo '<b>Ошибка! Запрещена запись в папку databackup</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -126,12 +126,12 @@ $archive = new PclZip(DATADIR.'databackup/'.$nam_backup);
 if($archive->add($newarc,PCLZIP_OPT_REMOVE_PATH, DATADIR)){
 chmod (DATADIR."databackup/$nam_backup", 0666);
 
-header ("Location: backup.php?isset=mp_yesbackup&".SID);  exit;
+header ("Location: backup.php?isset=mp_yesbackup");  exit;
 
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не удалось создать архив с данными!</b><br />';} 
+} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не удалось создать архив с данными!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не выбраны директории или файлы для аривации!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php?action=backup&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php?action=backup">Вернуться</a>';
 
 }
 
@@ -150,14 +150,14 @@ if (file_exists(DATADIR."databackup/$filearc")){
 
 unlink (DATADIR."databackup/$filearc");
 
-header ("Location: backup.php?isset=mp_delbackup&".SID); exit;
+header ("Location: backup.php?isset=mp_delbackup"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Данного архива не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимое название архива!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Вы не выбрали архив для удаления!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php">Вернуться</a>';
 }
 
 
@@ -172,13 +172,13 @@ if ($filearc!=""){
 
 echo 'Вы подтверждаете, что хотите восстановить бэкап сайта '.$filearc.'?<br />';
 echo '<img src="../images/img/reload.gif" alt="image" /> ';
-echo '<b><a href="backup.php?action=unzip&amp;filearc='.$filearc.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, подтверждаю!</a></b><br />';
+echo '<b><a href="backup.php?action=unzip&amp;filearc='.$filearc.'&amp;uid='.$_SESSION['token'].'">Да, подтверждаю!</a></b><br />';
 
 echo '<br />Восстановление архива не заменяет существующие файлы, а восстанавливает те, которые были случайно удалены<br />';
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Вы не выбрали архив для восстановления!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -196,9 +196,9 @@ if (file_exists(DATADIR."databackup/$filearc")){
 
 $archive = new PclZip(DATADIR.'databackup/'.$filearc);
 
-if($archive->extract(PCLZIP_OPT_PATH, DATADIR, PCLZIP_OPT_SET_CHMOD, 0777)){ 
+if($archive->extract(PCLZIP_OPT_PATH, DATADIR, PCLZIP_OPT_SET_CHMOD, 0777)){
 
-header ("Location: backup.php?isset=mp_restorebackup&".SID); exit;
+header ("Location: backup.php?isset=mp_restorebackup"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не удалось восстановить архив!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Данного архива не существует!</b><br />';}
@@ -206,7 +206,7 @@ header ("Location: backup.php?isset=mp_restorebackup&".SID); exit;
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Вы не выбрали архив для восстановления!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -247,7 +247,7 @@ $zfilename[$i] = substr($zfilename[$i],0,-1);
 
 echo '<img src="../images/img/dir.gif" alt="image" /> <b>Директория '.$zfilename[$i].'</b><br />';
 } else {
-echo '<img src="../images/img/files.gif" alt="image" /> '.$zfilename[$i].' ('.formatsize($zfilesize[$i]).')<br />'; 
+echo '<img src="../images/img/files.gif" alt="image" /> '.$zfilename[$i].' ('.formatsize($zfilesize[$i]).')<br />';
 }
 }
 
@@ -262,14 +262,14 @@ echo '<br /><br />Всего файлов: <b>'.$total.'</b><br />';
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимое название архива!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Вы не выбрали архив для просмотра!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php">Вернуться</a>';
 }
 
 
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once"../themes/".$config['themes']."/foot.php";
 ?>

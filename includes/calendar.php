@@ -8,13 +8,13 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 if (!defined('BASEDIR')) { header("Location:../index.php"); exit; }
 
-$cal_den = date_fixed(SITETIME,"j"); 
-$cal_mon = date_fixed(SITETIME,"m"); 
-$cal_year = date_fixed(SITETIME,"Y"); 
-$cal_monyear = date_fixed(SITETIME,"m.Y"); 
+$cal_den = date_fixed(SITETIME,"j");
+$cal_mon = date_fixed(SITETIME,"m");
+$cal_year = date_fixed(SITETIME,"Y");
+$cal_monyear = date_fixed(SITETIME,"m.Y");
 
 $array_news = array();
 $array_komm = array();
@@ -46,11 +46,11 @@ continue;
 }
 
 if(in_array($valday, $array_news)){
-echo '<td><a href="'.BASEDIR.'news/komm.php?id='.$array_komm[$valday].'&amp;'.SID.'"><span style="color:#ff0000">'.$valday.'</span></a></td>';
+echo '<td><a href="'.BASEDIR.'news/komm.php?id='.$array_komm[$valday].'"><span style="color:#ff0000">'.$valday.'</span></a></td>';
 continue;
 }
 
-if($keyday==5 || $keyday==6){	
+if($keyday==5 || $keyday==6){
 echo '<td><span style="color:#ff6666">'.$valday.'</span></td>';
 continue;
 }

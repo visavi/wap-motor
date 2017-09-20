@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -27,7 +27,7 @@ if ($action==""){
 
 echo 'Приветствие:<br />';
 
-echo '<form method="post" action="welcome.php?action=edit&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';	
+echo '<form method="post" action="welcome.php?action=edit&amp;uid='.$_SESSION['token'].'">';
 echo '<textarea name="msg" cols="35" rows="5">'.file_get_contents(DATADIR."welcome.dat").'</textarea><br />';
 echo '<input value="Редактировать" type="submit" /></form><hr />';
 }
@@ -50,13 +50,13 @@ echo '<b>Приветствие успешно отредактировано!</
 } else {echo '<b>Ошибка! Вы не написали текст приветствия!</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="welcome.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="welcome.php">Вернуться</a>';
 }
 
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

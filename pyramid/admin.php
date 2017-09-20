@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -25,7 +25,7 @@ if (is_admin(array(101,102,103,105))){
 
 if ($action == ""){
 
-echo '<form method="post" action="admin.php?action=settings&amp;'.SID.'">';
+echo '<form method="post" action="admin.php?action=settings">';
 
 echo 'Показывать IP адрес?<br />';
 if ($look_ip=="On"){
@@ -61,7 +61,7 @@ echo '<input name="history" type="text" value="'.$msg_his.'" /><br />';
 echo'<br /><input value="Изменить" type="submit" /></form><hr />';
 
 
-echo '<form method="post" action="admin.php?action=userset&amp;'.SID.'">';
+echo '<form method="post" action="admin.php?action=userset">';
 echo '<br /><b>Цвет ваших сообщений</b><br />';
 
 if (file_exists("color/$log.dat")){
@@ -99,7 +99,7 @@ $text = no_br($swip.'|'.$small.'|'.$mess.'|'.$all.'|'.$history.'|');
 
 write_files("config.dat", "$text\r\n", 1, 0666);
 
-header ("Location: admin.php?isset=editsetting&".SID); exit;
+header ("Location: admin.php?isset=editsetting"); exit;
 
 } else {show_error('Ошибка! Вы не заполнили все поля!');}
 }
@@ -114,14 +114,14 @@ if (!empty($color)){
 
 write_files("color/$log.dat", $color, 1, 0666);
 
-header ("Location: admin.php?isset=editsetting&".SID); exit;
+header ("Location: admin.php?isset=editsetting"); exit;
 
 } else {show_error('Ошибка! Вы не выбрали цвет для ваших сообщений!');}
 }
 
 } else {show_error('Ошибка! Данная страница доступна только администрации!');}
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

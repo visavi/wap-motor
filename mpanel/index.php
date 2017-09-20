@@ -29,50 +29,50 @@ if (stats_version()>MOTOR_VERSION) {
 echo '<img src="../images/img/custom.gif" alt="image" />  <b><a href="http://visavi.net/wap-motor/member.php"><span style="color:#ff0000">Доступна новая версия '.stats_version().'</span></a></b><br /><br />';
 }
 
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="adminchat.php?'.SID.'">Админ-чат</a> ('.stats(4).')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="book.php?'.SID.'">Управление гостевой</a> ('.stats(0).')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="chat.php?'.SID.'">Управление мини-чатом</a> ('.stats(8).')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="forum.php?'.SID.'">Управление форумом</a> ('.stats_forum().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="gallery.php?'.SID.'">Управление галереей</a> ('.stats_gallery().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="board.php?'.SID.'">Управление объявлениями</a> ('.stats_board().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="reklama.php?'.SID.'">Управление рекламой</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="adminchat.php">Админ-чат</a> ('.stats(4).')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="book.php">Управление гостевой</a> ('.stats(0).')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="chat.php">Управление мини-чатом</a> ('.stats(8).')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="forum.php">Управление форумом</a> ('.stats_forum().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="gallery.php">Управление галереей</a> ('.stats_gallery().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="board.php">Управление объявлениями</a> ('.stats_board().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="reklama.php">Управление рекламой</a><br />';
 
 if (is_admin(array(101,102,103))){
 echo '--------------------------<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="zaban.php?'.SID.'">Бан / Разбан</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="banlist.php?'.SID.'">Список забаненых</a> ('.stats_banned().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="adminlist.php?'.SID.'">Список старших</a> ('.stats_admins().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="reglist.php?'.SID.'">Список ожидающих</a> ('.stats_reglist().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="antimat.php?'.SID.'">Управление антиматом</a> ('.stats_antimat().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="zaban.php">Бан / Разбан</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="banlist.php">Список забаненых</a> ('.stats_banned().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="adminlist.php">Список старших</a> ('.stats_admins().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="reglist.php">Список ожидающих</a> ('.stats_reglist().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="antimat.php">Управление антиматом</a> ('.stats_antimat().')<br />';
 }
 
 if (is_admin(array(101,102))){
 echo '--------------------------<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="headlines.php?'.SID.'">Управление заголовками</a> ('.stats_headlines().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="news.php?'.SID.'">Управление новостями</a> ('.stats_allnews().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="votes.php?'.SID.'">Управление голосованием</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="users.php?'.SID.'">Управление юзерами</a> ('.stats_users().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="status.php?'.SID.'">Управление статусами</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="ban.php?'.SID.'">IP-бан панель</a> ('.stats_ipbanned().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="welcome.php?'.SID.'">Управление приветствием</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="logfiles.php?'.SID.'">Ошибки / Автобаны</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="logadmin.php?'.SID.'">Логи посещений</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="phpinfo.php?'.SID.'">PHP-информация</a> ('.phpversion().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="blacklist.php?'.SID.'">Черный список</a> ('.stats_blacklogin().'/'.stats_blackmail().')<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="navigation.php?'.SID.'">Управление навигацией</a> ('.stats_navigation().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="headlines.php">Управление заголовками</a> ('.stats_headlines().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="news.php">Управление новостями</a> ('.stats_allnews().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="votes.php">Управление голосованием</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="users.php">Управление юзерами</a> ('.stats_users().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="status.php">Управление статусами</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="ban.php">IP-бан панель</a> ('.stats_ipbanned().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="welcome.php">Управление приветствием</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="logfiles.php">Ошибки / Автобаны</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="logadmin.php">Логи посещений</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="phpinfo.php">PHP-информация</a> ('.phpversion().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="blacklist.php">Черный список</a> ('.stats_blacklogin().'/'.stats_blackmail().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="navigation.php">Управление навигацией</a> ('.stats_navigation().')<br />';
 }
 
 if (is_admin(array(101))){
 echo '--------------------------<br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="setting.php?'.SID.'">Настройки системы</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="backup.php?'.SID.'">Backup-панель</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="delusers.php?'.SID.'">Чистка юзеров</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="subscribe.php?'.SID.'">Управление подписчиками</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="systems.php?'.SID.'">Проверить систему</a><br />';
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="checker.php?'.SID.'">Сканировать систему</a> ('.stats_checker().')<br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="setting.php">Настройки системы</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="backup.php">Backup-панель</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="delusers.php">Чистка юзеров</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="subscribe.php">Управление подписчиками</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="systems.php">Проверить систему</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="checker.php">Сканировать систему</a> ('.stats_checker().')<br />';
 
 if ($log==$config['nickname']){
-echo '<img src="../images/img/act.gif" alt="image" /> <a href="files.php?'.SID.'">Редактирование файлов</a><br />';
+echo '<img src="../images/img/act.gif" alt="image" /> <a href="files.php">Редактирование файлов</a><br />';
 }}
 
 
@@ -90,7 +90,7 @@ echo '<br /><div class="b"><b><span style="color:#ff0000">Внимание!!! О
 
 if (file_exists(BASEDIR."INSTALL.php") && $config['nickname']!=""){
 echo '<br /><div class="b"><b><span style="color:#ff0000">Внимание!!! Необходимо удалить файл INSTALL.php</span></b><br />';
-echo 'Удалите этот файл прямо <u><a href="index.php?action=delinstall&amp;'.SID.'">сейчас</a></u></div>';
+echo 'Удалите этот файл прямо <u><a href="index.php?action=delinstall">сейчас</a></u></div>';
 }
 }
 
@@ -109,12 +109,12 @@ echo '<b>Ошибка, недостаточно прав для удаления
 } else {
 echo '<b>Ошибка, файл инсталляции отсутствует!</b><br />';
 }
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="index.php">Вернуться</a>';
 }
 
-echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

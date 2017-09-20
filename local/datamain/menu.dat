@@ -1,13 +1,13 @@
 <img src="<?=BASEDIR?>images/img/partners.gif" alt="image" /> <b>Мое меню</b><br /><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/privat.php?<?=SID?>">Сообщения</a> (<?=user_mail($log)?>)<br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/privat.php?action=submit&amp;<?=SID?>">Отправить письмо</a><br /> 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/ignor.php?<?=SID?>">Игнор-лист</a> (<?=user_ignor($log)?>)<br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/kontakt.php?<?=SID?>">Контакт-лист</a> (<?=user_kontakt($log)?>)<br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/anketa.php?<?=SID?>">Моя анкета</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/profil.php?<?=SID?>">Мой профиль</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/account.php?<?=SID?>">Мои данные</a><br /> 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/setting.php?<?=SID?>">Настройки</a><br /> 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/bank.php?<?=SID?>">Деньги</a> (<?=user_many($log)?>)<br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/health.php?<?=SID?>">Здоровье</a> (<?=user_health($log)?>)<br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/stamina.php?<?=SID?>">Выносливость</a> (<?=user_stamina($log)?>)<br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>input.php?action=exit&amp;<?=SID?>">Выход [Exit]</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/privat.php">Сообщения</a> (<?=user_mail($log)?>)<br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/privat.php?action=submit">Отправить письмо</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/ignor.php">Игнор-лист</a> (<?=user_ignor($log)?>)<br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/kontakt.php">Контакт-лист</a> (<?=user_kontakt($log)?>)<br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/anketa.php">Моя анкета</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/profil.php">Мой профиль</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/account.php">Мои данные</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/setting.php">Настройки</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/bank.php">Деньги</a> (<?=user_many($log)?>)<br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/health.php">Здоровье</a> (<?=user_health($log)?>)<br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>games/stamina.php">Выносливость</a> (<?=user_stamina($log)?>)<br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>input.php?action=exit">Выход [Exit]</a><br />

@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -17,21 +17,21 @@ include_once ("../themes/".$config['themes']."/index.php");
 if (isset($_GET['action'])) {$action = check($_GET['action']);} else {$action = "";}
 
 if (is_admin(array(101,102,103,105))){
-	
-echo'<img src="../images/img/menu.gif" alt="image" /> <b>Управление рекламой</b><br /><br />';	
+
+echo'<img src="../images/img/menu.gif" alt="image" /> <b>Управление рекламой</b><br /><br />';
 
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if ($action==""){	
+if ($action==""){
 
 echo 'Каждый админ или модер сможет добавить 1 рекламную ссылку которая будет в случайном порядке выводится на главную страницу вместе с другими ссылками старших сайта<br /><br />';
 
 if (file_exists(DATADIR."reklama.dat")){
-$filerek = file(DATADIR."reklama.dat"); 	
+$filerek = file(DATADIR."reklama.dat");
 
 //---------------------- Обзор ссылок --------------------------------//
-if (is_admin(array(101))){	
+if (is_admin(array(101))){
 
 echo '<big><b>Список всех ссылок</b></big><br /><br />';
 
@@ -39,7 +39,7 @@ $total = count($filerek);
 
 if ($total>0){
 
-echo '<form action="reklama.php?action=delstr&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="reklama.php?action=delstr&amp;uid='.$_SESSION['token'].'" method="post">';
 
 foreach ($filerek as $key=>$val){
 
@@ -64,20 +64,20 @@ if ($string) {
 //--------------------------- Изменение -------------------------------//
 echo '<big><b>Изменение ссылки</b></big><br /><br />';
 
-echo '<form action="reklama.php?action=edit&amp;id='.$string['line'].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="reklama.php?action=edit&amp;id='.$string['line'].'&amp;uid='.$_SESSION['token'].'" method="post">';
 echo 'Ссылка:<br />';
 echo '<input name="urlrek" value="'.$string[1].'" /> <br />';
 echo 'Название:<br />';
 echo '<input name="namerek" value="'.$string[2].'" /> <br /><br />';
 echo '<input type="submit" value="Изменить" /></form><hr />';
 
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="reklama.php?action=del&amp;del='.$string['line'].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить ссылку</a></b><br />';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="reklama.php?action=del&amp;del='.$string['line'].'&amp;uid='.$_SESSION['token'].'">Удалить ссылку</a></b><br />';
 } else {
 
 //--------------------------- Добавление -------------------------------//
 echo '<big><b>Добавление ссылки</b></big><br /><br />';
 
-echo '<form action="reklama.php?action=add&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="reklama.php?action=add&amp;uid='.$_SESSION['token'].'" method="post">';
 echo 'Ссылка:<br />';
 echo '<input name="urlrek" value="http://" /> <br />';
 echo 'Название:<br />';
@@ -112,7 +112,7 @@ $text = no_br('|'.$urlrek.'|'.$namerek.'|'.$log.'|');
 
 write_files(DATADIR."reklama.dat", "$text\r\n");
 
-header ("Location: reklama.php?isset=mp_addreklama&".SID); exit;
+header ("Location: reklama.php?isset=mp_addreklama"); exit;
 
 } else {echo '<b>Ошибка! Ваша ссылка уже добавлена!</b><br />';}
 } else {echo '<b>Ошибка! Недопустимый адрес сайта! (http://sitename.domen)</b><br />';}
@@ -120,7 +120,7 @@ header ("Location: reklama.php?isset=mp_addreklama&".SID); exit;
 } else {echo '<b>Ошибка! Слишком длинный адрес ссылки (до 50 символов)</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -148,17 +148,17 @@ $text = no_br('|'.$urlrek.'|'.$namerek.'|'.$log.'|');
 
 replace_lines(DATADIR."reklama.dat", $id, $text);
 
-header ("Location: reklama.php?isset=mp_editreklama&".SID); exit;
+header ("Location: reklama.php?isset=mp_editreklama"); exit;
 
 } else {echo '<b>Ошибка! Нельзя изменять чужую ссылку!</b><br />';}
-} else {echo '<b>Ошибка! Вашей ссылки нет в списке!</b><br />';} 
+} else {echo '<b>Ошибка! Вашей ссылки нет в списке!</b><br />';}
 } else {echo '<b>Ошибка! Недопустимый адрес сайта! (http://sitename.domen)</b><br />';}
 } else {echo '<b>Ошибка! Слишком длинное или короткое название! (от 10 до 35 символов)</b><br />';}
 } else {echo '<b>Ошибка! Слишком длинный адрес ссылки (до 50 символов)</b><br />';}
 } else {echo '<b>Ошибка! Отстутствует ID редактируемой ссылки!</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -177,16 +177,16 @@ if ($string){
 
 if ($del == $string['line']){
 
-delete_lines(DATADIR."reklama.dat", $del); 
+delete_lines(DATADIR."reklama.dat", $del);
 
-header ("Location: reklama.php?isset=mp_delreklama&".SID); exit;
+header ("Location: reklama.php?isset=mp_delreklama"); exit;
 
-} else {echo '<b>Ошибка! Нельзя удалять чужую ссылку!</b><br />';} 
+} else {echo '<b>Ошибка! Нельзя удалять чужую ссылку!</b><br />';}
 } else {echo '<b>Ошибка! Вашей ссылки нет в списке!</b><br />';}
 } else {echo '<b>Ошибка! Отстутствует ID ссылки!</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -201,22 +201,22 @@ if ($uid==$_SESSION['token']){
 if (is_admin(array(101))){
 if ($del!==""){
 
-delete_lines(DATADIR."reklama.dat", $del); 
+delete_lines(DATADIR."reklama.dat", $del);
 
-header ("Location: reklama.php?isset=mp_alldelreklama&".SID); exit;
+header ("Location: reklama.php?isset=mp_alldelreklama"); exit;
 
 } else {echo '<b>Ошибка! Отстутствуют ID выбранных ссылок!</b><br />';}
 } else {echo '<b>Ошибка! Удалять ссылки могут только суперадмины!</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="reklama.php">Вернуться</a>';
 }
 
-//-------------------------------- КОНЦОВКА ------------------------------------//	
-echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+//-------------------------------- КОНЦОВКА ------------------------------------//
+echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

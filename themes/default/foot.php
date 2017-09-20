@@ -10,7 +10,7 @@
 #-----------------------------------------------------#
 echo '</div><div class="lol" id="down">';
 echo '<p style="text-align:center">';
-echo '<a href="'.$config['home'].'/?'.SID.'">'.$config['copy'].'</a><br />';
+echo '<a href="'.$config['home'].'/">'.$config['copy'].'</a><br />';
 require_once BASEDIR."includes/counters.php";
 echo '</p>';
 echo '</div><div style="text-align:center">';

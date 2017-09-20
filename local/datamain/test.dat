@@ -1,9 +1,9 @@
 <img src="<?=BASEDIR?>images/img/partners.gif" alt="image" /> <b>Тестирование сайта</b><br /><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>?p=help&amp;f=test&amp;<?=SID?>">Проверка 1 (открываем папку help файл test)</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>?p=help&amp;<?=SID?>">Проверка 2 (открываем папку help файл index)</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>?p=help&amp;f=check&amp;<?=SID?>">Проверка 4 (открываем папку help файл check(несуществующий))</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>?p=help&amp;f=test">Проверка 1 (открываем папку help файл test)</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>?p=help">Проверка 2 (открываем папку help файл index)</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>?p=help&amp;f=check">Проверка 4 (открываем папку help файл check(несуществующий))</a><br />
 <img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>check">Проверка 5 (просто ввод check проверка на 404)</a><br />
 <img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>local">Проверка 6 (открываем папку local проверка на 403)</a><br />
-	
-Скачать движок вы можете на официальном сайте разработчиков, а также на лучшем сайте для wap-мастеров 
+
+Скачать движок вы можете на официальном сайте разработчиков, а также на лучшем сайте для wap-мастеров
 <a href="http://visavi.net">VISAVI.NET</a> где помимо кучи разных скриптов вы можете найти много интересного, статьи, учебники, также заходите в наш форум Visavi.net/forum там вы всегда найдете ответы на ваши вопросы<br />

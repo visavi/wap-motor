@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -31,7 +31,7 @@ if (preg_match('|^[a-z0-9\-]+$|i',$logs)){
 if (preg_match('|^[a-z0-9\-]+$|i',$pars)){
 if (preg_match('#^([a-z0-9_\-\.])+\@([a-z0-9_\-\.])+(\.([a-z0-9])+)+$#',$meil)){
 if (!file_exists(DATADIR."profil/$logs.prof")){
-if ($pars==$pars2){ 
+if ($pars==$pars2){
 if ($logs!=$pars){
 if (!ctype_digit($pars)){
 if (substr_count($logs,'-')<3){
@@ -44,7 +44,7 @@ $user_count = counter_string(DATADIR."datatmp/reguser.dat");
 
 $filtime = $filtime+(3600*$config['regusercache']);
 
-if(SITETIME>$filtime || $user_count<100){ 
+if(SITETIME>$filtime || $user_count<100){
 
 $array_users = array();
 $globusers = glob(DATADIR."profil/*.prof");
@@ -52,7 +52,7 @@ foreach ($globusers as $filename) {
 $tex = file_get_contents($filename);
 $data = explode(":||:",$tex);
 
-$array_users[] = strtolower($data[0]).'|'.$data[4].'|'.rus_utf_tolower($data[65]).'|'; 
+$array_users[] = strtolower($data[0]).'|'.$data[4].'|'.rus_utf_tolower($data[65]).'|';
 }
 
 if (count($array_users)>0){
@@ -85,7 +85,7 @@ $text=$logs.':||:'.md5(md5($pars)).':||::||::||:'.$meil.':||::||:'.SITETIME.':||
 
 write_files(DATADIR."profil/$logs.prof", $text, 0, 0666);
 
-$textpriv = $config['nickname'].'|Добро пожаловать, '.$logs.'! Теперь вы зарегистрированный пользователь сайта, сохраните ваш пароль и логин в надежном месте, они вам еще пригодится. Надеемся вам понравится на нашем портале!<br />Перед посещением сайта рекомендуем вам ознакомиться с [url='.$config['home'].'/pages/pravila.php?'.SID.']правилами сайта[/url]<br />Желаем приятно провести время. С уважением администрация сайта|'.SITETIME.'|';
+$textpriv = $config['nickname'].'|Добро пожаловать, '.$logs.'! Теперь вы зарегистрированный пользователь сайта, сохраните ваш пароль и логин в надежном месте, они вам еще пригодится. Надеемся вам понравится на нашем портале!<br />Перед посещением сайта рекомендуем вам ознакомиться с [url='.$config['home'].'/pages/pravila.php]правилами сайта[/url]<br />Желаем приятно провести время. С уважением администрация сайта|'.SITETIME.'|';
 
 write_files(DATADIR.'privat/'.$logs.'.priv', $textpriv."\r\n", 0, 0666);
 
@@ -106,7 +106,7 @@ write_files(DATADIR."datatmp/newuserday.dat", $logs.'|', 0, 0666);
 4 - E-mail
 5 - Адерс сайта
 6 - Время регистрации
-7 - Уровень доступа (101-суперадмин,102-админ,103-Cтарший модер,105-модер,107-юзер) 
+7 - Уровень доступа (101-суперадмин,102-админ,103-Cтарший модер,105-модер,107-юзер)
 8 - Написано сообщений в форуме
 9 - Написано сообщений в гостевой
 10 - Новые письма в привате
@@ -137,7 +137,7 @@ write_files(DATADIR."datatmp/newuserday.dat", $logs.'|', 0, 0666);
 35 - Пароль и время для восстановления пароля
 36 - Количество баллов
 37 - Забанен или нет
-38 - Время бана 
+38 - Время бана
 39 - Причина бана
 40 - Особый статус
 41 - Деньги
@@ -145,13 +145,13 @@ write_files(DATADIR."datatmp/newuserday.dat", $logs.'|', 0, 0666);
 43 - Встроенный аватар
 44 - Время последней авторизации
 45 -                                                                Включенные аватары     временно свободно
-46 - Требуется ли подтверждение регистрации 
+46 - Требуется ли подтверждение регистрации
 47 - Ключ для подтверждение регистрации
 48 - Время для возможности дать отзыв
 49 - Авторитет пользователя
-50 - Положительные отзывы 
-51 - Отрицательные отзывы 
-52 - Время последнего бана 
+50 - Положительные отзывы
+51 - Отрицательные отзывы
+52 - Время последнего бана
 53 - Время взятия кредита
 54 - Сумма кредита
 55 - Включение персонажа
@@ -164,8 +164,8 @@ write_files(DATADIR."datatmp/newuserday.dat", $logs.'|', 0, 0666);
 62 - Время пополнения выносливости
 63 - Логин отправившего в бан
 64 - Общее число банов
-65 - Русский ник 
-66 - Включить привязку к ip+браузер 
+65 - Русский ник
+66 - Включить привязку к ip+браузер
 67 - Легкое оружие
 68 - Пистолет
 69 - Тяжелое оружие
@@ -187,13 +187,13 @@ if ($config['regkeys']==1){
 $regmail .="\n\nВнимание! \nДля подтверждения регистрации необходимо в течении 24 часов ввести мастер-ключ! \nВаш мастер-ключ: ".$reg_key." \nВведите его после авторизации на сайте \nИли перейдите по прямой ссылке: \n\n".$config['home']."/pages/key.php?action=inkey&key=".$reg_key." \n\nЕсли в течении 24 часов вы не подтвердите регистрацию, ваш профиль будет автоматически удален";
 
 echo '<b><span style="color:#ff0000">Внимание! После входа на сайт, вам будет необходимо ввести мастер-ключ для подтверждения регистрации<br />';
-echo 'Мастер-ключ был выслан вам на почтовый ящик: '.$meil.'</span></b><br /><br />'; 
+echo 'Мастер-ключ был выслан вам на почтовый ящик: '.$meil.'</span></b><br /><br />';
 }
 
 if ($config['regkeys']==2){
 $regmail .="\n\nВнимание! \nВаш аккаунт будет активирован только после проверки администрацией! \nПроверить статус активации вы сможете после авторизации на сайте";
 
-echo '<b><span style="color:#ff0000">Внимание! Ваш аккаунт будет активирован только после проверки администрацией!</span></b><br /><br />'; 
+echo '<b><span style="color:#ff0000">Внимание! Ваш аккаунт будет активирован только после проверки администрацией!</span></b><br /><br />';
 }
 
 addmail($meil, "Регистрация на сайте ".$config['title'], $regmail);
@@ -207,7 +207,7 @@ echo 'Пароль: <b>'.$pars.'</b><br />';
 echo 'E-mail: <b>'.$meil.'</b><br /><br />';
 echo 'Теперь вы можете войти<br />';
 echo '<br /><img src="../images/img/reload.gif" alt="image" /> ';
-echo '<b><a href="'.BASEDIR.'input.php?login='.$logs.'&amp;pass='.$pars.'&amp;cookietrue=1&amp;'.SID.'">Вход на сайт</a></b><br /><br />';
+echo '<b><a href="'.BASEDIR.'input.php?login='.$logs.'&amp;pass='.$pars.'&amp;cookietrue=1">Вход на сайт</a></b><br /><br />';
 
 echo 'Вы можете сделать закладку для быстрого входа:<br />';
 echo '<span style="color:#ff0000">'.$config['home'].'/input.php?login='.$logs.'&amp;pass='.$pars.'</span><br /><br />';
@@ -235,8 +235,8 @@ echo 'Если у вас включены cookies, то делать такую 
 } else {echo '<b>Ошибка! Проверочное число не совпало с данными на картинке!</b><br />';}
 } else {echo '<b>Регистрация временно приостановлена, пожалуйста зайдите позже!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="registration.php?'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="registration.php">Вернуться</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

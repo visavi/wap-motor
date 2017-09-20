@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -25,12 +25,12 @@ if ($config['includenick']==1){
 if ($udata[36]>=150){
 if ($udata[75]<SITETIME){
 
-if (empty($nickname)){ 
+if (empty($nickname)){
 
 //------------------------------ Запись в профиль ----------------------------//
 change_profil($log, array(14=>$ip, 65=>"", 75=>SITETIME + 86400));
 
-header ("Location: ".BASEDIR."index.php?isset=delnick&".SID); exit;
+header ("Location: ".BASEDIR."index.php?isset=delnick"); exit;
 }
 
 //------------------------------------------------------------------------------//
@@ -50,7 +50,7 @@ if (empty($regusernick)){
 //------------------------------ Запись в профиль ----------------------------//
 change_profil($log, array(14=>$ip, 65=>$nickname, 75=>SITETIME + 86400));
 
-header ("Location: ".BASEDIR."index.php?isset=editnick&".SID);  exit;
+header ("Location: ".BASEDIR."index.php?isset=editnick");  exit;
 
 } else {show_error('К сожалению выбранный вами ник уже занят!');}
 } else {show_error('К сожалению выбранный вами ник используется кем-то в качестве логина!');}
@@ -63,9 +63,9 @@ header ("Location: ".BASEDIR."index.php?isset=editnick&".SID);  exit;
 } else {show_error('Ошибка, изменение ника запрещено администрацией сайта!');}
 
 } else {show_login('Вы не авторизованы, чтобы изменять свой ник, необходимо');}
-          
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="account.php?'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="account.php">Вернуться</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
 include_once"../themes/".$config['themes']."/foot.php";
 ?>

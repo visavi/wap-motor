@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -23,8 +23,8 @@ echo '<img src="../images/img/site.png" alt="image" /> <b>Управление �
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if ($action==""){	
-echo '<form method="post" action="users.php?action=edit&amp;'.SID.'">';
+if ($action==""){
+echo '<form method="post" action="users.php?action=edit">';
 echo 'Введите логин юзера:<br />';
 echo '<input type="text" name="users" maxlength="20" /><br /><br />';
 echo '<input value="Получить данные" type="submit" /></form><hr />';
@@ -50,9 +50,9 @@ echo '<img src="../images/img/user.gif" alt="image" /> <b>Профиль '.$user
 if ($log==$config['nickname'] || $users==$log || ($uzdata[7]<101 || $uzdata[7]>105)){
 if ($users==$log) {echo '<b><span style="color:#ff0000">Внимание! Вы редактируете cобственный аккаунт!</span></b><br /><br />';}
 
-echo '<form method="post" action="users.php?action=upgrade&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
+echo '<form method="post" action="users.php?action=upgrade&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'">';
 
-if ($log==$config['nickname']){	
+if ($log==$config['nickname']){
 $arr_access = array(101,102,103,105,107);
 
 echo 'Уровень доступа:<br />';
@@ -72,11 +72,11 @@ echo '<input name="ud2" value="'.$uzdata[2].'" /><br />';
 echo 'Инфа:<br />';
 echo '<input name="ud3" value="'.$uzdata[3].'" /><br />';
 echo 'Е-мэил:<br />';
-echo '<input name="ud4" value="'.$uzdata[4].'" /><br />';	
+echo '<input name="ud4" value="'.$uzdata[4].'" /><br />';
 echo 'Сайт:<br />';
 echo '<input name="ud5" value="'.$uzdata[5].'" /><br />';
 echo 'Зарегистрирован:<br />';
-echo '<input name="ud6" value="'.date_fixed($uzdata[6],"j.m.Y").'" /><br />';	
+echo '<input name="ud6" value="'.date_fixed($uzdata[6],"j.m.Y").'" /><br />';
 echo 'Мобила:<br />';
 echo '<input name="ud13" value="'.$uzdata[13].'" /><br />';
 echo 'ICQ:<br />';
@@ -105,13 +105,13 @@ echo 'IP: <b>'.$uzdata[14].'</b><br />';
 echo '<br /><input value="Изменить" type="submit" /></form><hr />';
 
 if ($uzdata[7]<101 || $uzdata[7]>105){
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="users.php?action=poddel&amp;users='.$users.'&amp;'.SID.'">Удалить профиль</a></b>';}
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="users.php?action=poddel&amp;users='.$users.'">Удалить профиль</a></b>';}
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, у вас недостаточно прав для редактирования этого профиля!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, пользователя с данным логином не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, необходимо ввести логин пользователя!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php">Вернуться</a>';
 }
 
 
@@ -148,7 +148,7 @@ if (preg_match('#^([a-z0-9_\-\.])+\@([a-z0-9_\-\.])+(\.([a-z0-9])+)+$#',$ud4)){
 if ($ud5=="" || preg_match('#^http://([a-z0-9_\-\.])+(\.([a-z0-9\/])+)+$#',$ud5)){
 if (preg_match('#^[0-9]{1,2}+\.[0-9]{2}+\.([0-9]{2}|[0-9]{4})$#',$ud6)){
 
-list($uday, $umonth, $uyear) = explode(".", $ud6); 
+list($uday, $umonth, $uyear) = explode(".", $ud6);
 $ud6 = mktime('0','0','0',$umonth,$uday,$uyear);
 
 $uzdata = reading_profil($users);
@@ -166,7 +166,7 @@ echo '<span style="color:#ff0000">Внимание! Вы изменили пар
 echo 'Не забудьте ему напомнить его новый пароль: <b>'.$ud1.'</b><br /><br />';
 }
 
-echo '<a href="users.php?'.SID.'">Редактировать нового юзера</a><br />';
+echo '<a href="users.php">Редактировать нового юзера</a><br />';
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, недопустимая дата регистрации, необходим формат (дд.мм.гггг)</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, недопустимый адрес сайта, необходим формат http://site.domen</b><br />';}
@@ -175,19 +175,19 @@ echo '<a href="users.php?'.SID.'">Редактировать нового юзе
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, пользователя с данным логином не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php?action=edit&amp;users='.$users.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php?action=edit&amp;users='.$users.'">Вернуться</a>';
 }
 
 ############################################################################################
 ##                           Подтверждение удаление профиля                               ##
 ############################################################################################
-if ($action=="poddel"){	
+if ($action=="poddel"){
 
 $users = check($_GET['users']);
 
 echo 'Вы подтверждаете, что хотите полностью удалить аккаунт пользователя <b>'.$users.'</b>?<br /><br />';
-	
-echo '<form action="users.php?action=deluser&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+
+echo '<form action="users.php?action=deluser&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'" method="post">';
 
 echo '<b>Добавить в черный список:</b><br /><br />';
 echo 'E-mail: <input name="mailblack" type="checkbox" value="1"  checked="checked" /><br />';
@@ -195,7 +195,7 @@ echo 'Логин: <input name="loginblack" type="checkbox" value="1"  checked="c
 
 echo '<br /><input type="submit" value="Удалить профиль" /></form><hr />';
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php?action=edit&amp;users='.$users.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php?action=edit&amp;users='.$users.'">Вернуться</a>';
 }
 
 ############################################################################################
@@ -212,7 +212,7 @@ if ($uid==$_SESSION['token']){
 if (file_exists(DATADIR."profil/$users.prof")){
 
 $uzdata = reading_profil($users);
-	
+
 if ($uzdata[7]<101 || $uzdata[7]>105){
 
 if ($mailblack==1){
@@ -235,13 +235,13 @@ echo '<b>Профиль пользователя успешно удален!</b
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, пользователя с данным логином не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="users.php">Вернуться</a>';
 }
 
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

@@ -8,12 +8,12 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
-include_once "../themes/".$config['themes']."/index.php";       
-                                                               
+include_once "../themes/".$config['themes']."/index.php";
+
 echo '<img src="../images/img/partners.gif" alt="image" /> <b>Правила сайта</b><br /><br />';
 
 echo 'Незнание этих Правил не только не освобождает Вас от ответственности за их нарушение, но и само по себе является нарушением!<br /><br />';
@@ -62,7 +62,7 @@ echo '5. Копирование или любое несанкционирова
 echo '<b><span style="color:#ff0000">Внимание! Если пользователь пренебрегает данными Правилами, его аккуант блокируется  на срок от 1 часа до '.round($config['maxbantime']/1440).' дней.<br />
 Если пользователь систематически игнорирует предупреждения администрации, то его учётная запись удаляется</span></b><br /><br />';
 
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once"../themes/".$config['themes']."/foot.php";
 ?>

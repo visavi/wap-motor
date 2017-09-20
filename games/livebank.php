@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -63,7 +63,7 @@ write_files(DATADIR."datatmp/vkladlist.dat", "$text\r\n", 1, 0666);
 ############################################################################################
 if (file_exists(DATADIR."datatmp/vkladlist.dat")){
 $file = file(DATADIR."datatmp/vkladlist.dat");
-$total = count($file);  
+$total = count($file);
 
 if ($total>0){
 
@@ -77,9 +77,9 @@ $data = explode("|",$file[$i]);
 echo '<div class="b">'.$data[1].'. <img src="../images/img/chel.gif" alt="image" /> ';
 
 if ($uz==$data[2]){
-echo '<b><big><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> ('.moneys($data[3]).')</div>';
+echo '<b><big><a href="../pages/anketa.php?uz='.$data[2].'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> ('.moneys($data[3]).')</div>';
 } else {
-echo '<b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ('.moneys($data[3]).')</div>';
+echo '<b><a href="../pages/anketa.php?uz='.$data[2].'">'.nickname($data[2]).'</a></b> ('.moneys($data[3]).')</div>';
 }
 
 echo '<div>Посл. операция: '.date_fixed($data[4]).'</div>';
@@ -94,7 +94,7 @@ page_strnavigation('livebank.php?', $config['vkladlist'], $start, $total);
 if ($uz==""){
 echo '<hr /><b>Поиск пользователя:</b><br />';
 
-echo '<form action="livebank.php?start='.$start.'&amp;'.SID.'" method="post">';
+echo '<form action="livebank.php?start='.$start.'" method="post">';
 echo'<input name="uz" value="'.$log.'" />';
 echo '<input type="submit" value="Искать" /></form><hr />';
 
@@ -105,26 +105,26 @@ if ($string) {
 
 $stranica = floor(($string[1] - 1) / $config['vkladlist']) * $config['vkladlist'];
 
-if ($start!=$stranica){ 
-header ("Location: livebank.php?start=$stranica&uz=$uz&".SID); exit;
+if ($start!=$stranica){
+header ("Location: livebank.php?start=$stranica&uz=$uz"); exit;
 }
 
 echo '<hr /><span style="color:#00ff00">Позиция в рейтинге:</span> <b>'.(int)$string[1].'</b><br />';
 
 } else { echo '<hr /><b><span style="color:#ff0000">Пользователь с таким логином не найден!</span></b><br />';}
 
-echo '<br /><a href="livebank.php?start='.$start.'&amp;'.SID.'">Искать еще</a><br />';
+echo '<br /><a href="livebank.php?start='.$start.'">Искать еще</a><br />';
 
 }
-  
+
 echo '<br />Всего вкладчиков: <b>'.(int)$total.'</b><br />';
 
 } else {show_error('Пользователей еще нет!');}
 } else {show_error('Пользователей еще нет!');}
 
-echo '<br /><img src="../images/img/many.gif" alt="image" /> <a href="bank.php?'.SID.'">В банк</a><br />';
-echo '<img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada&amp;'.SID.'">Развлечения</a><br />'; 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/many.gif" alt="image" /> <a href="bank.php">В банк</a><br />';
+echo '<img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada">Развлечения</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

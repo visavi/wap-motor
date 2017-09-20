@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -22,9 +22,9 @@ if (is_admin(array(101,102,103,105))){
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if($action==""){	
+if($action==""){
 
-echo '<img src="../images/img/menu.gif" alt="image" /> <b>Информация о портале</b><br /><br />';	
+echo '<img src="../images/img/menu.gif" alt="image" /> <b>Информация о портале</b><br /><br />';
 
 echo 'Используемая версия: '.MOTOR_VERSION.'<br /><br />';
 
@@ -54,16 +54,16 @@ echo file_get_contents(DATADIR."datatmp/information.dat");
 
 } else {echo '<b>Информационный файл отсутствует!</b><br />';}
 
-echo '<br /><img src="../images/img/zip.gif" alt="image" /> <a href="siteinfo.php?action=upgrades&amp;'.SID.'">Апгрейды</a><br />';
-echo '<img src="../images/img/reload.gif" alt="image" /> <a href="siteinfo.php?action=changes&amp;'.SID.'">Изменения</a><br />';
+echo '<br /><img src="../images/img/zip.gif" alt="image" /> <a href="siteinfo.php?action=upgrades">Апгрейды</a><br />';
+echo '<img src="../images/img/reload.gif" alt="image" /> <a href="siteinfo.php?action=changes">Изменения</a><br />';
 }
 
 ############################################################################################
 ##                                   Просмотр апгрейдов                                   ##
 ############################################################################################
-if($action=="upgrades"){	
+if($action=="upgrades"){
 
-echo '<img src="../images/img/menu.gif" alt="image" /> <b>Список апгрейдов</b><br /><br />';	
+echo '<img src="../images/img/menu.gif" alt="image" /> <b>Список апгрейдов</b><br /><br />';
 
 $filsize = 0;
 $filtime = 0;
@@ -90,7 +90,7 @@ echo file_get_contents(DATADIR."datatmp/upgrades.dat");
 
 } else {echo '<b>Информационный файл отсутствует!</b><br />';}
 
-echo '<br /><br /><img src="../images/img/reload.gif" alt="image" /> <a href="siteinfo.php?'.SID.'">Вернуться</a><br />';
+echo '<br /><br /><img src="../images/img/reload.gif" alt="image" /> <a href="siteinfo.php">Вернуться</a><br />';
 }
 
 
@@ -98,7 +98,7 @@ echo '<br /><br /><img src="../images/img/reload.gif" alt="image" /> <a href="si
 ##                                    Список изменений                                    ##
 ############################################################################################
 if ($action=="changes"){
-echo '<img src="../images/img/menu.gif" alt="image" /> <b>Готовящиеся изменения</b><br /><br />';	
+echo '<img src="../images/img/menu.gif" alt="image" /> <b>Готовящиеся изменения</b><br /><br />';
 
 $filsize = 0;
 $filtime = 0;
@@ -125,8 +125,8 @@ $file = file_get_contents(DATADIR."datatmp/changes.dat");
 
 $file = explode("|",$file);
 $file = array_reverse($file);
-$total = count($file);  
-  
+$total = count($file);
+
 if($total>0){
 
 if ($start < 0 || $start > $total){$start = 0;}
@@ -139,20 +139,20 @@ $file[$i] = preg_replace('|<b>(.*?)</b><br />(.*?)<br />$|', '<div class="b"><im
 
 echo $file[$i];
 }
- 
+
 page_jumpnavigation('siteinfo.php?action=changes&amp;', $config['siteinfo'], $start, $total);
 page_strnavigation('siteinfo.php?action=changes&amp;', $config['siteinfo'], $start, $total);
 
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Измений пока нет!</b><br /><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Информационный файл отсутствует!</b><br />';}
 
-echo '<br /><br /><img src="../images/img/reload.gif" alt="image" /> <a href="siteinfo.php?'.SID.'">Вернуться</a><br />';
+echo '<br /><br /><img src="../images/img/reload.gif" alt="image" /> <a href="siteinfo.php">Вернуться</a><br />';
 }
-	
-echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
+
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

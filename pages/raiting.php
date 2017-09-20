@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -28,15 +28,15 @@ if (preg_match('|^[a-z0-9_\-]+$|i',$uz)){
 if (file_exists(DATADIR."profil/$uz.prof")){
 if ($udata[48]<SITETIME){
 if ($udata[36]>=150){
-if ($log!=$uz){	
+if ($log!=$uz){
 
-$ratstr = search_string(DATADIR."dataraiting/$log.dat", $uz, 0);	
-if (empty($ratstr)){	
-	
-$uz_prof = file_get_contents(DATADIR."profil/$uz.prof"); 
-$uz_udata = explode(":||:",$uz_prof);	
-if ($uz_udata[36]>=150){	
-	
+$ratstr = search_string(DATADIR."dataraiting/$log.dat", $uz, 0);
+if (empty($ratstr)){
+
+$uz_prof = file_get_contents(DATADIR."profil/$uz.prof");
+$uz_udata = explode(":||:",$uz_prof);
+if ($uz_udata[36]>=150){
+
 ############################################################################################
 ##                                Увеличение авторитета                                   ##
 ############################################################################################
@@ -63,7 +63,7 @@ $pers = round((($filesize / 1024) * 100) / $config['limitsmail']);
 if ($pers < 100){
 
 change_profil($uz, array(10=>$uzdata[10]+1));
-$text = no_br($log.'|<img src="../images/img/plus.gif" alt="Плюс" /> Пользователь '.nickname($log).' поставил вам плюс|'.SITETIME.'|'); 
+$text = no_br($log.'|<img src="../images/img/plus.gif" alt="Плюс" /> Пользователь '.nickname($log).' поставил вам плюс|'.SITETIME.'|');
 
 write_files(DATADIR.'privat/'.$uz.'.priv', "$text\r\n");
 }}
@@ -103,7 +103,7 @@ $pers = round((($filesize / 1024) * 100) / $config['limitsmail']);
 if ($pers < 100){
 
 change_profil($uz, array(10=>$uzdata[10]+1));
-$text = no_br($log.'|<img src="../images/img/minus.gif" alt="Минус" /> Пользователь '.nickname($log).' поставил вам минус|'.SITETIME.'|'); 
+$text = no_br($log.'|<img src="../images/img/minus.gif" alt="Минус" /> Пользователь '.nickname($log).' поставил вам минус|'.SITETIME.'|');
 
 write_files(DATADIR.'privat/'.$uz.'.priv', "$text\r\n");
 }}
@@ -131,7 +131,7 @@ echo 'Внимание, следующий голос вы сможете ост
 
 } else {show_login('Вы не авторизованы, чтобы изменять авторитет, необходимо');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="anketa.php?uz='.$uz.'&amp;'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="anketa.php?uz='.$uz.'">Вернуться</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 include_once"../themes/".$config['themes']."/foot.php";
 ?>

@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -34,7 +34,7 @@ $q = 0;
 foreach($ini as $inikey=>$inivalue){ $q++;
 
 if($q&1){$bgcolor="#ffffff"; }else{$bgcolor="#e0e0e0";}
- 
+
 if (strlen($inivalue['local_value'])>40) {$inivalue['local_value']=substr($inivalue['local_value'],0,40); $inivalue['local_value'].="...";}
 if ($inivalue['local_value']==""){$inivalue['local_value']='no_value';}
 
@@ -44,10 +44,10 @@ echo '<tr bgcolor="'.$bgcolor.'"><td width="40%">'.$inikey.'</td><td width="60%"
 
 echo '</table>';
 
-echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

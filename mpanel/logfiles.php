@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -19,28 +19,28 @@ if (isset($_GET['action'])) {$action = check($_GET['action']);} else {$action = 
 if (isset($_GET['list'])) {$list = check($_GET['list']);} else {$list = 404;}
 
 if (is_admin(array(101,102))){
-	
-echo '<img src="../images/img/menu.gif" alt="image" /> <b>Просмотр лог-файлов</b><br /><br />';	
+
+echo '<img src="../images/img/menu.gif" alt="image" /> <b>Просмотр лог-файлов</b><br /><br />';
 
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if ($action==""){	
+if ($action==""){
 
 if ($list==404){
 echo '<b><big>Ошибки 404 - несуществующие файлы</big></b><br /><br />';
-echo '<b>404</b> | <a href="logfiles.php?list=403&amp;'.SID.'">403</a> | <a href="logfiles.php?list=ban&amp;'.SID.'">Автобаны</a><br /><br />';
+echo '<b>404</b> | <a href="logfiles.php?list=403">403</a> | <a href="logfiles.php?list=ban">Автобаны</a><br /><br />';
 $filename = DATADIR."datalog/error404.dat";}
 
 if ($list==403){
-echo '<b><big>Ошибки 403 - недопустимые запросы</big></b><br /><br />'; 
-echo '<a href="logfiles.php?'.SID.'">404</a> | <b>403</b> | <a href="logfiles.php?list=ban&amp;'.SID.'">Автобаны</a><br /><br />';	
+echo '<b><big>Ошибки 403 - недопустимые запросы</big></b><br /><br />';
+echo '<a href="logfiles.php">404</a> | <b>403</b> | <a href="logfiles.php?list=ban">Автобаны</a><br /><br />';
 $filename = DATADIR."datalog/error403.dat";}
 
 
 if ($list=='ban'){
-echo '<b><big>Автоматические баны</big></b><br /><br />'; 	
-echo '<a href="logfiles.php?'.SID.'">404</a> | <a href="logfiles.php?list=403&amp;'.SID.'">403</a>  | <b>Автобаны</b><br /><br />';
+echo '<b><big>Автоматические баны</big></b><br /><br />';
+echo '<a href="logfiles.php">404</a> | <a href="logfiles.php?list=403">403</a>  | <b>Автобаны</b><br /><br />';
 $filename = DATADIR."datalog/ban.dat";}
 
 if (file_exists($filename)){
@@ -53,7 +53,7 @@ if ($total>0){
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['loglist']){ $end = $total; }
 else {$end = $start + $config['loglist']; }
-for ($i = $start; $i < $end; $i++){	
+for ($i = $start; $i < $end; $i++){
 
 $dtlog=explode("|", $file[$i]);
 
@@ -68,12 +68,12 @@ page_jumpnavigation('logfiles.php?list='.$list.'&amp;', $config['loglist'], $sta
 page_strnavigation('logfiles.php?list='.$list.'&amp;', $config['loglist'], $start, $total);
 
 if (is_admin(array(101))) {
-echo '<br /><br /><img src="../images/img/error.gif" alt="image" /> <a href="logfiles.php?action=del&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Очистить логи</a>';}
+echo '<br /><br /><img src="../images/img/error.gif" alt="image" /> <a href="logfiles.php?action=del&amp;uid='.$_SESSION['token'].'">Очистить логи</a>';}
 
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Записей еще нет!</b><br />';}
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Записей еще нет!</b><br />';}
 }
-	
+
 ############################################################################################
 ##                                     Очистка логов                                      ##
 ############################################################################################
@@ -82,25 +82,25 @@ if ($action=="del"){
 $uid = check($_GET['uid']);
 
 if ($uid==$_SESSION['token']){
-if (is_admin(array(101))){	
+if (is_admin(array(101))){
 
 clear_files(DATADIR."datalog/error404.dat");
 clear_files(DATADIR."datalog/error403.dat");
-clear_files(DATADIR."datalog/ban.dat");		
-	
-header ("Location: logfiles.php?isset=mp_dellogs&".SID); exit;
+clear_files(DATADIR."datalog/ban.dat");
+
+header ("Location: logfiles.php?isset=mp_dellogs"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Очищать логи могут только суперадмины!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="logfiles.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="logfiles.php">Вернуться</a>';
 }
 
-//-------------------------------- КОНЦОВКА ------------------------------------//	
-echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+//-------------------------------- КОНЦОВКА ------------------------------------//
+echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

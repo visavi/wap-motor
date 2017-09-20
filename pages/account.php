@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -19,7 +19,7 @@ if (isset($_GET['action'])) {$action = check($_GET['action']);} else {$action = 
 echo '<img src="../images/img/profiles.gif" alt="image" /> <b>Мои данные</b><br /><br />';
 
 if (is_user()){
-if ($action==""){	
+if ($action==""){
 
 ############################################################################################
 ##                                    Изменение e-mail                                    ##
@@ -28,7 +28,7 @@ if ($action==""){
 echo '<b><big>Изменение E-mail</big></b><br /><br />';
 
 if ($udata[36]>=150){
-echo '<form method="post" action="account.php?action=editmail&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
+echo '<form method="post" action="account.php?action=editmail&amp;uid='.$_SESSION['token'].'">';
 
 echo 'Е-mail:<br />';
 echo '<input name="meil" value="'.$udata[4].'" /><br />';
@@ -54,7 +54,7 @@ echo '<b><big>Изменение ника</big></b><br /><br />';
 if ($config['includenick']==1){
 if ($udata[36]>=300){
 
-echo '<form method="post" action="nickname.php?uid='.$_SESSION['token'].'&amp;'.SID.'">';
+echo '<form method="post" action="nickname.php?uid='.$_SESSION['token'].'">';
 echo 'Ваш ник:<br />';
 echo '<input name="nickname" value="'.$udata[65].'" /><br />';
 echo '<br /><input value="Изменить" type="submit" /></form><hr />';
@@ -68,7 +68,7 @@ echo '<br /><input value="Изменить" type="submit" /></form><hr />';
 ############################################################################################
 echo '<b><big>Изменение пароля</big></b><br /><br />';
 
-echo '<form method="post" action="newpass.php?uid='.$_SESSION['token'].'&amp;'.SID.'">';
+echo '<form method="post" action="newpass.php?uid='.$_SESSION['token'].'">';
 echo 'Новый пароль:<br /><input name="newpar" maxlength="20" /><br />';
 echo 'Повторите пароль:<br /><input name="newpar2" maxlength="20" /><br />';
 echo 'Старый пароль:<br /><input name="oldpar" maxlength="20" /><br />';
@@ -83,7 +83,7 @@ if ($action=="editmail") {
 $uid = check($_GET['uid']);
 $meil = strtolower(check($_POST['meil']));
 $provpass = check($_POST['provpass']);
-if (isset($_POST['subnews'])) {$subnews = check($_POST['subnews']);} else {$subnews = '';} 
+if (isset($_POST['subnews'])) {$subnews = check($_POST['subnews']);} else {$subnews = '';}
 
 if ($uid==$_SESSION['token']){
 if ($udata[36]>=150){
@@ -91,7 +91,7 @@ if (md5(md5($provpass))==$udata[1]){
 if (preg_match('#^([a-z0-9_\-\.])+\@([a-z0-9_\-\.])+(\.([a-z0-9])+)+$#', $meil)) {
 
 $string = search_string(DATADIR."blackmail.dat", $meil, 1);
-if (empty($string)) { 
+if (empty($string)) {
 
 change_profil($log, array(4=>$meil));
 
@@ -117,20 +117,20 @@ if ($string) {
 delete_lines(DATADIR."subscribe.dat", $string['line']);
 }}
 
-header ("Location: account.php?isset=editaccount&".SID); exit;
+header ("Location: account.php?isset=editaccount"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Указанный вами адрес e-mail занесен в черный список</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Неправильный адрес e-mail, необходим формат name@site.domen</b><br />';}
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Пароль не совпадает с данными в профиле</b><br />';} 
+} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Пароль не совпадает с данными в профиле</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Изменять e-mail могут пользователи у которых более 150 баллов!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="account.php?'.SID.'">Вернуться</a><br />';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="account.php">Вернуться</a><br />';
 }
 
 } else {show_login('Вы не авторизованы, чтобы изменять свои данные, необходимо');}
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

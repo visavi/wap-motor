@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -22,10 +22,10 @@ if (is_user()){
 
 ############################################################################################
 ##                                 Главная страница                                       ##
-############################################################################################	
+############################################################################################
 if ($action==""){
 
-echo '<form method="post" action="setting.php?action=edit&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
+echo '<form method="post" action="setting.php?action=edit&amp;uid='.$_SESSION['token'].'">';
 
 echo 'Wap-тема по умолчанию:<br />';
 echo '<select name="skins">';
@@ -60,38 +60,38 @@ echo ' &nbsp; &nbsp; ';
 if ($udata[31]==0){
 echo '<input name="times" type="radio" value="0" checked="checked" />';
 } else {
-echo '<input name="times" type="radio" value="0" />';}  
-echo 'Нет<br />';	
-	
+echo '<input name="times" type="radio" value="0" />';}
+echo 'Нет<br />';
+
 echo 'Включить персонажа игры:<br />';
 echo 'Да';
 if ($udata[55]==1){
 echo '<input name="editperson" type="radio" value="1" checked="checked" />';
 } else {
 echo '<input name="editperson" type="radio" value="1" />';}
-echo ' &nbsp; &nbsp; ';	
-	
-	
+echo ' &nbsp; &nbsp; ';
+
+
 if ($udata[55]==0){
 echo '<input name="editperson" type="radio" value="0" checked="checked" />';
 } else {
-echo '<input name="editperson" type="radio" value="0" />';}  
-echo 'Нет<br />';		
-	
+echo '<input name="editperson" type="radio" value="0" />';}
+echo 'Нет<br />';
+
 echo 'Привязка к IP:<br />';
 echo 'Да';
 if ($udata[66]==1){
 echo '<input name="ipcontrol" type="radio" value="1" checked="checked" />';
 } else {
 echo '<input name="ipcontrol" type="radio" value="1" />';}
-echo ' &nbsp; &nbsp; ';	
-	
-	
+echo ' &nbsp; &nbsp; ';
+
+
 if ($udata[66]==0){
 echo '<input name="ipcontrol" type="radio" value="0" checked="checked" />';
 } else {
-echo '<input name="ipcontrol" type="radio" value="0" />';}  
-echo 'Нет<br /><br />';	
+echo '<input name="ipcontrol" type="radio" value="0" />';}
+echo 'Нет<br /><br />';
 
 echo '<input value="Изменить" type="submit" /></form><hr />';
 
@@ -101,7 +101,7 @@ echo '* Значение всех полей (max.50)<br />';
 
 ############################################################################################
 ##                                       Изменение                                        ##
-############################################################################################	
+############################################################################################
 if ($action=="edit"){
 
 $uid = check($_GET['uid']);
@@ -139,7 +139,7 @@ unset($_SESSION['my_themes']);
 
 change_profil($log, array(14=>$ip, 20=>$skins, 21=>$bookpostus, 22=>$news, 23=>$forumpost, 24=>$forumtem, 26=>$chatpost, 28=>$board, 30=>$sdvig, 31=>$times, 32=>$prrivs, 42=>$graffic, 45=>$editavator, 55=>$editperson, 66=>$ipcontrol));
 
-header ("Location: setting.php?isset=editsetting&".SID); exit;
+header ("Location: setting.php?isset=editsetting"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Временной сдвиг. (Допустимый диапазон -24 — +24 часов)</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Приватные сообщения (Допустимое значение от 3 до 50)</b><br />';}
@@ -153,12 +153,12 @@ header ("Location: setting.php?isset=editsetting&".SID); exit;
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимое название скина</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="setting.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="setting.php">Вернуться</a>';
 }
 
 } else {show_login('Вы не авторизованы, чтобы изменять настройки, необходимо');}
 
-echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

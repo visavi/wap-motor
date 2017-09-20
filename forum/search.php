@@ -28,7 +28,7 @@ switch ($act):
 ############################################################################################
 case "index":
 	echo '<div class="form">';
-	echo '<form action="search.php?act=search&amp;'.SID.'" method="get">';
+	echo '<form action="search.php?act=search" method="get">';
 	echo '<input type="hidden" name="act" value="search" />';
 
 	echo '<b>Запрос:</b><br /><input type="text" name="find" /><br /><br />';
@@ -115,7 +115,7 @@ case 'search':
 				$totalpost = counter_string(DATADIR.'dataforum/'.$data[1].'-'.$data[0].'.dat');
 
 				echo '<div class="b"><img src="/images/img/'.$icon.'" alt="image" /> ';
-				echo '<b><a href="topic.php?fid='.$data[1].'&amp;id='.$data[0].'&amp;'.SID.'">'.$data[3].'</a></b> ('.$totalpost.')</div>';
+				echo '<b><a href="topic.php?fid='.$data[1].'&amp;id='.$data[0].'">'.$data[3].'</a></b> ('.$totalpost.')</div>';
 
 				if($totalpost>0){
 					$filepost = file(DATADIR.'dataforum/'.$data[1].'-'.$data[0].'.dat');
@@ -180,9 +180,9 @@ case 'search':
 				$topic = search_string(DATADIR."dataforum/topic".$data[1].".dat", $data[0], 0);
 				if ($topic) {
 
-					echo '<div class="b"><img src="/images/img/edit.gif" alt="image"> <b><a href="topic.php?fid='.$data[1].'&amp;id='.$data[0].'&amp;'.SID.'">'.$topic[3].'</a></b></div>';
+					echo '<div class="b"><img src="/images/img/edit.gif" alt="image"> <b><a href="topic.php?fid='.$data[1].'&amp;id='.$data[0].'">'.$topic[3].'</a></b></div>';
 					echo '<div>'.bb_code($data[3]).'<br />';
-					echo 'Написал: <a href="/pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a> '.user_online($data[2]).' ('.date_fixed($data[5]).')</div>';
+					echo 'Написал: <a href="/pages/anketa.php?uz='.$data[2].'">'.nickname($data[2]).'</a> '.user_online($data[2]).' ('.date_fixed($data[5]).')</div>';
 				}
 			}
 
@@ -198,11 +198,11 @@ case 'search':
 		show_error('Ошибка! Запрос должен содержать от 3 до 50 символов!');
 	}
 
-	echo '<img src="/images/img/back.gif" alt="image"> <a href="search.php?'.SID.'">Вернуться</a><br />';
+	echo '<img src="/images/img/back.gif" alt="image"> <a href="search.php">Вернуться</a><br />';
 break;
 
 default:
-redirect("search.php?".SID);
+redirect("search.php");
 endswitch;
 
 /*
@@ -378,15 +378,15 @@ for ($i = $start; $i < $end; $i++){
 
 
 echo '<div class=b><img src="/images/img/forums.gif" alt=""> ';
-echo '<b>'.($i+1).'. <a href="/pages/anketa.php?uz='.$array_themauthor[$i].'&amp;'.SID.'">'.nickname($array_themauthor[$i]).'</a></b> ';
+echo '<b>'.($i+1).'. <a href="/pages/anketa.php?uz='.$array_themauthor[$i].'">'.nickname($array_themauthor[$i]).'</a></b> ';
 echo '('.date_fixed($array_themtime[$i]).')</div>';
-echo '<div><b><a href="index.php?fid='.$array_themfid[$i].'&amp;id='.$array_themid[$i].'&amp;'.SID.'">'.$array_themout[$i].'</a></b></div>';
+echo '<div><b><a href="index.php?fid='.$array_themfid[$i].'&amp;id='.$array_themid[$i].'">'.$array_themout[$i].'</a></b></div>';
 }
 
 echo '<hr />';
-if ($start != 0) {echo '<a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start - $config_searchforum).'&amp;'.SID.'">&lt;-Назад </a>';}else{echo '&lt;-Назад';}
+if ($start != 0) {echo '<a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start - $config_searchforum).'">&lt;-Назад </a>';}else{echo '&lt;-Назад';}
 echo ' | ';
-if ($total > $start + $config_searchforum) {echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start + $config_searchforum).'&amp;'.SID.'">Далее-&gt;</a>';}else{echo 'Далее-&gt;';}
+if ($total > $start + $config_searchforum) {echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start + $config_searchforum).'">Далее-&gt;</a>';}else{echo 'Далее-&gt;';}
 
 if($total>0){
 
@@ -397,7 +397,7 @@ echo '<br /><hr />Страницы:';
 $asd=$start-($config_searchforum*3);
 $asd2=$start+($config_searchforum*4);
 
-if($asd<$total && $asd>0){echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start=0&amp;'.SID.'">1</a> ... ';}
+if($asd<$total && $asd>0){echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start=0">1</a> ... ';}
 
 for($i=$asd; $i<$asd2;){
 if($i<$total && $i>=0){
@@ -406,11 +406,11 @@ $ii=floor(1+$i/$config_searchforum);
 if ($start==$i) {
 echo ' <b>('.$ii.')</b>';
 } else {
-echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$i.'&amp;'.SID.'">'.$ii.'</a>';
+echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$i.'">'.$ii.'</a>';
 }}
 
 $i=$i+$config_searchforum;}
-if($asd2<$total){echo ' ... <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';}
+if($asd2<$total){echo ' ... <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$ba2.'">'.$ba.'</a>';}
 }
 echo '<br /><br />';
 
@@ -505,17 +505,17 @@ for ($i = $start; $i < $end; $i++){
 $page = floor($array_toppost[$i] / $config_forumpost) * $config_forumpost;
 
 echo '<div class=b><img src="/images/img/forums.gif" alt=""> ';
-echo '<b>'.($i+1).'. <a href="index.php?fid='.$array_topfid[$i].'&amp;id='.$array_topid[$i].'&amp;page='.$page.'&amp;'.SID.'">'.$array_topthemes[$i].'</a></b> ';
+echo '<b>'.($i+1).'. <a href="index.php?fid='.$array_topfid[$i].'&amp;id='.$array_topid[$i].'&amp;page='.$page.'">'.$array_topthemes[$i].'</a></b> ';
 echo '('.date_fixed($array_toptime[$i]).')</div>';
 
-echo '<div>Автор: <b><a href="/pages/anketa.php?uz='.$array_topauthor[$i].'&amp;'.SID.'">'.nickname($array_topauthor[$i]).'</a></b><br />';
+echo '<div>Автор: <b><a href="/pages/anketa.php?uz='.$array_topauthor[$i].'">'.nickname($array_topauthor[$i]).'</a></b><br />';
 echo 'Сообщение: '.bb_code($array_topout[$i]).'</div>';
 }
 
 echo '<hr />';
-if ($start != 0) {echo '<a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start - $config_searchforum).'&amp;'.SID.'">&lt;-Назад</a>';}else{echo '&lt;-Назад';}
+if ($start != 0) {echo '<a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start - $config_searchforum).'">&lt;-Назад</a>';}else{echo '&lt;-Назад';}
 echo ' | ';
-if ($total > $start + $config_searchforum) {echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start + $config_searchforum).'&amp;'.SID.'">Далее-&gt;</a>';}else{echo 'Далее-&gt;';}
+if ($total > $start + $config_searchforum) {echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.($start + $config_searchforum).'">Далее-&gt;</a>';}else{echo 'Далее-&gt;';}
 
 if($total>0){
 
@@ -526,7 +526,7 @@ echo '<br /><hr />Страницы:';
 $asd=$start-($config_searchforum*3);
 $asd2=$start+($config_searchforum*4);
 
-if($asd<$total && $asd>0){echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start=0&amp;'.SID.'">1</a> ... ';}
+if($asd<$total && $asd>0){echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start=0">1</a> ... ';}
 
 for($i=$asd; $i<$asd2;)
 {
@@ -537,11 +537,11 @@ if ($start==$i) {
 echo ' <b>('.$ii.')</b>';
 }else {
 
-echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$i.'&amp;'.SID.'">'.$ii.'</a>';
+echo ' <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$i.'">'.$ii.'</a>';
 }}
 
 $i=$i+$config_searchforum;}
-if($asd2<$total){echo ' ... <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$ba2.'&amp;'.SID.'">'.$ba.'</a>';}
+if($asd2<$total){echo ' ... <a href="search.php?action=search&amp;findme='.$findme.'&amp;ftype='.$ftype.'&amp;tip='.$tip.'&amp;start='.$ba2.'">'.$ba.'</a>';}
 }
 echo '<br /><br />';
 
@@ -551,11 +551,11 @@ echo '<br /><br />';
 
 }else{echo '<b>Ваш запрос пуст, менее '.(int)$minfindme.' или более '.(int)$maxfindme.' символов!</b><br /><br />'; }
 
-echo '<img src="/images/img/back.gif" alt=""> <a href="search.php?'.SID.'">Вернуться</a>';
+echo '<img src="/images/img/back.gif" alt=""> <a href="search.php">Вернуться</a>';
 }*/
 
-echo '<img src="/images/img/panel.gif" alt="image"> <a href="index.php?'.SID.'">В форум</a><br />';
-echo '<img src="/images/img/homepage.gif" alt="image"> <a href="/index.php?'.SID.'">На главную</a><br />';
+echo '<img src="/images/img/panel.gif" alt="image"> <a href="index.php">В форум</a><br />';
+echo '<img src="/images/img/homepage.gif" alt="image"> <a href="/index.php">На главную</a><br />';
 
 include_once ('../themes/'.$config['themes'].'/foot.php');
 ?>

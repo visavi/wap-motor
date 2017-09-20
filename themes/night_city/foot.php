@@ -10,7 +10,7 @@
 #                          Z413162534324              #
 #-----------------------------------------------------#
 echo '</div><div class="c" id="down">';
-echo '<br /><a href="'.$config['home'].'/?'.SID.'">'.$config['copy'].'</a><br />';
+echo '<br /><a href="'.$config['home'].'/">'.$config['copy'].'</a><br />';
 require_once BASEDIR."includes/counters.php";
 require_once BASEDIR."includes/gzip_foot.php";
 echo '<!--'.MOTOR_VERSION.' version-->';

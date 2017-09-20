@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -34,10 +34,10 @@ if ($total>0){
 foreach($userfile as $value){
 $userdata = explode("|",$value);
 
-echo '<img src="../images/img/user.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$userdata[1].'&amp;'.SID.'">'.nickname($userdata[1]).'</a></b>  ('.user_status($userdata[2]).') '.user_online($userdata[1]).'<br />';	
+echo '<img src="../images/img/user.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$userdata[1].'">'.nickname($userdata[1]).'</a></b>  ('.user_status($userdata[2]).') '.user_online($userdata[1]).'<br />';
 
 if (is_admin(array(101))){
-echo '<img src="../images/img/edit.gif" alt="image" /> <a href="users.php?action=edit&amp;users='.$userdata[1].'&amp;'.SID.'">Изменить</a><hr />';
+echo '<img src="../images/img/edit.gif" alt="image" /> <a href="users.php?action=edit&amp;users='.$userdata[1].'">Изменить</a><hr />';
 }
 }
 
@@ -72,26 +72,26 @@ $dat_user[] = $data[0];
 $dat_status[] = $data[7];
 }}
 
-asort($dat_status);	
+asort($dat_status);
 $admin_top = array();
 
 foreach ($dat_status as $k=>$v){
-$admin_top[] = '|'.$dat_user[$k].'|'.$dat_status[$k].'|';	
+$admin_top[] = '|'.$dat_user[$k].'|'.$dat_status[$k].'|';
 }
-	
+
 $text = implode("\r\n",$admin_top);
 
 write_files(DATADIR."datatmp/adminlist.dat", $text, 1, 0666);
 }
 
-header ("Location: adminlist.php?isset=reload&".SID); exit;
+header ("Location: adminlist.php?isset=reload"); exit;
 }
 
-echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="adminlist.php?action=reload&amp;'.SID.'">Пересчитать</a><br />';
-echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="adminlist.php?action=reload">Пересчитать</a><br />';
+echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

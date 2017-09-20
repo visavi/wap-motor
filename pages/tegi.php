@@ -34,6 +34,6 @@ echo '[code]'.bb_code('[code]&lt;? echo"Для вставки php-кода"; ?&g
 echo '<br />Для того чтобы вставить ссылку, можно просто написать http://адрес_cсылки<br />';
 echo 'Для ссылки с названием: [url=http://адрес_cсылки] Название [/url]<br /><br />';
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 include_once "../themes/".$config['themes']."/foot.php";
 ?>

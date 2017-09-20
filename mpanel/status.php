@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -28,9 +28,9 @@ if($action==""){
 if (file_exists(DATADIR."status.dat")){
 $text = file_get_contents(DATADIR."status.dat");
 $data = explode("|",$text);
-	
-echo '<form method="post" action="status.php?action=edit&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';	
-echo '0 - 4 балла:<br /><input name="st0" value="'.$data[0].'" /><br />';	
+
+echo '<form method="post" action="status.php?action=edit&amp;uid='.$_SESSION['token'].'">';
+echo '0 - 4 балла:<br /><input name="st0" value="'.$data[0].'" /><br />';
 echo '5 - 9 баллов:<br /><input name="st1" value="'.$data[1].'" /><br />';
 echo '10 - 19 баллов:<br /><input name="st2" value="'.$data[2].'" /><br />';
 echo '20 - 49 баллов:<br /><input name="st3" value="'.$data[3].'" /><br />';
@@ -62,7 +62,7 @@ echo '<br /><input value="Сохранить" type="submit" /></form><hr />';
 ############################################################################################
 ##                                Редактирование статусов                                 ##
 ############################################################################################
-if($action=="edit") { 	
+if($action=="edit") {
 
 $uid = check($_GET['uid']);
 $st0 = check($_POST['st0']);
@@ -95,22 +95,22 @@ if ($st0!="" && $st1!="" && $st2!="" && $st3!="" && $st4!="" && $st5!="" && $st6
 $text=no_br($st0.'|'.$st1.'|'.$st2.'|'.$st3.'|'.$st4.'|'.$st5.'|'.$st6.'|'.$st7.'|'.$st8.'|'.$st9.'|'.$st10.'|'.$st11.'|'.$st12.'|'.$st13.'|'.$st14.'|'.$st15.'|'.$st16.'|'.$st17.'|'.$st18.'|'.$st19.'|'.$st20.'|'.$st21.'|'.$st22.'|');
 
 write_files(DATADIR."status.dat", $text, 1);
- 
-header ("Location: status.php?isset=mp_editstatus&".SID); exit;
+
+header ("Location: status.php?isset=mp_editstatus"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не заполнены все поля для статусов!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="status.php?'.SID.'">Вернуться</a>';
-}	
-	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="status.php">Вернуться</a>';
+}
 
 
-//-------------------------------- КОНЦОВКА ------------------------------------//	
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+//-------------------------------- КОНЦОВКА ------------------------------------//
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
+
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

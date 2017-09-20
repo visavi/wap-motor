@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -37,11 +37,11 @@ if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['banlist']){ $end = $total; }
 else {$end = $start + $config['banlist'];}
 for ($i = $start; $i < $end; $i++){
-	
+
 $data = explode("|",$file[$i]);
 
 
-echo '<div class="b"><img src="../images/img/user.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> ';
+echo '<div class="b"><img src="../images/img/user.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[1].'">'.nickname($data[1]).'</a></b> ';
 echo '(Забанен: '.date_fixed($data[4]).')</div>';
 echo '<div>';
 
@@ -52,7 +52,7 @@ echo '<b>Срок бана уже истек</b><br />';
 }
 echo 'Забанил: <b>'.nickname($data[5]).'</b><br />';
 echo 'Причина: '.$data[3].'<br />';
-echo '<img src="../images/img/edit.gif" alt="image" /> <a href="zaban.php?action=edit&amp;users='.$data[1].'&amp;'.SID.'">Разбанить</a></div>';
+echo '<img src="../images/img/edit.gif" alt="image" /> <a href="zaban.php?action=edit&amp;users='.$data[1].'">Разбанить</a></div>';
 }
 
 page_jumpnavigation('banlist.php?', $config['banlist'], $start, $total);
@@ -95,26 +95,26 @@ $dat_date[] = $data[52];
 $dat_who[] = $data[63];
 }}
 
-asort($dat_date);	
+asort($dat_date);
 $admin_top = array();
 
 foreach ($dat_date as $k=>$v){
-$admin_top[] = '|'.$dat_user[$k].'|'.$dat_time[$k].'|'.$dat_cause[$k].'|'.$dat_date[$k].'|'.$dat_who[$k].'|';	
+$admin_top[] = '|'.$dat_user[$k].'|'.$dat_time[$k].'|'.$dat_cause[$k].'|'.$dat_date[$k].'|'.$dat_who[$k].'|';
 }
-	
+
 $text = implode("\r\n",$admin_top);
 
 write_files(DATADIR."datatmp/banlist.dat", $text, 1, 0666);
 }
 
-header ("Location: banlist.php?isset=reload&".SID); exit;
+header ("Location: banlist.php?isset=reload"); exit;
 }
 
-echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="banlist.php?action=reload&amp;'.SID.'">Пересчитать</a><br />';
-echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="banlist.php?action=reload">Пересчитать</a><br />';
+echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

@@ -27,7 +27,7 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 		$forum = explode("|", $forumval);
 
 		echo '<div class="b"><img src="/images/img/forums.gif" alt="image" /> ';
-		echo '<b><a href="forum.php?fid='.$forum[0].'&amp;'.SID.'">'.$forum[1].'</a></b> ('.$forum[2].'/'.$forum[3].')</div>';
+		echo '<b><a href="forum.php?fid='.$forum[0].'">'.$forum[1].'</a></b> ('.$forum[2].'/'.$forum[3].')</div>';
 
 		$totalforum = counter_string(DATADIR."dataforum/topic".$forum[0].".dat");
 
@@ -41,7 +41,7 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 
 				if (utf_strlen($topic[3])>35) {$topic[3]=utf_substr($topic[3], 0, 30); $topic[3].="...";}
 
-				echo '<div>Тема: <a href="topic.php?act=end&amp;fid='.$forum[0].'&amp;id='.$topic[0].'&amp;'.SID.'">'.$topic[3].'</a><br />';
+				echo '<div>Тема: <a href="topic.php?act=end&amp;fid='.$forum[0].'&amp;id='.$topic[0].'">'.$topic[3].'</a><br />';
 				echo 'Сообщение: '.nickname($post[2]).' ('.date_fixed($post[5]).')</div>';
 
 			} else {echo 'Последняя тема не найдена!';}
@@ -53,8 +53,8 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 	} else {show_error('Форум пустой! Разделы еще не созданы!');}
 } else {show_error('Форум пустой! Разделы еще не созданы!');}
 
-echo '<img src="/images/img/search.gif" alt="image" /> <a href="search.php?'.SID.'">Поиск</a><br />';
-echo '<img src="/images/img/homepage.gif" alt="image" /> <a href="/index.php?'.SID.'">На главную</a><br />';
+echo '<img src="/images/img/search.gif" alt="image" /> <a href="search.php">Поиск</a><br />';
+echo '<img src="/images/img/homepage.gif" alt="image" /> <a href="/index.php">На главную</a><br />';
 
 include_once ('../themes/'.$config['themes'].'/foot.php');
 ?>

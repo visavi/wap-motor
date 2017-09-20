@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -73,7 +73,7 @@ $p24_hits = file(DATADIR."datacounter/24_hits.dat");
 
 foreach($p24_hits as $val){
 $p24_data = explode("|",$val);
-$allhits24+=$p24_data[0]; 
+$allhits24+=$p24_data[0];
 }}
 
 if (file_exists(DATADIR."datacounter/31_host.dat")){
@@ -111,13 +111,13 @@ echo 'Хостов за месяц: <b>'.(int)($allhost31 + $counter_host).'</b>
 echo 'Хитов за месяц: <b>'.(int)($allhits31 + $counter_hits).'</b><br /><br />';
 
 echo 'Динамика за сутки<br />';
-echo '<img src="'.BASEDIR.'gallery/count24.php" alt="image" /><br /><br />'; 
+echo '<img src="'.BASEDIR.'gallery/count24.php" alt="image" /><br /><br />';
 
 echo 'Динамика за месяц<br />';
-echo '<img src="'.BASEDIR.'gallery/count31.php" alt="image" /><br /><br />'; 
+echo '<img src="'.BASEDIR.'gallery/count31.php" alt="image" /><br /><br />';
 
-echo '<a href="counter.php?action=count24&amp;'.SID.'">Статистика по часам</a><br />';
-echo '<a href="counter.php?action=count31&amp;'.SID.'">Статистика по дням </a><br />';
+echo '<a href="counter.php?action=count24">Статистика по часам</a><br />';
+echo '<a href="counter.php?action=count31">Статистика по дням </a><br />';
 }
 
 //------------------------ Статистика за 24 часа --------------------------------//
@@ -126,7 +126,7 @@ if ($action=="count24") {
 echo'<img src="../images/img/partners.gif" alt="image" /> <b>Статистика по часам</b><br /><br />';
 
 echo 'Динамика за сутки<br />';
-echo '<img src="'.BASEDIR.'gallery/count24.php" alt="image" /><br /><br />'; 
+echo '<img src="'.BASEDIR.'gallery/count24.php" alt="image" /><br /><br />';
 
 if ($hour>0){
 $arrtimehour = mktime(date("H",SITETIME), 0, 0, date("m",SITETIME), date("d",SITETIME), date("Y",SITETIME));
@@ -190,7 +190,7 @@ echo $val.'<br />';
 
 } else {echo '<b>Статистика за текущие сутки еще не обновилась</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="counter.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="counter.php">Вернуться</a>';
 }
 
 
@@ -200,7 +200,7 @@ if ($action=="count31") {
 echo'<img src="../images/img/partners.gif" alt="image" /> <b>Статистика по дням</b><br /><br />';
 
 echo 'Динамика за месяц<br />';
-echo '<img src="'.BASEDIR.'gallery/count31.php" alt="image" /><br /><br />'; 
+echo '<img src="'.BASEDIR.'gallery/count31.php" alt="image" /><br /><br />';
 
 if ($hday>0){
 $arrtimeday = mktime(0, 0, 0, date("m",SITETIME), date("d",SITETIME), date("Y",SITETIME));
@@ -263,11 +263,11 @@ echo $val.'<br />';
 
 } else {echo '<b>Статистика за текущий месяц еще не обновилась</b><br />';}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="counter.php?'.SID.'">Вернуться</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="counter.php">Вернуться</a>';
 }
 
 
 
-echo'<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo'<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 include_once"../themes/".$config['themes']."/foot.php";
 ?>

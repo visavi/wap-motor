@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -19,7 +19,7 @@ if (isset($_GET['uz'])) {$uz=check($_GET['uz']);} elseif (isset($_POST['uz'])) {
 
 echo '<img src="../images/img/partners.gif" alt="image" /> <b>Перевод денег</b><br /><br />';
 
-if (is_user()){	
+if (is_user()){
 
 ############################################################################################
 ##                                    Главная страница                                    ##
@@ -34,14 +34,14 @@ echo 'Необходимо иметь в активе не менее 150 бал
 }
 
 if ($uz==""){
-echo '<form action="perevod.php?action=go&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="perevod.php?action=go&amp;uid='.$_SESSION['token'].'" method="post">';
 echo 'Логин юзера:<br />';
 echo '<input type="text" name="uz" maxlength="20" /><br />';
 echo 'Кол-во денег:<br />';
 echo '<input name="gold" /><br /><br />';
 echo '<input type="submit" value="Перевести" /></form><hr />';
 } else {
-echo '<form action="perevod.php?action=go&amp;uz='.$uz.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="perevod.php?action=go&amp;uz='.$uz.'&amp;uid='.$_SESSION['token'].'" method="post">';
 echo 'Перевод для <b>'.$uz.'</b>:<br /><br />';
 echo 'Кол-во денег:<br />';
 echo '<input name="gold" /><br /><br />';
@@ -80,8 +80,8 @@ if (empty($ignorstr)) {
 $filesize = filesize(DATADIR.'privat/'.$uz.'.priv');
 $pers = round((($filesize / 1024) * 100) / $config['limitsmail']);
 if ($pers < 99){
-	
-$text = no_br($log.'|Пользователь '.nickname($log).' перечислил вам '.moneys($gold).'|'.SITETIME.'|'); 
+
+$text = no_br($log.'|Пользователь '.nickname($log).' перечислил вам '.moneys($gold).'|'.SITETIME.'|');
 
 write_files(DATADIR.'privat/'.$uz.'.priv', "$text\r\n");
 }}}
@@ -96,13 +96,13 @@ echo 'Перевод успешно завершен! Пользователь <
 } else {show_error('Перевод невозможен укажите верную сумму!');}
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="perevod.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="perevod.php">Вернуться</a>';
 }
 
 } else {show_login('Вы не авторизованы, чтобы совершать операции, необходимо');}
 
-echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada&amp;'.SID.'">Развлечения</a><br />'; 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/games.gif" alt="image" /> <a href="../pages/index.php?action=arkada">Развлечения</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

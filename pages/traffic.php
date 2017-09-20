@@ -35,7 +35,7 @@ echo 'Время проведенное на сайте: <b>'.$_SESSION['timeon'
 
 echo 'Внимание! В подсчет трафика не входит трафик за загруженные картинки и прочее<br />';
 echo 'Если в браузере есть свой алгоритм сжатия, вы пользуетесь прокси или работаете с программами сжимающими трафик результаты могут несовпадать с реальными данными<br />';
-echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 include_once "../themes/".$config['themes']."/foot.php";
 ?>
 

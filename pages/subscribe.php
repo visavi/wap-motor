@@ -33,7 +33,7 @@ echo 'Ваш e-mail удален из базы данных нашего сай�
 } else {echo '<b>Ошибка, недопустимый код отписки от рассылки!</b><br />';}
 } else {echo '<b>Ошибка, отсутствует код отписки от рассылки!</b><br />';}
 
-echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<br /><img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

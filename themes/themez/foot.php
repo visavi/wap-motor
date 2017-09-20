@@ -1,10 +1,10 @@
 ﻿<?php
 echo '</div><div align="center" class="c" id="down">';
 
-echo '<a href="'.$config['home'].'/?'.SID.'">'.$config['copy'].'</a><br />';
+echo '<a href="'.$config['home'].'/">'.$config['copy'].'</a><br />';
 require_once BASEDIR."includes/counters.php";
 
-echo '[<a href="'.$config['home'].'/?'.SID.'">HOME</a> | <a href="'.$config['home'].'/download/?'.SID.'">DOWN</a> | <a href="'.$config['home'].'/forum/?'.SID.'">FORUM</a> | <a href="'.$config['home'].'/book/?'.SID.'">GUEST</a> | <a href="'.$config['home'].'/pages/index.php?action=menu&amp;'.SID.'">MAIN</a>]<br />';
+echo '[<a href="'.$config['home'].'/">HOME</a> | <a href="'.$config['home'].'/download/">DOWN</a> | <a href="'.$config['home'].'/forum/">FORUM</a> | <a href="'.$config['home'].'/book/">GUEST</a> | <a href="'.$config['home'].'/pages/index.php?action=menu">MAIN</a>]<br />';
 
 require_once BASEDIR."includes/gzip_foot.php";
 echo '<!--'.MOTOR_VERSION.' version-->';

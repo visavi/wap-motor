@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -26,25 +26,25 @@ if (is_user()){
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if($action==""){  
+if($action==""){
 
 $ulot = read_string(DATADIR."loterea.dat", 0);
 
 if ($newtime!=$ulot[1] || empty($ulot[2])){
 
 $lots = array();
-$flot = file(DATADIR."loterea.dat"); 
+$flot = file(DATADIR."loterea.dat");
 $count = count($flot);
 
 for ($b=1; $b<$count; $b++) {
-$dt = explode("|",$flot[$b]); 
+$dt = explode("|",$flot[$b]);
 if ($dt[2]==$ulot[4]) {$lots[]=$dt[1];}
 }
 
 $wincount = count($lots);
 
 //----------------------------- Награждение ------------------------------//
-if ($wincount>0){	
+if ($wincount>0){
 
 $allmoneys = round($ulot[2]/$wincount);
 
@@ -54,7 +54,7 @@ if (file_exists(DATADIR."profil/$uz.prof")){
 $uzdata = reading_profil($uz);
 change_profil($uz, array(10=>$uzdata[10]+1, 41=>$uzdata[41]+$allmoneys));
 
-$textpriv = no_br($config['nickname'].'|Поздравляем! Вы сорвали Джек-пот в лотерее и выиграли '.moneys($allmoneys).'|'.SITETIME.'|'); 
+$textpriv = no_br($config['nickname'].'|Поздравляем! Вы сорвали Джек-пот в лотерее и выиграли '.moneys($allmoneys).'|'.SITETIME.'|');
 write_files(DATADIR.'privat/'.$uz.'.priv', "$textpriv\r\n");
 }}
 
@@ -76,7 +76,7 @@ write_files(DATADIR."loterea.dat", "$text\r\n", 1);
 
 }
 
-$filelot = file(DATADIR."loterea.dat"); 
+$filelot = file(DATADIR."loterea.dat");
 $ulot = explode("|",$filelot[0]);
 $total = count($filelot)-1;
 
@@ -93,7 +93,7 @@ echo 'Победители: '.$ulot[5].'<br />';
 
 echo '<br />Введите число от 1 до 100 включительно';
 
-echo '<br /><form action="loterea.php?action=bilet&amp;'.SID.'" method="post">';
+echo '<br /><form action="loterea.php?action=bilet" method="post">';
 echo '<input name="bilet" /><br />';
 echo '<input type="submit" value="Купить билет" /></form>';
 
@@ -101,7 +101,7 @@ echo '<hr />В этом туре участвуют: '.(int)$total.'<br />';
 echo 'Cтоимость билета '.moneys(50).'<br />';
 echo 'В наличии: '.moneys($udata[41]).'<br />';
 
-echo '<br /><img src="../images/img/chat.gif" alt="image" /> <a href="loterea.php?action=show&amp;'.SID.'">Участники</a><br />';
+echo '<br /><img src="../images/img/chat.gif" alt="image" /> <a href="loterea.php?action=show">Участники</a><br />';
 }
 
 ############################################################################################
@@ -111,8 +111,8 @@ if ($action=="bilet"){
 
 $bilet = (int)$_POST['bilet'];
 
-if ($bilet>0 && $bilet<=100){	
-if ($udata[41]>=50){	
+if ($bilet>0 && $bilet<=100){
+if ($udata[41]>=50){
 
 $string = search_string(DATADIR."loterea.dat", $log, 1);
 if (empty($string)){
@@ -134,8 +134,8 @@ echo 'Результат розыгрыша станет известным по
 } else {show_error('Вы не можете купить билет, т.к. на вашем счету недостаточно средств!');}
 } else {show_error('Неверный ввод данных! Введите число от 1 до 100 включительно!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="loterea.php?'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/chat.gif" alt="image" /> <a href="loterea.php?action=show&amp;'.SID.'">Участники</a><br />';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="loterea.php">Вернуться</a><br />';
+echo '<img src="../images/img/chat.gif" alt="image" /> <a href="loterea.php?action=show">Участники</a><br />';
 }
 
 ############################################################################################
@@ -147,25 +147,25 @@ echo 'Список участников купивших билеты<br /><br /
 $lotfiles = file(DATADIR."loterea.dat");
 $total = count($lotfiles);
 
-if ($total>1){ 
+if ($total>1){
 
 for ($i=1;$i<$total;$i++){
 $user_dats = explode("|",$lotfiles[$i]);
 
 echo $i.'. <img src="../images/img/chel.gif" alt="image" /> ';
-echo '<b><a href="../pages/anketa.php?uz='.$user_dats[1].'&amp;'.SID.'">'.nickname($user_dats[1]).'</a></b> ';
+echo '<b><a href="../pages/anketa.php?uz='.$user_dats[1].'">'.nickname($user_dats[1]).'</a></b> ';
 echo '(Ставка: '.$user_dats[2].')<br />';
 }
 
 } else {show_error('Еще нет ни одного участника!');}
 
 echo '<br />Всего участников: <b>'.(int)($total-1).'</b><br />';
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="loterea.php?'.SID.'">Вернуться</a><br />';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="loterea.php">Вернуться</a><br />';
 }
 
 } else {show_login('Вы не авторизованы, чтобы учавствовать в лотерее, необходимо');}
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

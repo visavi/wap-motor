@@ -9,7 +9,7 @@
 #  Вы не имеете право вносить изменения в код скрипта #
 #-----------------------------------------------------#
 echo '</div><div class="c" id="down">';
-echo '<a href="'.$config['home'].'/?'.SID.'">'.$config['copy'].'</a><br />';
+echo '<a href="'.$config['home'].'/">'.$config['copy'].'</a><br />';
 require_once BASEDIR."includes/counters.php";
 echo '</div><div style="text-align:center">';
 require_once BASEDIR."includes/gzip_foot.php";

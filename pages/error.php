@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -35,9 +35,9 @@ if ($countstr>=$config['maxlogdat']) {
 delete_lines(DATADIR."datalog/error404.dat",array(0,1));
 }}
 
-header ("Location: ".$config['home']."/index.php?isset=".$error."&".SID); exit;
+header ("Location: ".$config['home']."/index.php?isset=".$error.""); exit;
 }}
 
-header ("Location: ".$config['home']."/index.php?isset=404&".SID); exit;
+header ("Location: ".$config['home']."/index.php?isset=404"); exit;
 
 ?>

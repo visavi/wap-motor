@@ -1,19 +1,19 @@
 <img src="<?=BASEDIR?>images/img/partners.gif" alt="image" /> <b>Информация сайта</b><br /><br />
 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=test&amp;<?=SID?>">Тест движка</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=test">Тест движка</a><br />
 <img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>help/README.html">Почитать README</a><br />
 <img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>help/CHANGES.html">Список изменений</a><br />
 <img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>help/LICENSE.html">Лицензионное соглашение</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/avators.php?<?=SID?>">Галерея аватаров</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/avators.php?action=buy&amp;<?=SID?>">Платные аватары</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/avators.php?action=load&amp;<?=SID?>">Загрузить аватар</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/smiles.php?<?=SID?>">Общие cмайлы</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/smiles.php?action=admsmiles&amp;<?=SID?>">Админские cмайлы</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/searchuser.php?<?=SID?>">Поиск юзера</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/faq.php?<?=SID?>">FAQ (Чаво)</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/avators.php">Галерея аватаров</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/avators.php?action=buy">Платные аватары</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/avators.php?action=load">Загрузить аватар</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/smiles.php">Общие cмайлы</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/smiles.php?action=admsmiles">Админские cмайлы</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/searchuser.php">Поиск юзера</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/faq.php">FAQ (Чаво)</a><br />
 
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/razban.php?<?=SID?>">Исправительная</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/pravila.php?<?=SID?>">Правила сайта</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/tegi.php?<?=SID?>">Справка по тегам</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/privat.php?action=submit&amp;<?=SID?>">Отправить приват</a><br />
-<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>mail/?<?=SID?>">Написать админу</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/razban.php">Исправительная</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/pravila.php">Правила сайта</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/tegi.php">Справка по тегам</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>pages/privat.php?action=submit">Отправить приват</a><br />
+<img src="<?=BASEDIR?>images/img/act.gif" alt="image" /> <a href="<?=BASEDIR?>mail/">Написать админу</a><br />

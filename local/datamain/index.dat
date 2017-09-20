@@ -1,14 +1,14 @@
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>news/?<?=SID?>">Новости сайта</a> (<?=stats_news()?>) <?=last_news()?><br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>forum/?<?=SID?>">Форум</a> (<?=stats_forum()?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>book/?<?=SID?>">Гостевая книга</a> (<?=stats(0)?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>chat/?<?=SID?>">Мини-чат</a> (<?=stats(8)?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>gallery/?<?=SID?>">Фотогалерея</a> (<?=stats_gallery()?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>board/?<?=SID?>">Доска объявлений</a> (<?=stats_board()?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>votes/?<?=SID?>">Голосование</a> (<?=stats_votes()?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/userlist.php?<?=SID?>">Список юзеров</a> (<?=stats_users()?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/adminlist.php?<?=SID?>">Администрация</a> (<?=stats_admins()?>)<br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=statistik&amp;<?=SID?>">Статистика</a><br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=arkada&amp;<?=SID?>">Развлечения</a><br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=info&amp;<?=SID?>">Информация</a><br />
-<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=partners&amp;<?=SID?>">Партнеры и друзья</a><br />
-<img src="<?=BASEDIR?>images/img/act3.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=buttons&amp;<?=SID?>">Наши кнопки</a><br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>news/">Новости сайта</a> (<?=stats_news()?>) <?=last_news()?><br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>forum/">Форум</a> (<?=stats_forum()?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>book/">Гостевая книга</a> (<?=stats(0)?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>chat/">Мини-чат</a> (<?=stats(8)?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>gallery/">Фотогалерея</a> (<?=stats_gallery()?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>board/">Доска объявлений</a> (<?=stats_board()?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>votes/">Голосование</a> (<?=stats_votes()?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/userlist.php">Список юзеров</a> (<?=stats_users()?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/adminlist.php">Администрация</a> (<?=stats_admins()?>)<br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=statistik">Статистика</a><br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=arkada">Развлечения</a><br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=info">Информация</a><br />
+<img src="<?=BASEDIR?>images/img/act2.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=partners">Партнеры и друзья</a><br />
+<img src="<?=BASEDIR?>images/img/act3.gif" alt="image" /> <a href="<?=BASEDIR?>pages/index.php?action=buttons">Наши кнопки</a><br />

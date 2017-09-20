@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -21,7 +21,7 @@ echo '<img src="../images/img/menu.gif" alt="image" /> <b>Проверка си�
 $dires = array();
 $files = array();
 
-$dir = opendir (DATADIR); 
+$dir = opendir (DATADIR);
 while ($file = readdir ($dir)) {
 
 if ($file!='.' && $file!='..' && $file!='license.key' && $file!='.htaccess'){
@@ -31,7 +31,7 @@ $dires[] = $file;
 } else {
 $files[] = $file;
 }}}
-closedir ($dir); 
+closedir ($dir);
 
 
 ############################################################################################
@@ -59,22 +59,22 @@ foreach ($files as $key=>$value){
 
 if($key&1){$bgcolor="#e0e0e0"; }else{$bgcolor="#ffffff";}
 
-echo '<tr bgcolor="'.$bgcolor.'"><td width="40%">'.$value.'</td><td width="20%">'; 
+echo '<tr bgcolor="'.$bgcolor.'"><td width="40%">'.$value.'</td><td width="20%">';
 
-if (is_writeable(DATADIR.$value)){ 
-echo '<span style="color:#00ff00">Готов</span>'; 
-} else { 
-echo '<span style="color:#ff0000">Не готов</span>'; 
+if (is_writeable(DATADIR.$value)){
+echo '<span style="color:#00ff00">Готов</span>';
+} else {
+echo '<span style="color:#ff0000">Не готов</span>';
 }
 
 echo '</td><td width="20%">'.permissions(DATADIR.$value).'</td><td width="20%">'.formatsize(filesize(DATADIR.$value)).'</td></tr>';
-} 
+}
 
 echo '</table>';
 
 ############################################################################################
 ##                                         Директории                                     ##
-############################################################################################	
+############################################################################################
 echo'<br /><b>Готовность директорий</b><br /><br />';
 
 echo '<table width="99%" border="0" cellspacing="0" cellpadding="2">';
@@ -84,25 +84,25 @@ foreach ($dires as $key=>$value){
 
 if($key&1){$bgcolor="#e0e0e0"; }else{$bgcolor="#ffffff";}
 
-echo '<tr bgcolor="'.$bgcolor.'"><td width="40%">'.$value.'</td><td width="20%">'; 
+echo '<tr bgcolor="'.$bgcolor.'"><td width="40%">'.$value.'</td><td width="20%">';
 
 if (is_writeable(DATADIR.$value)) {
 echo '<span style="color:#00ff00">Готова</span>';
 } else {
-echo '<span style="color:#ff0000">Не готова</span>'; 
+echo '<span style="color:#ff0000">Не готова</span>';
 }
 
 echo '</td><td width="20%">'.permissions(DATADIR.$value).'</td><td width="20%">'.formatsize(read_dir(DATADIR.$value)).'</td></tr>';
-} 
+}
 
 echo '</table>';
 
 echo '<br />Если какой-то пункт выделен красным необходимо зайти по фтп и выставить CHMOD разрещающую запись<br />';
 
-echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

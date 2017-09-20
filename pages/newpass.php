@@ -8,12 +8,12 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
 include_once ("../themes/".$config['themes']."/index.php");
-   	   
+
 echo '<img src="../images/img/profiles.gif" alt="image" /> <b>Изменение пароля</b><br /><br />';
 
 if (is_user()){
@@ -43,7 +43,7 @@ setcookie(session_name(), '');
 session_destroy();
 session_unset();
 
-header ("Location: ".BASEDIR."index.php?isset=editpass&".SID); exit;
+header ("Location: ".BASEDIR."index.php?isset=editpass"); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Слишком длинный или короткий новый пароль (От 3 до 20 символов)</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Запрещен пароль состоящий только из цифр, используйте буквы</b><br />';}
@@ -54,8 +54,8 @@ header ("Location: ".BASEDIR."index.php?isset=editpass&".SID); exit;
 
 } else {show_login('Вы не авторизованы, чтобы изменять свой пароль, необходимо');}
 
-echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="profil.php?'.SID.'">Вернуться</a><br />';
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo'<br /><img src="../images/img/back.gif" alt="image" /> <a href="profil.php">Вернуться</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

@@ -31,7 +31,7 @@ $total = count($file);
 
 if ($total>0){
 
-echo '<form action="news.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="news.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'" method="post">';
 
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['postnews']){ $end = $total; }
@@ -47,11 +47,11 @@ echo '<div class="b">';
 echo '<img src="../images/img/edit.gif" alt="image" /> ';
 echo '<b>'.$data[0].'</b> <small>('.date_fixed($data[3]).')</small><br />';
 echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
-echo '<a href="news.php?action=editnews&amp;id='.$num.'&amp;start='.$start.'&amp;'.SID.'">Редактировать</a>';
+echo '<a href="news.php?action=editnews&amp;id='.$num.'&amp;start='.$start.'">Редактировать</a>';
 echo '</div><div>'.bb_code($data[1]).'<br />';
 
 echo 'Разместил: '.$data[4].'<br />';
-echo '<a href="../news/komm.php?id='.$data[5].'&amp;'.SID.'">Комментарии</a> ';
+echo '<a href="../news/komm.php?id='.$data[5].'">Комментарии</a> ';
 
 $countkomm = counter_string(DATADIR."datakomm/$data[5].dat");
 echo '('.(int)$countkomm.')</div>';
@@ -67,7 +67,7 @@ echo '<br /><br />Всего новостей: <b>'.(int)$total.'</b><br />';
 
 } else {echo '<br /><img src="../images/img/reload.gif" alt="image" /> <b>Новостей еще нет!</b><br />';}
 
-echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="news.php?action=addnews&amp;'.SID.'">Добавить новость</a>';
+echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="news.php?action=addnews">Добавить новость</a>';
 
 }
 
@@ -94,12 +94,12 @@ unlink (DATADIR."datakomm/$data[5].dat");
 
 delete_lines(DATADIR."news.dat", $del);
 
-header ("Location: news.php?start=$start&isset=mp_delnews&".SID);  exit;
+header ("Location: news.php?start=$start&isset=mp_delnews");  exit;
 
 } else {echo '<b>Ошибка удаления! Отсутствуют выбранные новости</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'">Вернуться</a>';
 }
 
 
@@ -121,7 +121,7 @@ $data[1] = str_replace("<br />","\r\n",$data[1]);
 
 echo '<b><big>Редактирование</big></b><br /><br />';
 
-echo '<form action="news.php?action=edit&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" name="form" method="post">';
+echo '<form action="news.php?action=edit&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'" name="form" method="post">';
 echo 'Заголовок: <br /><input type="text" name="name" size="50" maxlength="50" value="'.$data[0].'" /><br />';
 echo 'Cообщение:<br />';
 echo '<textarea cols="25" rows="10" name="msg">'.$data[1].'</textarea><br />';
@@ -138,7 +138,7 @@ echo '<br /><input type="submit" value="Изменить" /></form><hr />';
 } else {echo '<b>Ошибка! Новости для редактирования не существует!</b><br />';}
 } else {echo '<b>Произошла ошибка, не выбрана новость для редактирования!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'">Вернуться</a>';
 }
 
 
@@ -166,13 +166,13 @@ $text = no_br($name.'|'.$msg.'||'.$timer.'|'.$logins.'|'.$komm.'|');
 
 replace_lines(DATADIR."news.dat", $id, $text);
 
-header ("Location: news.php?start=$start&isset=mp_editnews&".SID); exit;
+header ("Location: news.php?start=$start&isset=mp_editnews"); exit;
 
 } else {echo '<b>Ошибка редактирования, отсутствуют важные данные</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 } else {echo '<b>Ошибка редактирования выбранной вами новости</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?start='.$start.'">Вернуться</a>';
 }
 
 
@@ -183,7 +183,7 @@ if($action=="addnews"){
 
 echo '<b><big>Создание новости</big></b><br /><br />';
 
-echo '<form action="news.php?action=add&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" name="form" method="post">';
+echo '<form action="news.php?action=add&amp;uid='.$_SESSION['token'].'" name="form" method="post">';
 echo 'Заголовок новости:<br />';
 echo '<input type="text" name="themes" size="50" maxlength="50" /><br />';
 echo 'Новость:<br />';
@@ -196,7 +196,7 @@ quicksmiles();
 echo 'Рассылка: <input name="subadd" type="checkbox" value="yes" /><br />';
 echo '<br /><input type="submit" value="Добавить" /></form><hr />';
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php">Вернуться</a>';
 }
 
 
@@ -238,16 +238,16 @@ $msg = nosmiles($msg);
 $msg = str_replace('<br />',"\n",$msg);
 $msg = strip_tags(bb_code($msg));
 
-echo '<form action="news.php?action=sub&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post" />';
+echo '<form action="news.php?action=sub&amp;uid='.$_SESSION['token'].'" method="post" />';
 echo '<input type="hidden" name="themes" value="'.$themes.'" />';
 echo '<input type="hidden" name="msg" value="'.$msg.'" />';
 echo '<input type="submit" value="Перейти к рассылке" /></form><hr />';
 
-} else { header ("Location: news.php?isset=mp_addnews&".SID); exit;}
+} else { header ("Location: news.php?isset=mp_addnews"); exit;}
 } else {echo '<b>Ошибка добавления новости, пустой заголовок или новость!</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?action=addnews&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?action=addnews">Вернуться</a>';
 
 }
 
@@ -287,7 +287,7 @@ $per = round(100 * $next / $send_count);
 echo '<br />Рассылка начата<br />';
 echo 'Успешно отправлено: '.(int)$per.'%<br /><br />';
 
-echo '<form action="news.php?action=sub&amp;last='.$next.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post" />';
+echo '<form action="news.php?action=sub&amp;last='.$next.'&amp;uid='.$_SESSION['token'].'" method="post" />';
 echo '<input type="hidden" name="themes" value="'.$themes.'" />';
 echo '<input type="hidden" name="msg" value="'.$msg.'" />';
 echo '<input type="submit" value="Продолжить рассылку" /></form><hr />';
@@ -299,13 +299,13 @@ echo 'Всего подписчиков: '.(int)$send_count.'<br />';
 } else {echo '<b>Ошибка рассылки новостей, пустой заголовок или новость!</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="news.php">Вернуться</a>';
 }
 
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

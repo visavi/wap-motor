@@ -111,7 +111,7 @@ $ip_check_matches += 1;}}
 }
 
 if ($ipdr_check_matches == 4 || $ip_check_matches == 4) {
-if (!strstr($php_self, 'pages/banip.php')){header ('Location: '.$config['home'].'/pages/banip.php?'.SID);  exit;}} //бан по IP
+if (!strstr($php_self, 'pages/banip.php')){header ('Location: '.$config['home'].'/pages/banip.php');  exit;}} //бан по IP
 }
 
 ############################################################################################
@@ -180,15 +180,15 @@ $config['privatpost'] = (int)$udata[32];        # Вывод писем в пр�
 
 if ($udata[37]==1){
 if (!strstr($php_self, 'pages/ban.php') && !strstr($php_self, 'pages/pravila.php')){
-header ('Location: '.$config['home'].'/pages/ban.php?log='.$log.'&'.SID);  exit();}}
+header ('Location: '.$config['home'].'/pages/ban.php?log='.$log);  exit();}}
 
 if ($config['regkeys']>0 && $udata[46]>0){
 if (!strstr($php_self, 'pages/key.php') && !strstr($php_self,'input.php')){
-header ('Location: '.$config['home'].'/pages/key.php?log='.$log.'&'.SID);  exit();}}
+header ('Location: '.$config['home'].'/pages/key.php?log='.$log);  exit();}}
 
 if (SITETIME>$udata[53] && $udata[54]>0){
 if (!strstr($php_self, 'games/kredit.php')){
-header ('Location: '.$config['home'].'/games/kredit.php?'.SID);  exit();}}
+header ('Location: '.$config['home'].'/games/kredit.php');  exit();}}
 
 //---------------------- функция проверки ip и браузера -----------------------//
 if ($udata[66]==1){
@@ -280,8 +280,8 @@ if (!empty($config['webthemes']) && empty($_SESSION['my_themes'])) {
 
 if (isset($_SESSION['my_themes'])){$config['themes'] = $_SESSION['my_themes'];}
 if (!file_exists(BASEDIR.'themes/'.$config['themes'].'/index.php')){$config['themes'] = 'default';}
-if ($config['nickname']=='' && file_exists(BASEDIR.'INSTALL.php') && !strstr($php_self, 'INSTALL.php')){header ('Location: '.BASEDIR.'INSTALL.php?'.SID); exit;}
-if ($config['closedsite']==1 && !strstr($php_self, 'pages/closed.php') && !strstr($php_self,'input.php') && $log!=$config['nickname']){header ('Location: '.$config['home'].'/pages/closed.php?'.SID); exit;}
+if ($config['nickname']=='' && file_exists(BASEDIR.'INSTALL.php') && !strstr($php_self, 'INSTALL.php')){header ('Location: '.BASEDIR.'INSTALL.php'); exit;}
+if ($config['closedsite']==1 && !strstr($php_self, 'pages/closed.php') && !strstr($php_self,'input.php') && $log!=$config['nickname']){header ('Location: '.$config['home'].'/pages/closed.php'); exit;}
 $header_title = '';
 
 ############################################################################################

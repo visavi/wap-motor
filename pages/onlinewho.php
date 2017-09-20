@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -53,23 +53,23 @@ $online_shet++;
 }}
 echo 'Всего на сайте: <b>'.(int)$online_shet.'</b><br />';
 
-echo '<a href="'.BASEDIR.'index.php?'.SID.'">На главной:</a>  '.(int)$index_shet.'<br />';
-echo '<a href="'.BASEDIR.'forum/?'.SID.'">В форуме:</a> '.(int)$forum_shet.'<br />';
-echo '<a href="'.BASEDIR.'chat/?'.SID.'">В мини-чате:</a> '.(int)$chat_shet.'<br />';
-echo '<a href="'.BASEDIR.'book/?'.SID.'">В гостевой:</a> '.(int)$book_shet.'<br />';
-echo '<a href="'.BASEDIR.'news/?'.SID.'">В новостях:</a> '.(int)$news_shet.'<br />';
-echo '<a href="'.BASEDIR.'download/?'.SID.'">В загрузках:</a> '.(int)$down_shet.'<br />';
-echo '<a href="'.BASEDIR.'index.php?action=arkada&amp;'.SID.'">В развлечениях:</a>  '.(int)$games_shet.'<br />';
-echo '<a href="'.BASEDIR.'library/?'.SID.'">В библиотеке:</a> '.(int)$library_shet.'<br />';
-echo '<a href="'.BASEDIR.'gallery/?'.SID.'">В галерее:</a> '.(int)$gallery_shet.'<br />';
+echo '<a href="'.BASEDIR.'index.php">На главной:</a>  '.(int)$index_shet.'<br />';
+echo '<a href="'.BASEDIR.'forum/">В форуме:</a> '.(int)$forum_shet.'<br />';
+echo '<a href="'.BASEDIR.'chat/">В мини-чате:</a> '.(int)$chat_shet.'<br />';
+echo '<a href="'.BASEDIR.'book/">В гостевой:</a> '.(int)$book_shet.'<br />';
+echo '<a href="'.BASEDIR.'news/">В новостях:</a> '.(int)$news_shet.'<br />';
+echo '<a href="'.BASEDIR.'download/">В загрузках:</a> '.(int)$down_shet.'<br />';
+echo '<a href="'.BASEDIR.'index.php?action=arkada">В развлечениях:</a>  '.(int)$games_shet.'<br />';
+echo '<a href="'.BASEDIR.'library/">В библиотеке:</a> '.(int)$library_shet.'<br />';
+echo '<a href="'.BASEDIR.'gallery/">В галерее:</a> '.(int)$gallery_shet.'<br />';
 
 echo '<br /><b>Пользователи на сайте:</b><br />';
 
 foreach($array_users as $key=>$value){
 if($key==0){
-echo '<b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'">'.nickname($value).'</a></b>';
+echo '<b><a href="../pages/anketa.php?uz='.$value.'">'.nickname($value).'</a></b>';
 }else{
-echo ', <b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'">'.nickname($value).'</a></b>';
+echo ', <b><a href="../pages/anketa.php?uz='.$value.'">'.nickname($value).'</a></b>';
 }
 }
 
@@ -86,7 +86,7 @@ $array_users[] = basename($filename);
 }
 
 $user_happy = "";
-foreach($array_users as $value){ 
+foreach($array_users as $value){
 
 $tex = file_get_contents(DATADIR."profil/$value");
 $data = explode(":||:",$tex);
@@ -103,20 +103,20 @@ write_files(DATADIR."datatmp/happyday.dat", $user_happy, 1, 0666);
 
 echo '<br /><hr /><b>Сегодняшние именинники:</b><br />';
 
-$happyuser = file_get_contents(DATADIR."datatmp/happyday.dat"); 
+$happyuser = file_get_contents(DATADIR."datatmp/happyday.dat");
 $arr_happy = explode("|",$happyuser);
 
 $counthappy = count($arr_happy)-1;
-    
+
 if ($counthappy>0){
 echo 'Сегодня отмечают свой день рождения '.(int)$counthappy.' чел.<br />';
-   
+
 foreach($arr_happy as $key=>$value){
 if ($value!==""){
 if ($key==0){
-echo '<b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';	
+echo '<b><a href="../pages/anketa.php?uz='.$value.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';
 } else {
-echo ', <b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';
+echo ', <b><a href="../pages/anketa.php?uz='.$value.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';
 }}}
 
 } else {echo '<b>Именинников нет!</b><br />';}
@@ -130,25 +130,25 @@ if ($daytime!=$filtimeday){
 write_files(DATADIR."datatmp/newuserday.dat", "", 1, 0666);
 }
 
-$newuser = file_get_contents(DATADIR."datatmp/newuserday.dat"); 
+$newuser = file_get_contents(DATADIR."datatmp/newuserday.dat");
 $arr_newuser= explode("|",$newuser);
 
 $countnewuser=count($arr_newuser)-1;
-    
+
 if($countnewuser>0){
 echo 'Сегодня зарегистрировались на сайте '.(int)$countnewuser.' чел.<br />';
 
 foreach($arr_newuser as $key=>$value){
 if ($value!=""){
 if ($key==0){
-echo '<b><a href="../pages/anketa.php?uz='.check($value).'&amp;'.SID.'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';	
+echo '<b><a href="../pages/anketa.php?uz='.check($value).'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';
 } else {
-echo ', <b><a href="../pages/anketa.php?uz='.check($value).'&amp;'.SID.'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';
+echo ', <b><a href="../pages/anketa.php?uz='.check($value).'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';
 }}}
 } else {echo '<b>Новичков нет!</b>';}
 
 
-echo '<br /><br /><img src="../images/img/chat.gif" alt="image" /> <a href="who.php?'.SID.'">Kто-где?</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a> '; 
+echo '<br /><br /><img src="../images/img/chat.gif" alt="image" /> <a href="who.php">Kто-где?</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a> ';
 include_once "../themes/".$config['themes']."/foot.php";
 ?>

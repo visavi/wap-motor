@@ -48,7 +48,7 @@ echo 'E-mail в черном списке: <b>'.stats_blackmail().'</b><br /><br
 //$arrloc[7] = Комментарий в галерее
 //$arrloc[8] = Сообщений в чате
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

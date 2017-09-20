@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -33,34 +33,34 @@ foreach ($globfiles as $filename) {
 $arrfiles[] = basename($filename);
 }
 
-$total = count($arrfiles);  
+$total = count($arrfiles);
 
 if ($total>0) {
 
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['editfiles']){ $end = $total; }
 else {$end = $start + $config['editfiles']; }
-for ($i = $start; $i < $end; $i++){	
-	
+for ($i = $start; $i < $end; $i++){
+
 $filename = str_replace('.dat','',$arrfiles[$i]);
-$size = formatsize(filesize(DATADIR."datamain/$arrfiles[$i]")); 
-$strok = count(file(DATADIR."datamain/$arrfiles[$i]")); 
+$size = formatsize(filesize(DATADIR."datamain/$arrfiles[$i]"));
+$strok = count(file(DATADIR."datamain/$arrfiles[$i]"));
 
 if ($arrfiles[$i]=='index.dat'){
 
 echo '<div class="b"><img src="../images/img/edit.gif" alt="image" /> ';
-echo '<b><a href="../index.php?'.SID.'"><span style="color:#ff0000">'.$arrfiles[$i].'</span></a></b> ('.$size.')<br />';
-echo '<a href="files.php?action=edit&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Редактировать</a> | ';
-echo '<a href="files.php?action=obzor&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Просмотр</a></div>'; 
+echo '<b><a href="../index.php"><span style="color:#ff0000">'.$arrfiles[$i].'</span></a></b> ('.$size.')<br />';
+echo '<a href="files.php?action=edit&amp;file='.$arrfiles[$i].'">Редактировать</a> | ';
+echo '<a href="files.php?action=obzor&amp;file='.$arrfiles[$i].'">Просмотр</a></div>';
 echo '<div>Кол. строк: '.$strok.'<br />';
 echo 'Изменен: '.date_fixed(filemtime(DATADIR."datamain/$arrfiles[$i]")).'</div>';
 } else {
 
 echo '<div class="b"><img src="../images/img/edit.gif" alt="image" /> ';
-echo '<b><a href="../pages/index.php?action='.$filename.'&amp;'.SID.'">'.$arrfiles[$i].'</a></b> ('.$size.')<br />';
-echo '<a href="files.php?action=edit&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Редактировать</a> | ';
-echo '<a href="files.php?action=obzor&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Просмотр</a> | ';
-echo '<a href="files.php?action=poddel&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Удалить</a></div>';
+echo '<b><a href="../pages/index.php?action='.$filename.'">'.$arrfiles[$i].'</a></b> ('.$size.')<br />';
+echo '<a href="files.php?action=edit&amp;file='.$arrfiles[$i].'">Редактировать</a> | ';
+echo '<a href="files.php?action=obzor&amp;file='.$arrfiles[$i].'">Просмотр</a> | ';
+echo '<a href="files.php?action=poddel&amp;file='.$arrfiles[$i].'">Удалить</a></div>';
 echo '<div>Кол. строк: '.$strok.'<br />';
 echo 'Изменен: '.date_fixed(filemtime(DATADIR."datamain/$arrfiles[$i]")).'</div>';
 }}
@@ -72,8 +72,8 @@ echo '<br /><br />Всего файлов: <b>'.(int)$total.'</b><br />';
 
 } else {show_error('Файлов еще нет!');}
 
-echo'<br /><img src="../images/img/files.gif" alt="image" /> <a href="files.php?action=new&amp;'.SID.'">Создать</a><br />';
-echo'<img src="../images/img/faq.gif" alt="image" /> <a href="files.php?action=faq&amp;'.SID.'">Помощь</a>';
+echo'<br /><img src="../images/img/files.gif" alt="image" /> <a href="files.php?action=new">Создать</a><br />';
+echo'<img src="../images/img/faq.gif" alt="image" /> <a href="files.php?action=faq">Помощь</a>';
 }
 
 
@@ -94,13 +94,13 @@ echo 'Строчек: '.(int)$count.'<br /><br />';
 
 echo highlight_code(check($opis)).'<br />';
 
-echo '<br /><img src="../images/img/edit.gif" alt="image" /> <a href="files.php?action=edit&amp;file='.$file.'&amp;'.SID.'">Редактировать</a><br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <a href="files.php?action=poddel&amp;file='.$file.'&amp;'.SID.'">Удалить</a>';
+echo '<br /><img src="../images/img/edit.gif" alt="image" /> <a href="files.php?action=edit&amp;file='.$file.'">Редактировать</a><br />';
+echo '<img src="../images/img/error.gif" alt="image" /> <a href="files.php?action=poddel&amp;file='.$file.'">Удалить</a>';
 
 } else {show_error('Ошибка! Данного файла не существует!');}
 } else {show_error('Ошибка! Недопустимое название страницы!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -119,7 +119,7 @@ $datamainfile = str_replace('&amp;','&',$datamainfile);
 echo '<div class="form" id="form">';
 echo '<b>Редактирование файла '.$file.'</b><br />';
 
-echo '<form action="files.php?action=editfile&amp;file='.$file.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" name="form" method="post">';
+echo '<form action="files.php?action=editfile&amp;file='.$file.'&amp;uid='.$_SESSION['token'].'" name="form" method="post">';
 
 echo '<textarea cols="90" rows="20" name="msg">'.check($datamainfile).'</textarea><br />';
 
@@ -132,8 +132,8 @@ echo '<br /><input type="submit" value="Редактировать" /></form></d
 } else {show_error('Ошибка! Данного файла не существует!');}
 } else {show_error('Ошибка! Недопустимое название страницы!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?'.SID.'">Вернуться</a><br />';
-echo '<img src="../images/img/online.gif" alt="image" /> <a href="../pages/index.php?action='.$filename.'&amp;'.SID.'">Просмотр</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php">Вернуться</a><br />';
+echo '<img src="../images/img/online.gif" alt="image" /> <a href="../pages/index.php?action='.$filename.'">Просмотр</a>';
 }
 
 ############################################################################################
@@ -153,14 +153,14 @@ $msg = str_replace('&','&amp;',$msg);
 
 write_files(DATADIR."datamain/$file", $msg, 1);
 
-header ("Location: files.php?action=edit&file=$file&isset=mp_editfiles&".SID); exit;
+header ("Location: files.php?action=edit&file=$file&isset=mp_editfiles"); exit;
 
 } else {show_error('Ошибка! Данного файла не существует!');}
 } else {show_error('Ошибка! Недопустимое название страницы!');}
 } else {show_error('Ошибка! Вы не ввели текст для редактирования!');}
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?action=edit&amp;file='.$file.'&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?action=edit&amp;file='.$file.'">Вернуться</a>';
 }
 
 ############################################################################################
@@ -168,7 +168,7 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?
 ############################################################################################
 if ($action=="faq"){
 
-echo '<b>Сокрашенные коды Wap-Motor</b><br /><br />';	
+echo '<b>Сокрашенные коды Wap-Motor</b><br /><br />';
 
 echo '<img src="../images/editor/a.gif" alt="image" /> - Тег служит для создания гипертекста (ссылок). Гипертекст позволяет осуществлять мгновенный переход от одного фрагмента текста к другому.<br />';
 echo '<img src="../images/editor/img.gif" alt="image" /> - Тег служит для внедрения графики на страницы. alt - Выводит текст к картинке. Полезно, если браузер не отображает графику на странице.<br />';
@@ -188,7 +188,7 @@ echo '<img src="../images/editor/green.gif" alt="image" /> - Тег изменя
 echo '<img src="../images/editor/blue.gif" alt="image" /> - Тег изменяет цвет текста на синий<br />';
 echo '<img src="../images/editor/yellow.gif" alt="image" /> - Тег изменяет цвет текста на желтый<br />';
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -200,7 +200,7 @@ echo '<b>Создание нового файла</b><br /><br />';
 
 if (is_writeable(DATADIR."datamain")){
 
-echo '<div class="form"><form action="files.php?action=addnew&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<div class="form"><form action="files.php?action=addnew&amp;uid='.$_SESSION['token'].'" method="post">';
 echo 'Название файла:<br />';
 echo '<input type="text" name="newfile" maxlength="20" /><br /><br />';
 echo '<input value="Создать файл" type="submit" /></form></div>';
@@ -208,7 +208,7 @@ echo '<br />Разрешены латинские символы и цифры, 
 
 } else {show_error('Директория недоступна для создания файлов!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -221,17 +221,17 @@ $newfile = check($_POST['newfile']);
 
 if ($uid==$_SESSION['token']){
 if (preg_match('|^[a-z0-9_\-]+$|i', $newfile)){
-if (!file_exists(DATADIR.'datamain/'.$newfile.'.dat')){	
+if (!file_exists(DATADIR.'datamain/'.$newfile.'.dat')){
 
 write_files(DATADIR.'datamain/'.$newfile.'.dat', '', 1, 0666);
 
-header ('Location: files.php?action=edit&file='.$newfile.'.dat&isset=mp_newfiles&'.SID);
+header ('Location: files.php?action=edit&file='.$newfile.'.dat&isset=mp_newfiles');
 
 } else {show_error('Ошибка! Файл с данным названием уже существует!');}
 } else {show_error('Ошибка! Недопустимое название файла!');}
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?action=new&amp;'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?action=new">Вернуться</a>';
 }
 
 ############################################################################################
@@ -243,12 +243,12 @@ if (preg_match('|^[a-z0-9_\.\-]+$|i', $file)){
 if (file_exists(DATADIR."datamain/$file")){
 
 echo 'Вы подтверждаете что хотите удалить файл <b>'.$file.'</b><br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="files.php?action=del&amp;file='.$file.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить</a></b><br />';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="files.php?action=del&amp;file='.$file.'&amp;uid='.$_SESSION['token'].'">Удалить</a></b><br />';
 
 } else {show_error('Ошибка! Данного файла не существует!');}
 } else {show_error('Ошибка! Недопустимое название страницы!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php">Вернуться</a>';
 }
 
 ############################################################################################
@@ -265,7 +265,7 @@ if ($file!='index.dat'){
 
 if (unlink (DATADIR."datamain/$file")){
 
-header ("Location: files.php?isset=mp_delfiles&".SID); exit;
+header ("Location: files.php?isset=mp_delfiles"); exit;
 
 } else {show_error('Ошибка! Не удалось удалить файл!');}
 } else {show_error('Ошибка! Запрещено удалять главный файл!');}
@@ -273,13 +273,13 @@ header ("Location: files.php?isset=mp_delfiles&".SID); exit;
 } else {show_error('Ошибка! Недопустимое название страницы!');}
 } else {show_error('Ошибка! Неверный идентификатор сессии, повторите действие!');}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php">Вернуться</a>';
 }
 
-echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo'<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo'<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit;}
+} else {header ("Location: ../index.php?isset=404"); exit;}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

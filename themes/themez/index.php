@@ -15,7 +15,7 @@ echo '<!--Themes by Silent-->';
 
 
 echo '<table cellpadding="0" cellspacing="0"><tr><td>';
-echo '<div class="a" id="up"><a href="/index.php?'.SID.'"><img src="'.$config['logotip'].'" alt="'.$config['title'].'" /></a><br />'.$config['logos'].' </div>';
+echo '<div class="a" id="up"><a href="/index.php"><img src="'.$config['logotip'].'" alt="'.$config['title'].'" /></a><br />'.$config['logos'].' </div>';
 
 if ($config['rekhead']==1){include_once DATADIR."datamain/reklama_head.dat";}
 include_once (BASEDIR."includes/isset.php");

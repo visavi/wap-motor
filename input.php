@@ -50,7 +50,7 @@ $_SESSION['my_ip'] = $my_ip;
 
 change_profil($login, array(11=>$info[11]+1, 14=>$ip, 25=>1, 44=>SITETIME));
 
-header ("Location: index.php?".SID); exit;
+header ("Location: index.php"); exit;
 }}}
 header ("Location: pages/login.php?isset=inputoff"); exit;
 }

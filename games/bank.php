@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -49,7 +49,7 @@ if ($string[2]>=1000000){$stavka=1;}
 $percent = round((($string[2]*$stavka)/100));
 
 $text = no_br('|'.$log.'|'.($percent + $string[2]).'|'.(SITETIME + 43200).'|');
- 
+
 replace_lines(DATADIR."bank.dat", $string['line'], $text);
 
 echo '<b>Продление счета успешно завершено, получено c процентов: '.moneys($percent).'</b><br />';
@@ -57,13 +57,13 @@ echo '<b>Продление счета успешно завершено, пол
 
 } else {
 echo 'Вы новый клиент нашего банка. Мы рады, что вы доверяеете нам свои деньги<br />';
-echo 'Сейчас ваш счет не открыт, достаточно вложить '.moneys(10).', чтобы получать проценты с вклада<br />'; 
+echo 'Сейчас ваш счет не открыт, достаточно вложить '.moneys(10).', чтобы получать проценты с вклада<br />';
 }
 
 
 echo '<br /><b>Операция:</b><br />';
 
-echo '<form action="bank.php?action=operacia&amp;'.SID.'" method="post">';
+echo '<form action="bank.php?action=operacia" method="post">';
 echo '<input name="gold" /><br />';
 echo '<select name="oper">';
 echo '<option value="2">Положить на счет</option><option value="1">Снять со счета</option>';
@@ -145,16 +145,16 @@ echo 'Получить проценты с вклада вы сможете не
 
 } else {show_error('Недостаточное количество денег, у вас нет данной суммы на руках');}
 } else {show_error('Операции менее чем с '.moneys(10).' не проводятся');}
-} 
+}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="bank.php?'.SID.'">Вернуться</a>';
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="bank.php">Вернуться</a>';
 }
 
 } else {show_login('Вы не авторизованы, чтобы совершать операции, необходимо');}
 
-echo '<br /><img src="../images/img/stat.gif" alt="image" /> <a href="../games/livebank.php?'.SID.'">Статистика вкладов</a><br />';
-echo '<img src="../images/img/many.gif" alt="image" /> <a href="../games/kredit.php?'.SID.'">Выдача кредитов</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<br /><img src="../images/img/stat.gif" alt="image" /> <a href="../games/livebank.php">Статистика вкладов</a><br />';
+echo '<img src="../images/img/many.gif" alt="image" /> <a href="../games/kredit.php">Выдача кредитов</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

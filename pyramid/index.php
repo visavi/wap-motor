@@ -20,7 +20,7 @@ show_title('menu.gif', 'Добавление сообщения');
 
 if (is_user()){
 
-echo'<form action="go.php?'.SID.'" name="form" method="post">';
+echo'<form action="go.php" name="form" method="post">';
 
 echo'Ваш ICQ:<br />';
 echo'<input type="text" name="icq" value="'.$udata[19].'" maxlength="9" /><br />';
@@ -42,7 +42,7 @@ echo 'В тексте запрещено использовать любые н�
 
 } else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>'; 
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -20,9 +20,9 @@ if (isset($_GET['imja'])){$imja = '[b]'.safe_decode(check($_GET['imja'])).'[/b],
 show_title('partners.gif', 'Мини-чат');
 
 echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';
-echo '<a href="#form">Написать</a> / ';	
-echo '<a href="index.php?rand='.mt_rand(100,999).'&amp;'.SID.'">Обновить</a>';
-if (is_admin(array(101,102,103,105))){echo ' / <a href="'.ADMINDIR.'chat.php?start='.$start.'&amp;'.SID.'">Управление</a>';}
+echo '<a href="#form">Написать</a> / ';
+echo '<a href="index.php?rand='.mt_rand(100,999).'">Обновить</a>';
+if (is_admin(array(101,102,103,105))){echo ' / <a href="'.ADMINDIR.'chat.php?start='.$start.'">Управление</a>';}
 echo '<hr />';
 
 if (is_user()){
@@ -50,7 +50,7 @@ if ($config['magnik']==1){
 $mmagfi = file(DATADIR."chat.dat");
 $mmagshow = explode("|",end($mmagfi));
 
-if($mmagshow[8]!="" && SITETIME>$mmagshow[7]){ 
+if($mmagshow[8]!="" && SITETIME>$mmagshow[7]){
 
 $magtext = no_br('На вопрос никто не ответил, правильный ответ был: [b]'.$mmagshow[8].'[/b]! Следующий вопрос через 1 минуту|Вундер-киндер||'.SITETIME.'|Opera|127.0.0.3|0|'.(SITETIME + 60).'||');
 
@@ -61,9 +61,9 @@ write_files(DATADIR."chat.dat", "$magtext\r\n");
 $magfi = file(BASEDIR."includes/chat_mag.php");
 $mag_rand = array_rand($magfi);
 $magshow = $magfi[$mag_rand];
-$magstr = explode("|",$magshow); 
+$magstr = explode("|",$magshow);
 
-if (empty($mmagshow[8]) && SITETIME>$mmagshow[7] && $magstr[0]!=""){ 
+if (empty($mmagshow[8]) && SITETIME>$mmagshow[7] && $magstr[0]!=""){
 
 $strlent = utf_strlen($magstr[1]);
 
@@ -77,9 +77,9 @@ write_files(DATADIR."chat.dat", "$magtext\r\n");
 //----------------------------  Подключение бота  -----------------------------------------//
 if($config['botnik']==1){
 if(empty($_SESSION['botochat'])){
-	
-$hellobots = array('Приветик', 'Здравствуй', 'Хай', 'Добро пожаловать', 'Салют', 'Hello', 'Здарова'); 
-$hellobots_rand = array_rand($hellobots); 
+
+$hellobots = array('Приветик', 'Здравствуй', 'Хай', 'Добро пожаловать', 'Салют', 'Hello', 'Здарова');
+$hellobots_rand = array_rand($hellobots);
 $hellobots_well = $hellobots[$hellobots_rand];
 
 $mmagfi = file(DATADIR."chat.dat");
@@ -101,7 +101,7 @@ delete_lines(DATADIR."chat.dat", array(0,1,2,3,4));
 //---------------------------------------------------------------//
 $file = file(DATADIR."chat.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
 if ($total>0){
 
@@ -123,7 +123,7 @@ echo '<div class="b">';
 
 echo $useravatars;
 
-echo '<b><a href="index.php?imja='.safe_encode(nickname($data[1])).'&amp;'.SID.'#form">'.nickname($data[1]).'</a></b> '.user_title($data[1]).$useronline.' <small>('.date_fixed($data[3]).')</small></div>';
+echo '<b><a href="index.php?imja='.safe_encode(nickname($data[1])).'#form">'.nickname($data[1]).'</a></b> '.user_title($data[1]).$useronline.' <small>('.date_fixed($data[3]).')</small></div>';
 echo '<div>'.bb_code($data[0]).'<br />';
 echo '<span class="data">('.$data[4].', '.$data[5].')</span></div>';
 }
@@ -135,7 +135,7 @@ page_strnavigation('index.php?', $config['chatpost'], $start, $total);
 
 if (is_user()){
 echo '<br /><div class="form" id="form">';
-echo '<form action="add.php?'.SID.'" method="post">';
+echo '<form action="add.php" method="post">';
 echo '<b>Сообщение:</b><br />';
 echo '<textarea cols="20" rows="3" name="msg">'.$imja.'</textarea><br />';
 echo '<input type="submit" value="Добавить" /></form></div>';
@@ -143,11 +143,11 @@ echo '<input type="submit" value="Добавить" /></form></div>';
 } else {show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо');}
 
 echo '<br /><a href="#up"><img src="../images/img/ups.gif" alt="image" /></a> ';
-echo '<a href="../pages/pravila.php?'.SID.'">Правила</a> / ';
-echo '<a href="../pages/smiles.php?'.SID.'">Смайлы</a> / ';
-echo '<a href="../pages/tegi.php?'.SID.'">Теги</a><br /><br />';
+echo '<a href="../pages/pravila.php">Правила</a> / ';
+echo '<a href="../pages/smiles.php">Смайлы</a> / ';
+echo '<a href="../pages/tegi.php">Теги</a><br /><br />';
 
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a>'; 
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a>';
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>

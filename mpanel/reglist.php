@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -60,7 +60,7 @@ $count_delusers = count($array_users);
 if($count_delusers>0){
 echo '<br />Было удалено аккаунтов: <b>'.(int)$count_delusers.'</b><br />';
 
-delete_lines(DATADIR."datatmp/reglist.dat", $del); 
+delete_lines(DATADIR."datatmp/reglist.dat", $del);
 
 echo 'Список: ';
 foreach($array_users as $delkey=>$delvalue){
@@ -75,26 +75,26 @@ echo '<br /><br />';
 
 $file = file(DATADIR."datatmp/reglist.dat");
 $file = array_reverse($file);
-$total = count($file);  
+$total = count($file);
 
 if ($total>0){
 
-echo '<form action="reglist.php?action=choice&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
+echo '<form action="reglist.php?action=choice&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'" method="post">';
 
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['reglist']){ $end = $total; }
 else {$end = $start + $config['reglist'];}
 for ($i = $start; $i < $end; $i++){
-	
+
 $data = explode("|",$file[$i]);
 
 $num = $total - $i - 1;
 
 echo '<div class="b">';
 echo '<input type="checkbox" name="id[]" value="'.$num.'" /> ';
-echo '<img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[0].'&amp;'.SID.'"> '.nickname($data[0]).' </a></b>';
+echo '<img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[0].'"> '.nickname($data[0]).' </a></b>';
 echo '(E-mail: '.$data[1].')</div>';
-	
+
 echo '<div>Зарегистрирован: '.date_fixed($data[2]).'</div>';
 
 }
@@ -142,9 +142,9 @@ if (file_exists(DATADIR."profil/$data[0].prof")){
 change_profil($data[0], array(46=>0, 47=>''));
 }}}
 
-delete_lines(DATADIR."datatmp/reglist.dat", $id); 
+delete_lines(DATADIR."datatmp/reglist.dat", $id);
 
-header ("Location: reglist.php?start=$start&isset=mp_addregusers&".SID); exit();
+header ("Location: reglist.php?start=$start&isset=mp_addregusers"); exit();
 }
 
 //----------------------------------- Запрет регистрации -------------------------------------//
@@ -160,22 +160,22 @@ if (file_exists(DATADIR."profil/$data[0].prof")){
 delete_users($data[0]);
 }}}
 
-delete_lines(DATADIR."datatmp/reglist.dat", $id); 
+delete_lines(DATADIR."datatmp/reglist.dat", $id);
 
-header ("Location: reglist.php?start=$start&isset=mp_delregusers&".SID); exit();
+header ("Location: reglist.php?start=$start&isset=mp_delregusers"); exit();
 }
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Отсутствуют выбранные пользователи!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не выбрано действие!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="reglist.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="reglist.php?start='.$start.'">Вернуться</a>';
 }
 
-echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
-echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
+echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php">В админку</a><br />';
+echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php">На главную</a><br />';
 
-} else {header ("Location: ../index.php?isset=404&".SID); exit();}
+} else {header ("Location: ../index.php?isset=404"); exit();}
 
 include_once ("../themes/".$config['themes']."/foot.php");
 ?>
