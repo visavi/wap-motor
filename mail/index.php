@@ -40,7 +40,7 @@ echo 'Сообщение:<br /><textarea cols="25" rows="5" name="body"></textar
 
 echo 'Проверочный код: ';
 if ($config['protectimg']==1){
-echo '<br /><img src="../gallery/protect.php" alt="" /><br />';
+echo '<br /><img onclick="this.src=\'/gallery/protect.php?\'+Math.random()" style="cursor: pointer;" src="/gallery/protect.php" alt="" /><br />';
 } else {
 echo '<b>'.$_SESSION['protect'].'</b><br />';
 }

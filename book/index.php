@@ -78,14 +78,14 @@ echo '<form action="add.php?uid='.$_SESSION['token'].'" method="post">';
 echo 'Сообщение:<br />';
 echo '<textarea cols="25" rows="3" name="msg"></textarea><br />';
 
-echo 'Проверочный код:<br /> ';
-echo '<input name="provkod" size="6" maxlength="6" /> ';
-
+echo 'Проверочный код: ';
 if ($config['protectimg']==1){
-echo '<img src="../gallery/protect.php" alt="" /><br />';
+    echo '<br /><img onclick="this.src=\'/gallery/protect.php?\'+Math.random()" style="cursor: pointer;" src="/gallery/protect.php" alt="" /><br />';
 } else {
-echo '<b>'.$_SESSION['protect'].'</b><br />';
+    echo '<b>'.$_SESSION['protect'].'</b><br />';
 }
+
+echo '<input name="provkod" size="6" maxlength="6" /> ';
 
 echo '<br /><input type="submit" value="Написать" /></form></div>';
 

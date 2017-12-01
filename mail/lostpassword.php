@@ -36,7 +36,7 @@ echo 'Логин:<br />';
 echo '<input name="uz" type="text" maxlength="20" value="'.$cookname.'" /><br />';
 echo 'Проверочный код: ';
 if ($config['protectimg']==1){
-echo '<img src="'.BASEDIR.'gallery/protect.php" alt="" /><br />';
+echo '<br /><img onclick="this.src=\'/gallery/protect.php?\'+Math.random()" style="cursor: pointer;" src="/gallery/protect.php" alt="" /><br />';
 } else {
 echo '<b>'.$_SESSION['protect'].'</b><br />';
 }

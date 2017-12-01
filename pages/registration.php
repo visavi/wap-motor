@@ -44,7 +44,7 @@ echo 'Ваш e-mail: <br /><input name="meil" maxlength="50" /><br />';
 echo 'Проверочный код: ';
 
 if ($config['protectimg']==1){
-echo '<img src="../gallery/protect.php" alt="" /><br />';
+echo '<br /><img onclick="this.src=\'/gallery/protect.php?\'+Math.random()" style="cursor: pointer;" src="/gallery/protect.php" alt="" /><br />';
 } else {
 echo '<b>'.$_SESSION['protect'].'</b><br />';
 }
