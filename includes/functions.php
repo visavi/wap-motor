@@ -1920,7 +1920,7 @@ function last_news() {
 		$count = count($file);
 
 		if ($config['lastnews'] > $count) {
-			$config['lastnews'] = count;
+			$config['lastnews'] = $count;
 		}
 
 		for ($i = 0; $i < $config['lastnews']; $i++) {
