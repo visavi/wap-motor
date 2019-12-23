@@ -1,6 +1,6 @@
 # WAP-MOTOR version 25.0
 
-![](/images/img/wap-motor.gif)  
+![](/images/img/logo.png)  
 
 Текущая версия 25.0 от 30.11.17
 
