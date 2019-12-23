@@ -123,8 +123,6 @@ ICQ: 36-44-66
 Очень буду рад и благодарен за финансовую помощь и поддержку  
   
 ### Наши реквизиты
-WM # R 152942568632 и Z 571168380987  
+WM R152942568632 и Z571168380987  
     
-[© W@P-MOTORS PROJECT](http://visavi.net)
-
-© Powered by Wap-Motors
+[© Powered by Wap-Motors](http://visavi.net)
