@@ -22,7 +22,7 @@ echo '<img src="../images/img/partners.gif" alt="image" /> <b>Список по�
 ############################################################################################
 ##                                       Запись в кэш                                     ##
 ############################################################################################
-$filtime = filemtime(DATADIR."datatmp/userlist.dat");
+$filtime = @filemtime(DATADIR."datatmp/userlist.dat");
 $user_count = counter_string(DATADIR."datatmp/userlist.dat");
 
 $filtime=$filtime+(3600*$config['userlistcache']);

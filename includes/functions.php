@@ -46,10 +46,7 @@ function date_fixed($timestamp, $format = "d.m.y / H:i") {
 
 	$today = date("d.m.y", SITETIME + $shift);
 	$yesterday = date("d.m.y", strtotime("-1 day", SITETIME + $shift));
-
-	$datestamp = str_replace($today, 'Сегодня', $datestamp);
-	$datestamp = str_replace($yesterday, 'Вчера', $datestamp);
-
+	$datestamp = str_replace([$today, $yesterday], ['Сегодня', 'Вчера'], $datestamp);
 	$search = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	$replace = array('Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря');
 	$datestamp = str_replace($search, $replace, $datestamp);
@@ -114,8 +111,7 @@ function moneys($string) {
 // ------------------- Функция очистки файла --------------------//
 function clear_files($files) {
 	if (file_exists($files)) {
-		$file = file($files);
-		$fp = fopen($files, "a+");
+		$fp = fopen($files, 'ab+');
 		flock ($fp, LOCK_EX);
 		ftruncate ($fp, 0);
 		fflush($fp);
@@ -196,17 +192,17 @@ function move_lines($files, $lines, $where) {
 				$file = file($files);
 
 				if (isset($file[$lines]) && isset($file[$lines2])) {
-					$fp = fopen($files, "a+");
+					$fp = fopen($files, 'ab+');
 					flock ($fp, LOCK_EX);
 					ftruncate ($fp, 0);
 
 					foreach($file as $key => $val) {
 						if ($lines == $key) {
-							fputs($fp, $file[$lines2]);
+							fwrite($fp, $file[$lines2]);
 						} elseif ($lines2 == $key) {
-							fputs($fp, $file[$lines]);
+							fwrite($fp, $file[$lines]);
 						} else {
-							fputs($fp, $val);
+							fwrite($fp, $val);
 						}
 					}
 
@@ -588,9 +584,8 @@ function read_file($file) {
 
 // --------------- Функция подсчета веса директории -------------------//
 function read_dir($dir) {
-	if (empty($allsize)) {
-		$allsize = 0;
-	}
+
+	$allsize = 0;
 
 	if ($path = opendir($dir)) {
 		while ($file_name = readdir($path)) {
@@ -878,7 +873,8 @@ function safe_decode($string) {
 // ------------------ Функция шифрования по ключу --------------------//
 function xoft_encode($string, $key) {
 	$result = "";
-	for($i = 1; $i <= strlen($string); $i++) {
+	$length = strlen($string);
+	for($i = 1; $i <= $length; $i++) {
 		$char = substr($string, $i-1, 1);
 		$keychar = substr($key, ($i % strlen($key)) - 1, 1);
 		$char = chr(ord($char) + ord($keychar));
@@ -891,8 +887,9 @@ function xoft_encode($string, $key) {
 function xoft_decode($string, $key) {
 	$string = safe_decode($string);
 	$result = "";
-	for($i = 1; $i <= strlen($string); $i++) {
-		$char = substr($string, $i - 1, 1);
+	$length = strlen($string);
+	for($i = 1; $i <= $length; $i++) {
+		$char = $string[$i - 1];
 		$keychar = substr($key, ($i % strlen($key)) - 1, 1);
 		$char = chr(ord($char) - ord($keychar));
 		$result .= $char;
@@ -912,29 +909,6 @@ function generate_password($length = "") {
 		$makepass .= $salt[array_rand($salt)];
 	}
 	return $makepass;
-}
-
-// ------------------ Функция для читаемого вывода массива --------------------//
-function text_dump($var, $level = 0) {
-	if (is_array($var)) $type = "array[".count($var)."]";
-	else if (is_object($var)) $type = "object";
-	else $type = "";
-	if ($type) {
-		echo $type.'<br />';
-		for(Reset($var), $level++; list($k, $v) = each($var);) {
-			if (is_array($v) && $k === "GLOBALS") continue;
-			for($i = 0; $i < $level * 3; $i++) echo ' ';
-			echo '<b>'.htmlspecialchars($k).'</b> => ', text_dump($v, $level);
-		}
-	} else echo '"', htmlspecialchars($var), '"<br />';
-}
-
-function dump($var) {
-	if ((is_array($var) || is_object($var)) && count($var)) {
-		echo '<pre>', text_dump($var), '</pre>';
-	} else {
-		echo '<tt>', text_dump($var), '</tt>';
-	}
 }
 
 // ------------------ Функция кодировки-раскодировки юникода --------------------//
@@ -1524,10 +1498,12 @@ function utf_stristr($str, $search, $before = false) {
 		return false;
 	}
 
-	preg_match('|^(.*)'.preg_quote($search).'|iusU', $str, $matches);
+	preg_match('|^(.*)' . preg_quote($search, '|') . '|iusU', $str, $matches);
 
-	if (count($matches) == 2) {
-		if ($before) return utf_substr($str, 0, utf_strlen($matches[1]));
+	if (count($matches) === 2) {
+		if ($before) {
+			return utf_substr($str, 0, utf_strlen($matches[1]));
+		}
 		return utf_substr($str, utf_strlen($matches[1]));
 	}
 
@@ -1543,18 +1519,32 @@ function is_utf($str) {
 	for($i = 0; $i < $len; $i++) {
 		$c = ord($str[$i]);
 		if ($c > 128) {
-			if (($c >= 254)) return false;
-			elseif ($c >= 252) $bits = 6;
-			elseif ($c >= 248) $bits = 5;
-			elseif ($c >= 240) $bits = 4;
-			elseif ($c >= 224) $bits = 3;
-			elseif ($c >= 192) $bits = 2;
-			else return false;
-			if (($i + $bits) > $len) return false;
+			if (($c >= 254)) {
+				return false;
+			}
+
+			if ($c >= 252) {
+				$bits = 6;
+			} elseif ($c >= 248) {
+				$bits = 5;
+			} elseif ($c >= 240) {
+				$bits = 4;
+			} elseif ($c >= 224) {
+				$bits = 3;
+			} elseif ($c >= 192) {
+				$bits = 2;
+			} else {
+				return false;
+			}
+			if (($i + $bits) > $len) {
+				return false;
+			}
 			while ($bits > 1) {
 				$i++;
 				$b = ord($str[$i]);
-				if ($b < 128 || $b > 191) return false;
+				if ($b < 128 || $b > 191) {
+					return false;
+				}
 				$bits--;
 			}
 		}
@@ -1565,22 +1555,35 @@ function is_utf($str) {
 // --------------------- Функция вырезания битых символов UTF -------------------//
 function utf_badstrip($str) {
 	$ret = '';
-	for ($i = 0;$i < strlen($str);) {
+	$length = strlen($str);
+	for ($i = 0; $i < $length;) {
 		$tmp = $str[$i++];
 		$ch = ord($tmp);
 		if ($ch > 0x7F) {
-			if ($ch < 0xC0) continue;
-			elseif ($ch < 0xE0) $di = 1;
-			elseif ($ch < 0xF0) $di = 2;
-			elseif ($ch < 0xF8) $di = 3;
-			elseif ($ch < 0xFC) $di = 4;
-			elseif ($ch < 0xFE) $di = 5;
-			else continue;
+			if ($ch < 0xC0) {
+				continue;
+			}
+
+			if ($ch < 0xE0) {
+				$di = 1;
+			} elseif ($ch < 0xF0) {
+				$di = 2;
+			} elseif ($ch < 0xF8) {
+				$di = 3;
+			} elseif ($ch < 0xFC) {
+				$di = 4;
+			} elseif ($ch < 0xFE) {
+				$di = 5;
+			} else {
+				continue;
+			}
 
 			for ($j = 0;$j < $di;$j++) {
 				$tmp .= $ch = $str[$i + $j];
 				$ch = ord($ch);
-				if ($ch < 0x80 || $ch > 0xBF) continue 2;
+				if ($ch < 0x80 || $ch > 0xBF) {
+					continue 2;
+				}
 			}
 			$i += $di;
 		}

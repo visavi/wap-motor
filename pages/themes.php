@@ -21,7 +21,7 @@ echo 'Вы используете скин: <b>'.check($udata[20]).'</b><br /><b
 }
 
 //------------------------------ НОВАЯ ФУНКЦИЯ КЕШИРОВАНИЯ ------------------------------//
-$filtime=filemtime(DATADIR."datatmp/themes.dat");
+$filtime=@filemtime(DATADIR."datatmp/themes.dat");
 $filtime=$filtime+(3600*$config['themescache']);
 
 if(SITETIME>=$filtime){

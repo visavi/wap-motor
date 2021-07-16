@@ -60,7 +60,7 @@ fclose ($f);
 ##                                      Запись хитов                                      ##
 ############################################################################################
 $arcounts = array();
-$fp = fopen(DATADIR."datacounter/hits.dat","a+");
+$fp = fopen(DATADIR."datacounter/hits.dat", 'ab+');
 if ($fp){
 flock($fp,LOCK_EX);
 while (!feof($fp)){
@@ -71,8 +71,12 @@ $counts = explode("|",$arcounts[0]);
 //----------------------- Статистика за 24 часа (хиты) ----------------------------//
 if(isset($counts[3]) && isset($counts[4]) && $counts[3]!=$hour){
 
+if (!file_exists(DATADIR."datacounter/24_hits.dat")) {
+    write_files(DATADIR."datacounter/24_hits.dat", "0|0|\r\n", 0, 0666);
+}
+
 $filehits24 = file(DATADIR."datacounter/24_hits.dat");
-$datahits24 = explode("|",end($filehits24));
+$datahits24 = explode("|", end($filehits24));
 
 if ($arrtimehour>$datahits24[1]){
 write_files(DATADIR."datacounter/24_hits.dat", $counts[4]."|".$arrtimehour."|\r\n", 0, 0666);
@@ -85,6 +89,10 @@ delete_lines(DATADIR."datacounter/24_hits.dat", 0);
 
 //------------------------ Статистика за 31 день (хиты) ---------------------------//
 if (isset($counts[0]) && isset($counts[1]) && $counts[0]!=$den){
+
+if (!file_exists(DATADIR."datacounter/31_hits.dat")) {
+    write_files(DATADIR."datacounter/31_hits.dat", "0|0|\r\n", 0, 0666);
+}
 
 $filehits31 = file(DATADIR."datacounter/31_hits.dat");
 $dathits31 = explode("|",end($filehits31));
@@ -116,7 +124,7 @@ fclose($fp);
 ############################################################################################
 if ($found==0){
 $arcounts = array();
-$fp = fopen(DATADIR."datacounter/host.dat","a+");
+$fp = fopen(DATADIR."datacounter/host.dat", 'ab+');
 if ($fp){
 flock($fp,LOCK_EX);
 while (!feof($fp)){
@@ -126,6 +134,10 @@ $counts = explode("|",$arcounts[0]);
 
 //----------------------- Статистика за 24 часа (хосты) ----------------------------//
 if(isset($counts[3]) && isset($counts[4]) && $counts[3]!=$hour){
+
+if (!file_exists(DATADIR."datacounter/24_host.dat")) {
+    write_files(DATADIR."datacounter/24_host.dat", "0|0|\r\n", 0, 0666);
+}
 
 $filehost24 = file(DATADIR."datacounter/24_host.dat");
 $datahost24 = explode("|",end($filehost24));

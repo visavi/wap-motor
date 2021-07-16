@@ -22,7 +22,7 @@ echo '<img src="../images/img/partners.gif" alt="image" /> <b>Рейтинг т�
 ############################################################################################
 ##                                       Запись в кэш                                     ##
 ############################################################################################
-$filtime = filemtime(DATADIR."datatmp/raitinglist.dat");
+$filtime = @filemtime(DATADIR."datatmp/raitinglist.dat");
 $user_count = counter_string(DATADIR."datatmp/raitinglist.dat");
 
 $filtime = $filtime+(3600*$config['raitinglistcache']);

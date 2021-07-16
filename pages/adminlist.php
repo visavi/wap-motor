@@ -19,7 +19,7 @@ echo '<img src="../images/img/user.gif" alt="image" /> <b>Администрац
 ############################################################################################
 ##                                       Запись в кэш                                     ##
 ############################################################################################
-$filtime = filemtime(DATADIR."datatmp/adminlist.dat");
+$filtime = @filemtime(DATADIR."datatmp/adminlist.dat");
 
 $filtime = $filtime+(3600*$config['adminlistcache']);
 

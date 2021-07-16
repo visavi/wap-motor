@@ -39,7 +39,7 @@ if (substr_count($logs,'-')<3){
 ############################################################################################
 ##                                       Запись в кэш                                     ##
 ############################################################################################
-$filtime = filemtime(DATADIR."datatmp/reguser.dat");
+$filtime = @filemtime(DATADIR."datatmp/reguser.dat");
 $user_count = counter_string(DATADIR."datatmp/reguser.dat");
 
 $filtime = $filtime+(3600*$config['regusercache']);

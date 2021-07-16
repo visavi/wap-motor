@@ -74,7 +74,7 @@ echo ', <b><a href="../pages/anketa.php?uz='.$value.'">'.nickname($value).'</a><
 }
 
 //----------------------Функция вычисляет у кого сегодня Д.Р.--------------------------//
-$filtime=filemtime(DATADIR."datatmp/happyday.dat");
+$filtime=@filemtime(DATADIR."datatmp/happyday.dat");
 $filtimeday=date("d",$filtime);
 
 if($daytime!=$filtimeday){
@@ -123,7 +123,7 @@ echo ', <b><a href="../pages/anketa.php?uz='.$value.'"><span style="color:#ff000
 
 //---------------------------------------------------------------------------------//
 echo '<hr /><b>Приветствуем новичков:</b><br />';
-$filtime=filemtime(DATADIR."datatmp/newuserday.dat");
+$filtime=@filemtime(DATADIR."datatmp/newuserday.dat");
 $filtimeday=date("d",$filtime);
 
 if ($daytime!=$filtimeday){
