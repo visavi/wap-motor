@@ -1566,7 +1566,7 @@ function is_utf($str) {
 function utf_badstrip($str) {
 	$ret = '';
 	for ($i = 0;$i < strlen($str);) {
-		$tmp = $str{$i++};
+		$tmp = $str[$i++];
 		$ch = ord($tmp);
 		if ($ch > 0x7F) {
 			if ($ch < 0xC0) continue;
@@ -1578,7 +1578,7 @@ function utf_badstrip($str) {
 			else continue;
 
 			for ($j = 0;$j < $di;$j++) {
-				$tmp .= $ch = $str{$i + $j};
+				$tmp .= $ch = $str[$i + $j];
 				$ch = ord($ch);
 				if ($ch < 0x80 || $ch > 0xBF) continue 2;
 			}

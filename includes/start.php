@@ -35,25 +35,6 @@ if (version_compare(PHP_VERSION, '5.2.1') < 0) {
     die('<b>Ошибка! Версия PHP должна быть 5.2.1 или выше!</b>');
 }
 
-if (get_magic_quotes_gpc()) {
-    $in = array(& $_GET, & $_POST, & $_COOKIE);
-    while (list($k, $v) = each($in)) {
-        foreach ($v as $key => $val) {
-            if (!is_array($val)) {
-                $in[$k][$key] = stripslashes($val);
-                continue;
-            }
-            $in[] = & $in[$k][$key];
-        }
-    }
-    unset ($in);
-    if (!empty ($_FILES)) {
-        foreach ($_FILES as $k => $v) {
-            $_FILES[$k]['name'] = stripslashes((string) $v['name']);
-        }
-    }
-}
-
 $level = 0;
 $folder_level = '';
 while (!file_exists($folder_level.'input.php') && $level < 5) {
