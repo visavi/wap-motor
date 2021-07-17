@@ -2057,7 +2057,7 @@ function change_profil($login, $str) {
 			if (isset($str[$u])) {
 				$data[$u] = $str[$u];
 			}
-			$text .= $data[$u].':||:';
+			$text .= isset($data[$u]) ? $data[$u] . ':||:' : ':||:';
 		}
 
 		if (!empty($data[0]) && !empty($data[1]) && !empty($data[4]) && !empty($text)) {

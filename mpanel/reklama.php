@@ -103,7 +103,7 @@ $namerek = check($_POST['namerek']);
 if ($uid==$_SESSION['token']){
 if (strlen($urlrek)<=50) {
 if (utf_strlen(trim($namerek))>=10 && utf_strlen($namerek)<=35) {
-if (preg_match('#^http://([a-z0-9_\-\.])+(\.([a-z0-9\/])+)+$#',$urlrek)){
+if (preg_match('|^https?://([а-яa-z0-9_\-\.])+(\.([а-яa-z0-9\/\-?_=#])+)+$|iu', $urlrek)){
 
 $string = search_string(DATADIR."reklama.dat", $log, 3);
 if (empty($string)) {
@@ -137,7 +137,7 @@ if ($uid==$_SESSION['token']){
 if ($id!==""){
 if (strlen($urlrek)<=50) {
 if (utf_strlen(trim($namerek))>=10 && utf_strlen($namerek)<=35) {
-if (preg_match('#^http://([a-z0-9_\-\.])+(\.([a-z0-9\/])+)+$#',$urlrek)){
+if (preg_match('|^https?://([а-яa-z0-9_\-\.])+(\.([а-яa-z0-9\/\-?_=#])+)+$|iu', $urlrek)){
 
 $string = search_string(DATADIR."reklama.dat", $log, 3);
 if ($string) {

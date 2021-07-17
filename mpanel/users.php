@@ -145,7 +145,7 @@ if ($uid==$_SESSION['token']){
 if (file_exists(DATADIR."profil/$users.prof")) {
 if ($ud1=="" || preg_match('|^[a-z0-9\-]+$|i',$ud1)){
 if (preg_match('#^([a-z0-9_\-\.])+\@([a-z0-9_\-\.])+(\.([a-z0-9])+)+$#',$ud4)){
-if ($ud5=="" || preg_match('#^http://([a-z0-9_\-\.])+(\.([a-z0-9\/])+)+$#',$ud5)){
+if ($ud5=="" || preg_match('|^https?://([а-яa-z0-9_\-\.])+(\.([а-яa-z0-9\/\-?_=#])+)+$|iu',$ud5)){
 if (preg_match('#^[0-9]{1,2}+\.[0-9]{2}+\.([0-9]{2}|[0-9]{4})$#',$ud6)){
 
 list($uday, $umonth, $uyear) = explode(".", $ud6);

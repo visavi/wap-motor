@@ -232,7 +232,7 @@ if (preg_match('|^[a-z0-9\-]+$|i',$name)){
 if (preg_match('|^[a-z0-9\-]+$|i',$password)){
 if ($password==$password2){
 if (preg_match('#^([a-z0-9_\-\.])+\@([a-z0-9_\-\.])+(\.([a-z0-9])+)+$#',$oemails)){
-if (preg_match('#^http://([a-z0-9_\-\.])+(\.([a-z0-9\/])+)+$#',$osite)){
+if (preg_match('|^https?://([а-яa-z0-9_\-\.])+(\.([а-яa-z0-9\/\-?_=#])+)+$|iu',$osite)){
 
 
 $text = $name.':||:'.md5(md5($password)).':||::||:Администратор  сайта:||:'.$oemails.':||::||:'.SITETIME.':||:101:||:0:||:0:||:1:||:0:||:0:||:'.$brow.':||:'.$ip.':||:N:||::||::||::||::||:'.$config['themes'].':||:'.$config['bookpost'].':||:'.$config['postnews'].':||:'.$config['forumpost'].':||:'.$config['forumtem'].':||::||:'.$config['chatpost'].':||::||:'.$config['boardspost'].':||::||:'.$config['timeclocks'].':||:'.$config['showtime'].':||:'.$config['privatpost'].':||:0:||::||::||:500:||:0:||:0:||::||:Администратор  сайта:||:100000:||:1:||:images/avators/noavatar.gif:||:'.SITETIME.':||:1:||::||::||:0:||:0:||:0:||:0:||::||::||:0:||:0:||:0:||:0:||:0:||:50:||::||::||::||::||:0:||::||:0:||::||::||::||::||::||::||:0:||:0:||::||::||::||:';

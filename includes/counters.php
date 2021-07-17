@@ -154,6 +154,10 @@ delete_lines(DATADIR."datacounter/24_host.dat", 0);
 //------------------------ Статистика за 31 день (хосты) ---------------------------//
 if (isset($counts[0]) && isset($counts[1]) && $counts[0]!=$den){
 
+if (!file_exists(DATADIR."datacounter/31_host.dat")) {
+    write_files(DATADIR."datacounter/31_host.dat", "0|0|\r\n", 0, 0666);
+}
+
 $filehost31 = file(DATADIR."datacounter/31_host.dat");
 $dathost31 = explode("|",end($filehost31));
 

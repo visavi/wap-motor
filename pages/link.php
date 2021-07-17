@@ -51,7 +51,7 @@ $linkurl = strtolower($linkurl);
 $linkname = antimat($linkname);
 
 if (utf_strlen($linkname)>=5 && utf_strlen($linkname)<=25){
-if (preg_match('#^http://([a-z0-9_\-\.])+(\.([a-z0-9\/])+)+$#', $linkurl)) {
+if (preg_match('|^https?://([а-яa-z0-9_\-\.])+(\.([а-яa-z0-9\/\-?_=#])+)+$|iu', $linkurl)) {
 
 $linkcell_url = search_string(DATADIR."link.dat", $linkurl, 0);
 $linkcell_log = search_string(DATADIR."link.dat", $log, 2);

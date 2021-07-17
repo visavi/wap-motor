@@ -69,7 +69,7 @@ $site = check($_POST['site']);
 $happy = check($_POST['happy']);
 
 if ($uid==$_SESSION['token']){
-if (preg_match('#^http://([a-z0-9_\-\.])+(\.([a-z0-9\/])+)+$#', $site) || $site=="") {
+if (preg_match('|^https?://([а-яa-z0-9_\-\.])+(\.([а-яa-z0-9\/\-?_=#])+)+$|iu', $site) || $site=="") {
 if (preg_match('#^[0-9]{1,2}+\.[0-9]{2}+\.([0-9]{2}|[0-9]{4})$#', $happy) || $happy=="") {
 
 $otkel = utf_substr($otkel,0,50);
