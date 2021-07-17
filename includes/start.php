@@ -9,7 +9,7 @@
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
 #-----------------------------------------------------#
-define('MOTOR_VERSION', '24.0');
+define('MOTOR_VERSION', '27.0');
 
 $debugmode = 1;
 
@@ -31,8 +31,8 @@ session_start();
 $starttime = microtime(1);
 $ip = $ip_addr = preg_replace('|[^0-9\.]|', '', $_SERVER['REMOTE_ADDR']);
 
-if (version_compare(PHP_VERSION, '5.2.1') < 0) {
-    die('<b>Ошибка! Версия PHP должна быть 5.2.1 или выше!</b>');
+if (version_compare(PHP_VERSION, '7.0.0') < 0) {
+    die('<b>Ошибка! Версия PHP должна быть 7.0.0 или выше!</b>');
 }
 
 $level = 0;
