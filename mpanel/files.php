@@ -88,9 +88,9 @@ if (file_exists(DATADIR."datamain/$file")){
 echo '<b>Просмотр файла '.$file.'</b><br />';
 
 $opis = file_get_contents(DATADIR."datamain/$file");
-$count = count($opis);
+$strok = count(file(DATADIR . 'datamain/' . $file));
 
-echo 'Строчек: '.(int)$count.'<br /><br />';
+echo 'Строчек: ' . $strok . '<br /><br />';
 
 echo highlight_code(check($opis)).'<br />';
 
@@ -110,7 +110,7 @@ if ($action=="edit"){
 
 if (preg_match('|^[a-z0-9_\.\-]+$|i', $file)){
 if (file_exists(DATADIR."datamain/$file")){
-if (is_writeable(DATADIR."datamain/$file")){
+if (is_writable(DATADIR."datamain/$file")){
 
 $datamainfile = file_get_contents(DATADIR."datamain/$file");
 $filename = str_replace(".dat","",$file);
