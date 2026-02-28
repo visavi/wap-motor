@@ -7,7 +7,7 @@
 Официальный сайт проекта [VISAVI.NET](http://visavi.net) Там вы всегда сможете найти обновления, моды, плагины и модули, а также новые версии Портала W@P-MOTOR и апгрейды к ним, настоятельно рекомендуем скачивать новые версии только у нас, так как возможны злонамеренные внедрения вредоносных php-кодов способные взломать систему  
   
 **Спасибо всем за огромную помощь по улучшению этого движка**  
-Спасибо 4oku, Shift, John77, Mackler, 3v(Вован), Zoom, Giga, Ugon_HarleeV, Skor, Hobbit19, Nox, Condor, Wild, Ogir, Аligan, Anton 99, V@DOS, Koder, Kaaz, Sklep, Klips, Sonicflame, Hintoz, Delorean, Chuma, Maxtor, Dred, AxqpxA и многим другим которые в какой-то мере принимали участие по созданию этого движка  
+Спасибо 4oku, Shift, John77, Mackler, 3v(Вован), Zoom (Anton 99), Giga, Ugon_HarleeV, Skor, Hobbit19, Nox, Condor, Wild, Ogir, Аligan, V@DOS, Koder, Kaaz, Sklep, Klips, Sonicflame, Hintoz, Delorean, Chuma, Maxtor, Dred, AxqpxA и многим другим которые в какой-то мере принимали участие по созданию этого движка  
   
 Cпасибо всем кто с нетерпением ждал выхода этой версии  
   
